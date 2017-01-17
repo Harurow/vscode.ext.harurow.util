@@ -1,21 +1,7 @@
-'use strict';
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
-import * as vscode from 'vscode';
+'use strict'
+
+import * as vscode from 'vscode'
 import * as clipboard from 'copy-paste'
-
-export function toHtmlLite(value: string): string {
-    
-    return value;
-}
-
-export function toHtml(value: string): string {
-    return value;
-}
-
-export function toHtmlAll(value: string): string {
-    return value;
-}
 
 var map = {
     '"': "&quot;",
@@ -264,38 +250,49 @@ var map = {
     "\xa0": "&nbsp;",
     "&": "&amp;",
     "`": "&apos;",
-
     "/": "&#x2f;",
+}
+
+export function toHtmlLite(value: string): string {
+    return value;
+}
+
+export function toHtml(value: string): string {
+    return value;
+}
+
+export function toHtmlAll(value: string): string {
+    return value;
 }
 
 export function escapeHtml(value: string): string {
     return value.replace("&", "&amp;")
-                .replace("'", "&#x27;")
-                .replace("`", "&#x60;")
-                .replace('"', "&quot;")
-                .replace("<", "&lt;")
-                .replace(">", "&gt;")
-                .replace(" ", "&nbsp;");
+        .replace("'", "&#x27;")
+        .replace("`", "&#x60;")
+        .replace('"', "&quot;")
+        .replace("<", "&lt;")
+        .replace(">", "&gt;")
+        .replace(" ", "&nbsp;")
 }
 
 export function unescapeHtml(value: string): string {
     return value.replace("&#x27;", "'")
-                .replace("&#x60;", "`")
-                .replace("&quot;", '"')
-                .replace("&lt;", "<")
-                .replace("&gt;", ">")
-                .replace("&nbsp;", " ")
-                .replace("&amp;", "&");
+        .replace("&#x60;", "`")
+        .replace("&quot;", '"')
+        .replace("&lt;", "<")
+        .replace("&gt;", ">")
+        .replace("&nbsp;", " ")
+        .replace("&amp;", "&")
 }
 
 export async function getContent(): Promise<string> {
     return await new Promise<string>((resolve, reject) => {
         clipboard.paste((err, content) => {
-            if(err)
-                reject(err);
-            else
-                resolve(content);
-        });
-    });
+            if (err) {
+                reject(err)
+            } else {
+                resolve(content)
+            }
+        })
+    })
 }
-
