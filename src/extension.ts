@@ -1,55 +1,51 @@
 'use strict'
 
 import * as vscode from 'vscode'
-import * as util from './util'
+import * as commands from './commands'
 import * as strutil from './stringutil';
 import * as filter from './filter'
 import * as encoding from './encoding'
 import * as escape from './escape'
 import * as misc from './misc'
 
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
-
-    // Use the console to output diagnostic information (console.log) and errors (console.error)
-    // This line of code will only be executed once when your extension is activated
-    console.log('Congratulations, your extension "harurow-util" is now active!')
+    console.log('"harurow-util" is now active')
 
     context.subscriptions.push(
-        util.regCommand('extension.str.toPascalCase', strutil.toPascalCase),
-        util.regCommand('extension.str.toCamelCase', strutil.toCamelCase),
-        util.regCommand('extension.str.toUpperSnakeCase', strutil.toUpperSnakeCase),
-        util.regCommand('extension.str.toLowerSnakeCase', strutil.toLowerSnakeCase),
+        commands.register('extension.str.toPascalCase', {replace: strutil.toPascalCase}),
+        commands.register('extension.str.toCamelCase', {replace: strutil.toCamelCase}),
+        commands.register('extension.str.toUpperSnakeCase', {replace: strutil.toUpperSnakeCase}),
+        commands.register('extension.str.toLowerSnakeCase', {replace: strutil.toLowerSnakeCase}),
 
-        util.regCommand2('extension.flt.removeMatched', filter.removeMatched),
-        util.regCommand2('extension.flt.removeUnmatched', filter.removeUnmatched),
-        util.regCommand2('extension.flt.removeContains', filter.removeContains),
-        util.regCommand2('extension.flt.removeNotContains', filter.removeNotContains),
+        commands.register('extension.flt.removeMatched', {whole: filter.removeMatched}),
+        commands.register('extension.flt.removeUnmatched', {whole: filter.removeUnmatched}),
+        commands.register('extension.flt.removeContains', {whole: filter.removeContains}),
+        commands.register('extension.flt.removeNotContains', {whole: filter.removeNotContains}),
 
-        util.regCommand('extension.enc.rfc3986ShiftJis', encoding.toRfc3986ShiftJis),
-        util.regCommand('extension.enc.rfc3986EucJp', encoding.toRfc3986EucJp),
-        util.regCommand('extension.enc.rfc3986Utf8', encoding.toRfc3986Utf8),
-        util.regCommand('extension.enc.rfc1866ShiftJis', encoding.toRfc1866ShiftJis),
-        util.regCommand('extension.enc.rfc1866EucJp', encoding.toRfc1866EucJp),
-        util.regCommand('extension.enc.rfc1866Utf8', encoding.toRfc1866Utf8),
+        commands.register('extension.enc.rfc3986ShiftJis', {replace: encoding.toRfc3986ShiftJis}),
+        commands.register('extension.enc.rfc3986EucJp', {replace: encoding.toRfc3986EucJp}),
+        commands.register('extension.enc.rfc3986Utf8', {replace: encoding.toRfc3986Utf8}),
+        commands.register('extension.enc.rfc1866ShiftJis', {replace: encoding.toRfc1866ShiftJis}),
+        commands.register('extension.enc.rfc1866EucJp', {replace: encoding.toRfc1866EucJp}),
+        commands.register('extension.enc.rfc1866Utf8', {replace: encoding.toRfc1866Utf8}),
 
-        util.regCommand('extension.dec.rfc3986ShiftJis', encoding.fromRfc3986ShiftJis),
-        util.regCommand('extension.dec.rfc3986EucJp', encoding.fromRfc3986EucJp),
-        util.regCommand('extension.dec.rfc3986Utf8', encoding.fromRfc3986Utf8),
-        util.regCommand('extension.dec.rfc1866ShiftJis', encoding.fromRfc1866ShiftJis),
-        util.regCommand('extension.dec.rfc1866EucJp', encoding.fromRfc1866EucJp),
-        util.regCommand('extension.dec.rfc1866Utf8', encoding.fromRfc1866Utf8),
+        commands.register('extension.dec.rfc3986ShiftJis', {replace: encoding.fromRfc3986ShiftJis}),
+        commands.register('extension.dec.rfc3986EucJp', {replace: encoding.fromRfc3986EucJp}),
+        commands.register('extension.dec.rfc3986Utf8', {replace: encoding.fromRfc3986Utf8}),
+        commands.register('extension.dec.rfc1866ShiftJis', {replace: encoding.fromRfc1866ShiftJis}),
+        commands.register('extension.dec.rfc1866EucJp', {replace: encoding.fromRfc1866EucJp}),
+        commands.register('extension.dec.rfc1866Utf8', {replace: encoding.fromRfc1866Utf8}),
 
-        util.regCommand('extension.trn.transGoogle', misc.transGoogle),
-        util.regCommand('extension.trn.transMicrosoft', misc.transMicrosoft),
+        commands.register('extension.trn.transGoogle', {replace: misc.transGoogle}),
+        commands.register('extension.trn.transMicrosoft', {replace: misc.transMicrosoft}),
 
-        util.regCommand('extension.esc.toHtml', escape.toHtml),
-        util.regCommand('extension.esc.toHtmlLite', escape.toHtmlLite),
-        util.regCommand('extension.esc.toHtmlAll', escape.toHtmlAll),
+        commands.register('extension.esc.toHtml', {replace: escape.toHtml}),
+        commands.register('extension.esc.toHtmlLite', {replace: escape.toHtmlLite}),
+        commands.register('extension.esc.toHtmlAll', {replace: escape.toHtmlAll}),
     )
 }
 
 // this method is called when your extension is deactivated
 export function deactivate() {
+    console.log('"harurow-util" is now deactive')
 }

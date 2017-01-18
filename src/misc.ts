@@ -7,5 +7,6 @@ export function transGoogle(value: string): string {
 }
 
 export function transMicrosoft(value: string): string {
+    
     return value
 }

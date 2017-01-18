@@ -29,7 +29,7 @@ function toCase(value: string, callback: (value: string) => string): string {
         if (identifier === "_".repeat(identifier.length)) {
             return identifier
         }
-        return callback(identifier.replace(/([A-Z]+[a-z]*|[a-z]+|[0-9]+|_)/g, (word) =>
+        return callback(identifier.replace(/([A-Z]+[a-z]*|[a-z]+|[0-9]+|_$)/g, (word) =>
             word === "_"
                 ? ""
                 : toUpperCaseWhenFirstChar(word)))
@@ -61,5 +61,5 @@ export function toPascalCase(value: string): string {
 }
 
 export function toCamelCase(value: string): string {
-    return toCase(value, toLowerCaseFirstChar);
+    return toCase(value, toLowerCaseFirstChar)
 }
