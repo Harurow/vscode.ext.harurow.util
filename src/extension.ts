@@ -36,7 +36,9 @@ export function activate(context: vscode.ExtensionContext) {
 
         commands.register('extension.esc.toHtml', {replace: escape.toHtml}),
         commands.register('extension.esc.toHtmlAll', {replace: escape.toHtmlAll}),
+        commands.register('extension.esc.toUnicode', {replace: escape.toUnicode}),
         commands.register('extension.esc.fromHtmlAll', {replace: escape.fromHtmlAll}),
+        commands.register('extension.esc.fromUnicode', {replace: escape.fromUnicode}),
 
         commands.register('extension.num.numbers', {whole: num.numbers}),
 
@@ -45,7 +47,6 @@ export function activate(context: vscode.ExtensionContext) {
     )
 }
 
-// this method is called when your extension is deactivated
 export function deactivate() {
     console.log('"harurow-util" is now deactive')
 }

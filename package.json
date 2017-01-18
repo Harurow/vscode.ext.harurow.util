@@ -61,19 +61,14 @@
     "onCommand:extension.enc.rfc1866ShiftJis",
     "onCommand:extension.enc.rfc1866EucJp",
     "onCommand:extension.enc.rfc1866Utf8",
-    "onCommand:extension.enc.toBase64Url",
-    "onCommand:extension.enc.toBase64",
     "onCommand:extension.dec.rfc3986ShiftJis",
     "onCommand:extension.dec.rfc3986EucJp",
     "onCommand:extension.dec.rfc3986Utf8",
-    "onCommand:extension.dec.rfc1866ShiftJis",
-    "onCommand:extension.dec.rfc1866EucJp",
-    "onCommand:extension.dec.rfc1866Utf8",
-    "onCommand:extension.dec.toBase64Url",
-    "onCommand:extension.dec.toBase64",
     "onCommand:extension.esc.toHtml",
     "onCommand:extension.esc.toHtmlAll",
+    "onCommand:extension.esc.toUnicode",
     "onCommand:extension.esc.fromHtmlAll",
+    "onCommand:extension.esc.fromUnicode",
     "onCommand:extension.num.numbers",
     "onCommand:extension.trn.transGoogle",
     "onCommand:extension.trn.transMicrosoft"
@@ -168,17 +163,27 @@
       {
         "command": "extension.esc.toHtml",
         "category": "Escape",
-        "title": "Escape HTML"
+        "title": "HTML Escape"
       },
       {
         "command": "extension.esc.toHtmlAll",
         "category": "Escape",
-        "title": "Escape HTML All Charactors"
+        "title": "HTML Escape All Charactors"
+      },
+      {
+        "command": "extension.esc.toUnicode",
+        "category": "Escape",
+        "title": "Unicode Escape"
       },
       {
         "command": "extension.esc.fromHtmlAll",
         "category": "Escape",
-        "title": "Unescape HTML All Charactors"
+        "title": "HTML Unescape"
+      },
+      {
+        "command": "extension.esc.fromUnicode",
+        "category": "Escape",
+        "title": "Unicode Unescape"
       },
       {
         "command": "extension.num.numbers",

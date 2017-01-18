@@ -52,7 +52,8 @@ suite("Decoding Tests", () => {
         assert.equal("ウィキペディア", encoding.fromRfc3986Utf8("%e3%82%a6%e3%82%a3%e3%82%ad%e3%83%9a%e3%83%87%e3%82%a3%e3%82%a2"))
         assert.equal("叱", encoding.fromRfc3986Utf8("%e5%8f%b1"))
 
-        assert.equal("𩸽 𩸽", encoding.fromRfc3986Utf8("%F0%A9%B8%BD+\u{29e3d}"))
+        assert.equal("𩸽 \u{29e3d} \ud867\ude3d 𩸽", encoding.fromRfc3986Utf8("%F0%A9%B8%BD+\u{29e3d} \ud867\ude3d 𩸽"))
+        assert.equal("𠮟 \u{20b9f} \ud842\udf9f 𠮟", encoding.fromRfc3986Utf8("%f0%a0%ae%9f+\u{20b9f} 𠮟 \ud842\udf9f"))
 
         assert.equal("wiki ウィキペディア pedia", encoding.fromRfc3986Utf8("wiki%20ウィキペディア%20pedia"))
         assert.equal("%shika 叱 ru%", encoding.fromRfc3986Utf8("%shika%20叱%20ru%"))

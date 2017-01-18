@@ -6,15 +6,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
-#### Escape Html
-HTMLのエスケープ処理を実施します
-- `Escape HTML`
-- `Escape HTML All Charactors`
-
-#### Unescape Html
-HTMLのエスケープされた文字を元に戻します
-- `Unescape HTML All Charactors`
-
 #### Numbering
 複数カーソルの位置に連番で番号を採番します
 - `Numbering to Multiple Cursors`
@@ -74,3 +65,15 @@ HTMLのエスケープされた文字を元に戻します
 - `From URL Encoding, x-www-form-urlencoded (RFC3986, RFC1866) / Shift_JIS`
 - `From URL Encoding, x-www-form-urlencoded (RFC3986, RFC1866) / EUC-JP`
 - `From URL Encoding, x-www-form-urlencoded (RFC3986, RFC1866) / UTF-8`
+
+#### Escape
+エスケープ処理を実施します
+- `HTML Escape`
+- `HTML Escape All Charactors`
+- `Unicode Escape`
+
+#### Unescap
+HTMLのエスケープされた文字を元に戻します
+- `HTML Unescape`
+- `Unicode Unescape`
+

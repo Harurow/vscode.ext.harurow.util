@@ -101,7 +101,7 @@ suite("Encoding Tests", () => {
        
         assert.equal("%e3%82%a6%e3%82%a3%e3%82%ad%e3%83%9a%e3%83%87%e3%82%a3%e3%82%a2", encoding.toRfc1866Utf8("ウィキペディア"))
 
-        assert.equal("%f0%a0%ae%9f+%f0%a0%ae%9f", encoding.toRfc1866Utf8("\u{20b9f} 𠮟"))
-        assert.equal("%f0%a9%b8%bd+%f0%a9%b8%bd", encoding.toRfc1866Utf8("\u{29e3d} 𩸽"))
+        assert.equal("%f0%a9%b8%bd+%f0%a9%b8%bd+%f0%a9%b8%bd", encoding.toRfc1866Utf8("\u{29e3d} 𩸽 \ud867\ude3d"))
+        assert.equal("%f0%a0%ae%9f+%f0%a0%ae%9f+%f0%a0%ae%9f", encoding.toRfc1866Utf8("\u{20b9f} 𠮟 \ud842\udf9f"))
     })
 })

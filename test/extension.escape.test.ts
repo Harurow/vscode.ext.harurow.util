@@ -260,7 +260,6 @@ suite("Escape Tests", () => {
         assert.equal("abcdef", escape.toHtml("abcdef"))
         assert.equal("あいうえお", escape.toHtml("あいうえお"))
         assert.equal("叱", escape.toHtml("叱"))
-
     })
 
     test("toHtmlAll", () => {
@@ -520,4 +519,13 @@ suite("Escape Tests", () => {
         assert.equal("&#x20b9f;&#x20b9f;", escape.toHtmlAll("\u{20b9f}𠮟"))
         assert.equal("&#x30a6;&#x30a3;&#x30ad;&#x30da;&#x30c7;&#x30a3;&#x30a2;", escape.toHtmlAll("ウィキペディア"))
 
-    })})
+    })
+    
+    test("toUnicode", () => {
+        assert.equal("\\u0030\\u0041\\u0061", escape.toUnicode('0Aa'))
+        assert.equal("\\ud867\\ude3d\\u0020\\ud867\\ude3d\\u0020\\ud867\\ude3d", escape.toUnicode('\u{29e3d} \uD867\uDE3D 𩸽'))
+
+        assert.equal("", escape.toUnicode(''))
+    })
+    
+})
