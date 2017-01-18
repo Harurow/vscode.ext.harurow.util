@@ -7,6 +7,8 @@ import * as encja from 'encoding-japanese'
 suite("Encoding Tests", () => {
 
     test("toRfc3986ShiftJis", () => {
+        assert.equal("", encoding.toRfc3986ShiftJis(""))
+        
         assert.equal("%3a%2f%3f%23%5b%5d%40%21%24%26%27%28%29%2a%2b%2c%3b%3d", encoding.toRfc3986ShiftJis(":/?#[]@!$&'()*+,;="))
         assert.equal("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLNOPQRSUTVWXYZ0123456789-._~",
                      encoding.toRfc3986ShiftJis("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLNOPQRSUTVWXYZ0123456789-._~"))
@@ -21,6 +23,8 @@ suite("Encoding Tests", () => {
     })
 
     test("toRfc3986EucJp", () => {
+        assert.equal("", encoding.toRfc3986EucJp(""))
+        
         assert.equal("%3a%2f%3f%23%5b%5d%40%21%24%26%27%28%29%2a%2b%2c%3b%3d", encoding.toRfc3986EucJp(":/?#[]@!$&'()*+,;="))
         assert.equal("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLNOPQRSUTVWXYZ0123456789-._~",
                      encoding.toRfc3986EucJp("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLNOPQRSUTVWXYZ0123456789-._~"))
@@ -35,6 +39,8 @@ suite("Encoding Tests", () => {
     })
     
     test("toRfc3986Utf8", () => {
+        assert.equal("", encoding.toRfc3986Utf8(""))
+
         assert.equal("%3a%2f%3f%23%5b%5d%40%21%24%26%27%28%29%2a%2b%2c%3b%3d", encoding.toRfc3986Utf8(":/?#[]@!$&'()*+,;="))
         assert.equal("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLNOPQRSUTVWXYZ0123456789-._~",
                      encoding.toRfc3986Utf8("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLNOPQRSUTVWXYZ0123456789-._~"))
@@ -49,6 +55,8 @@ suite("Encoding Tests", () => {
     })
 
     test("toRfc1866ShiftJis", () => {
+        assert.equal("", encoding.toRfc1866ShiftJis(""))
+
         assert.equal("%3a%2f%3f%23%5b%5d%40%21%24%26%27%28%29%2a%2b%2c%3b%3d", encoding.toRfc1866ShiftJis(":/?#[]@!$&'()*+,;="))
         assert.equal("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLNOPQRSUTVWXYZ0123456789-._~",
                      encoding.toRfc1866ShiftJis("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLNOPQRSUTVWXYZ0123456789-._~"))
@@ -63,6 +71,8 @@ suite("Encoding Tests", () => {
     })
 
     test("toRfc1866EucJp", () => {
+        assert.equal("", encoding.toRfc1866EucJp(""))
+
         assert.equal("%3a%2f%3f%23%5b%5d%40%21%24%26%27%28%29%2a%2b%2c%3b%3d", encoding.toRfc1866EucJp(":/?#[]@!$&'()*+,;="))
         assert.equal("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLNOPQRSUTVWXYZ0123456789-._~",
                      encoding.toRfc1866EucJp("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLNOPQRSUTVWXYZ0123456789-._~"))
@@ -77,6 +87,8 @@ suite("Encoding Tests", () => {
     })
     
     test("toRfc1866Utf8", () => {
+        assert.equal("", encoding.toRfc1866Utf8(""))
+
         assert.equal("%3a%2f%3f%23%5b%5d%40%21%24%26%27%28%29%2a%2b%2c%3b%3d", encoding.toRfc1866Utf8(":/?#[]@!$&'()*+,;="))
         assert.equal("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLNOPQRSUTVWXYZ0123456789-._~",
                      encoding.toRfc1866Utf8("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLNOPQRSUTVWXYZ0123456789-._~"))
@@ -89,6 +101,7 @@ suite("Encoding Tests", () => {
        
         assert.equal("%e3%82%a6%e3%82%a3%e3%82%ad%e3%83%9a%e3%83%87%e3%82%a3%e3%82%a2", encoding.toRfc1866Utf8("ウィキペディア"))
 
-        assert.equal("%e5%8f%b1", encoding.toRfc3986Utf8("叱"))
+        assert.equal("%f0%a0%ae%9f+%f0%a0%ae%9f", encoding.toRfc1866Utf8("\u{20b9f} 𠮟"))
+        assert.equal("%f0%a9%b8%bd+%f0%a9%b8%bd", encoding.toRfc1866Utf8("\u{29e3d} 𩸽"))
     })
 })

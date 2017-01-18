@@ -6,6 +6,7 @@ import * as strutil from './stringutil';
 import * as filter from './linefilter'
 import * as encoding from './encoding'
 import * as escape from './escape'
+import * as num from './numbers'
 import * as misc from './misc'
 
 export function activate(context: vscode.ExtensionContext) {
@@ -33,12 +34,14 @@ export function activate(context: vscode.ExtensionContext) {
         commands.register('extension.dec.rfc3986EucJp', {replace: encoding.fromRfc3986EucJp}),
         commands.register('extension.dec.rfc3986Utf8', {replace: encoding.fromRfc3986Utf8}),
 
+        commands.register('extension.esc.toHtml', {replace: escape.toHtml}),
+        commands.register('extension.esc.toHtmlAll', {replace: escape.toHtmlAll}),
+        commands.register('extension.esc.fromHtmlAll', {replace: escape.fromHtmlAll}),
+
+        commands.register('extension.num.numbers', {whole: num.numbers}),
+
         commands.register('extension.trn.transGoogle', {foreach: misc.transGoogle}),
         commands.register('extension.trn.transMicrosoft', {foreach: misc.transMicrosoft}),
-
-        commands.register('extension.esc.toHtml', {replace: escape.toHtml}),
-        commands.register('extension.esc.toHtmlLite', {replace: escape.toHtmlLite}),
-        commands.register('extension.esc.toHtmlAll', {replace: escape.toHtmlAll}),
     )
 }
 

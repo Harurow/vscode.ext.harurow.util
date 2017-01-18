@@ -18,6 +18,8 @@ suite("Fileter Tests", () => {
 
         assert.equal("aaa\n", filter.removeMatchedLine("[d|c]", "aaa\nddd\naabcc"))
         assert.equal("ddd\naabcc", filter.removeMatchedLine("a{3}", "aaa\nddd\naabcc"))
+
+        assert.equal("ABC\nddd\n", filter.removeMatchedLine("abc", "ABC\nddd\naabcc"))
     })
 
     test("removeUnmatchedLine", () => {
@@ -42,6 +44,8 @@ suite("Fileter Tests", () => {
         assert.equal("aaa\nddd", filter.removeContainsLine("abc", "aaa\naabcc\nddd"))
         assert.equal("aaa\nddd", filter.removeContainsLine("abc", "aabcc\naaa\nddd"))
         assert.equal("aaa\nddd\n", filter.removeContainsLine("abc", "aaa\nddd\naabcc"))
+  
+        assert.equal("ABC\nddd\n", filter.removeContainsLine("abc", "ABC\nddd\naabcc"))
     })
 
     test("removeNotContainsLine", () => {

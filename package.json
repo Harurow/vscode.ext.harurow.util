@@ -71,9 +71,10 @@
     "onCommand:extension.dec.rfc1866Utf8",
     "onCommand:extension.dec.toBase64Url",
     "onCommand:extension.dec.toBase64",
-    "onCommand:extension.esc.toHtmlLite",
     "onCommand:extension.esc.toHtml",
     "onCommand:extension.esc.toHtmlAll",
+    "onCommand:extension.esc.fromHtmlAll",
+    "onCommand:extension.num.numbers",
     "onCommand:extension.trn.transGoogle",
     "onCommand:extension.trn.transMicrosoft"
   ],
@@ -165,19 +166,24 @@
         "title": "From URL Encoding, x-www-form-urlencoded (RFC3986, RFC1866) / UTF-8"
       },
       {
-        "command": "extension.esc.toHtmlLite",
-        "category": "Escape",
-        "title": "HTML Escape for [<, >, &, \"]"
-      },
-      {
         "command": "extension.esc.toHtml",
         "category": "Escape",
-        "title": "HTML Escape"
+        "title": "Escape HTML"
       },
       {
         "command": "extension.esc.toHtmlAll",
         "category": "Escape",
-        "title": "HTML Escape All Charactors"
+        "title": "Escape HTML All Charactors"
+      },
+      {
+        "command": "extension.esc.fromHtmlAll",
+        "category": "Escape",
+        "title": "Unescape HTML All Charactors"
+      },
+      {
+        "command": "extension.num.numbers",
+        "category": "Numbers",
+        "title": "Numbering to Multiple Cursors"
       }
     ],
     "commands-tmp": [

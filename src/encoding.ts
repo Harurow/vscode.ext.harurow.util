@@ -17,11 +17,15 @@ function hex(c: number): string {
     return "%" + ("0" + c.toString(16)).slice(-2)
 }
 
+function stringToChars(value: string) : string[] {
+    return value.match(/[\uD800-\uDBFF][\uDC00-\uDFFF]|[^\uD800-\uDFFF]/g) || []
+}
+
 function encode(value: string, sp: string, enc: (ch: string) => string): string {
     let result = ""
 
-    value.split('').forEach(ch => {
-        let c = ch.charCodeAt(0)
+    stringToChars(value).forEach(ch => {
+        let c = ch.codePointAt(0)
         if (c <= 0xFF) {
             if (isUnReservedChar(c)) {
                 result += ch;
@@ -69,14 +73,13 @@ function decode(value: string, encoding: encja.Encoding): string {
     let bufChunk: string = ''
     let mode: DecodeMode = 'NORMAL'
 
-    value.split('').forEach(ch => {
+    stringToChars(value).forEach(ch => {
         switch (mode) {
             case 'NORMAL':
                 if (ch === '%') {
                     mode = 'PERCENT1'
                     buf = ch
                 } else {
-                    console.log(ch)
                     results += ch
                 }
                 break
@@ -115,11 +118,9 @@ function decode(value: string, encoding: encja.Encoding): string {
 
         if (mode === 'ABORT') {
             if (bufChunk !== '') {
-                console.log(bufChunk)
                 results += decodeUrlString(bufChunk, encoding)
                 bufChunk = ''
             }
-            console.log(buf)
             results += buf
             buf = ''
             mode = 'NORMAL'
@@ -127,11 +128,9 @@ function decode(value: string, encoding: encja.Encoding): string {
     })
 
     if (bufChunk !== '') {
-        console.log(bufChunk)
         results += decodeUrlString(bufChunk, encoding)
         bufChunk = ''
     }
-    console.log(buf)
     results += buf
 
     return results
@@ -139,10 +138,9 @@ function decode(value: string, encoding: encja.Encoding): string {
 
 function encodeUnicode(ch: string, encoding: encja.Encoding) {
     let result = ""
-    let arr = []
-    arr.push(ch.charCodeAt(0))
+    let code = encja.stringToCode(ch)
 
-    encja.convert(arr, encoding, "UNICODE").forEach((c) => {
+    encja.convert(code, encoding, "UNICODE").forEach((c) => {
         result += isUnReservedChar(c)
             ? String.fromCharCode(c)
             : hex(c)

@@ -7,6 +7,8 @@ import * as encja from 'encoding-japanese'
 suite("Decoding Tests", () => {
 
     test("fromRfc3986ShiftJis", () => {
+        assert.equal("", encoding.fromRfc3986ShiftJis(""))
+        
         assert.equal(":/?#[]@!$&'()*+,;=", encoding.fromRfc3986ShiftJis("%3a%2f%3f%23%5b%5d%40%21%24%26%27%28%29%2a%2b%2c%3b%3d"))
         assert.equal("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLNOPQRSUTVWXYZ0123456789-._~", encoding.fromRfc3986ShiftJis("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLNOPQRSUTVWXYZ0123456789-._~"))
         assert.equal(" !\"#$%&'()*+,-./", encoding.fromRfc3986ShiftJis("%20%21%22%23%24%25%26%27%28%29%2a%2b%2c-.%2f"))
@@ -20,6 +22,8 @@ suite("Decoding Tests", () => {
     })
 
     test("fromRfc3986EucJp", () => {
+        assert.equal("", encoding.fromRfc3986EucJp(""))
+
         assert.equal(":/?#[]@!$&'()*+,;=", encoding.fromRfc3986EucJp("%3a%2f%3f%23%5b%5d%40%21%24%26%27%28%29%2a%2b%2c%3b%3d"))
         assert.equal("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLNOPQRSUTVWXYZ0123456789-._~", encoding.fromRfc3986EucJp("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLNOPQRSUTVWXYZ0123456789-._~"))
         assert.equal(" !\"#$%&'()*+,-./", encoding.fromRfc3986EucJp("%20%21%22%23%24%25%26%27%28%29%2a%2b%2c-.%2f"))
@@ -33,6 +37,8 @@ suite("Decoding Tests", () => {
     })
     
     test("fromRfc3986Utf8", () => {
+        assert.equal("", encoding.fromRfc3986Utf8(""))
+
         assert.equal(":/?#[]@!$&'()*+,;=", encoding.fromRfc3986Utf8("%3a%2f%3f%23%5b%5d%40%21%24%26%27%28%29%2a%2b%2c%3b%3d"))
         assert.equal("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLNOPQRSUTVWXYZ0123456789-._~", encoding.fromRfc3986Utf8("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLNOPQRSUTVWXYZ0123456789-._~"))
         assert.equal(" !\"#$%&'()*+,-./", encoding.fromRfc3986Utf8("%20%21%22%23%24%25%26%27%28%29%2a%2b%2c-.%2f"))
@@ -45,6 +51,8 @@ suite("Decoding Tests", () => {
        
         assert.equal("ウィキペディア", encoding.fromRfc3986Utf8("%e3%82%a6%e3%82%a3%e3%82%ad%e3%83%9a%e3%83%87%e3%82%a3%e3%82%a2"))
         assert.equal("叱", encoding.fromRfc3986Utf8("%e5%8f%b1"))
+
+        assert.equal("𩸽 𩸽", encoding.fromRfc3986Utf8("%F0%A9%B8%BD+\u{29e3d}"))
 
         assert.equal("wiki ウィキペディア pedia", encoding.fromRfc3986Utf8("wiki%20ウィキペディア%20pedia"))
         assert.equal("%shika 叱 ru%", encoding.fromRfc3986Utf8("%shika%20叱%20ru%"))

@@ -6,14 +6,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
-#### Escape Text
+#### Escape Html
+HTMLのエスケープ処理を実施します
 - `Escape HTML`
-HTML向けのエスケープ処理を実施します
+- `Escape HTML All Charactors`
 
-- `Escape HTML with UTF-8`
+#### Unescape Html
+HTMLのエスケープされた文字を元に戻します
+- `Unescape HTML All Charactors`
 
-#### Unescape Text
-- `Unescape HTML`
+#### Numbering
+複数カーソルの位置に連番で番号を採番します
+- `Numbering to Multiple Cursors`
 
 ## [1.0.1] 2017-01-xx
 
