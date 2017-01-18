@@ -5,10 +5,11 @@ import * as vscode from 'vscode'
 interface RegisterCallback {
     replace?: (value: string) => string
     whole?: (value: vscode.TextEditor) => void
+    foreach?: (value: string) => void
 }
 
-export function register(command: string, callback: RegisterCallback) : vscode.Disposable {
-    let innerCallback : (...args: any[]) => any
+export function register(command: string, callback: RegisterCallback): vscode.Disposable {
+    let innerCallback: (...args: any[]) => any
 
     if (callback.replace) {
         innerCallback = () => {
@@ -16,9 +17,9 @@ export function register(command: string, callback: RegisterCallback) : vscode.D
             if (editor) {
                 editor.edit((builder) => {
                     editor.selections
-                          .forEach((value, index, array) => {
-                              builder.replace(value, callback.replace(editor.document.getText(value)))
-                          })
+                        .forEach(i => {
+                            builder.replace(i, callback.replace(editor.document.getText(i)))
+                        })
                 })
             }
         }
@@ -27,6 +28,16 @@ export function register(command: string, callback: RegisterCallback) : vscode.D
             let editor = vscode.window.activeTextEditor
             if (editor) {
                 callback.whole(editor)
+            }
+        }
+    } else if (callback.foreach) {
+        innerCallback = () => {
+            let editor = vscode.window.activeTextEditor
+            if (editor) {
+                editor.selections
+                    .forEach(i => {
+                        callback.foreach(editor.document.getText(i))
+                    })
             }
         }
     }

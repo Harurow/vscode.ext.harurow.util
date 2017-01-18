@@ -18,11 +18,11 @@ function hex(c: number): string {
 }
 
 function encode(value: string, sp: string, enc: (ch: string) => string): string {
-    var result = ""
+    let result = ""
 
     value.split('').forEach(ch => {
         let c = ch.charCodeAt(0)
-        if (c <= 0xff) {
+        if (c <= 0xFF) {
             if (isUnReservedChar(c)) {
                 result += ch;
             } else if (c == 0x20) {
@@ -38,13 +38,108 @@ function encode(value: string, sp: string, enc: (ch: string) => string): string 
     return result
 }
 
-function decode(value: string, encoding): string {
-    return encja.codeToString(encja.convert(encja.urlDecode(value), "UNICODE", encoding))
+function decodeUrlString(value: string, encoding: encja.Encoding): string {
+    let code = encja.urlDecode(value)
+    let decoded = encja.convert(code, "UNICODE", encoding)
+    return encja.codeToString(decoded)
 }
 
-function encodeUnicode(ch: string, encoding: string) {
-    var result = ""
-    var arr = []
+function isHexChar(ch: string) {
+    var num = ch.charCodeAt(0)
+    return 0x30 <= num && num <= 0x39
+        || 0x41 <= num && num <= 0x46
+        || 0x61 <= num && num <= 0x66
+}
+function toHexFromChar(ch: string) {
+    var num = ch.charCodeAt(0)
+    if (0x30 <= num && num <= 0x39) {
+        return num - 0x30;
+    } else if (0x41 <= num && num <= 0x46) {
+        return 10 + (num - 0x41);
+    } else if (0x61 <= num && num <= 0x66) {
+        return 10 + (num - 0x61);
+    }
+}
+
+type DecodeMode = 'NORMAL' | 'NORMAL_BUF' | 'PERCENT1' | 'PERCENT2' | 'ABORT'
+
+function decode(value: string, encoding: encja.Encoding): string {
+    let results = ''
+    let buf: string = ''
+    let bufChunk: string = ''
+    let mode: DecodeMode = 'NORMAL'
+
+    value.split('').forEach(ch => {
+        switch (mode) {
+            case 'NORMAL':
+                if (ch === '%') {
+                    mode = 'PERCENT1'
+                    buf = ch
+                } else {
+                    console.log(ch)
+                    results += ch
+                }
+                break
+            case 'NORMAL_BUF':
+                if (ch === '%') {
+                    mode = 'PERCENT1'
+                    buf = ch
+                } else if (isUnReservedChar(ch.codePointAt(0))) {
+                    bufChunk += ch
+                } else {
+                    results += decodeUrlString(bufChunk, encoding)
+                    bufChunk = ''
+                    results += ch
+                    mode = 'NORMAL'
+                }
+                break
+            case 'PERCENT1':
+                buf += ch
+                if (isHexChar(ch)) {
+                    mode = 'PERCENT2'
+                } else {
+                    mode = 'ABORT'
+                }
+                break
+            case 'PERCENT2':
+                buf += ch
+                if (isHexChar(ch)) {
+                    mode = 'NORMAL_BUF'
+                    bufChunk += buf
+                    buf = ''
+                } else {
+                    mode = 'ABORT'
+                }
+                break
+        }
+
+        if (mode === 'ABORT') {
+            if (bufChunk !== '') {
+                console.log(bufChunk)
+                results += decodeUrlString(bufChunk, encoding)
+                bufChunk = ''
+            }
+            console.log(buf)
+            results += buf
+            buf = ''
+            mode = 'NORMAL'
+        }
+    })
+
+    if (bufChunk !== '') {
+        console.log(bufChunk)
+        results += decodeUrlString(bufChunk, encoding)
+        bufChunk = ''
+    }
+    console.log(buf)
+    results += buf
+
+    return results
+}
+
+function encodeUnicode(ch: string, encoding: encja.Encoding) {
+    let result = ""
+    let arr = []
     arr.push(ch.charCodeAt(0))
 
     encja.convert(arr, encoding, "UNICODE").forEach((c) => {
@@ -61,7 +156,7 @@ function encShiftJis(ch: string): string {
 }
 
 function encEucJp(ch: string): string {
-    return encodeUnicode(ch, "EucJp")
+    return encodeUnicode(ch, "EUCJP")
 }
 
 function encUtf8(ch: string): string {
@@ -93,35 +188,13 @@ export function toRfc1866Utf8(value: string): string {
 }
 
 export function fromRfc3986ShiftJis(value: string): string {
-    return decode(value, "SJIS")
+    return decode(value.replace("+", "%20"), "SJIS")
 }
 
 export function fromRfc3986EucJp(value: string): string {
-    return decode(value, "EUCJP")
+    return decode(value.replace("+", "%20"), "EUCJP")
 }
 
 export function fromRfc3986Utf8(value: string): string {
-    return decode(value, "UTF8")
-}
-
-export function fromRfc1866ShiftJis(value: string): string {
-    return decode(value.replace("+", " "), "SJIS")
-}
-
-export function fromRfc1866EucJp(value: string): string {
-    return decode(value.replace("+", " "), "EUCJP")
-}
-
-export function fromRfc1866Utf8(value: string): string {
-    return decode(value.replace("+", " "), "UTF8")
-}
-
-export function toBase64Url(value: string): string {
-    return value.replace("+", "-")
-        .replace("/", "_")
-}
-
-export function toBase64(value: string): string {
-    return value.replace("-", "+")
-        .replace("_", "/")
+    return decode(value.replace("+", "%20"), "UTF8")
 }

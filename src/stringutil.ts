@@ -29,7 +29,7 @@ function toCase(value: string, callback: (value: string) => string): string {
         if (identifier === "_".repeat(identifier.length)) {
             return identifier
         }
-        return callback(identifier.replace(/([A-Z]+[a-z]*|[a-z]+|[0-9]+|_$)/g, (word) =>
+        return callback(identifier.replace(/([A-Z]+[a-z]*|[a-z]+|[0-9]+|_)/g, (word) =>
             word === "_"
                 ? ""
                 : toUpperCaseWhenFirstChar(word)))
@@ -38,7 +38,7 @@ function toCase(value: string, callback: (value: string) => string): string {
 
 function toSnake(value: string): string {
     return enumIdentifiers(value, (identifier) => {
-        var i = 0;
+        let i = 0;
         return identifier.replace(/(_?[A-Z]+[a-z]*|_?[a-z]+|_)/g, (word) => {
             i++
             return word.startsWith("_")

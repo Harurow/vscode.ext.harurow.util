@@ -3,7 +3,7 @@
 import * as vscode from 'vscode'
 import * as clipboard from 'copy-paste'
 
-var map = {
+const map = {
     '"': "&quot;",
     "'": "&#039;",
     "<": "&lt;",

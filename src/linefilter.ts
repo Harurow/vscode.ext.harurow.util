@@ -4,7 +4,7 @@ import * as vscode from 'vscode'
 
 function enumLines(value: string, callback: (line: string) => string): string {
     return value.replace(/(^.*\n)|(^.*$)/mg, (line) => {
-        var newLine = callback(line)
+        let newLine = callback(line)
         return newLine === null
             ? ""
             : newLine
@@ -29,11 +29,6 @@ function filter(editor: vscode.TextEditor, options: vscode.InputBoxOptions,
             })
         }
     })
-}
-
-function filterLine(input: string, value: string,
-    removeCondition: (input: string, line: string) => boolean): string {
-    return enumLines(value, (line) => removeCondition(input, line) ? null : line)
 }
 
 export function removeMatched(editor: vscode.TextEditor) {
@@ -78,6 +73,11 @@ function contains(input: string, line: string): boolean {
 
 function notContains(input: string, line: string): boolean {
     return line.indexOf(input) === -1
+}
+
+function filterLine(input: string, value: string,
+    removeCondition: (input: string, line: string) => boolean): string {
+    return enumLines(value, (line) => removeCondition(input, line) ? null : line)
 }
 
 export function removeMatchedLine(input: string, value: string): string {

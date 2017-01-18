@@ -3,7 +3,7 @@
 import * as vscode from 'vscode'
 import * as commands from './commands'
 import * as strutil from './stringutil';
-import * as filter from './filter'
+import * as filter from './linefilter'
 import * as encoding from './encoding'
 import * as escape from './escape'
 import * as misc from './misc'
@@ -32,12 +32,9 @@ export function activate(context: vscode.ExtensionContext) {
         commands.register('extension.dec.rfc3986ShiftJis', {replace: encoding.fromRfc3986ShiftJis}),
         commands.register('extension.dec.rfc3986EucJp', {replace: encoding.fromRfc3986EucJp}),
         commands.register('extension.dec.rfc3986Utf8', {replace: encoding.fromRfc3986Utf8}),
-        commands.register('extension.dec.rfc1866ShiftJis', {replace: encoding.fromRfc1866ShiftJis}),
-        commands.register('extension.dec.rfc1866EucJp', {replace: encoding.fromRfc1866EucJp}),
-        commands.register('extension.dec.rfc1866Utf8', {replace: encoding.fromRfc1866Utf8}),
 
-        commands.register('extension.trn.transGoogle', {replace: misc.transGoogle}),
-        commands.register('extension.trn.transMicrosoft', {replace: misc.transMicrosoft}),
+        commands.register('extension.trn.transGoogle', {foreach: misc.transGoogle}),
+        commands.register('extension.trn.transMicrosoft', {foreach: misc.transMicrosoft}),
 
         commands.register('extension.esc.toHtml', {replace: escape.toHtml}),
         commands.register('extension.esc.toHtmlLite', {replace: escape.toHtmlLite}),

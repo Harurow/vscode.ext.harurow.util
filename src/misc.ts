@@ -2,11 +2,8 @@
 
 import * as vscode from 'vscode'
 
-export function transGoogle(value: string): string {
-    return value
+export function transGoogle(value: string): void {
 }
 
-export function transMicrosoft(value: string): string {
-    
-    return value
+export function transMicrosoft(value: string): void {
 }
