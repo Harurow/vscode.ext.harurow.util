@@ -37,6 +37,7 @@ export function activate(context: vscode.ExtensionContext) {
         commands.register('extension.esc.toHtml', {replace: escape.toHtml}),
         commands.register('extension.esc.toHtmlAll', {replace: escape.toHtmlAll}),
         commands.register('extension.esc.toUnicode', {replace: escape.toUnicode}),
+        commands.register('extension.esc.toUnicodeAll', {replace: escape.toUnicodeAll}),
         commands.register('extension.esc.fromHtmlAll', {replace: escape.fromHtmlAll}),
         commands.register('extension.esc.fromUnicode', {replace: escape.fromUnicode}),
 

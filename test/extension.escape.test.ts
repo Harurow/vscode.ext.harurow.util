@@ -522,10 +522,18 @@ suite("Escape Tests", () => {
     })
     
     test("toUnicode", () => {
-        assert.equal("\\u0030\\u0041\\u0061", escape.toUnicode('0Aa'))
-        assert.equal("\\ud867\\ude3d\\u0020\\ud867\\ude3d\\u0020\\ud867\\ude3d", escape.toUnicode('\u{29e3d} \uD867\uDE3D 𩸽'))
-
         assert.equal("", escape.toUnicode(''))
+
+        assert.equal("0Aa", escape.toUnicode('0Aa'))
+        assert.equal("\\ud867\\ude3d \\ud867\\ude3d \\ud867\\ude3d", escape.toUnicode('\u{29e3d} \uD867\uDE3D 𩸽'))
+
+    })
+    test("toUnicodeAll", () => {
+        assert.equal("", escape.toUnicodeAll(''))
+
+        assert.equal("\\u0030\\u0041\\u0061", escape.toUnicodeAll('0Aa'))
+        assert.equal("\\ud867\\ude3d\\u0020\\ud867\\ude3d\\u0020\\ud867\\ude3d", escape.toUnicodeAll('\u{29e3d} \uD867\uDE3D 𩸽'))
+
     })
     
 })

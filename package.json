@@ -69,6 +69,7 @@
     "onCommand:extension.esc.toUnicode",
     "onCommand:extension.esc.fromHtmlAll",
     "onCommand:extension.esc.fromUnicode",
+    "onCommand:extension.esc.fromUnicodeAll",
     "onCommand:extension.num.numbers",
     "onCommand:extension.trn.transGoogle",
     "onCommand:extension.trn.transMicrosoft"
@@ -174,6 +175,11 @@
         "command": "extension.esc.toUnicode",
         "category": "Escape",
         "title": "Unicode Escape"
+      },
+      {
+        "command": "extension.esc.toUnicodeAll",
+        "category": "Escape",
+        "title": "Unicode Escape All Charactors"
       },
       {
         "command": "extension.esc.fromHtmlAll",

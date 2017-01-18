@@ -71,6 +71,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - `HTML Escape`
 - `HTML Escape All Charactors`
 - `Unicode Escape`
+- `Unicode Escape All Charactors`
 
 #### Unescap
 HTMLのエスケープされた文字を元に戻します
