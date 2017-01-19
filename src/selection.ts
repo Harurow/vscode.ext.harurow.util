@@ -12,7 +12,7 @@ function enumLines(value: string, callback: (line: string) => string): string {
     })
 }
 
-function getSafeSelections (editor: vscode.TextEditor): vscode.Selection[] {
+function getSafeSelections(editor: vscode.TextEditor): vscode.Selection[] {
     var selections: vscode.Selection[] = []
 
     if (editor.selection.isEmpty) {
@@ -29,8 +29,8 @@ function getSafeSelections (editor: vscode.TextEditor): vscode.Selection[] {
 function clearSelection(editor: vscode.TextEditor) {
     let sttline = editor.document.lineAt(0)
     editor.selection = new vscode.Selection(
-            sttline.rangeIncludingLineBreak.start,
-            sttline.rangeIncludingLineBreak.start
+        sttline.rangeIncludingLineBreak.start,
+        sttline.rangeIncludingLineBreak.start
     )
 }
 
@@ -39,14 +39,14 @@ interface Matched {
     value: string
 }
 
-function match(offset: number, text: string, pattern: RegExp|string): Matched[] {
+function match(offset: number, text: string, pattern: RegExp | string): Matched[] {
     let results: Matched[] = []
 
     if (typeof pattern === 'string') {
         let stidx = 0
         let htidx = text.indexOf(pattern)
         while (htidx !== -1) {
-            results.push({index: offset + htidx, value: pattern})
+            results.push({ index: offset + htidx, value: pattern })
             stidx = htidx + pattern.length
             htidx = text.indexOf(pattern, stidx)
         }
@@ -55,7 +55,7 @@ function match(offset: number, text: string, pattern: RegExp|string): Matched[] 
         let m = regex.exec(text)
 
         while (m) {
-            results.push({index: offset + m.index, value: m[0]})
+            results.push({ index: offset + m.index, value: m[0] })
             m = regex.exec(text)
         }
     }
@@ -66,7 +66,7 @@ function match(offset: number, text: string, pattern: RegExp|string): Matched[] 
 function matches(editor: vscode.TextEditor, selections: vscode.Selection[], pattern: RegExp | string): vscode.Selection[] {
     let doc = editor.document
     let newSels: vscode.Selection[] = []
-    
+
     selections.forEach(sel => {
         let text = doc.getText(sel)
         let offset = sel.start.character
@@ -95,12 +95,12 @@ function select(editor: vscode.TextEditor, options: vscode.InputBoxOptions, type
             vscode.window.showWarningMessage("Must be input text.")
             return
         }
-        
+
         let selections = getSafeSelections(editor)
 
         let doc = editor.document
         let sttline = doc.lineAt(0)
-        let endline = doc.lineAt(doc.lineCount-1)
+        let endline = doc.lineAt(doc.lineCount - 1)
 
         let newSels: vscode.Selection[] = []
 
@@ -108,12 +108,12 @@ function select(editor: vscode.TextEditor, options: vscode.InputBoxOptions, type
             clearSelection(editor)
 
             switch (type) {
-            case 'REGEX':
-                newSels = matches(editor, selections, new RegExp(input, "gm"))
-                break
-            case 'STR':
-                newSels = matches(editor, selections, input)
-                break
+                case 'REGEX':
+                    newSels = matches(editor, selections, new RegExp(input, "gm"))
+                    break
+                case 'STR':
+                    newSels = matches(editor, selections, input)
+                    break
             }
 
             if (newSels && newSels.length > 0) {

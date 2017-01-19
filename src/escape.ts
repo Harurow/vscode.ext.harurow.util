@@ -7,7 +7,7 @@ import * as util from './util'
 import * as htmlchars from './htmlchars'
 
 
-function toHtmlInternal(value: string, undefFunc: (ch: string)=>string) :string {
+function toHtmlInternal(value: string, undefFunc: (ch: string) => string): string {
     if (!value) {
         return value
     }
@@ -37,7 +37,7 @@ export function toHtmlAll(value: string): string {
 var toUni = (code: number) => `\\u${util.toHex(code, 4)}`
 var toChr = (c: number) => String.fromCodePoint(c)
 
-function toUnicodeInternal(value: string, funcAscii: (c: number) => string) : string {
+function toUnicodeInternal(value: string, funcAscii: (c: number) => string): string {
     if (!value) {
         return value
     }
@@ -99,35 +99,35 @@ export function fromHtmlAll(value: string): string {
 
     util.strToChars(value).forEach(ch => {
         switch (mode) {
-        case 'NORMAL':
-            if (ch === '&') {
-                buf = ch
-                mode = 'AMP'
-            } else {
-                results += ch
-            }
-            break
-        case 'AMP':
-            if (ch === ';') {
-                results += '&;'
-                buf = ''
-                mode = 'NORMAL'
-            } else {
-                buf += ch
-                mode = 'AMP_DATA'
-            }
-            break
-        case 'AMP_DATA':
-            if (ch === ';') {
-                buf += ch
-                results += parseHtmlSymbol(buf)
-                buf = ''
-                mode = 'NORMAL'
-            } else {
-                buf += ch
-                mode = 'AMP_DATA'
-            }
-            break
+            case 'NORMAL':
+                if (ch === '&') {
+                    buf = ch
+                    mode = 'AMP'
+                } else {
+                    results += ch
+                }
+                break
+            case 'AMP':
+                if (ch === ';') {
+                    results += '&;'
+                    buf = ''
+                    mode = 'NORMAL'
+                } else {
+                    buf += ch
+                    mode = 'AMP_DATA'
+                }
+                break
+            case 'AMP_DATA':
+                if (ch === ';') {
+                    buf += ch
+                    results += parseHtmlSymbol(buf)
+                    buf = ''
+                    mode = 'NORMAL'
+                } else {
+                    buf += ch
+                    mode = 'AMP_DATA'
+                }
+                break
         }
     })
 
@@ -137,9 +137,8 @@ export function fromHtmlAll(value: string): string {
 }
 
 export function fromUnicode(value: string): string {
-    // hi = U+D800 〜 U+DBFF
-    // lo = U+DC00 〜 U+DFFF
-    return value
+    let reg = /(\\u)([0-9A-Fa-f]{4})/g
+    return value.replace(reg, (m) => String.fromCodePoint(Number.parseInt(m.substr(2), 16)))
 }
 
 export async function getContent(): Promise<string> {

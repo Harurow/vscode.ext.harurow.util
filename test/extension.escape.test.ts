@@ -549,6 +549,13 @@ suite("Escape Tests", () => {
 
         assert.equal("\\u0030\\u0041\\u0061", escape.toUnicodeAll('0Aa'))
         assert.equal("\\ud867\\ude3d\\u0020\\ud867\\ude3d\\u0020\\ud867\\ude3d", escape.toUnicodeAll('\u{29e3d} \uD867\uDE3D 𩸽'))
+    })
+
+    test("fromUnicode", () => {
+        assert.equal("", escape.fromUnicode(''))
+
+        assert.equal("0Aa", escape.fromUnicode('\\u0030\\u0041\\u0061'))
+        assert.equal('\u{29e3d} \uD867\uDE3D 𩸽', escape.fromUnicode("\\ud867\\ude3d \\ud867\\ude3d\\u0020\\ud867\\ude3d"))
 
     })
     
@@ -574,7 +581,5 @@ suite("Unescape Tests", () => {
         andReverseAssert("abcdef")
         andReverseAssert("&'")
         andReverseAssert("\u{29e3d} \uD867\uDE3D 𩸽")
-
-
     })
 })
