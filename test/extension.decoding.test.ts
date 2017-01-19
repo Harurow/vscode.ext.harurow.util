@@ -66,31 +66,73 @@ suite("Decoding Tests", () => {
 
 suite("Encode-Decoding Tests", () => {
 
-    function encdec(value: string): string {
+    function encdecS(value: string): string {
+        let enc = encoding.toRfc3986ShiftJis(value)
+        let dec = encoding.fromRfc3986ShiftJis(enc)
+        console.log(`${value} => ${enc} => ${dec}`)
+        return dec
+    }
+    function encdecE(value: string): string {
+        let enc = encoding.toRfc3986EucJp(value)
+        let dec = encoding.fromRfc3986EucJp(enc)
+        console.log(`${value} => ${enc} => ${dec}`)
+        return dec
+    }
+    function encdecU(value: string): string {
         let enc = encoding.toRfc3986Utf8(value)
+        let dec = encoding.fromRfc3986Utf8(enc)
+        console.log(`${value} => ${enc} => ${dec}`)
+        return dec
+    }
+    function encdecS_(value: string): string {
+        let enc = encoding.toRfc1866ShiftJis(value)
+        let dec = encoding.fromRfc3986ShiftJis(enc)
+        console.log(`${value} => ${enc} => ${dec}`)
+        return dec
+    }
+    function encdecE_(value: string): string {
+        let enc = encoding.toRfc1866EucJp(value)
+        let dec = encoding.fromRfc3986EucJp(enc)
+        console.log(`${value} => ${enc} => ${dec}`)
+        return dec
+    }
+    function encdecU_(value: string): string {
+        let enc = encoding.toRfc1866Utf8(value)
         let dec = encoding.fromRfc3986Utf8(enc)
         console.log(`${value} => ${enc} => ${dec}`)
         return dec
     }
 
     function encdecAssert(value: string) {
-        assert.equal(value, encdec(value))
+        assert.equal(value, encdecS(value))
+        assert.equal(value, encdecE(value))
+        assert.equal(value, encdecU(value))
+        assert.equal(value, encdecS_(value))
+        assert.equal(value, encdecE_(value))
+        assert.equal(value, encdecU_(value))
+    }
+
+    function encdecUAssert(value: string) {
+        assert.equal(value, encdecU(value))
     }
 
     test("-", () => {
-        encdecAssert(null)
-        encdecAssert(undefined)
-        encdecAssert("")
-        encdecAssert(":/?#[]@!$&'()*+,;=")
-        encdecAssert("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLNOPQRSUTVWXYZ0123456789-._~")
-        encdecAssert(" !\"#$%&'()*+,-./")
-        encdecAssert("0123456789:;<=>?")
-        encdecAssert("@ABCDEFGHIJKLMNO")
-        encdecAssert("PQRSTUVWXYZ[\\]^_")
-        encdecAssert("`abcdefghijklmno")
-        encdecAssert("pqrstuvwxyz{|}~")
-        encdecAssert("ウィキペディア")
+        let testCase = [
+        null,
+        undefined,
+        "",
+        " ",
+        ":/?#[]@!$&'()*+,;=",
+        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLNOPQRSUTVWXYZ0123456789-._~",
+        " !\"#$%&'()*+,-./",
+        "0123456789:;<=>?",
+        "@ABCDEFGHIJKLMNO",
+        "PQRSTUVWXYZ[\\]^_",
+        "`abcdefghijklmno",
+        "pqrstuvwxyz{|}~",
+        "ウィキペディア"
+        ].forEach(t => encdecAssert(t))
         
-        encdecAssert("\u{29e3d} \ud867\ude3d 𩸽")
+        encdecUAssert("\u{29e3d} \ud867\ude3d 𩸽")
     })
 })

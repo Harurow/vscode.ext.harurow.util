@@ -5,10 +5,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
-### Added
-#### Numbering
-複数カーソルの位置に連番で番号を採番します
-- `Numbering to Multiple Cursors`
+none
 
 ## [1.0.1] 2017-01-xx
 
@@ -47,42 +44,37 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 #### Encode Text
 選択中の文字列を % エンコーディングします  
-スペースは
-- URL Encodingは '%20'
-- application/x-www-form-urlencodedは '+'  
-へ変換します。  
-日本語のエンコーディングについては ShiftJIS, EUC-JP, UTF-8のいずれかを選べます
-- `To URL Encoding (RFC3986) / Shift_JIS`
-- `To URL Encoding (RFC3986) / EUC-JP`
-- `To URL Encoding (RFC3986) / UTF-8`  
-RFC2986に従って%エンコーディングします  
-※スペースは%20になります
 
-- `To application/x-www-form-urlencoded (RFC1866) / Shift_JIS`
-- `To application/x-www-form-urlencoded (RFC1866) / EUC-JP`
-- `To application/x-www-form-urlencoded (RFC1866) / UTF-8`  
-RFC1866に従って%エンコーディングします  
-※スペースは`+`になります
+- RFC3986 は スペースを`%20`に
+- RFC1866 は スペースを`+`に  
+へ変換します。  
+
+日本語のエンコーディングについては ShiftJIS, EUC-JP, UTF-8のいずれかを選べます
+- `To Percent Encoding (RFC3986 ' ' => %20) / Shift_JIS`
+- `To Percent Encoding (RFC3986 ' ' => %20) / EUC-JP`
+- `To Percent Encoding (RFC3986 ' ' => %20) / UTF-8`  
+- `To Percent Encoding (RFC1866 ' ' => +) / Shift_JIS`
+- `To Percent Encoding (RFC1866 ' ' => +) / EUC-JP`
+- `To Percent Encoding (RFC1866 ' ' => +) / UTF-8`  
 
 #### Decode Text
 選択中の % エンコーディングされた文字列をデコードし元へ戻します  
 日本語のエンコーディングについては ShiftJIS, EUC-JP, UTF-8のいずれかを選べます  
-コマンドは次の通りです
-- `From URL Encoding, x-www-form-urlencoded (RFC3986, RFC1866) / Shift_JIS`
-- `From URL Encoding, x-www-form-urlencoded (RFC3986, RFC1866) / EUC-JP`
-- `From URL Encoding, x-www-form-urlencoded (RFC3986, RFC1866) / UTF-8`
+- `From Percent Encoding (RFC3986, RFC1866) / Shift_JIS`
+- `From Percent Encoding (RFC3986, RFC1866) / EUC-JP`
+- `From Percent Encoding (RFC3986, RFC1866) / UTF-8`
 
 #### Escape
 エスケープ処理を実施します
-- `HTML Escape`
-- `HTML Escape All Charactors`
-- `Unicode Escape`
-- `Unicode Escape All Charactors`
+- `To HTML Escape`
+- `To HTML Escape All Charactors`
+- `To Unicode Escape`
+- `To Unicode Escape All Charactors`
 
 #### Unescap
 HTMLのエスケープされた文字を元に戻します
-- `HTML Unescape`
-- `Unicode Unescape`
+- `From HTML Escape`
+- `From Unicode Eescape`
 
 #### Selection
 選択します
@@ -91,3 +83,24 @@ HTMLのエスケープされた文字を元に戻します
 
 - `Select If Matched Regex`  
 正規表現に一致する文字列を選択します
+
+#### Numbering
+複数カーソルの位置に連番で番号を採番します
+- `Insert Numbers to Multiple Cursors`  
+範囲を複数選択しカーソルを複数設定してからこのコマンドを実行してください
+入力エリアにはスペース区切りで数字を指定します  
+start 以外は省略可能です  
+start step?=1 radix?:[2|10|8|16]=10 len?=0
+
+- start 最初の番号  
+  省略不可
+- step 増加する値  
+  10進数で入力 マイナス可  
+  省略した場合は1
+- redix 番号のn進数を指定する  
+  2, 10, 8, 16のいずれか  
+  省略した場合は10
+- len 長さ  
+  全体の長さを指定し前ゼロを付加する  
+  0を指定した場合は前ゼロを付加しない  
+  省略した場合は0

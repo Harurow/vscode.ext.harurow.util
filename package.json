@@ -124,77 +124,77 @@
       {
         "command": "extension.enc.rfc3986ShiftJis",
         "category": "Encode",
-        "title": "To URL Encoding (RFC3986) / Shift_JIS"
+        "title": "To Percent Encoding (RFC3986 ' ' => %20) / Shift_JIS"
       },
       {
         "command": "extension.enc.rfc3986EucJp",
         "category": "Encode",
-        "title": "To URL Encoding (RFC3986) / EUC-JP"
+        "title": "To Percent Encoding (RFC3986 ' ' => %20) / EUC-JP"
       },
       {
         "command": "extension.enc.rfc3986Utf8",
         "category": "Encode",
-        "title": "To URL Encoding (RFC3986) / UTF-8"
+        "title": "To Percent Encoding (RFC3986 ' ' => %20) / UTF-8"
       },
       {
         "command": "extension.enc.rfc1866ShiftJis",
         "category": "Encode",
-        "title": "To x-www-form-urlencoded (RFC1866) / Shift_JIS"
+        "title": "To Percent Encoding (RFC1866 ' ' => +) / Shift_JIS"
       },
       {
         "command": "extension.enc.rfc1866EucJp",
         "category": "Encode",
-        "title": "To x-www-form-urlencoded (RFC1866) / EUC-JP"
+        "title": "To Percent Encoding (RFC1866 ' ' => +) / EUC-JP"
       },
       {
         "command": "extension.enc.rfc1866Utf8",
         "category": "Encode",
-        "title": "To x-www-form-urlencoded (RFC1866) / UTF-8"
+        "title": "To Percent Encoding (RFC1866 ' ' => +) / UTF-8"
       },
       {
         "command": "extension.dec.rfc3986ShiftJis",
         "category": "Decode",
-        "title": "From URL Encoding, x-www-form-urlencoded (RFC3986, RFC1866) / Shift_JIS"
+        "title": "From Percent Encoding (RFC3986, RFC1866) / Shift_JIS"
       },
       {
         "command": "extension.dec.rfc3986EucJp",
         "category": "Decode",
-        "title": "From URL Encoding, x-www-form-urlencoded (RFC3986, RFC1866) / EUC-JP"
+        "title": "From Percent Encoding (RFC3986, RFC1866) / EUC-JP"
       },
       {
         "command": "extension.dec.rfc3986Utf8",
         "category": "Decode",
-        "title": "From URL Encoding, x-www-form-urlencoded (RFC3986, RFC1866) / UTF-8"
+        "title": "From Percent Encoding (RFC3986, RFC1866) / UTF-8"
       },
       {
         "command": "extension.esc.toHtml",
         "category": "Escape",
-        "title": "HTML Escape"
+        "title": "To HTML Escape"
       },
       {
         "command": "extension.esc.toHtmlAll",
         "category": "Escape",
-        "title": "HTML Escape All Charactors"
+        "title": "To HTML Escape All Charactors"
       },
       {
         "command": "extension.esc.toUnicode",
         "category": "Escape",
-        "title": "Unicode Escape"
+        "title": "To Unicode Escape"
       },
       {
         "command": "extension.esc.toUnicodeAll",
         "category": "Escape",
-        "title": "Unicode Escape All Charactors"
+        "title": "To Unicode Escape All Charactors"
       },
       {
         "command": "extension.esc.fromHtmlAll",
-        "category": "Escape",
-        "title": "HTML Unescape"
+        "category": "Unescape",
+        "title": "From HTML Escape"
       },
       {
         "command": "extension.esc.fromUnicode",
-        "category": "Escape",
-        "title": "Unicode Unescape"
+        "category": "Unescape",
+        "title": "From Unicode Escape"
       },
       {
         "command": "extension.sel.string",
@@ -204,12 +204,12 @@
       {
         "command": "extension.sel.regex",
         "category": "Selection",
-        "title": "Select If Matched Regex"
+        "title": "Select If Matched Regex ..."
       },
       {
         "command": "extension.num.numbers",
         "category": "Numbers",
-        "title": "Numbering to Multiple Cursors"
+        "title": "Inert Numbers to Multiple Cursors ..."
       }
     ],
     "commands-tmp": [
