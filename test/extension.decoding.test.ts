@@ -60,4 +60,37 @@ suite("Decoding Tests", () => {
         assert.equal("%1sh%%ika 叱 ru%", encoding.fromRfc3986Utf8("%1sh%%ika%20叱%20ru%"))
         assert.equal("%%1shika 叱 ru%", encoding.fromRfc3986Utf8("%%1shika%20叱%20ru%"))
     })
+
+
+})
+
+suite("Encode-Decoding Tests", () => {
+
+    function encdec(value: string): string {
+        let enc = encoding.toRfc3986Utf8(value)
+        let dec = encoding.fromRfc3986Utf8(enc)
+        console.log(`${value} => ${enc} => ${dec}`)
+        return dec
+    }
+
+    function encdecAssert(value: string) {
+        assert.equal(value, encdec(value))
+    }
+
+    test("-", () => {
+        encdecAssert(null)
+        encdecAssert(undefined)
+        encdecAssert("")
+        encdecAssert(":/?#[]@!$&'()*+,;=")
+        encdecAssert("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLNOPQRSUTVWXYZ0123456789-._~")
+        encdecAssert(" !\"#$%&'()*+,-./")
+        encdecAssert("0123456789:;<=>?")
+        encdecAssert("@ABCDEFGHIJKLMNO")
+        encdecAssert("PQRSTUVWXYZ[\\]^_")
+        encdecAssert("`abcdefghijklmno")
+        encdecAssert("pqrstuvwxyz{|}~")
+        encdecAssert("ウィキペディア")
+        
+        encdecAssert("\u{29e3d} \ud867\ude3d 𩸽")
+    })
 })

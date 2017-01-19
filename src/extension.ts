@@ -7,6 +7,7 @@ import * as filter from './linefilter'
 import * as encoding from './encoding'
 import * as escape from './escape'
 import * as num from './numbers'
+import * as sel from './selection'
 import * as misc from './misc'
 
 export function activate(context: vscode.ExtensionContext) {
@@ -42,6 +43,9 @@ export function activate(context: vscode.ExtensionContext) {
         commands.register('extension.esc.fromUnicode', {replace: escape.fromUnicode}),
 
         commands.register('extension.num.numbers', {whole: num.numbers}),
+
+        commands.register('extension.sel.string', {whole: sel.string}),
+        commands.register('extension.sel.regex', {whole: sel.regex}),
 
         commands.register('extension.trn.transGoogle', {foreach: misc.transGoogle}),
         commands.register('extension.trn.transMicrosoft', {foreach: misc.transMicrosoft}),

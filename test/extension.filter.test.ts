@@ -59,4 +59,5 @@ suite("Fileter Tests", () => {
         assert.equal("aabcc\n", filter.removeNotContainsLine("abc", "aabcc\naaa\nddd"))
         assert.equal("aabcc", filter.removeNotContainsLine("abc", "aaa\nddd\naabcc"))
     })
+
 })

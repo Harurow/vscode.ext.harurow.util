@@ -25,6 +25,9 @@
     "shift-jis",
     "remove-line",
     "line-filter",
+    "multiple",
+    "cursors",
+    "selection",
     "numbers"
   ],
   "main": "./out/src/extension",
@@ -71,6 +74,8 @@
     "onCommand:extension.esc.fromUnicode",
     "onCommand:extension.esc.fromUnicodeAll",
     "onCommand:extension.num.numbers",
+    "onCommand:extension.sel.string",
+    "onCommand:extension.sel.regex",
     "onCommand:extension.trn.transGoogle",
     "onCommand:extension.trn.transMicrosoft"
   ],
@@ -190,6 +195,16 @@
         "command": "extension.esc.fromUnicode",
         "category": "Escape",
         "title": "Unicode Unescape"
+      },
+      {
+        "command": "extension.sel.string",
+        "category": "Selection",
+        "title": "Select String ..."
+      },
+      {
+        "command": "extension.sel.regex",
+        "category": "Selection",
+        "title": "Select If Matched Regex"
       },
       {
         "command": "extension.num.numbers",

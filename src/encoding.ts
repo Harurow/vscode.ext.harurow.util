@@ -2,6 +2,7 @@
 
 import * as vscode from 'vscode'
 import * as encja from 'encoding-japanese'
+import * as util from './util'
 
 function isUnReservedChar(c: number): boolean {
     return 0x41 <= c && c <= 0x5A   // A-Z
@@ -13,18 +14,14 @@ function isUnReservedChar(c: number): boolean {
         || c == 0x7E                // ~
 }
 
-function hex(c: number): string {
-    return "%" + ("0" + c.toString(16)).slice(-2)
-}
-
-function stringToChars(value: string) : string[] {
-    return value.match(/[\uD800-\uDBFF][\uDC00-\uDFFF]|[^\uD800-\uDFFF]/g) || []
-}
-
 function encode(value: string, sp: string, enc: (ch: string) => string): string {
+    if (!value) {
+        return value
+    }
+
     let result = ""
 
-    stringToChars(value).forEach(ch => {
+    util.strToChars(value).forEach(ch => {
         let c = ch.codePointAt(0)
         if (c <= 0xFF) {
             if (isUnReservedChar(c)) {
@@ -32,7 +29,7 @@ function encode(value: string, sp: string, enc: (ch: string) => string): string 
             } else if (c == 0x20) {
                 result += sp
             } else {
-                result += hex(c)
+                result += "%" + util.toHex(c)
             }
         } else {
             result += enc(ch)
@@ -48,72 +45,59 @@ function decodeUrlString(value: string, encoding: encja.Encoding): string {
     return encja.codeToString(decoded)
 }
 
-function isHexChar(ch: string) {
-    var num = ch.charCodeAt(0)
-    return 0x30 <= num && num <= 0x39
-        || 0x41 <= num && num <= 0x46
-        || 0x61 <= num && num <= 0x66
-}
-function toHexFromChar(ch: string) {
-    var num = ch.charCodeAt(0)
-    if (0x30 <= num && num <= 0x39) {
-        return num - 0x30;
-    } else if (0x41 <= num && num <= 0x46) {
-        return 10 + (num - 0x41);
-    } else if (0x61 <= num && num <= 0x66) {
-        return 10 + (num - 0x61);
-    }
-}
-
 type DecodeMode = 'NORMAL' | 'NORMAL_BUF' | 'PERCENT1' | 'PERCENT2' | 'ABORT'
 
 function decode(value: string, encoding: encja.Encoding): string {
+    if (!value) {
+        return value
+    }
+
     let results = ''
     let buf: string = ''
     let bufChunk: string = ''
     let mode: DecodeMode = 'NORMAL'
 
-    stringToChars(value).forEach(ch => {
+    util.strToChars(value).forEach(ch => {
         switch (mode) {
-            case 'NORMAL':
-                if (ch === '%') {
-                    mode = 'PERCENT1'
-                    buf = ch
-                } else {
-                    results += ch
-                }
-                break
-            case 'NORMAL_BUF':
-                if (ch === '%') {
-                    mode = 'PERCENT1'
-                    buf = ch
-                } else if (isUnReservedChar(ch.codePointAt(0))) {
-                    bufChunk += ch
-                } else {
-                    results += decodeUrlString(bufChunk, encoding)
-                    bufChunk = ''
-                    results += ch
-                    mode = 'NORMAL'
-                }
-                break
-            case 'PERCENT1':
-                buf += ch
-                if (isHexChar(ch)) {
-                    mode = 'PERCENT2'
-                } else {
-                    mode = 'ABORT'
-                }
-                break
-            case 'PERCENT2':
-                buf += ch
-                if (isHexChar(ch)) {
-                    mode = 'NORMAL_BUF'
-                    bufChunk += buf
-                    buf = ''
-                } else {
-                    mode = 'ABORT'
-                }
-                break
+        case 'NORMAL':
+            if (ch === '%') {
+                mode = 'PERCENT1'
+                buf = ch
+            } else {
+                results += ch
+            }
+            break
+        case 'NORMAL_BUF':
+            if (ch === '%') {
+                mode = 'PERCENT1'
+                buf = ch
+            } else if (isUnReservedChar(ch.codePointAt(0))) {
+                bufChunk += ch
+            } else {
+                results += decodeUrlString(bufChunk, encoding)
+                bufChunk = ''
+                results += ch
+                mode = 'NORMAL'
+            }
+            break
+        case 'PERCENT1':
+            buf += ch
+            if (util.isHexChar(ch)) {
+                mode = 'PERCENT2'
+            } else {
+                mode = 'ABORT'
+            }
+            break
+        case 'PERCENT2':
+            buf += ch
+            if (util.isHexChar(ch)) {
+                mode = 'NORMAL_BUF'
+                bufChunk += buf
+                buf = ''
+            } else {
+                mode = 'ABORT'
+            }
+            break
         }
 
         if (mode === 'ABORT') {
@@ -143,7 +127,7 @@ function encodeUnicode(ch: string, encoding: encja.Encoding) {
     encja.convert(code, encoding, "UNICODE").forEach((c) => {
         result += isUnReservedChar(c)
             ? String.fromCharCode(c)
-            : hex(c)
+            : "%" + util.toHex(c)
     })
 
     return result
@@ -186,13 +170,13 @@ export function toRfc1866Utf8(value: string): string {
 }
 
 export function fromRfc3986ShiftJis(value: string): string {
-    return decode(value.replace("+", "%20"), "SJIS")
+    return decode(util.safeReplace(value, "+", "%20"), "SJIS")
 }
 
 export function fromRfc3986EucJp(value: string): string {
-    return decode(value.replace("+", "%20"), "EUCJP")
+    return decode(util.safeReplace(value, "+", "%20"), "EUCJP")
 }
 
 export function fromRfc3986Utf8(value: string): string {
-    return decode(value.replace("+", "%20"), "UTF8")
+    return decode(util.safeReplace(value, "+", "%20"), "UTF8")
 }

@@ -19,15 +19,19 @@ function filter(editor: vscode.TextEditor, options: vscode.InputBoxOptions,
     }
 
     vscode.window.showInputBox(options).then((input) => {
-        if (input === "") {
-            vscode.window.showWarningMessage("Must be input text.")
-        } else {
-            editor.edit((builder) => {
-                editor.selections.forEach((value, index, array) => {
-                    builder.replace(value, callback(input, editor.document.getText(value)))
-                })
-            })
+        if (input === undefined) {
+            return
         }
+        if (!input) {
+            vscode.window.showWarningMessage("Must be input text.")
+            return
+        }
+        
+        editor.edit((builder) => {
+            editor.selections.forEach((value, index, array) => {
+                builder.replace(value, callback(input, editor.document.getText(value)))
+            })
+        })
     })
 }
 
@@ -35,14 +39,14 @@ export function removeMatched(editor: vscode.TextEditor) {
     filter(editor, {
         placeHolder: "Pattern",
         prompt: "Remove lines if it matched input pattern.",
-    }, removeContainsLine)
+    }, removeMatchedLine)
 }
 
 export function removeUnmatched(editor: vscode.TextEditor) {
     filter(editor, {
         placeHolder: "Pattern",
         prompt: "Remove lines if it un-matched input pattern.",
-    }, removeNotContainsLine)
+    }, removeUnmatchedLine)
 }
 
 export function removeContains(editor: vscode.TextEditor) {

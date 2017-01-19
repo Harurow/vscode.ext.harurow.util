@@ -17,32 +17,33 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 選択中の文字列をのケースを変換します
 
 - `ToPascalCase`  
-    パスカルケース(PascalCase)へ変換します
+パスカルケース(PascalCase)へ変換します
 
 - `toCamelCase`  
-    キャメルケースへ(camelCase)変換します
+キャメルケースへ(camelCase)変換します
 
 - `TO_UPPER_SNAKE_CASE`  
-    大文字のスネークケース(SNAKE_CASE)へ変換します
+大文字のスネークケース(SNAKE_CASE)へ変換します
 
 - `to_lower_snake_case`  
-    小文字のスネークケース(snake_case)へ変換します
+小文字のスネークケース(snake_case)へ変換します
 
 #### Remove Lines
 選択中の行をフィルタンリングします
 正規表現または単純な検索が条件として利用できます
 
-- `Remove Line If Matched Regex`  
-    正規表現に一致した行を削除します
-
-- `Remove Line If Un-Matched Regex`  
-    正規表現に一致する行は残し、そうでない行を削除します
-
 - `Remove Line If Contains String`  
-    入力文字が含まれる行を削除します
+入力文字が含まれる行を削除します
 
 - `Remove Line If NOT Contains String`  
-    入力文字が含まれる行は残し、そうではない行を削除します
+入力文字が含まれる行は残し、そうではない行を削除します
+
+- `Remove Line If Matched Regex`  
+正規表現に一致した行を削除します
+
+- `Remove Line If Un-Matched Regex`  
+正規表現に一致する行は残し、そうでない行を削除します
+
 
 #### Encode Text
 選択中の文字列を % エンコーディングします  
@@ -53,10 +54,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 日本語のエンコーディングについては ShiftJIS, EUC-JP, UTF-8のいずれかを選べます
 - `To URL Encoding (RFC3986) / Shift_JIS`
 - `To URL Encoding (RFC3986) / EUC-JP`
-- `To URL Encoding (RFC3986) / UTF-8`
+- `To URL Encoding (RFC3986) / UTF-8`  
+RFC2986に従って%エンコーディングします  
+※スペースは%20になります
+
 - `To application/x-www-form-urlencoded (RFC1866) / Shift_JIS`
 - `To application/x-www-form-urlencoded (RFC1866) / EUC-JP`
 - `To application/x-www-form-urlencoded (RFC1866) / UTF-8`  
+RFC1866に従って%エンコーディングします  
+※スペースは`+`になります
 
 #### Decode Text
 選択中の % エンコーディングされた文字列をデコードし元へ戻します  
@@ -78,3 +84,10 @@ HTMLのエスケープされた文字を元に戻します
 - `HTML Unescape`
 - `Unicode Unescape`
 
+#### Selection
+選択します
+- `Select String`  
+一致する文字列を選択します
+
+- `Select If Matched Regex`  
+正規表現に一致する文字列を選択します

@@ -521,6 +521,22 @@ suite("Escape Tests", () => {
 
     })
     
+    test("fromHtmlAll", () =>{
+        assert.equal(" ", escape.fromHtmlAll("&#32;"))
+        assert.equal(" ", escape.fromHtmlAll("&#032;"))
+        assert.equal(" ", escape.fromHtmlAll("&#x20;"))
+
+        assert.equal("&", escape.fromHtmlAll("&amp;"))
+        assert.equal("&Amp;", escape.fromHtmlAll("&Amp;"))
+        assert.equal("&", escape.fromHtmlAll("&AMP;"))
+
+        assert.equal("⇐", escape.fromHtmlAll("&lArr;"))
+        assert.equal("←", escape.fromHtmlAll("&larr;"))
+        assert.equal("&LARR;", escape.fromHtmlAll("&LARR;"))
+
+        assert.equal("&#x20", escape.fromHtmlAll("&#x20"))
+    })
+
     test("toUnicode", () => {
         assert.equal("", escape.toUnicode(''))
 
@@ -536,4 +552,29 @@ suite("Escape Tests", () => {
 
     })
     
+})
+
+suite("Unescape Tests", () => {
+
+    function escapeUnescase(value: string): string {
+        let esc = escape.toHtmlAll(value)
+        let une = escape.fromHtmlAll(esc)
+        console.log(`${value} => ${esc} => ${une}`)
+        return une
+    }
+
+    function andReverseAssert(value: string) {
+        assert.equal(value, escapeUnescase(value))
+    }
+    
+    test("-", () => {
+        andReverseAssert(null)
+        andReverseAssert(undefined)
+        andReverseAssert('')
+        andReverseAssert("abcdef")
+        andReverseAssert("&'")
+        andReverseAssert("\u{29e3d} \uD867\uDE3D 𩸽")
+
+
+    })
 })
