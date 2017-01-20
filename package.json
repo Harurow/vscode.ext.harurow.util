@@ -1,0 +1,226 @@
+{
+  "name": "harurow-util",
+  "displayName": "Harurow Util",
+  "description": "",
+  "version": "1.0.1",
+  "publisher": "Harurow-the-programmer",
+  "homepage": "https://https://github.com/Harurow/vscode.ext.harurow.util",
+  "repository": {
+    "type": "git",
+    "url": "https://https://https://github.com/Harurow/vscode.ext.harurow.util.git"
+  },
+  "bugs": {
+    "url": "https://https://github.com/Harurow/vscode.ext.harurow.util/issues"
+  },
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.8.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "pascal/camel/snake",
+    "encode/decode, escape/unescape",
+    "line-filter",
+    "multiple-cursors"
+  ],
+  "main": "./out/src/extension",
+  "scripts": {
+    "vscode:prepublish": "tsc -p ./",
+    "compile": "tsc -watch -p ./",
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "test": "node ./node_modules/vscode/bin/test"
+  },
+  "devDependencies": {
+    "@types/copy-paste": "^1.1.30",
+    "@types/encoding-japanese": "^1.0.15",
+    "@types/mocha": "^2.2.38",
+    "@types/node": "^7.0.0",
+    "mocha": "^3.2.0",
+    "typescript": "^2.1.5",
+    "vscode": "^1.0.3",
+    "vscode-nls": "^2.0.2"
+  },
+  "dependencies": {
+    "copy-paste": "^1.3.0",
+    "encoding-japanese": "^1.0.25"
+  },
+  
+  "activationEvents": [
+    "onCommand:extension.str.toPascalCase",
+    "onCommand:extension.str.toCamelCase",
+    "onCommand:extension.str.toUpperSnakeCase",
+    "onCommand:extension.str.toLowerSnakeCase",
+    "onCommand:extension.flt.removeMatched",
+    "onCommand:extension.flt.removeUnmatched",
+    "onCommand:extension.flt.removeContains",
+    "onCommand:extension.flt.removeNotContains",
+    "onCommand:extension.enc.rfc3986ShiftJis",
+    "onCommand:extension.enc.rfc3986EucJp",
+    "onCommand:extension.enc.rfc3986Utf8",
+    "onCommand:extension.enc.rfc1866ShiftJis",
+    "onCommand:extension.enc.rfc1866EucJp",
+    "onCommand:extension.enc.rfc1866Utf8",
+    "onCommand:extension.dec.rfc3986ShiftJis",
+    "onCommand:extension.dec.rfc3986EucJp",
+    "onCommand:extension.dec.rfc3986Utf8",
+    "onCommand:extension.esc.toHtml",
+    "onCommand:extension.esc.toHtmlAll",
+    "onCommand:extension.esc.toUnicode",
+    "onCommand:extension.esc.fromHtmlAll",
+    "onCommand:extension.esc.fromUnicode",
+    "onCommand:extension.esc.fromUnicodeAll",
+    "onCommand:extension.num.numbers",
+    "onCommand:extension.sel.string",
+    "onCommand:extension.sel.regex",
+    "onCommand:extension.trn.transGoogle",
+    "onCommand:extension.trn.transMicrosoft"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "extension.str.toPascalCase",
+        "category": "ConvertCase",
+        "title": "ToPascalCase"
+      },
+      {
+        "command": "extension.str.toCamelCase",
+        "category": "ConvertCase",
+        "title": "toCamelCase"
+      },
+      {
+        "command": "extension.str.toUpperSnakeCase",
+        "category": "ConvertCase",
+        "title": "TO_UPPER_SNAKE_CASE"
+      },
+      {
+        "command": "extension.str.toLowerSnakeCase",
+        "category": "ConvertCase",
+        "title": "to_lower_snake_case"
+      },
+      {
+        "command": "extension.flt.removeMatched",
+        "category": "LineFilter",
+        "title": "Remove Line If Matched Regex ..."
+      },
+      {
+        "command": "extension.flt.removeUnmatched",
+        "category": "LineFilter",
+        "title": "Remove Line If Un-Matched Regex ..."
+      },
+      {
+        "command": "extension.flt.removeContains",
+        "category": "LineFilter",
+        "title": "Remove Line If Contains String ..."
+      },
+      {
+        "command": "extension.flt.removeNotContains",
+        "category": "LineFilter",
+        "title": "Remove Line If NOT Contains String ..."
+      },
+      {
+        "command": "extension.enc.rfc3986ShiftJis",
+        "category": "Encode",
+        "title": "To Percent Encoding (RFC3986 ' ' => %20) / Shift_JIS"
+      },
+      {
+        "command": "extension.enc.rfc3986EucJp",
+        "category": "Encode",
+        "title": "To Percent Encoding (RFC3986 ' ' => %20) / EUC-JP"
+      },
+      {
+        "command": "extension.enc.rfc3986Utf8",
+        "category": "Encode",
+        "title": "To Percent Encoding (RFC3986 ' ' => %20) / UTF-8"
+      },
+      {
+        "command": "extension.enc.rfc1866ShiftJis",
+        "category": "Encode",
+        "title": "To Percent Encoding (RFC1866 ' ' => +) / Shift_JIS"
+      },
+      {
+        "command": "extension.enc.rfc1866EucJp",
+        "category": "Encode",
+        "title": "To Percent Encoding (RFC1866 ' ' => +) / EUC-JP"
+      },
+      {
+        "command": "extension.enc.rfc1866Utf8",
+        "category": "Encode",
+        "title": "To Percent Encoding (RFC1866 ' ' => +) / UTF-8"
+      },
+      {
+        "command": "extension.dec.rfc3986ShiftJis",
+        "category": "Decode",
+        "title": "From Percent Encoding (RFC3986, RFC1866) / Shift_JIS"
+      },
+      {
+        "command": "extension.dec.rfc3986EucJp",
+        "category": "Decode",
+        "title": "From Percent Encoding (RFC3986, RFC1866) / EUC-JP"
+      },
+      {
+        "command": "extension.dec.rfc3986Utf8",
+        "category": "Decode",
+        "title": "From Percent Encoding (RFC3986, RFC1866) / UTF-8"
+      },
+      {
+        "command": "extension.esc.toHtml",
+        "category": "Escape",
+        "title": "To HTML Escape"
+      },
+      {
+        "command": "extension.esc.toHtmlAll",
+        "category": "Escape",
+        "title": "To HTML Escape All Charactors"
+      },
+      {
+        "command": "extension.esc.toUnicode",
+        "category": "Escape",
+        "title": "To Unicode Escape"
+      },
+      {
+        "command": "extension.esc.toUnicodeAll",
+        "category": "Escape",
+        "title": "To Unicode Escape All Charactors"
+      },
+      {
+        "command": "extension.esc.fromHtmlAll",
+        "category": "Unescape",
+        "title": "From HTML Escape"
+      },
+      {
+        "command": "extension.esc.fromUnicode",
+        "category": "Unescape",
+        "title": "From Unicode Escape"
+      },
+      {
+        "command": "extension.sel.string",
+        "category": "Selection",
+        "title": "Select String ..."
+      },
+      {
+        "command": "extension.sel.regex",
+        "category": "Selection",
+        "title": "Select If Matched Regex ..."
+      },
+      {
+        "command": "extension.num.numbers",
+        "category": "Numbers",
+        "title": "Inert Numbers to Multiple Cursors ..."
+      }
+    ],
+    "commands-tmp": [
+      {
+        "command": "extension.trn.transGoogle",
+        "category": "Translate",
+        "title": "Open Google Translation"
+      },
+      {
+        "command": "extension.trn.transMicrosoft",
+        "category": "Translate",
+        "title": "Opne Bing Translation"
+      }
+    ]
+  }
+}
