@@ -2,15 +2,15 @@
   "name": "harurow-util",
   "displayName": "Harurow Util",
   "description": "",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "publisher": "Harurow-the-programmer",
-  "homepage": "https://https://github.com/Harurow/vscode.ext.harurow.util",
+  "homepage": "https://github.com/Harurow/vscode.ext.harurow.util",
   "repository": {
     "type": "git",
-    "url": "https://https://https://github.com/Harurow/vscode.ext.harurow.util.git"
+    "url": "//https://github.com/Harurow/vscode.ext.harurow.util.git"
   },
   "bugs": {
-    "url": "https://https://github.com/Harurow/vscode.ext.harurow.util/issues"
+    "url": "https://github.com/Harurow/vscode.ext.harurow.util/issues"
   },
   "license": "MIT",
   "engines": {
