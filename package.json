@@ -3,8 +3,15 @@
   "displayName": "Harurow Util",
   "description": "",
   "version": "1.0.1",
-  "publisher": "Harurow",
-  "private": true,
+  "publisher": "Harurow-the-programmer",
+  "homepage": "https://https://github.com/Harurow/vscode.ext.harurow.util",
+  "repository": {
+    "type": "git",
+    "url": "https://https://https://github.com/Harurow/vscode.ext.harurow.util.git"
+  },
+  "bugs": {
+    "url": "https://https://github.com/Harurow/vscode.ext.harurow.util/issues"
+  },
   "license": "MIT",
   "engines": {
     "vscode": "^1.8.0"
@@ -13,22 +20,10 @@
     "Other"
   ],
   "keywords": [
-    "pascal-case",
-    "camel-case",
-    "snake-case",
-    "encode",
-    "decode",
-    "escape",
-    "unescape",
-    "euc-jp",
-    "utf8",
-    "shift-jis",
-    "remove-line",
+    "pascal/camel/snake",
+    "encode/decode, escape/unescape",
     "line-filter",
-    "multiple",
-    "cursors",
-    "selection",
-    "numbers"
+    "multiple-cursors"
   ],
   "main": "./out/src/extension",
   "scripts": {

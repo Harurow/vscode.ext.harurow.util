@@ -1,11 +1,11 @@
-# harurow-utili README
-
-This is the README for your extension "harurow-util". After writing up a brief description, we recommend including the following sections.
+# Harurow Util README
 
 ## Features
 
 #### Convert Word Case
 選択中の文字列をのケースを変換します
+
+![単語のケースを変更](images/feature-convert-case.gif)
 
 - `ToPascalCase`  
 パスカルケース(PascalCase)へ変換します
@@ -19,9 +19,10 @@ This is the README for your extension "harurow-util". After writing up a brief d
 - `to_lower_snake_case`  
 小文字のスネークケース(snake_case)へ変換します
 
-#### Remove Lines
+#### Line Filter / Remove Lines
 選択中の行をフィルタンリングします
 正規表現または単純な検索が条件として利用できます
+![行の絞り込み](images/feature-line-filter.gif)
 
 - `Remove Line If Contains String`  
 入力文字が含まれる行を削除します
@@ -35,15 +36,18 @@ This is the README for your extension "harurow-util". After writing up a brief d
 - `Remove Line If Un-Matched Regex`  
 正規表現に一致する行は残し、そうでない行を削除します
 
-
 #### Encode Text
 選択中の文字列を % エンコーディングします  
+
+![%エンコーディング(URLエンコーディング)](images/feature-percent-encoding.gif)
 
 - RFC3986 は スペースを`%20`に
 - RFC1866 は スペースを`+`に  
 へ変換します。  
 
-日本語のエンコーディングについては ShiftJIS, EUC-JP, UTF-8のいずれかを選べます
+日本語のエンコーディングについては ShiftJIS, EUC-JP, UTF-8のいずれかを選べます  
+
+##### エンコード
 - `To Percent Encoding (RFC3986 ' ' => %20) / Shift_JIS`
 - `To Percent Encoding (RFC3986 ' ' => %20) / EUC-JP`
 - `To Percent Encoding (RFC3986 ' ' => %20) / UTF-8`  
@@ -51,23 +55,24 @@ This is the README for your extension "harurow-util". After writing up a brief d
 - `To Percent Encoding (RFC1866 ' ' => +) / EUC-JP`
 - `To Percent Encoding (RFC1866 ' ' => +) / UTF-8`  
 
-#### Decode Text
-選択中の % エンコーディングされた文字列をデコードし元へ戻します  
-日本語のエンコーディングについては ShiftJIS, EUC-JP, UTF-8のいずれかを選べます  
+##### デコード
 - `From Percent Encoding (RFC3986, RFC1866) / Shift_JIS`
 - `From Percent Encoding (RFC3986, RFC1866) / EUC-JP`
 - `From Percent Encoding (RFC3986, RFC1866) / UTF-8`
 
 #### Escape
-エスケープ処理を実施します
+HTMLまたはUnicodeエスケープ処理を実施します
+
+![エスケープ処理](images/feature-escape.gif)
+
+##### HTMLエンコード・デコード
 - `To HTML Escape`
 - `To HTML Escape All Charactors`
+- `From HTML Escape`
+
+##### Unicodeエンコード・デコード
 - `To Unicode Escape`
 - `To Unicode Escape All Charactors`
-
-#### Unescap
-HTMLのエスケープされた文字を元に戻します
-- `From HTML Escape`
 - `From Unicode Eescape`
 
 #### Selection
@@ -99,16 +104,14 @@ start step?=1 radix?:[2|10|8|16]=10 len?=0
   0を指定した場合は前ゼロを付加しない  
   省略した場合は0
 
-\!\[feature X\]\(images/feature-x.png\)
-
 ## Requirements
-特に
+なし
 
 ## Extension Settings
-設定不要
+なし
 
 ## Known Issues
-特に
+なし
 
 ## Release Notes
 
