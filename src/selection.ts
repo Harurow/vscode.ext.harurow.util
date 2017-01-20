@@ -69,7 +69,7 @@ function matches(editor: vscode.TextEditor, selections: vscode.Selection[], patt
 
     selections.forEach(sel => {
         let text = doc.getText(sel)
-        let offset = sel.start.character
+        let offset = doc.offsetAt(sel.start)
 
         let ms = match(offset, text, pattern)
 

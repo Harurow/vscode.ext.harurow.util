@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 none
 
-## [1.0.1] 2017-01-20
+## [1.0.1] 2017-01-21
 
 ### Added
 #### Convert Word Case

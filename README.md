@@ -5,7 +5,7 @@
 #### Convert Word Case
 選択中の文字列をのケースを変換します
 
-![単語のケースを変更](images/feature-convert-case.gif)
+![単語のケースを変更](screenshots/feature-convert-case.gif)
 
 - `ToPascalCase`  
 パスカルケース(PascalCase)へ変換します
@@ -21,8 +21,9 @@
 
 #### Line Filter / Remove Lines
 選択中の行をフィルタンリングします
-正規表現または単純な検索が条件として利用できます
-![行の絞り込み](images/feature-line-filter.gif)
+正規表現または単純な検索が条件として利用できます  
+
+![行の絞り込み](screenshots/feature-line-filter.gif)
 
 - `Remove Line If Contains String`  
 入力文字が含まれる行を削除します
@@ -39,7 +40,7 @@
 #### Encode Text
 選択中の文字列を % エンコーディングします  
 
-![%エンコーディング(URLエンコーディング)](images/feature-percent-encoding.gif)
+![%エンコーディング(URLエンコーディング)](screenshots/feature-percent-encoding.gif)
 
 - RFC3986 は スペースを`%20`に
 - RFC1866 は スペースを`+`に  
@@ -63,7 +64,7 @@
 #### Escape
 HTMLまたはUnicodeエスケープ処理を実施します
 
-![エスケープ処理](images/feature-escape.gif)
+![エスケープ処理](screenshots/feature-escape.gif)
 
 ##### HTMLエンコード・デコード
 - `To HTML Escape`
@@ -77,6 +78,9 @@ HTMLまたはUnicodeエスケープ処理を実施します
 
 #### Selection
 選択します
+
+![洗濯](screenshots/feature-selection.gif)
+
 - `Select String`  
 一致する文字列を選択します
 
@@ -85,6 +89,9 @@ HTMLまたはUnicodeエスケープ処理を実施します
 
 #### Numbering
 複数カーソルの位置に連番で番号を採番します
+
+![連番](screenshots/feature-insert-number.gif)
+
 - `Insert Numbers to Multiple Cursors`  
 範囲を複数選択しカーソルを複数設定してからこのコマンドを実行してください
 入力エリアにはスペース区切りで数字を指定します  
@@ -115,7 +122,7 @@ start step?=1 radix?:[2|10|8|16]=10 len?=0
 
 ## Release Notes
 
-### [1.0.1] 2017-01-20
+### [1.0.1] 2017-01-21
 初回リリース
 
 -----------------------------------------------------------------------------------------------------------
