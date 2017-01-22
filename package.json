@@ -1,8 +1,8 @@
 {
   "name": "harurow-util",
   "displayName": "Harurow Util",
-  "description": "",
-  "version": "1.0.3",
+  "description": "自分で使う機能をまとめたVisual Studio Code 拡張",
+  "version": "1.0.4",
   "publisher": "Harurow-the-programmer",
   "homepage": "https://github.com/Harurow/vscode.ext.harurow.util",
   "repository": {
@@ -21,9 +21,10 @@
   ],
   "keywords": [
     "pascal/camel/snake",
-    "encode/decode, escape/unescape",
+    "encode/escape",
     "line-filter",
-    "multiple-cursors"
+    "multiple-cursors",
+    "numbering"
   ],
   "main": "./out/src/extension",
   "scripts": {
