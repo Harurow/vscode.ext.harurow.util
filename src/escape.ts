@@ -6,7 +6,6 @@ import * as clipboard from 'copy-paste'
 import * as util from './util'
 import * as htmlchars from './htmlchars'
 
-
 function toHtmlInternal(value: string, undefFunc: (ch: string) => string): string {
     if (!value) {
         return value

@@ -8,38 +8,45 @@ interface RegisterCallback {
     foreach?: (value: string) => void
 }
 
+function onReplace(callback: (value: string) => string) {
+    let editor = vscode.window.activeTextEditor
+    if (!editor) {
+        return
+    }
+    editor.edit((builder) => {
+        editor.selections.forEach(i => {
+            builder.replace(i, callback(editor.document.getText(i)))
+        })
+    })
+}
+
+function onWhole(callback: (editor: vscode.TextEditor) => void): void {
+    let editor = vscode.window.activeTextEditor
+    if (!editor) {
+        return
+    }
+    callback(editor)
+}
+
+function onForEach(callback: (value: string)=> void): void {
+    let editor = vscode.window.activeTextEditor
+    if (!editor) {
+        return
+    }
+    editor.selections.forEach(i => {
+        callback(editor.document.getText(i))
+    })
+}
+
 export function register(command: string, callback: RegisterCallback): vscode.Disposable {
     let innerCallback: (...args: any[]) => any
 
     if (callback.replace) {
-        innerCallback = () => {
-            let editor = vscode.window.activeTextEditor
-            if (editor) {
-                editor.edit((builder) => {
-                    editor.selections
-                        .forEach(i => {
-                            builder.replace(i, callback.replace(editor.document.getText(i)))
-                        })
-                })
-            }
-        }
+        innerCallback = () => onReplace(callback.replace)
     } else if (callback.whole) {
-        innerCallback = () => {
-            let editor = vscode.window.activeTextEditor
-            if (editor) {
-                callback.whole(editor)
-            }
-        }
+        innerCallback = () => onWhole(callback.whole)
     } else if (callback.foreach) {
-        innerCallback = () => {
-            let editor = vscode.window.activeTextEditor
-            if (editor) {
-                editor.selections
-                    .forEach(i => {
-                        callback.foreach(editor.document.getText(i))
-                    })
-            }
-        }
+        innerCallback = () => onForEach(callback.foreach)
     }
 
     return vscode.commands.registerCommand(command, innerCallback)

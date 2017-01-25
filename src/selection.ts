@@ -3,15 +3,6 @@
 import * as vscode from 'vscode'
 import * as util from './util'
 
-function enumLines(value: string, callback: (line: string) => string): string {
-    return value.replace(/(^.*\n)|(^.*$)/mg, (line) => {
-        let newLine = callback(line)
-        return newLine === null
-            ? ""
-            : newLine
-    })
-}
-
 function getSafeSelections(editor: vscode.TextEditor): vscode.Selection[] {
     var selections: vscode.Selection[] = []
 

@@ -1,7 +1,7 @@
 {
   "name": "harurow-util",
   "displayName": "Harurow Util",
-  "description": "自分で使う機能をまとめたVisual Studio Code 拡張",
+  "description": "自分で使うプログラマのための機能をまとめたVisual Studio Code 拡張",
   "version": "1.0.4",
   "publisher": "Harurow-the-programmer",
   "homepage": "https://github.com/Harurow/vscode.ext.harurow.util",
@@ -20,7 +20,7 @@
     "Other"
   ],
   "keywords": [
-    "pascal/camel/snake",
+    "pascal/camel",
     "encode/escape",
     "line-filter",
     "multiple-cursors",
@@ -75,6 +75,7 @@
     "onCommand:extension.num.numbers",
     "onCommand:extension.sel.string",
     "onCommand:extension.sel.regex",
+    "onCommand:extension.rep.leftsideRight",
     "onCommand:extension.trn.transGoogle",
     "onCommand:extension.trn.transMicrosoft"
   ],
@@ -209,7 +210,13 @@
         "command": "extension.num.numbers",
         "category": "Numbers",
         "title": "Inert Numbers to Multiple Cursors ..."
+      },
+      {
+        "command": "extension.rep.leftsideRight",
+        "category": "Replace",
+        "title": "Leftside Right"
       }
+      
     ],
     "commands-tmp": [
       {

@@ -1,8 +1,10 @@
 # Harurow Util README
 
-## Features
+## 特徴
+自分でプログラムを書くときに利用する機能を
+VisualStudioCodeの拡張として提供しています
 
-#### Convert Word Case
+#### 変数のケース変換
 選択中の文字列をのケースを変換します
 
 ![単語のケースを変更](screenshots/feature-convert-case.gif)
@@ -19,7 +21,7 @@
 - `to_lower_snake_case`  
 小文字のスネークケース(snake_case)へ変換します
 
-#### Line Filter / Remove Lines
+#### 行フィルタ
 選択中の行をフィルタンリングします
 正規表現または単純な検索が条件として利用できます  
 
@@ -37,7 +39,7 @@
 - `Remove Line If Un-Matched Regex`  
 正規表現に一致する行は残し、そうでない行を削除します
 
-#### Encode Text
+#### パーセントエンコード変換
 選択中の文字列を % エンコーディングします  
 
 ![%エンコーディング(URLエンコーディング)](screenshots/feature-percent-encoding.gif)
@@ -61,7 +63,7 @@
 - `From Percent Encoding (RFC3986, RFC1866) / EUC-JP`
 - `From Percent Encoding (RFC3986, RFC1866) / UTF-8`
 
-#### Escape
+#### エスケープ処理
 HTMLまたはUnicodeエスケープ処理を実施します
 
 ![エスケープ処理](screenshots/feature-escape.gif)
@@ -76,8 +78,8 @@ HTMLまたはUnicodeエスケープ処理を実施します
 - `To Unicode Escape All Charactors`
 - `From Unicode Eescape`
 
-#### Selection
-選択します
+#### 文字の選択
+正規表現または指定した文字に一致する範囲を選択します
 
 ![洗濯](screenshots/feature-selection.gif)
 
@@ -87,7 +89,7 @@ HTMLまたはUnicodeエスケープ処理を実施します
 - `Select If Matched Regex`  
 正規表現に一致する文字列を選択します
 
-#### Numbering
+#### 連番
 複数カーソルの位置に連番で番号を採番します
 
 ![連番](screenshots/feature-insert-number.gif)
@@ -111,6 +113,13 @@ start step?=1 radix?:[2|10|8|16]=10 len?=0
   0を指定した場合は前ゼロを付加しない  
   省略した場合は0
 
+#### 変数入れ替え
+左右の変数を入れ替え
+
+- `Leftside Right`
+左右の変数を入れ替えます
+`Left = Right;` を 'Right = Left;'
+
 ## Requirements
 なし
 
@@ -121,6 +130,9 @@ start step?=1 radix?:[2|10|8|16]=10 len?=0
 なし
 
 ## Release Notes
+
+### [1.0.4] 2017-01-25
+機能追加
 
 ### [1.0.3] 2017-01-21
 初回リリース
