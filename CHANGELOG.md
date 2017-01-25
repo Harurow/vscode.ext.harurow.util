@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 none
 
+## [1.1.1] 2017-01-26
+### Changed
+- package.jsonを修正
+  リポジトリへのリンクを正しくした
+
 ## [1.1.0] 2017-01-25
 ### Added
 #### Leftside Right

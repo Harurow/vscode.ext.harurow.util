@@ -2,12 +2,12 @@
   "name": "harurow-util",
   "displayName": "Harurow Util",
   "description": "自分で使うプログラマのための機能をまとめたVisual Studio Code 拡張",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "publisher": "Harurow-the-programmer",
   "homepage": "https://github.com/Harurow/vscode.ext.harurow.util",
   "repository": {
     "type": "git",
-    "url": "//https://github.com/Harurow/vscode.ext.harurow.util.git"
+    "url": "https://github.com/Harurow/vscode.ext.harurow.util.git"
   },
   "bugs": {
     "url": "https://github.com/Harurow/vscode.ext.harurow.util/issues"
