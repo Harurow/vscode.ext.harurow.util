@@ -1,8 +1,8 @@
 # Harurow Util README
 
 ## 特徴
-自分でプログラムを書くときに利用する機能を
-VisualStudioCodeの拡張として提供しています
+自分でプログラムを書くときに利用する機能をVisualStudioCodeの拡張として提供しています
+[Github](https://github.com/Harurow/vscode.ext.harurow.util)でソースも公開しています
 
 #### 変数のケース変換
 選択中の文字列をのケースを変換します
@@ -130,6 +130,9 @@ start step?=1 radix?:[2|10|8|16]=10 len?=0
 なし
 
 ## Release Notes
+
+### [1.1.1] 2017-01-26
+微修正
 
 ### [1.1.0] 2017-01-25
 機能追加
