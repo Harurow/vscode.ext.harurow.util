@@ -1,27 +1,7 @@
 'use strict'
 
-import * as vscode from 'vscode'
-
 function enumIdentifiers(value: string, callback: (identifier: string) => string): string {
     return value.replace(/[a-zA-Z_][a-zA-Z_0-9]*/g, callback)
-}
-
-export function toUpperCaseWhenFirstChar(value: string): string {
-    return (!value)
-        ? ""
-        : value[0].toUpperCase() + value.slice(1).toLowerCase()
-}
-
-export function toUpperCaseFirstChar(value: string): string {
-    return (!value)
-        ? ""
-        : value[0].toUpperCase() + value.slice(1)
-}
-
-export function toLowerCaseFirstChar(value: string): string {
-    return (!value)
-        ? ""
-        : value[0].toLowerCase() + value.slice(1)
 }
 
 function toCase(value: string, callback: (value: string) => string): string {
@@ -46,6 +26,24 @@ function toSnake(value: string): string {
                 : (i > 1 ? "_" : "") + word
         })
     })
+}
+
+export function toUpperCaseWhenFirstChar(value: string): string {
+    return (!value)
+        ? ""
+        : value[0].toUpperCase() + value.slice(1).toLowerCase()
+}
+
+export function toUpperCaseFirstChar(value: string): string {
+    return (!value)
+        ? ""
+        : value[0].toUpperCase() + value.slice(1)
+}
+
+export function toLowerCaseFirstChar(value: string): string {
+    return (!value)
+        ? ""
+        : value[0].toLowerCase() + value.slice(1)
 }
 
 export function toUpperSnakeCase(value: string): string {

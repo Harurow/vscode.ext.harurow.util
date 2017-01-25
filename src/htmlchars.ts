@@ -1,8 +1,5 @@
 'use strict'
 
-import * as vscode from 'vscode'
-import * as clipboard from 'copy-paste'
-
 export const SpecialChars = {
     "\xa0": "&nbsp;",
     "'": "&#039;",

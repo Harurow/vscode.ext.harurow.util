@@ -1,3 +1,4 @@
+'use strict'
 
 export function safeReplace(value: string, from: string, to: string) {
     return value
@@ -46,4 +47,13 @@ export function toSurrogatePair(code: number) : {hi: number, lo: number} {
         hi: Math.floor(un / 0x400) + 0xd800,
         lo: un % 0x400 + 0xdc00
     }
+}
+
+export function forEachLines(value: string, callback: (line: string) => string): string {
+    return value.replace(/(^.*\n)|(^.*$)/mg, (line) => {
+        let newLine = callback(line)
+        return newLine === null
+            ? ""
+            : newLine
+    })
 }

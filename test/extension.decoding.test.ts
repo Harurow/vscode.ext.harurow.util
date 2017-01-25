@@ -60,8 +60,6 @@ suite("Decoding Tests", () => {
         assert.equal("%1sh%%ika 叱 ru%", encoding.fromRfc3986Utf8("%1sh%%ika%20叱%20ru%"))
         assert.equal("%%1shika 叱 ru%", encoding.fromRfc3986Utf8("%%1shika%20叱%20ru%"))
     })
-
-
 })
 
 suite("Encode-Decoding Tests", () => {
