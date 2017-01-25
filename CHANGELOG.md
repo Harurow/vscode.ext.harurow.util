@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 none
 
-## [1.0.4] 2017-01-25
+## [1.1.0] 2017-01-25
 ### Added
 #### Leftside Right
 左右の変数を入れ替える機能を追加
