@@ -81,7 +81,7 @@ HTMLまたはUnicodeエスケープ処理を実施します
 #### 文字の選択
 正規表現または指定した文字に一致する範囲を選択します
 
-![洗濯](screenshots/feature-selection.gif)
+![文字の選択](screenshots/feature-selection.gif)
 
 - `Select String`  
 一致する文字列を選択します
@@ -130,6 +130,9 @@ start step?=1 radix?:[2|10|8|16]=10 len?=0
 なし
 
 ## Release Notes
+
+### [1.1.2] 2017-02-28
+プレビューの画像を圧縮
 
 ### [1.1.1] 2017-01-26
 微修正

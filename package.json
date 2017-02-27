@@ -2,7 +2,7 @@
   "name": "harurow-util",
   "displayName": "Harurow Util",
   "description": "自分で使うプログラマのための機能をまとめたVisual Studio Code 拡張",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "publisher": "Harurow-the-programmer",
   "homepage": "https://github.com/Harurow/vscode.ext.harurow.util",
   "repository": {
@@ -36,7 +36,7 @@
   "devDependencies": {
     "@types/copy-paste": "^1.1.30",
     "@types/encoding-japanese": "^1.0.15",
-    "@types/mocha": "^2.2.38",
+    "@types/mocha": "^2.2.39",
     "@types/node": "^7.0.0",
     "mocha": "^3.2.0",
     "typescript": "^2.1.5",
