@@ -78,8 +78,10 @@
     "onCommand:extension.rep.leftsideRight",
 
 
-    "onCommand:caseConverters.toPascal"
-
+    "onCommand:caseConverters.toPascal",
+    "onCommand:caseConverters.toCamel",
+    "onCommand:caseConverters.toUpperSnake",
+    "onCommand:caseConverters.toLowerSnake"
   ],
   "contributes": {
     "commands": [{

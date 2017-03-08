@@ -2,7 +2,7 @@
 
 import * as vscode from 'vscode'
 import * as commands from './commands'
-import * as strutil from './stringutil';
+import * as strutil from './stringutil'
 import * as filter from './linefilter'
 import * as encoding from './encoding'
 import * as escape from './escape'
@@ -15,6 +15,10 @@ export function activate(context: vscode.ExtensionContext) {
     console.log('"harurow-util" is now active')
 
     context.subscriptions.push(
+        
+
+
+
         commands.register('extension.str.toPascalCase', {replace: strutil.toPascalCase}),
         commands.register('extension.str.toCamelCase', {replace: strutil.toCamelCase}),
         commands.register('extension.str.toUpperSnakeCase', {replace: strutil.toUpperSnakeCase}),

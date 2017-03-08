@@ -3,6 +3,7 @@ import * as vscode from 'vscode'
 
 import * as strutl from '../src/StringUtil'
 
+/*
 suite("StringUtil Tests", () => {
 
     test("toUpperCaseWhenFirstChar", () => {
@@ -135,3 +136,4 @@ suite("StringUtil Tests", () => {
                 strutl.toLowerSnakeCase("hello_world   world  HelloWorld 10 _"))
     })
 })
+*/
