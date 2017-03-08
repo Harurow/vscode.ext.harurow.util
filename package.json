@@ -37,10 +37,10 @@
     "@types/copy-paste": "^1.1.30",
     "@types/encoding-japanese": "^1.0.15",
     "@types/mocha": "^2.2.39",
-    "@types/node": "^7.0.0",
+    "@types/node": "^7.0.5",
     "mocha": "^3.2.0",
-    "typescript": "^2.1.5",
-    "vscode": "^1.0.3",
+    "typescript": "^2.2.1",
+    "vscode": "^1.0.5",
     "vscode-nls": "^2.0.2"
   },
   "dependencies": {
@@ -76,11 +76,34 @@
     "onCommand:extension.sel.string",
     "onCommand:extension.sel.regex",
     "onCommand:extension.rep.leftsideRight",
-    "onCommand:extension.trn.transGoogle",
-    "onCommand:extension.trn.transMicrosoft"
+
+
+    "onCommand:caseConverters.toPascal"
+
   ],
   "contributes": {
-    "commands": [
+    "commands": [{
+        "command": "caseConverters.toPascal",
+        "category": "CaseConverter",
+        "title": "ToPascal"
+      }, {
+        "command": "caseConverters.toCamel",
+        "category": "CaseConverter",
+        "title": "ToCamel"
+      }, {
+        "command": "caseConverters.toUpperSnake",
+        "category": "CaseConverter",
+        "title": "TO_UPPER_SNAKE"
+      }, {
+        "command": "caseConverters.toLowerSnake",
+        "category": "CaseConverter",
+        "title": "to_lower_snake"
+      },
+
+
+
+
+
       {
         "command": "extension.str.toPascalCase",
         "category": "ConvertCase",
@@ -215,19 +238,6 @@
         "command": "extension.rep.leftsideRight",
         "category": "Replace",
         "title": "Leftside Right"
-      }
-      
-    ],
-    "commands-tmp": [
-      {
-        "command": "extension.trn.transGoogle",
-        "category": "Translate",
-        "title": "Open Google Translation"
-      },
-      {
-        "command": "extension.trn.transMicrosoft",
-        "category": "Translate",
-        "title": "Opne Bing Translation"
       }
     ]
   }
