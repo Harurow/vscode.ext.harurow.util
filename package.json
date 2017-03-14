@@ -45,9 +45,9 @@
   },
   "dependencies": {
     "copy-paste": "^1.3.0",
-    "encoding-japanese": "^1.0.25"
+    "encoding-japanese": "^1.0.25",
+    "linq": "^3.0.7"
   },
-  
   "activationEvents": [
     "onCommand:extension.str.toPascalCase",
     "onCommand:extension.str.toCamelCase",
@@ -76,36 +76,33 @@
     "onCommand:extension.sel.string",
     "onCommand:extension.sel.regex",
     "onCommand:extension.rep.leftsideRight",
-
-
     "onCommand:caseConverters.toPascal",
     "onCommand:caseConverters.toCamel",
     "onCommand:caseConverters.toUpperSnake",
     "onCommand:caseConverters.toLowerSnake"
   ],
   "contributes": {
-    "commands": [{
+    "commands": [
+      {
         "command": "caseConverters.toPascal",
         "category": "CaseConverter",
         "title": "ToPascal"
-      }, {
+      },
+      {
         "command": "caseConverters.toCamel",
         "category": "CaseConverter",
         "title": "ToCamel"
-      }, {
+      },
+      {
         "command": "caseConverters.toUpperSnake",
         "category": "CaseConverter",
         "title": "TO_UPPER_SNAKE"
-      }, {
+      },
+      {
         "command": "caseConverters.toLowerSnake",
         "category": "CaseConverter",
         "title": "to_lower_snake"
       },
-
-
-
-
-
       {
         "command": "extension.str.toPascalCase",
         "category": "ConvertCase",
