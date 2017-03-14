@@ -1,11 +1,11 @@
 import * as $ from '../../utils/string'
 
-const toSnakeCase = (str: string) =>
+const toLowerSnakeCase = (str: string) =>
     !$.isValidIdentifier(str)
         ? str
         : $.words(str)
            .filter(s => !$.isUnderscore(s))
-           .map($.toUpperWord)
+           .map($.toLowerWord)
            .join('_')
 
-export default toSnakeCase
+export default toLowerSnakeCase

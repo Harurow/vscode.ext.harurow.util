@@ -14,14 +14,28 @@ export const deactivate = () => {
 const getEditor = () => 
     vscode.window.activeTextEditor
 
-export const replace = (replacer: (str: string) => string) => {
+type editCommand = (editor: vscode.TextEditor) => void | Promise<{}>
+
+const regEditCmd = (name: string, cmd: editCommand) => {
+    let callback = () => {
+        let editor = vscode.window.activeTextEditor
+        if (editor) {
+            cmd(editor)
+        }
+    }
+
+    return vscode.commands.registerCommand(name, callback)
+}
+
+
+export const replaceAsync = (replacer: (str: string) => string) => {
     const editor = getEditor()
 
     if (!editor || !replacer) {
         return
     }
 
-    editor.edit(editBuilder => {
+    return editor.edit(editBuilder => {
         const replace = (selection: vscode.Selection) =>
             editBuilder.replace(selection, replacer(editor.document.getText(selection)))
 
