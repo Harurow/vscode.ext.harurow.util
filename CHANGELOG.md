@@ -5,7 +5,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
-none
+None
+
+## [1.2.0] 2017-xx-xx
+ - Base64エンコード・デコード
 
 ## [1.1.2] 2017-02-28
 ### Changed
