@@ -27,7 +27,7 @@ suite('commands/lineFilters/removeLine', () => {
     })
     
     test('isNotMatch', () => {
-        let isNotMatch = $.isNotMatch('[a-z]')
+        let isNotMatch = $.isUnmatch('[a-z]')
 
         assert.equal(false, isNotMatch(undefined))
         assert.equal(false, isNotMatch(null))
@@ -39,7 +39,7 @@ suite('commands/lineFilters/removeLine', () => {
     })
 
     test('isNotMatch - 2', () => {
-        let isNotMatch = $.isNotMatch('0')
+        let isNotMatch = $.isUnmatch('0')
 
         assert.equal(false, isNotMatch(undefined))
         assert.equal(false, isNotMatch(null))
@@ -100,9 +100,9 @@ suite('commands/lineFilters/removeLine', () => {
     test('removeLineIfNotMatch', () => {
         let content = 'abc\ndef\n987\nthis is line.'
 
-        assert.equal('abc\ndef\nthis is line.', $.removeLineIfNotMatch(content, '[a-z]'))
-        assert.equal('', $.removeLineIfNotMatch(content, '[0-6]'))
-        assert.equal('this is line.', $.removeLineIfNotMatch(content, 'i'))
+        assert.equal('abc\ndef\nthis is line.', $.removeLineIfUnmatch(content, '[a-z]'))
+        assert.equal('', $.removeLineIfUnmatch(content, '[0-6]'))
+        assert.equal('this is line.', $.removeLineIfUnmatch(content, 'i'))
     })
 
     test('removeLineIfContains', () => {

@@ -1,35 +1,12 @@
 import * as vscode from 'vscode'
 import {
         removeLineIfMatch,
-        removeLineIfNotMatch,
+        removeLineIfUnmatch,
         removeLineIfContains,
         removeLineIfNotContains
     } from './removeLine'
 import * as cmd from '../../utils/commands'
-import * as edt from '../../utils/editor'
-
-const filter = async (replacer: (str: string, input: string) => string, options?: vscode.InputBoxOptions) => {
-    let editor = await edt.showWarningIfHasNoSelection()
-    if (!editor) {
-        return
-    }
-    let input = await vscode.window.showInputBox(options)
-    let inputIsValid = await edt.showWarningIfHasNoInputAsync(input)
-    if (!inputIsValid) {
-        return
-    }
-    
-    return editor.edit(eb => {
-        editor.selections = editor.selections
-                                  .map(edt.getNormalizedLineSelection)
-
-        editor.selections
-            .forEach(sel => {
-                let content = editor.document.getText(sel)
-                eb.replace(sel, replacer(content, input))
-            })
-    })
-}
+import filter from './filter'
 
 export const removeLineIfMatchCommand = (command: string) =>
     vscode.commands.registerCommand(command, () =>
@@ -38,9 +15,9 @@ export const removeLineIfMatchCommand = (command: string) =>
             prompt: 'Remove lines if it matched input pattern.'
         }))
 
-export const removeLineIfNotMatchCommand = (command: string) =>
+export const removeLineIfUnmatchCommand = (command: string) =>
     vscode.commands.registerCommand(command, () =>
-        filter(removeLineIfNotMatch, {
+        filter(removeLineIfUnmatch, {
             placeHolder: 'Pattern',
             prompt: 'Remove lines if it un-matched input pattern.'
         }))

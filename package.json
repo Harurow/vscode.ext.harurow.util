@@ -2,7 +2,7 @@
   "name": "harurow-util",
   "displayName": "Harurow Util",
   "description": "自分で使うプログラマのための機能をまとめたVisual Studio Code 拡張",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "publisher": "Harurow-the-programmer",
   "homepage": "https://github.com/Harurow/vscode.ext.harurow.util",
   "repository": {
@@ -20,7 +20,7 @@
     "Other"
   ],
   "keywords": [
-    "pascal/camel",
+    "pascal/camel/snake/case",
     "encode/escape",
     "line-filter",
     "multiple-cursors",
@@ -49,14 +49,16 @@
     "linq": "^3.0.7"
   },
   "activationEvents": [
-    "onCommand:extension.str.toPascalCase",
-    "onCommand:extension.str.toCamelCase",
-    "onCommand:extension.str.toUpperSnakeCase",
-    "onCommand:extension.str.toLowerSnakeCase",
-    "onCommand:extension.flt.removeMatched",
-    "onCommand:extension.flt.removeUnmatched",
-    "onCommand:extension.flt.removeContains",
-    "onCommand:extension.flt.removeNotContains",
+    "onCommand:commands.caseConverters.toPascalCase",
+    "onCommand:commands.caseConverters.toCamelCase",
+    "onCommand:commands.caseConverters.toUpperSnakeCase",
+    "onCommand:commands.caseConverters.toLowerSnakeCase",
+    "onCommand:commands.lineFilters.match",
+    "onCommand:commands.lineFilters.unmatch",
+    "onCommand:commands.lineFilters.contains",
+    "onCommand:commands.lineFilters.notContains",
+
+
     "onCommand:extension.enc.rfc3986ShiftJis",
     "onCommand:extension.enc.rfc3986EucJp",
     "onCommand:extension.enc.rfc3986Utf8",
@@ -84,65 +86,49 @@
   "contributes": {
     "commands": [
       {
-        "command": "caseConverters.toPascal",
+        "command": "commands.caseConverters.toPascalCase",
         "category": "CaseConverter",
-        "title": "ToPascal"
-      },
-      {
-        "command": "caseConverters.toCamel",
-        "category": "CaseConverter",
-        "title": "ToCamel"
-      },
-      {
-        "command": "caseConverters.toUpperSnake",
-        "category": "CaseConverter",
-        "title": "TO_UPPER_SNAKE"
-      },
-      {
-        "command": "caseConverters.toLowerSnake",
-        "category": "CaseConverter",
-        "title": "to_lower_snake"
-      },
-      {
-        "command": "extension.str.toPascalCase",
-        "category": "ConvertCase",
         "title": "ToPascalCase"
       },
       {
-        "command": "extension.str.toCamelCase",
-        "category": "ConvertCase",
+        "command": "commands.caseConverters.toCamelCase",
+        "category": "CaseConverter",
         "title": "toCamelCase"
       },
       {
-        "command": "extension.str.toUpperSnakeCase",
-        "category": "ConvertCase",
+        "command": "commands.caseConverters.toUpperSnakeCase",
+        "category": "CaseConverter",
         "title": "TO_UPPER_SNAKE_CASE"
       },
       {
-        "command": "extension.str.toLowerSnakeCase",
-        "category": "ConvertCase",
+        "command": "commands.caseConverters.toLowerSnakeCase",
+        "category": "CaseConverter",
         "title": "to_lower_snake_case"
       },
       {
-        "command": "extension.flt.removeMatched",
+        "command": "commands.lineFilters.match",
         "category": "LineFilter",
         "title": "Remove Line If Matched Regex ..."
       },
       {
-        "command": "extension.flt.removeUnmatched",
+        "command": "commands.lineFilters.unmatch",
         "category": "LineFilter",
         "title": "Remove Line If Un-Matched Regex ..."
       },
       {
-        "command": "extension.flt.removeContains",
+        "command": "commands.lineFilters.contains",
         "category": "LineFilter",
         "title": "Remove Line If Contains String ..."
       },
       {
-        "command": "extension.flt.removeNotContains",
+        "command": "commands.lineFilters.notContains",
         "category": "LineFilter",
         "title": "Remove Line If NOT Contains String ..."
       },
+
+
+
+
       {
         "command": "extension.enc.rfc3986ShiftJis",
         "category": "Encode",

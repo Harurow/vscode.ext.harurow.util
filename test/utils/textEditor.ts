@@ -1,8 +1,6 @@
 import * as assert from 'assert'
 import * as vscode from 'vscode'
 
-import * as $ from '../src/__/extensions'
-
 export default class TextEditor {
     editor: vscode.TextEditor
 

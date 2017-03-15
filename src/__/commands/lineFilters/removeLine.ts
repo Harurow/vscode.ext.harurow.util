@@ -3,7 +3,7 @@ import * as $ from '../../utils/string'
 export const isMatch = (pattern: string) =>
     (str: string) => (str != null) && RegExp(pattern).test(str)
 
-export const isNotMatch = (pattern: string) =>
+export const isUnmatch = (pattern: string) =>
     (str: string) => (str != null) && !RegExp(pattern).test(str)
 
 export const contains = (substr: string) =>
@@ -20,8 +20,8 @@ const removeLine = (str: string, condition: (line: string) => boolean) =>
 export const removeLineIfMatch = (str: string, pattern: string) =>
     removeLine(str, isMatch(pattern))
 
-export const removeLineIfNotMatch = (str: string, pattern: string) =>
-    removeLine(str, isNotMatch(pattern))
+export const removeLineIfUnmatch = (str: string, pattern: string) =>
+    removeLine(str, isUnmatch(pattern))
 
 export const removeLineIfContains = (str: string, substr: string) =>
     removeLine(str, contains(substr))

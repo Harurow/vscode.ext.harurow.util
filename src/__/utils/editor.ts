@@ -33,3 +33,34 @@ export const getNormalizedLineSelection = (selection: vscode.Selection) =>
     new vscode.Selection(
         selection.anchor.line, 0,
         getNormalizedActiveLine(selection), Number.MAX_VALUE)
+
+export const getReplaceFunc = (replacer: (str: string) => string) =>
+    async () => {
+        let editor = vscode.window.activeTextEditor
+        if (!editor) {
+            return
+        }
+
+        let getText = (range?: vscode.Range) => editor.document.getText(range)
+
+        await editor.edit(eb => {
+            let replace = (sel: vscode.Selection) =>
+                eb.replace(sel, replacer(getText(sel)))
+
+            editor.selections
+                  .forEach(replace)
+        })
+    }
+
+export const getForEachFunc = (each: (str: string, index: number) => void) =>
+    () => {
+        let editor = vscode.window.activeTextEditor
+        if (!editor) {
+            return
+        }
+
+        let getText = (range?: vscode.Range) => editor.document.getText(range)
+
+        editor.selections
+              .forEach((sel, i) => each(getText(sel), i))
+    }

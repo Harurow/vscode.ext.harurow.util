@@ -1,9 +1,8 @@
 import * as assert from 'assert'
 import * as vscode from 'vscode'
 
-/*
 import TextEditor from './textEditor'
-import * as $ from '../src/__/extensions'
+import * as $ from '../../src/__/utils/editor'
 
 suite('extensions tests', () => {
     test('replace', async () => {
@@ -13,8 +12,9 @@ suite('extensions tests', () => {
         await editor.setTextAsync('abc ABC 123')
         assert.equal('abc ABC 123', editor.getText())
         
-        await $.replaceAsync(str => str.replace('ABC', 'xyz'))
+        let func = $.getReplaceFunc(str => str.replace('ABC', 'xyz'))
+        await func()
+
         assert.equal('abc xyz 123', editor.getText())
     })
 })
-*/

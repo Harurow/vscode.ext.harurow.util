@@ -11,8 +11,12 @@ import * as sel from './selection'
 import * as rep from './replace'
 import * as misc from './misc'
 
+import * as next from './__/'
+
 export function activate(context: vscode.ExtensionContext) {
     console.log('"harurow-util" is now active')
+
+    next.activate(context)
 
     context.subscriptions.push(
         
@@ -61,4 +65,5 @@ export function activate(context: vscode.ExtensionContext) {
 
 export function deactivate() {
     console.log('"harurow-util" is now deactive')
+    next.deactivate()
 }
