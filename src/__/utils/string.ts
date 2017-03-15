@@ -1,4 +1,3 @@
-
 export const isValidStr = (str: string) => 
     !(!str)
 
@@ -44,3 +43,22 @@ export const toUpperWord = (str: string) =>
     !hasChar(str)       ? str
     : isUnderscore(str) ? ''
     : str.toUpperCase()
+
+export const lines = (str: string) => {
+    if (str == null)
+        return undefined
+
+    if (!str.match(/(\r\n|\r|\n)$/)) {
+        str += '\n'
+    }
+
+    let result: string[] = []
+
+    let regex = /^(.*)(\r\n|\r|\n)/mg
+    let match: RegExpMatchArray
+    while ((match = regex.exec(str)) !== null) {
+        result.push(match[1])
+    }
+
+    return result
+}

@@ -52,8 +52,8 @@ export function toSurrogatePair(code: number) : {hi: number, lo: number} {
 export function forEachLines(value: string, callback: (line: string) => string): string {
     return value.replace(/(^.*\n)|(^.*$)/mg, (line) => {
         let newLine = callback(line)
-        return newLine === null
-            ? ""
+        return newLine == null
+            ? ''
             : newLine
     })
 }

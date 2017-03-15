@@ -11,7 +11,7 @@ export default class TextEditor {
     }
 
     getAllSelection = () =>
-        new vscode.Selection(0, 0, this.editor.document.lineCount -1, 100000)
+        new vscode.Selection(0, 0, this.editor.document.lineCount -1, Number.MAX_VALUE)
 
     selectAll = () =>
         this.editor.selection = this.getAllSelection()
