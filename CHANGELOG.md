@@ -5,10 +5,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
-None
+- svg preview
+  - zoom
+  - background-color
+- Base64エンコード・デコード
+- 画像ファイルのcssへの埋め込み
+
 
 ## [1.2.0] 2017-xx-xx
- - Base64エンコード・デコード
+- リファクタリング
 
 ## [1.1.2] 2017-02-28
 ### Changed
