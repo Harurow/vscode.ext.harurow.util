@@ -62,3 +62,41 @@ export const lines = (str: string) => {
 
     return result
 }
+
+export const chars = (str: string) : string[] =>
+    (str == null)
+        ? []
+        : str.match(/[\uD800-\uDBFF][\uDC00-\uDFFF]|[^\uD800-\uDFFF]/g) || []
+
+export const strLen = (str: string) =>
+    chars(str).length
+
+export interface charInfo {
+    char: string
+    code: number
+}
+
+export const codePoints = (str: string) =>
+    chars(str).map(char => <charInfo>({
+        char,
+        code: char.codePointAt(0)
+    }))
+
+export const hex = (code: number, len: number = 2) =>
+    ('0'.repeat(len) + code.toString(16)).slice(-len)
+
+export interface surrogatePair {
+    hi: number
+    lo: number
+}
+
+export const surrogatePair = (code: number) => {
+    if (code <= 0xffff) {
+        return undefined
+    }
+    let un = code - 0x10000
+    return <surrogatePair>{
+        hi: 0xd800 + Math.floor(un / 0x400),
+        lo: 0xdc00 + un % 0x400
+    }
+}

@@ -136,4 +136,36 @@ suite('utils/string tests', () => {
         assert.deepEqual(['c', 'a'], $.lines('c\na'))
         assert.deepEqual(['c', 'a'], $.lines('c\r\na'))
     })
+
+    test('chars', () => {
+        assert.deepEqual([], $.chars(undefined))
+        assert.deepEqual([], $.chars(null))
+        assert.deepEqual([], $.chars(''))
+
+        assert.deepEqual(['0'], $.chars('0'))
+        assert.deepEqual([' '], $.chars(' '))
+        assert.deepEqual(['_'], $.chars('_'))
+        assert.deepEqual([' ', ' '], $.chars('  '))
+        assert.deepEqual(['a', 'b', 'c'], $.chars('abc'))
+        assert.deepEqual(['あ', 'い', 'う'], $.chars('あいう'))
+        assert.deepEqual(['𠮟', ' ', '𠮟', ' ', '𠮟'], $.chars('\u{20b9f} 𠮟 \ud842\udf9f'))
+        assert.deepEqual(['\u{20b9f}', ' ', '\u{20b9f}', ' ', '\u{20b9f}'], $.chars('\u{20b9f} 𠮟 \ud842\udf9f'))
+        assert.deepEqual(['\ud842\udf9f', ' ', '\ud842\udf9f', ' ', '\ud842\udf9f'], $.chars('\u{20b9f} 𠮟 \ud842\udf9f'))
+    })
+
+    test('codePoints', () => {
+        assert.deepEqual([], $.codePoints(undefined))
+        assert.deepEqual([], $.codePoints(null))
+        assert.deepEqual([], $.codePoints(''))
+        
+        assert.deepEqual([{char:'0', code:0x30}], $.codePoints('0'))
+        assert.deepEqual([{char:' ', code:0x20}], $.codePoints(' '))
+        assert.deepEqual([{char:'_', code:0x5f}], $.codePoints('_'))
+        assert.deepEqual([{char:' ', code:0x20}, {char:' ', code:0x20}], $.codePoints('  '))
+        assert.deepEqual([{char:'a', code:0x61}, {char:'b', code:0x62}, {char:'c', code:0x63}], $.codePoints('abc'))
+        assert.deepEqual([{char:'あ', code:0x3042}, {char:'い', code:0x3044}, {char:'う', code:0x3046}], $.codePoints('あいう'))
+        assert.deepEqual([{char:'𠮟', code:0x20b9f}], $.codePoints('\u{20b9f}'))
+        assert.deepEqual([{char:'𠮟', code:0x20b9f}], $.codePoints('𠮟'))
+        assert.deepEqual([{char:'𩸽', code:0x29e3d}], $.codePoints('𩸽'))
+    })
 })
