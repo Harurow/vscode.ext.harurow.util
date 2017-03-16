@@ -82,8 +82,16 @@ export const codePoints = (str: string) =>
         code: char.codePointAt(0)
     }))
 
-export const hex = (code: number, len: number = 2) =>
-    ('0'.repeat(len) + code.toString(16)).slice(-len)
+export const hex = (code: number, len: number = 2) => {
+    if (code == null || code < 0) {
+        return undefined
+    }
+    var str = code.toString(16)
+    if (str.length < len) {
+        str = '0'.repeat(len - str.length) + str
+    }
+    return str
+}
 
 export interface surrogatePair {
     hi: number
@@ -91,7 +99,7 @@ export interface surrogatePair {
 }
 
 export const surrogatePair = (code: number) => {
-    if (code <= 0xffff) {
+    if (code == null || code <= 0xffff) {
         return undefined
     }
     let un = code - 0x10000

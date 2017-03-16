@@ -168,4 +168,20 @@ suite('utils/string tests', () => {
         assert.deepEqual([{char:'𠮟', code:0x20b9f}], $.codePoints('𠮟'))
         assert.deepEqual([{char:'𩸽', code:0x29e3d}], $.codePoints('𩸽'))
     })
+
+    test('hex', () => {
+        assert.equal(undefined, $.hex(null))
+        assert.equal(undefined, $.hex(undefined))
+        assert.equal(undefined, $.hex(-1))
+        assert.equal('00', $.hex(0))
+        assert.equal('ff', $.hex(255))
+        assert.equal('100', $.hex(256))
+    })
+
+    test('surrogatePair', () => {
+        assert.equal(undefined, $.surrogatePair(null))
+        assert.equal(undefined, $.surrogatePair(undefined))
+        assert.equal(undefined, $.surrogatePair(-1))
+        assert.deepEqual({hi: 0xd842, lo:0xdf9f}, $.surrogatePair(0x20b9f))
+    })
 })
