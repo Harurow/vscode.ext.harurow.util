@@ -16,43 +16,33 @@ const isSpace = (code: number) =>
 const isAscii = (code: number) =>
     code <= 0xff
 
+const mapCode = (code: number) =>
+    isUnreserved(code)
+        ? String.fromCodePoint(code)
+        : '%' + hex(code)
+
 const encodeEncoding = (encoding: ej.Encoding) =>
     (char: string) =>
-        ej.convert(ej.stringToCode(char), encoding, 'UNICODE')
-          .map(c => '%' + hex(c))
-          .join('')
+        (char == null)
+            ? char
+            : ej.convert(ej.stringToCode(char), encoding, 'UNICODE')
+                .map(mapCode)
+                .join('')
 
 const encodeChar = (space: string, enc: (char: string) => string) => 
     (info: charInfo) =>
         isSpace(info.code)        ? space
         : isUnreserved(info.code) ? info.char
-        : isAscii(info.code)      ? '%' + info.code
+        : isAscii(info.code)      ? '%' + hex(info.code)
         : enc(info.char)
 
-const rcf3986 = (enc: (char: string) => string) =>
-    encodeChar('%20', enc)
-
-const rcf1866 = (enc: (char: string) => string) =>
-    encodeChar('+', enc)
-
-const encodeRcf3986ShiftJis = () =>
-    rcf3986(encodeEncoding('SJIS'))
-
-const encodeRcf3986EucJp = () =>
-    rcf3986(encodeEncoding('EUCJP'))
-
-const encodeRcf3986Utf8 = () =>
-    rcf3986(encodeEncoding('UTF8'))
-
-const encodeRcf1866ShiftJis = () =>
-    rcf1866(encodeEncoding('SJIS'))
-
-const encodeRcf1866EucJp = () =>
-    rcf1866(encodeEncoding('EUCJP'))
-
-const encodeRcf1866Utf8 = () =>
-    rcf1866(encodeEncoding('UTF8'))
-
-const encodeString = (str: string, encode: (info: charInfo) => string) =>
+export const encodeString = (str: string, encode: (info: charInfo) => string) =>
     (!str) ? str : codePoints(str).map(encode).join('')
+
+export const encodingEucJp = encodeEncoding('EUCJP')
+export const encodingShiftJis = encodeEncoding('SJIS')
+export const encodingUtf8 = encodeEncoding('UTF8')
+
+export const rfc3986 = (enc: (char: string) => string) => encodeChar('%20', enc)
+export const rfc1866 = (enc: (char: string) => string) => encodeChar('+', enc)
 
