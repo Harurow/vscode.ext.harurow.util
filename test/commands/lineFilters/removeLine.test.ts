@@ -25,7 +25,7 @@ suite('commands/lineFilters/removeLine', () => {
         assert.equal(false, isMatch(''))
         assert.equal(true, isMatch('0'))
     })
-    
+
     test('isNotMatch', () => {
         let isNotMatch = $.isUnmatch('[a-z]')
 

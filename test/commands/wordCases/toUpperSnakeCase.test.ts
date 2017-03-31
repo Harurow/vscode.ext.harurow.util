@@ -3,7 +3,7 @@ import * as vscode from 'vscode'
 
 import $ from '../../../src/__/commands/wordCases/toUpperSnakeCase'
 
-suite('commands/wordCases/toUpperSnakeCase', () =>{
+suite('commands/wordCases/toUpperSnakeCase', () => {
     test('toUpperSnakeCase', () => {
         assert.equal(undefined, $(undefined))
         assert.equal(null, $(null))

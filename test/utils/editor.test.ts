@@ -11,7 +11,7 @@ suite('extensions tests', () => {
 
         await editor.setTextAsync('abc ABC 123')
         assert.equal('abc ABC 123', editor.getText())
-        
+
         let func = $.getReplaceFunc(str => str.replace('ABC', 'xyz'))
         await func()
 

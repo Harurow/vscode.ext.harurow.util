@@ -2,7 +2,7 @@
 
 import * as vscode from 'vscode'
 import * as commands from './commands'
-import * as strutil from './stringutil'
+//import * as strutil from './stringutil'
 import * as filter from './linefilter'
 import * as encoding from './encoding'
 import * as escape from './escape'
@@ -19,14 +19,14 @@ export function activate(context: vscode.ExtensionContext) {
     next.activate(context)
 
     context.subscriptions.push(
-        
 
 
 
-        commands.register('extension.str.toPascalCase', {replace: strutil.toPascalCase}),
-        commands.register('extension.str.toCamelCase', {replace: strutil.toCamelCase}),
-        commands.register('extension.str.toUpperSnakeCase', {replace: strutil.toUpperSnakeCase}),
-        commands.register('extension.str.toLowerSnakeCase', {replace: strutil.toLowerSnakeCase}),
+
+        // commands.register('extension.str.toPascalCase', {replace: strutil.toPascalCase}),
+        // commands.register('extension.str.toCamelCase', {replace: strutil.toCamelCase}),
+        // commands.register('extension.str.toUpperSnakeCase', {replace: strutil.toUpperSnakeCase}),
+        // commands.register('extension.str.toLowerSnakeCase', {replace: strutil.toLowerSnakeCase}),
 
         commands.register('extension.flt.removeMatched', {whole: filter.removeMatched}),
         commands.register('extension.flt.removeUnmatched', {whole: filter.removeUnmatched}),
@@ -55,7 +55,7 @@ export function activate(context: vscode.ExtensionContext) {
 
         commands.register('extension.sel.string', {whole: sel.string}),
         commands.register('extension.sel.regex', {whole: sel.regex}),
-        
+
         commands.register('extension.rep.leftsideRight', {replace: rep.leftsideRight}),
 
         commands.register('extension.trn.transGoogle', {foreach: misc.transGoogle}),

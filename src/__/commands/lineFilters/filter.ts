@@ -11,7 +11,7 @@ const filter = async (replacer: (str: string, input: string) => string, options?
     if (!inputIsValid) {
         return false
     }
-    
+
     return editor.edit(eb => {
         editor.selections = editor.selections
                                   .map(edt.getNormalizedLineSelection)

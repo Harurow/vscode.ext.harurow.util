@@ -1,17 +1,15 @@
-'use strict'
-
 function enumIdentifiers(value: string, callback: (identifier: string) => string): string {
     return value.replace(/[a-zA-Z_][a-zA-Z_0-9]*/g, callback)
 }
 
 function toCase(value: string, callback: (value: string) => string): string {
     return enumIdentifiers(value, (identifier) => {
-        if (identifier === "_".repeat(identifier.length)) {
+        if (identifier === '_'.repeat(identifier.length)) {
             return identifier
         }
         return callback(identifier.replace(/([A-Z]+[a-z]*|[a-z]+|[0-9]+|_)/g, (word) =>
-            word === "_"
-                ? ""
+            word === '_'
+                ? ''
                 : toUpperCaseWhenFirstChar(word)))
     })
 }
@@ -21,28 +19,28 @@ function toSnake(value: string): string {
         let i = 0;
         return identifier.replace(/(_?[A-Z]+[a-z]*|_?[a-z]+|_)/g, (word) => {
             i++
-            return word.startsWith("_")
+            return word.startsWith('_')
                 ? word
-                : (i > 1 ? "_" : "") + word
+                : (i > 1 ? '_' : '') + word
         })
     })
 }
 
 export function toUpperCaseWhenFirstChar(value: string): string {
     return (!value)
-        ? ""
+        ? ''
         : value[0].toUpperCase() + value.slice(1).toLowerCase()
 }
 
 export function toUpperCaseFirstChar(value: string): string {
     return (!value)
-        ? ""
+        ? ''
         : value[0].toUpperCase() + value.slice(1)
 }
 
 export function toLowerCaseFirstChar(value: string): string {
     return (!value)
-        ? ""
+        ? ''
         : value[0].toLowerCase() + value.slice(1)
 }
 

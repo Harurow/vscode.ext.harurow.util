@@ -12,7 +12,7 @@ suite('extensions tests', () => {
 
         await editor.setTextAsync('abc ABC 123')
         assert.equal('abc ABC 123', editor.getText())
-        
+
         await $.replaceAsync(str => str.replace('ABC', 'xyz'))
         assert.equal('abc xyz 123', editor.getText())
     })

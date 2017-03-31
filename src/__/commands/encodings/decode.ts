@@ -1,5 +1,5 @@
 import * as ej from 'encoding-japanese'
-import { codePoints, CharInfo, hex } from '../../utils/string'
+import { percentEncodedCodePoints, CharInfo, hex } from '../../utils/string'
 
 const isUnreserved = (code: number) =>
     0x41 <= code && code <= 0x5A ||     // A-Z
@@ -29,21 +29,20 @@ const encodeEncoding = (encoding: ej.Encoding) =>
                 .map(mapCode)
                 .join('')
 
-const encodeChar = (space: string, enc: (char: string) => string) =>
-    (info: CharInfo) =>
-        isSpace(info.code)        ? space
-        : isUnreserved(info.code) ? info.char
-        : isAscii(info.code)      ? '%' + hex(info.code)
-        : enc(info.char)
+const decodeEncoding = (encoding: ej.Encoding) =>
+    (code: number[]) =>
+        ej.codeToString(ej.convert(code, 'UNICODE', encoding))
 
-export const encodingEucJp = encodeEncoding('EUCJP')
-export const encodingShiftJis = encodeEncoding('SJIS')
-export const encodingUtf8 = encodeEncoding('UTF8')
+export const encodingEucJp = decodeEncoding('EUCJP')
+export const encodingShiftJis = decodeEncoding('SJIS')
+export const encodingUtf8 = decodeEncoding('UTF8')
 
-export const rfc3986 = (enc: (char: string) => string) => encodeChar('%20', enc)
-export const rfc1866 = (enc: (char: string) => string) => encodeChar('+', enc)
+export const rfc3986 = (info: CharInfo) => info.char
 
-export const encodeString = (str: string, encode: (info: CharInfo) => string) =>
+export const decodeString = (str: string, dec: (code: number[]) => string) =>
     (!str)
         ? str
-        : codePoints(str).map(encode).join('')
+        : dec(percentEncodedCodePoints(str).map(info => info.code))
+
+/*
+*/

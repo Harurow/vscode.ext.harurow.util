@@ -1,7 +1,7 @@
 import * as $ from '../../utils/string'
 
 const toCamelWord = (value: string, index: number) =>
-    index == 0
+    index === 0
         ? $.toLowerWord(value)
         : $.toPascalWord(value)
 

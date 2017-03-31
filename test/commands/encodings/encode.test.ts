@@ -12,8 +12,8 @@ import {
   } from '../../../src/__/commands/encodings/'
 
 suite('commands/encodings/encode tests', () => {
-    
-    test('encodingEucJp', () =>{
+
+    test('encodingEucJp', () => {
         assert.equal(undefined, $.encodingEucJp(undefined))
         assert.equal(null, $.encodingEucJp(null))
         assert.equal('', $.encodingEucJp(''))
@@ -21,7 +21,7 @@ suite('commands/encodings/encode tests', () => {
         assert.equal('%a5%a6%a5%a3%a5%ad%a5%da%a5%c7%a5%a3%a5%a2', $.encodingEucJp('ウィキペディア'))
     })
 
-    test('encodingShiftJis', () =>{
+    test('encodingShiftJis', () => {
         assert.equal(undefined, $.encodingShiftJis(undefined))
         assert.equal(null, $.encodingShiftJis(null))
         assert.equal('', $.encodingShiftJis(''))
@@ -29,7 +29,7 @@ suite('commands/encodings/encode tests', () => {
         assert.equal('%83E%83B%83L%83y%83f%83B%83A', $.encodingShiftJis('ウィキペディア'))
     })
 
-    test('encodingUtf8', () =>{
+    test('encodingUtf8', () => {
         assert.equal(undefined, $.encodingUtf8(undefined))
         assert.equal(null, $.encodingUtf8(null))
         assert.equal('', $.encodingUtf8(''))
@@ -55,7 +55,7 @@ suite('commands/encodings tests', () => {
         assert.equal('PQRSTUVWXYZ%5b%5c%5d%5e_', encodeRfc1866EucJp('PQRSTUVWXYZ[\\]^_'))
         assert.equal('%60abcdefghijklmno', encodeRfc1866EucJp('`abcdefghijklmno'))
         assert.equal('pqrstuvwxyz%7b%7c%7d~', encodeRfc1866EucJp('pqrstuvwxyz{|}~'))
-       
+
         assert.equal('%a5%a6%a5%a3%a5%ad%a5%da%a5%c7%a5%a3%a5%a2', encodeRfc1866EucJp('ウィキペディア'))
     })
 
@@ -74,10 +74,10 @@ suite('commands/encodings tests', () => {
         assert.equal('PQRSTUVWXYZ%5b%5c%5d%5e_', encodeRfc1866ShiftJis('PQRSTUVWXYZ[\\]^_'))
         assert.equal('%60abcdefghijklmno', encodeRfc1866ShiftJis('`abcdefghijklmno'))
         assert.equal('pqrstuvwxyz%7b%7c%7d~', encodeRfc1866ShiftJis('pqrstuvwxyz{|}~'))
-       
+
         assert.equal('%83E%83B%83L%83y%83f%83B%83A', encodeRfc1866ShiftJis('ウィキペディア'))
     })
-    
+
     test('encodeRfc1866Utf8', () => {
         assert.equal(undefined, encodeRfc1866Utf8(undefined))
         assert.equal(null, encodeRfc1866Utf8(null))
@@ -93,7 +93,7 @@ suite('commands/encodings tests', () => {
         assert.equal('PQRSTUVWXYZ%5b%5c%5d%5e_', encodeRfc1866Utf8('PQRSTUVWXYZ[\\]^_'))
         assert.equal('%60abcdefghijklmno', encodeRfc1866Utf8('`abcdefghijklmno'))
         assert.equal('pqrstuvwxyz%7b%7c%7d~', encodeRfc1866Utf8('pqrstuvwxyz{|}~'))
-       
+
         assert.equal('%e3%82%a6%e3%82%a3%e3%82%ad%e3%83%9a%e3%83%87%e3%82%a3%e3%82%a2', encodeRfc1866Utf8('ウィキペディア'))
 
         assert.equal('%f0%a9%b8%bd+%f0%a9%b8%bd+%f0%a9%b8%bd', encodeRfc1866Utf8('\u{29e3d} 𩸽 \ud867\ude3d'))
@@ -121,7 +121,7 @@ suite('commands/encodings tests', () => {
         assert.equal('PQRSTUVWXYZ%5b%5c%5d%5e_', encodeRfc3986EucJp('PQRSTUVWXYZ[\\]^_'))
         assert.equal('%60abcdefghijklmno', encodeRfc3986EucJp('`abcdefghijklmno'))
         assert.equal('pqrstuvwxyz%7b%7c%7d~', encodeRfc3986EucJp('pqrstuvwxyz{|}~'))
-       
+
         assert.equal('%a5%a6%a5%a3%a5%ad%a5%da%a5%c7%a5%a3%a5%a2', encodeRfc3986EucJp('ウィキペディア'))
     })
 
@@ -140,10 +140,10 @@ suite('commands/encodings tests', () => {
         assert.equal('PQRSTUVWXYZ%5b%5c%5d%5e_', encodeRfc3986ShiftJis('PQRSTUVWXYZ[\\]^_'))
         assert.equal('%60abcdefghijklmno', encodeRfc3986ShiftJis('`abcdefghijklmno'))
         assert.equal('pqrstuvwxyz%7b%7c%7d~', encodeRfc3986ShiftJis('pqrstuvwxyz{|}~'))
-       
+
         assert.equal('%83E%83B%83L%83y%83f%83B%83A', encodeRfc3986ShiftJis('ウィキペディア'))
     })
-    
+
     test('encodeRfc3986Utf8', () => {
         assert.equal(undefined, encodeRfc3986Utf8(undefined))
         assert.equal(null, encodeRfc3986Utf8(null))
@@ -159,7 +159,7 @@ suite('commands/encodings tests', () => {
         assert.equal('PQRSTUVWXYZ%5b%5c%5d%5e_', encodeRfc3986Utf8('PQRSTUVWXYZ[\\]^_'))
         assert.equal('%60abcdefghijklmno', encodeRfc3986Utf8('`abcdefghijklmno'))
         assert.equal('pqrstuvwxyz%7b%7c%7d~', encodeRfc3986Utf8('pqrstuvwxyz{|}~'))
-       
+
         assert.equal('%e3%82%a6%e3%82%a3%e3%82%ad%e3%83%9a%e3%83%87%e3%82%a3%e3%82%a2', encodeRfc3986Utf8('ウィキペディア'))
 
         assert.equal('%f0%a9%b8%bd%20%f0%a9%b8%bd%20%f0%a9%b8%bd', encodeRfc3986Utf8('\u{29e3d} 𩸽 \ud867\ude3d'))

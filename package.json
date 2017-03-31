@@ -39,6 +39,7 @@
     "@types/mocha": "^2.2.39",
     "@types/node": "^7.0.5",
     "mocha": "^3.2.0",
+    "tslint": "^5.0.0",
     "typescript": "^2.2.1",
     "vscode": "^1.0.5",
     "vscode-nls": "^2.0.2"
@@ -57,8 +58,6 @@
     "onCommand:commands.lineFilters.unmatch",
     "onCommand:commands.lineFilters.contains",
     "onCommand:commands.lineFilters.notContains",
-
-
     "onCommand:extension.enc.rfc3986ShiftJis",
     "onCommand:extension.enc.rfc3986EucJp",
     "onCommand:extension.enc.rfc3986Utf8",
@@ -125,10 +124,6 @@
         "category": "LineFilter",
         "title": "Remove Line If NOT Contains String ..."
       },
-
-
-
-
       {
         "command": "extension.enc.rfc3986ShiftJis",
         "category": "Encode",
