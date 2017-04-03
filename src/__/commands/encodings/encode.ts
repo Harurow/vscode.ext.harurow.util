@@ -1,25 +1,6 @@
 import * as ej from 'encoding-japanese'
+import { isUnreserved, isSpace, isAscii, mapCode } from './util'
 import { codePoints, CharInfo, hex } from '../../utils/string'
-
-const isUnreserved = (code: number) =>
-    0x41 <= code && code <= 0x5A ||     // A-Z
-    0x61 <= code && code <= 0x7A ||     // a-z
-    0x30 <= code && code <= 0x39 ||     // 0-9
-    code === 0x2D                ||     // - hyphen
-    code === 0x2E                ||     // . dot
-    code === 0x5F                ||     // _ under-scodeore
-    code === 0x7E                       // ~ tilde
-
-const isSpace = (code: number) =>
-    code === 0x20
-
-const isAscii = (code: number) =>
-    code <= 0xff
-
-const mapCode = (code: number) =>
-    isUnreserved(code)
-        ? String.fromCodePoint(code)
-        : '%' + hex(code)
 
 const encodeEncoding = (encoding: ej.Encoding) =>
     (char: string) =>
@@ -36,14 +17,22 @@ const encodeChar = (space: string, enc: (char: string) => string) =>
         : isAscii(info.code)      ? '%' + hex(info.code)
         : enc(info.char)
 
-export const encodingEucJp = encodeEncoding('EUCJP')
-export const encodingShiftJis = encodeEncoding('SJIS')
-export const encodingUtf8 = encodeEncoding('UTF8')
+const encodingEucJp = encodeEncoding('EUCJP')
+const encodingShiftJis = encodeEncoding('SJIS')
+const encodingUtf8 = encodeEncoding('UTF8')
 
-export const rfc3986 = (enc: (char: string) => string) => encodeChar('%20', enc)
-export const rfc1866 = (enc: (char: string) => string) => encodeChar('+', enc)
+const rfc3986 = (enc: (char: string) => string) => encodeChar('%20', enc)
+const rfc1866 = (enc: (char: string) => string) => encodeChar('+', enc)
 
-export const encodeString = (str: string, encode: (info: CharInfo) => string) =>
+const encodeString = (str: string, encode: (info: CharInfo) => string) =>
     (!str)
         ? str
         : codePoints(str).map(encode).join('')
+
+export const encodeRfc1866EucJp = (str: string) => encodeString(str, rfc1866(encodingEucJp))
+export const encodeRfc1866ShiftJis = (str: string) => encodeString(str, rfc1866(encodingShiftJis))
+export const encodeRfc1866Utf8 = (str: string) => encodeString(str, rfc1866(encodingUtf8))
+
+export const encodeRfc3986EucJp = (str: string) => encodeString(str, rfc3986(encodingEucJp))
+export const encodeRfc3986ShiftJis = (str: string) => encodeString(str, rfc3986(encodingShiftJis))
+export const encodeRfc3986Utf8 = (str: string) => encodeString(str, rfc3986(encodingUtf8))

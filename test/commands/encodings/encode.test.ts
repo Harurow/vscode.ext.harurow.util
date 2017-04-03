@@ -1,7 +1,6 @@
 import * as assert from 'assert'
 import * as vscode from 'vscode'
 
-import * as $ from '../../../src/__/commands/encodings/encode'
 import {
     encodeRfc1866EucJp,
     encodeRfc1866ShiftJis,
@@ -9,36 +8,9 @@ import {
     encodeRfc3986EucJp,
     encodeRfc3986ShiftJis,
     encodeRfc3986Utf8,
-  } from '../../../src/__/commands/encodings/'
+  } from '../../../src/__/commands/encodings'
 
 suite('commands/encodings/encode tests', () => {
-
-    test('encodingEucJp', () => {
-        assert.equal(undefined, $.encodingEucJp(undefined))
-        assert.equal(null, $.encodingEucJp(null))
-        assert.equal('', $.encodingEucJp(''))
-        assert.equal('abc', $.encodingEucJp('abc'))
-        assert.equal('%a5%a6%a5%a3%a5%ad%a5%da%a5%c7%a5%a3%a5%a2', $.encodingEucJp('ウィキペディア'))
-    })
-
-    test('encodingShiftJis', () => {
-        assert.equal(undefined, $.encodingShiftJis(undefined))
-        assert.equal(null, $.encodingShiftJis(null))
-        assert.equal('', $.encodingShiftJis(''))
-        assert.equal('abc', $.encodingShiftJis('abc'))
-        assert.equal('%83E%83B%83L%83y%83f%83B%83A', $.encodingShiftJis('ウィキペディア'))
-    })
-
-    test('encodingUtf8', () => {
-        assert.equal(undefined, $.encodingUtf8(undefined))
-        assert.equal(null, $.encodingUtf8(null))
-        assert.equal('', $.encodingUtf8(''))
-        assert.equal('abc', $.encodingUtf8('abc'))
-        assert.equal('%e3%82%a6%e3%82%a3%e3%82%ad%e3%83%9a%e3%83%87%e3%82%a3%e3%82%a2', $.encodingUtf8('ウィキペディア'))
-    })
-})
-
-suite('commands/encodings tests', () => {
 
     test('encodeRfc1866EucJp', () => {
         assert.equal(undefined, encodeRfc1866EucJp(undefined))
@@ -83,6 +55,7 @@ suite('commands/encodings tests', () => {
         assert.equal(null, encodeRfc1866Utf8(null))
         assert.equal('', encodeRfc1866Utf8(''))
         assert.equal('+', encodeRfc1866Utf8(' '))
+        assert.equal('++', encodeRfc1866Utf8('  '))
         assert.equal('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLNOPQRSUTVWXYZ0123456789-._~',
                      encodeRfc1866Utf8('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLNOPQRSUTVWXYZ0123456789-._~'))
 
@@ -99,12 +72,6 @@ suite('commands/encodings tests', () => {
         assert.equal('%f0%a9%b8%bd+%f0%a9%b8%bd+%f0%a9%b8%bd', encodeRfc1866Utf8('\u{29e3d} 𩸽 \ud867\ude3d'))
         assert.equal('%f0%a0%ae%9f+%f0%a0%ae%9f+%f0%a0%ae%9f', encodeRfc1866Utf8('\u{20b9f} 𠮟 \ud842\udf9f'))
     })
-
-
-
-
-
-
 
     test('encodeRfc3986EucJp', () => {
         assert.equal(undefined, encodeRfc3986EucJp(undefined))
@@ -165,22 +132,5 @@ suite('commands/encodings tests', () => {
         assert.equal('%f0%a9%b8%bd%20%f0%a9%b8%bd%20%f0%a9%b8%bd', encodeRfc3986Utf8('\u{29e3d} 𩸽 \ud867\ude3d'))
         assert.equal('%f0%a0%ae%9f%20%f0%a0%ae%9f%20%f0%a0%ae%9f', encodeRfc3986Utf8('\u{20b9f} 𠮟 \ud842\udf9f'))
     })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 })

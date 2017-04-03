@@ -1,17 +1,35 @@
 import {
-    encodeString,
-    encodingEucJp,
-    encodingShiftJis,
-    encodingUtf8,
-    rfc3986,
-    rfc1866,
+    encodeRfc1866EucJp,
+    encodeRfc1866ShiftJis,
+    encodeRfc1866Utf8,
+    encodeRfc3986EucJp,
+    encodeRfc3986ShiftJis,
+    encodeRfc3986Utf8,
 } from './encode'
 
-export const encodeRfc1866EucJp = (str: string) => encodeString(str, rfc1866(encodingEucJp))
-export const encodeRfc1866ShiftJis = (str: string) => encodeString(str, rfc1866(encodingShiftJis))
-export const encodeRfc1866Utf8 = (str: string) => encodeString(str, rfc1866(encodingUtf8))
+import {
+    decodeRfc1866EucJp,
+    decodeRfc1866ShiftJis,
+    decodeRfc1866Utf8,
+    decodeRfc3986EucJp,
+    decodeRfc3986ShiftJis,
+    decodeRfc3986Utf8,
+} from './decode'
 
-export const encodeRfc3986EucJp = (str: string) => encodeString(str, rfc3986(encodingEucJp))
-export const encodeRfc3986ShiftJis = (str: string) => encodeString(str, rfc3986(encodingShiftJis))
-export const encodeRfc3986Utf8 = (str: string) => encodeString(str, rfc3986(encodingUtf8))
+export {
+    encodeRfc1866EucJp,
+    encodeRfc1866ShiftJis,
+    encodeRfc1866Utf8,
 
+    encodeRfc3986EucJp,
+    encodeRfc3986ShiftJis,
+    encodeRfc3986Utf8,
+
+    decodeRfc1866EucJp,
+    decodeRfc1866ShiftJis,
+    decodeRfc1866Utf8,
+
+    decodeRfc3986EucJp,
+    decodeRfc3986ShiftJis,
+    decodeRfc3986Utf8,
+}
