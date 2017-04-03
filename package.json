@@ -58,15 +58,19 @@
     "onCommand:commands.lineFilters.unmatch",
     "onCommand:commands.lineFilters.contains",
     "onCommand:commands.lineFilters.notContains",
-    "onCommand:extension.enc.rfc3986ShiftJis",
-    "onCommand:extension.enc.rfc3986EucJp",
-    "onCommand:extension.enc.rfc3986Utf8",
-    "onCommand:extension.enc.rfc1866ShiftJis",
-    "onCommand:extension.enc.rfc1866EucJp",
-    "onCommand:extension.enc.rfc1866Utf8",
-    "onCommand:extension.dec.rfc3986ShiftJis",
-    "onCommand:extension.dec.rfc3986EucJp",
-    "onCommand:extension.dec.rfc3986Utf8",
+    "onCommand:commands.encodings.encodeRfc3986ShiftJis",
+    "onCommand:commands.encodings.encodeRfc3986EucJp",
+    "onCommand:commands.encodings.encodeRfc3986Utf8",
+    "onCommand:commands.encodings.encodeRfc1866ShiftJis",
+    "onCommand:commands.encodings.encodeRfc1866EucJp",
+    "onCommand:commands.encodings.encodeRfc1866Utf8",
+    "onCommand:commands.encodings.decodeRfc3986ShiftJis",
+    "onCommand:commands.encodings.decodeRfc3986EucJp",
+    "onCommand:commands.encodings.decodeRfc3986Utf8",
+    "onCommand:commands.encodings.decodeRfc1866ShiftJis",
+    "onCommand:commands.encodings.decodeRfc1866EucJp",
+    "onCommand:commands.encodings.decodeRfc1866Utf8",
+
     "onCommand:extension.esc.toHtml",
     "onCommand:extension.esc.toHtmlAll",
     "onCommand:extension.esc.toUnicode",
@@ -125,50 +129,51 @@
         "title": "Remove Line If NOT Contains String ..."
       },
       {
-        "command": "extension.enc.rfc3986ShiftJis",
+        "command": "commands.encoding.encodeRfc3986ShiftJis",
         "category": "Encode",
         "title": "To Percent Encoding (RFC3986 ' ' => %20) / Shift_JIS"
       },
       {
-        "command": "extension.enc.rfc3986EucJp",
+        "command": "commands.encoding.encodeRfc3986EucJp",
         "category": "Encode",
         "title": "To Percent Encoding (RFC3986 ' ' => %20) / EUC-JP"
       },
       {
-        "command": "extension.enc.rfc3986Utf8",
+        "command": "commands.encoding.encodeRfc3986Utf8",
         "category": "Encode",
         "title": "To Percent Encoding (RFC3986 ' ' => %20) / UTF-8"
       },
       {
-        "command": "extension.enc.rfc1866ShiftJis",
+        "command": "commands.encoding.encodeRfc1866ShiftJis",
         "category": "Encode",
         "title": "To Percent Encoding (RFC1866 ' ' => +) / Shift_JIS"
       },
       {
-        "command": "extension.enc.rfc1866EucJp",
+        "command": "commands.encoding.encodeRfc1866EucJp",
         "category": "Encode",
         "title": "To Percent Encoding (RFC1866 ' ' => +) / EUC-JP"
       },
       {
-        "command": "extension.enc.rfc1866Utf8",
+        "command": "commands.encoding.encodeRfc1866Utf8",
         "category": "Encode",
         "title": "To Percent Encoding (RFC1866 ' ' => +) / UTF-8"
       },
       {
-        "command": "extension.dec.rfc3986ShiftJis",
+        "command": "commands.encoding.deodeRfc1866ShiftJis",
         "category": "Decode",
         "title": "From Percent Encoding (RFC3986, RFC1866) / Shift_JIS"
       },
       {
-        "command": "extension.dec.rfc3986EucJp",
+        "command": "commands.encoding.deodeRfc1866EucJp",
         "category": "Decode",
         "title": "From Percent Encoding (RFC3986, RFC1866) / EUC-JP"
       },
       {
-        "command": "extension.dec.rfc3986Utf8",
+        "command": "commands.encoding.deodeRfc1866Utf8",
         "category": "Decode",
         "title": "From Percent Encoding (RFC3986, RFC1866) / UTF-8"
       },
+
       {
         "command": "extension.esc.toHtml",
         "category": "Escape",

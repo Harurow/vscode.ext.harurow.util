@@ -8,7 +8,7 @@ import {
     encodeRfc3986EucJp,
     encodeRfc3986ShiftJis,
     encodeRfc3986Utf8,
-  } from '../../../src/__/commands/encodings'
+} from '../../../src/__/commands/encodings/encode'
 
 suite('commands/encodings/encode tests', () => {
 
