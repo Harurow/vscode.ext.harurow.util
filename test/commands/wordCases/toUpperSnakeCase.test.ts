@@ -11,6 +11,12 @@ suite('commands/wordCases/toUpperSnakeCase', () => {
         assert.equal(' ', $(' '))
         assert.equal('0', $('0'))
 
+        assert.equal('UPPER', $('Upper'))
+        assert.equal('UPPER', $('UPPER'))
+        assert.equal('UPPER', $('upper'))
+        assert.equal('', $('_'))
+        assert.equal('', $('__'))
+
         assert.equal('THIS_IS_SNAKE', $('ThisIsSnake'))
         assert.equal('THIS_IS_SNAKE', $('thisIsSnake'))
         assert.equal('THIS_IS_SNAKE', $('this_is_Snake'))

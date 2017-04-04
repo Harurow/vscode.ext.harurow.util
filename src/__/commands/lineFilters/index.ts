@@ -5,6 +5,7 @@ import {
     removeLineIfContains,
     removeLineIfNotContains
 } from './removeLine'
+
 import filter from './filter'
 
 export const removeLineIfMatchCommand = (command: string) =>

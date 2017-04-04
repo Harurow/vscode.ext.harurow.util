@@ -86,30 +86,6 @@ suite('utils/string tests', () => {
         assert.deepEqual(['THIS', '_', 'IS', '_', '99', '_', 'PASCAL'], $.words('THIS_IS_99_PASCAL'))
     })
 
-    test('toPascalWord', () => {
-        assert.equal('Pascal', $.toPascalWord('Pascal'))
-        assert.equal('Pascal', $.toPascalWord('PASCAL'))
-        assert.equal('Pascal', $.toPascalWord('pascal'))
-        assert.equal('', $.toPascalWord('_'))
-        assert.equal('', $.toPascalWord('__'))
-    })
-
-    test('toLowerWord', () => {
-        assert.equal('lower', $.toLowerWord('Lower'))
-        assert.equal('lower', $.toLowerWord('LOWER'))
-        assert.equal('lower', $.toLowerWord('lower'))
-        assert.equal('', $.toLowerWord('_'))
-        assert.equal('', $.toLowerWord('__'))
-    })
-
-    test('toUpperWord', () => {
-        assert.equal('UPPER', $.toUpperWord('Upper'))
-        assert.equal('UPPER', $.toUpperWord('UPPER'))
-        assert.equal('UPPER', $.toUpperWord('upper'))
-        assert.equal('', $.toUpperWord('_'))
-        assert.equal('', $.toUpperWord('__'))
-    })
-
     test('lines', () => {
         assert.equal(undefined, $.lines(undefined))
         assert.equal(undefined, $.lines(null))
@@ -155,24 +131,6 @@ suite('utils/string tests', () => {
         assert.deepEqual(['\u{20b9f}', ' ', '\u{20b9f}', ' ', '%', '7', 'e',  '\u{20b9f}'], $.chars('\u{20b9f} 𠮟 %7e\ud842\udf9f'))
     })
 
-    test('percentEncodedChars', () => {
-        assert.deepEqual([], $.percentEncodedChars(undefined))
-        assert.deepEqual([], $.percentEncodedChars(null))
-        assert.deepEqual([], $.percentEncodedChars(''))
-
-        assert.deepEqual(['0'], $.percentEncodedChars('0'))
-        assert.deepEqual([' '], $.percentEncodedChars(' '))
-        assert.deepEqual(['_'], $.percentEncodedChars('_'))
-        assert.deepEqual([' ', ' '], $.percentEncodedChars('  '))
-        assert.deepEqual(['a', 'b', 'c'], $.percentEncodedChars('abc'))
-        assert.deepEqual(['あ', 'い', 'う'], $.percentEncodedChars('あいう'))
-        assert.deepEqual(['𠮟', ' ', '𠮟', ' ', '𠮟'], $.percentEncodedChars('\u{20b9f} 𠮟 \ud842\udf9f'))
-        assert.deepEqual(['\u{20b9f}', ' ', '\u{20b9f}', ' ', '\u{20b9f}'], $.percentEncodedChars('\u{20b9f} 𠮟 \ud842\udf9f'))
-        assert.deepEqual(['\ud842\udf9f', ' ', '\ud842\udf9f', ' ', '\ud842\udf9f'], $.percentEncodedChars('\u{20b9f} 𠮟 \ud842\udf9f'))
-        assert.deepEqual(['0', '%20'], $.percentEncodedChars('0%20'))
-        assert.deepEqual(['\u{20b9f}', ' ', '\u{20b9f}', ' ', '%7e',  '\u{20b9f}'], $.percentEncodedChars('\u{20b9f} 𠮟 %7e\ud842\udf9f'))
-    })
-
     test('codePoints', () => {
         assert.deepEqual([], $.codePoints(undefined))
         assert.deepEqual([], $.codePoints(null))
@@ -191,27 +149,6 @@ suite('utils/string tests', () => {
         assert.deepEqual([{char: '%', code: 0x25}, {char: '2', code: 0x32}, {char: '0', code: 0x30}], $.codePoints('%20'))
         assert.deepEqual([{char: '%', code: 0x25}, {char: '3', code: 0x33}, {char: '0', code: 0x30}, {char: 'a', code: 0x61}], $.codePoints('%30a'))
     })
-
-    test('percentEncodedCodePoints', () => {
-        assert.deepEqual([], $.percentEncodedCodePoints(undefined))
-        assert.deepEqual([], $.percentEncodedCodePoints(null))
-        assert.deepEqual([], $.percentEncodedCodePoints(''))
-
-        assert.deepEqual([{char: '0', code: 0x30}], $.percentEncodedCodePoints('0'))
-        assert.deepEqual([{char: ' ', code: 0x20}], $.percentEncodedCodePoints(' '))
-        assert.deepEqual([{char: '_', code: 0x5f}], $.percentEncodedCodePoints('_'))
-        assert.deepEqual([{char: ' ', code: 0x20}, {char: ' ', code: 0x20}], $.percentEncodedCodePoints('  '))
-        assert.deepEqual([{char: 'a', code: 0x61}, {char: 'b', code: 0x62}, {char: 'c', code: 0x63}], $.percentEncodedCodePoints('abc'))
-        assert.deepEqual([{char: 'あ', code: 0x3042}, {char: 'い', code: 0x3044}, {char: 'う', code: 0x3046}], $.percentEncodedCodePoints('あいう'))
-        assert.deepEqual([{char: '𠮟', code: 0x20b9f}], $.percentEncodedCodePoints('\u{20b9f}'))
-        assert.deepEqual([{char: '𠮟', code: 0x20b9f}], $.percentEncodedCodePoints('𠮟'))
-        assert.deepEqual([{char: '𩸽', code: 0x29e3d}], $.percentEncodedCodePoints('𩸽'))
-
-        assert.deepEqual([{char: ' ', code: 0x20}], $.percentEncodedCodePoints('%20'))
-        assert.deepEqual([{char: '0', code: 0x30}, {char: 'a', code: 0x61}], $.percentEncodedCodePoints('%30a'))
-        assert.deepEqual([{char: '_', code: 0x5f}], $.percentEncodedCodePoints('%5f'))
-    })
-
 
     test('hex', () => {
         assert.equal(undefined, $.hex(null))

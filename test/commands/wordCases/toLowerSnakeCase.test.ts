@@ -15,5 +15,11 @@ suite('commands/wordCases/toLowerSnakeCase', () => {
         assert.equal('this_is_snake', $('thisIsSnake'))
         assert.equal('this_is_snake', $('this_is_Snake'))
         assert.equal('this_is_snake', $('THIS_IS_Snake'))
+
+        assert.equal('lower', $('Lower'))
+        assert.equal('lower', $('LOWER'))
+        assert.equal('lower', $('lower'))
+        assert.equal('', $('_'))
+        assert.equal('', $('__'))
     })
 })

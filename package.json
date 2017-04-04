@@ -70,11 +70,12 @@
     "onCommand:commands.encodings.decodeRfc1866ShiftJis",
     "onCommand:commands.encodings.decodeRfc1866EucJp",
     "onCommand:commands.encodings.decodeRfc1866Utf8",
+    "onCommand:commands.escapes.escapeHtml",
+    "onCommand:commands.escapes.escapeHtmlAll",
+    "onCommand:commands.escapes.unescapeHtml",
 
-    "onCommand:extension.esc.toHtml",
-    "onCommand:extension.esc.toHtmlAll",
+
     "onCommand:extension.esc.toUnicode",
-    "onCommand:extension.esc.fromHtmlAll",
     "onCommand:extension.esc.fromUnicode",
     "onCommand:extension.esc.fromUnicodeAll",
     "onCommand:extension.num.numbers",
@@ -173,17 +174,22 @@
         "category": "Decode",
         "title": "From Percent Encoding (RFC3986, RFC1866) / UTF-8"
       },
-
       {
-        "command": "extension.esc.toHtml",
+        "command": "commands.escapes.escapeHtml",
         "category": "Escape",
         "title": "To HTML Escape"
       },
       {
-        "command": "extension.esc.toHtmlAll",
+        "command": "commands.escapes.escapeHtmlAll",
         "category": "Escape",
         "title": "To HTML Escape All Charactors"
       },
+      {
+        "command": "commands.escapes.unescapeHtml",
+        "category": "Unescape",
+        "title": "From HTML Escape"
+      },
+
       {
         "command": "extension.esc.toUnicode",
         "category": "Escape",
@@ -193,11 +199,6 @@
         "command": "extension.esc.toUnicodeAll",
         "category": "Escape",
         "title": "To Unicode Escape All Charactors"
-      },
-      {
-        "command": "extension.esc.fromHtmlAll",
-        "category": "Unescape",
-        "title": "From HTML Escape"
       },
       {
         "command": "extension.esc.fromUnicode",

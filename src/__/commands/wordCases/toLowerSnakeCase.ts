@@ -1,9 +1,14 @@
 import {
+    hasChar,
     isValidIdentifier,
     words,
     isUnderscore,
-    toLowerWord,
 } from '../../utils'
+
+export const toLowerWord = (str: string) =>
+    !hasChar(str)       ? str
+    : isUnderscore(str) ? ''
+    : str.toLowerCase()
 
 const toLowerSnakeCase = (str: string) =>
     !isValidIdentifier(str)

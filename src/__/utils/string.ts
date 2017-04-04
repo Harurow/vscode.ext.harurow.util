@@ -30,21 +30,6 @@ export const words = (str: string) => {
     return result
 }
 
-export const toPascalWord = (str: string) =>
-    !hasChar(str)       ? str
-    : isUnderscore(str) ? ''
-    : str[0].toUpperCase() + str.slice(1).toLowerCase()
-
-export const toLowerWord = (str: string) =>
-    !hasChar(str)       ? str
-    : isUnderscore(str) ? ''
-    : str.toLowerCase()
-
-export const toUpperWord = (str: string) =>
-    !hasChar(str)       ? str
-    : isUnderscore(str) ? ''
-    : str.toUpperCase()
-
 export const lines = (str: string) => {
     if (str == null) {
         return undefined
@@ -70,11 +55,6 @@ export const chars = (str: string) : string[] =>
         ? []
         : str.match(/[\uD800-\uDBFF][\uDC00-\uDFFF]|[^\uD800-\uDFFF]/g) || []
 
-export const percentEncodedChars = (str: string) =>
-    (str == null)
-        ? []
-        : str.match(/%[0-9a-fA-F]{2}|[\uD800-\uDBFF][\uDC00-\uDFFF]|[^\uD800-\uDFFF]/g) || []
-
 export const strLen = (str: string) =>
     chars(str).length
 
@@ -88,18 +68,6 @@ export const codePoints = (str: string) =>
         char,
         code: char.codePointAt(0)
     }))
-
-const decodePercentEncode = (str: string) =>
-    (str.length === 3 && str.startsWith('%'))
-        ? String.fromCodePoint(Number.parseInt(str.substr(1), 16))
-        : str
-
-export const percentEncodedCodePoints = (str: string) =>
-    percentEncodedChars(str).map(char => decodePercentEncode(char))
-                            .map(char => <CharInfo>({
-                                char,
-                                code: char.codePointAt(0)
-                            }))
 
 export const hex = (code: number, len: number = 2) => {
     if (code == null || code < 0) {

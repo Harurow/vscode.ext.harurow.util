@@ -1,6 +1,6 @@
 import * as ej from 'encoding-japanese'
 import { isUnreserved, isSpace, isAscii, mapCode } from './utils'
-import { percentEncodedCodePoints, CharInfo, hex } from '../../utils'
+import { CharInfo, hex } from '../../utils'
 
 const encodeEncoding = (encoding: ej.Encoding) =>
     (char: string) =>
@@ -23,6 +23,23 @@ const rfc1866 = (str: string) =>
 
 const rfc3986 = (str: string) =>
     str
+
+const decodePercentEncode = (str: string) =>
+    (str.length === 3 && str.startsWith('%'))
+        ? String.fromCodePoint(Number.parseInt(str.substr(1), 16))
+        : str
+
+const percentEncodedChars = (str: string) =>
+    (str == null)
+        ? []
+        : str.match(/%[0-9a-fA-F]{2}|[\uD800-\uDBFF][\uDC00-\uDFFF]|[^\uD800-\uDFFF]/g) || []
+
+const percentEncodedCodePoints = (str: string) =>
+    percentEncodedChars(str).map(char => decodePercentEncode(char))
+                            .map(char => <CharInfo>({
+                                char,
+                                code: char.codePointAt(0)
+                            }))
 
 const decodeString = (str: string, dec: (code: number[]) => string) =>
     (!str)

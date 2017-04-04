@@ -1,9 +1,10 @@
 import {
-    toLowerWord,
-    toPascalWord,
     isValidIdentifier,
     words,
 } from '../../utils'
+
+import { toLowerWord } from './toLowerSnakeCase'
+import { toPascalWord } from './toPascalCase'
 
 const toCamelWord = (value: string, index: number) =>
     index === 0

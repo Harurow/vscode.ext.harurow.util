@@ -13,7 +13,7 @@ import * as misc from './misc'
 
 import * as next from './__/'
 
-export function activate(context: vscode.ExtensionContext) {
+export const activate = (context: vscode.ExtensionContext) => {
     console.log('"harurow-util" is now active')
 
     next.activate(context)
@@ -40,7 +40,7 @@ export function activate(context: vscode.ExtensionContext) {
     )
 }
 
-export function deactivate() {
+export const deactivate = () => {
     console.log('"harurow-util" is now deactive')
     next.deactivate()
 }

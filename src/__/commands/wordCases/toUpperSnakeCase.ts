@@ -1,9 +1,14 @@
 import {
+    hasChar,
     isValidIdentifier,
     words,
     isUnderscore,
-    toUpperWord,
 } from '../../utils'
+
+const toUpperWord = (str: string) =>
+    !hasChar(str)       ? str
+    : isUnderscore(str) ? ''
+    : str.toUpperCase()
 
 const toUpperSnakeCase = (str: string) =>
     !isValidIdentifier(str)

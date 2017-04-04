@@ -1,8 +1,14 @@
 import {
+    hasChar,
+    isUnderscore,
     isValidIdentifier,
     words,
-    toPascalWord
 } from '../../utils'
+
+export const toPascalWord = (str: string) =>
+    !hasChar(str)       ? str
+    : isUnderscore(str) ? ''
+    : str[0].toUpperCase() + str.slice(1).toLowerCase()
 
 const toPascalCase = (str: string) =>
     !isValidIdentifier(str)

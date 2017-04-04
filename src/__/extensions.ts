@@ -2,6 +2,7 @@ import * as vscode from 'vscode'
 import * as words from './commands/wordCases'
 import * as filters from './commands/lineFilters'
 import * as encodings from './commands/encodings'
+import * as escape from './commands/escapes'
 
 export const activate = (context: vscode.ExtensionContext) => {
     console.log('Harurow say "Hello!"')
@@ -33,6 +34,12 @@ export const activate = (context: vscode.ExtensionContext) => {
         encodings.decodeRfc3986EucJpCommand('commands.encodings.decodeRfc3986EucJp'),
         encodings.decodeRfc3986ShiftJisCommand('commands.encodings.decodeRfc3986ShiftJis'),
         encodings.decodeRfc3986Utf8Command('commands.encodings.decodeRfc3986Utf8'),
+    )
+
+    context.subscriptions.push(
+        escape.escapeHtmlCommand('commands.escapes.escapeHtml'),
+        escape.escapeHtmlAllCommand('commands.escapes.escapeHtmlAll'),
+        escape.unescapeHtmlCommand('commands.escapes.unescapeHtml'),
     )
 }
 

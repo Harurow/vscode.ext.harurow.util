@@ -15,5 +15,11 @@ suite('commands/wordCases/toPascalCase', () => {
         assert.equal('ThisIsPascal', $('thisIsPascal'))
         assert.equal('ThisIsPascal', $('this_is_pascal'))
         assert.equal('ThisIsPascal', $('THIS_IS_PASCAL'))
+
+        assert.equal('Pascal', $('Pascal'))
+        assert.equal('Pascal', $('PASCAL'))
+        assert.equal('Pascal', $('pascal'))
+        assert.equal('', $('_'))
+        assert.equal('', $('__'))
     })
 })

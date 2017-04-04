@@ -1,4 +1,8 @@
-import { } from '../../utils'
+import {
+    isValidStr,
+    chars,
+    hex,
+} from '../../utils'
 
 const specialChars = {
     '\xa0': '&nbsp;',
@@ -614,5 +618,58 @@ const specialCharsRev = {
     '&zeta;': 'ζ',
     '&Zeta;': 'Ζ',
 }
+
+const escape = (ch: string, fallback: (ch: string) => string) =>
+    specialChars[ch] !== undefined
+        ? specialChars[ch]
+        : fallback(ch)
+
+const thru = (ch: string) => ch
+
+const toHex = (ch: string) =>
+    `&#x${hex(ch.codePointAt(0))};`
+
+export const escapeHtml = (str: string) =>
+    !isValidStr(str)
+        ? str
+        : chars(str).map(ch => escape(ch, thru))
+                    .join('')
+
+export const escapeHtmlAll = (str: string) =>
+    !isValidStr(str)
+        ? str
+        : chars(str).map(ch => escape(ch, toHex))
+                    .join('')
+
+const sliceHex = (str: string) =>
+    str.slice(3, -1)
+
+const sliceDec = (str: string) =>
+    str.slice(2, -1)
+
+const unescapeHex = (str: string) =>
+    String.fromCodePoint(Number.parseInt(sliceHex(str), 16))
+
+const unescapeDec = (str: string) =>
+    String.fromCodePoint(Number.parseInt(sliceDec(str), 10))
+
+const unescapeSpecialChar = (str: string) =>
+    specialCharsRev[str] !== undefined
+        ? specialCharsRev[str]
+        : str
+
+const unescapeChar = (ch: string) =>
+    ch.startsWith('&#x') ? unescapeHex(ch) :
+    ch.startsWith('&#')  ? unescapeDec(ch) :
+                   unescapeSpecialChar(ch)
+
+const escapedChars = (str: string) =>
+    str.match(/&[^;]+;|[\uD800-\uDBFF][\uDC00-\uDFFF]|[^\uD800-\uDFFF]/g) || []
+
+export const unescapeHtml = (str: string) =>
+    !isValidStr(str)
+        ? str
+        : escapedChars(str).map(unescapeChar)
+                           .join('')
 
 
