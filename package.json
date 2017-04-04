@@ -46,8 +46,7 @@
   },
   "dependencies": {
     "copy-paste": "^1.3.0",
-    "encoding-japanese": "^1.0.25",
-    "linq": "^3.0.7"
+    "encoding-japanese": "^1.0.25"
   },
   "activationEvents": [
     "onCommand:commands.caseConverters.toPascalCase",
@@ -73,8 +72,10 @@
     "onCommand:commands.escapes.escapeHtml",
     "onCommand:commands.escapes.escapeHtmlAll",
     "onCommand:commands.escapes.unescapeHtml",
-
-
+    "onCommand:commands.escapes.escapeUnicode",
+    "onCommand:commands.escapes.escapeUnicodeAll",
+    "onCommand:commands.escapes.unescapeUnicode",
+    
     "onCommand:extension.esc.toUnicode",
     "onCommand:extension.esc.fromUnicode",
     "onCommand:extension.esc.fromUnicodeAll",
@@ -189,22 +190,23 @@
         "category": "Unescape",
         "title": "From HTML Escape"
       },
-
       {
-        "command": "extension.esc.toUnicode",
+        "command": "commands.escapes.escapeUnicode",
         "category": "Escape",
         "title": "To Unicode Escape"
       },
       {
-        "command": "extension.esc.toUnicodeAll",
+        "command": "commands.escapes.escapeUnicodeAll",
         "category": "Escape",
         "title": "To Unicode Escape All Charactors"
       },
       {
-        "command": "extension.esc.fromUnicode",
+        "command": "commands.escapes.unescapeUnicode",
         "category": "Unescape",
         "title": "From Unicode Escape"
       },
+
+
       {
         "command": "extension.sel.string",
         "category": "Selection",

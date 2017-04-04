@@ -619,7 +619,7 @@ const specialCharsRev = {
     '&Zeta;': 'Ζ',
 }
 
-const escape = (ch: string, fallback: (ch: string) => string) =>
+const escapeChar = (ch: string, fallback: (ch: string) => string) =>
     specialChars[ch] !== undefined
         ? specialChars[ch]
         : fallback(ch)
@@ -629,17 +629,17 @@ const thru = (ch: string) => ch
 const toHex = (ch: string) =>
     `&#x${hex(ch.codePointAt(0))};`
 
-export const escapeHtml = (str: string) =>
+const escapeInternal = (str: string, fallback: (ch: string) => string) =>
     !isValidStr(str)
         ? str
-        : chars(str).map(ch => escape(ch, thru))
+        : chars(str).map(ch => escapeChar(ch, fallback))
                     .join('')
 
+export const escapeHtml = (str: string) =>
+    escapeInternal(str, thru)
+
 export const escapeHtmlAll = (str: string) =>
-    !isValidStr(str)
-        ? str
-        : chars(str).map(ch => escape(ch, toHex))
-                    .join('')
+    escapeInternal(str, toHex)
 
 const sliceHex = (str: string) =>
     str.slice(3, -1)

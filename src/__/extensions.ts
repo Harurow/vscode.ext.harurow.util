@@ -40,6 +40,10 @@ export const activate = (context: vscode.ExtensionContext) => {
         escape.escapeHtmlCommand('commands.escapes.escapeHtml'),
         escape.escapeHtmlAllCommand('commands.escapes.escapeHtmlAll'),
         escape.unescapeHtmlCommand('commands.escapes.unescapeHtml'),
+
+        escape.escapeUnicodeCommand('commands.escapes.escapeUnicode'),
+        escape.escapeUnicodeAllCommand('commands.escapes.escapeUnicodeAll'),
+        escape.unescapeUnicodeCommand('commands.escapes.unescapeUnicode'),
     )
 }
 
