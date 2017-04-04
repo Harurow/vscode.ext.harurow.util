@@ -1,10 +1,14 @@
-import * as $ from '../../utils/string'
+import {
+    isValidIdentifier,
+    words,
+    toPascalWord
+} from '../../utils'
 
 const toPascalCase = (str: string) =>
-    !$.isValidIdentifier(str)
+    !isValidIdentifier(str)
         ? str
-        : $.words(str)
-           .map($.toPascalWord)
+        : words(str)
+           .map(toPascalWord)
            .join('')
 
 export default toPascalCase

@@ -1,11 +1,16 @@
-import * as $ from '../../utils/string'
+import {
+    isValidIdentifier,
+    words,
+    isUnderscore,
+    toUpperWord,
+} from '../../utils'
 
 const toUpperSnakeCase = (str: string) =>
-    !$.isValidIdentifier(str)
+    !isValidIdentifier(str)
         ? str
-        : $.words(str)
-           .filter(s => !$.isUnderscore(s))
-           .map($.toUpperWord)
+        : words(str)
+           .filter(s => !isUnderscore(s))
+           .map(toUpperWord)
            .join('_')
 
 export default toUpperSnakeCase

@@ -1,11 +1,10 @@
 import * as vscode from 'vscode'
 import {
-        removeLineIfMatch,
-        removeLineIfUnmatch,
-        removeLineIfContains,
-        removeLineIfNotContains
-    } from './removeLine'
-import * as cmd from '../../utils/commands'
+    removeLineIfMatch,
+    removeLineIfUnmatch,
+    removeLineIfContains,
+    removeLineIfNotContains
+} from './removeLine'
 import filter from './filter'
 
 export const removeLineIfMatchCommand = (command: string) =>

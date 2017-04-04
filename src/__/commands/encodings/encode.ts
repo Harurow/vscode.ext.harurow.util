@@ -1,6 +1,6 @@
 import * as ej from 'encoding-japanese'
-import { isUnreserved, isSpace, isAscii, mapCode } from './util'
-import { codePoints, CharInfo, hex } from '../../utils/string'
+import { isUnreserved, isSpace, isAscii, mapCode } from './utils'
+import { codePoints, CharInfo, hex } from '../../utils'
 
 const encodeEncoding = (encoding: ej.Encoding) =>
     (char: string) =>

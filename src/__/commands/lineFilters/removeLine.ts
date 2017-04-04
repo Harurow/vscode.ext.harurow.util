@@ -1,4 +1,6 @@
-import * as $ from '../../utils/string'
+import {
+    lines
+} from '../../utils'
 
 export const isMatch = (pattern: string) =>
     (str: string) => (str != null) && RegExp(pattern).test(str)
@@ -13,9 +15,8 @@ export const notContains = (substr: string) =>
     (str: string) => (str != null) && str.indexOf(substr) === -1
 
 const removeLine = (str: string, condition: (line: string) => boolean) =>
-    $.lines(str)
-     .filter(line => !condition(line))
-     .join('\n')
+    lines(str).filter(line => !condition(line))
+              .join('\n')
 
 export const removeLineIfMatch = (str: string, pattern: string) =>
     removeLine(str, isMatch(pattern))

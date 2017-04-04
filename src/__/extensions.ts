@@ -26,6 +26,7 @@ export const activate = (context: vscode.ExtensionContext) => {
         encodings.encodeRfc3986EucJpCommand('commands.encodings.encodeRfc3986EucJp'),
         encodings.encodeRfc3986ShiftJisCommand('commands.encodings.encodeRfc3986ShiftJis'),
         encodings.encodeRfc3986Utf8Command('commands.encodings.encodeRfc3986Utf8'),
+
         encodings.decodeRfc1866EucJpCommand('commands.encodings.decodeRfc1866EucJp'),
         encodings.decodeRfc1866ShiftJisCommand('commands.encodings.decodeRfc1866ShiftJis'),
         encodings.decodeRfc1866Utf8Command('commands.encodings.decodeRfc1866Utf8'),

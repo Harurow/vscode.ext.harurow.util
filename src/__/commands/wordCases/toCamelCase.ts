@@ -1,14 +1,19 @@
-import * as $ from '../../utils/string'
+import {
+    toLowerWord,
+    toPascalWord,
+    isValidIdentifier,
+    words,
+} from '../../utils'
 
 const toCamelWord = (value: string, index: number) =>
     index === 0
-        ? $.toLowerWord(value)
-        : $.toPascalWord(value)
+        ? toLowerWord(value)
+        : toPascalWord(value)
 
 const toCamelCase = (str: string) =>
-    !$.isValidIdentifier(str)
+    !isValidIdentifier(str)
         ? str
-        : $.words(str)
+        : words(str)
            .map((v, i) => toCamelWord(v, i))
            .join('')
 
