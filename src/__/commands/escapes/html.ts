@@ -4,6 +4,59 @@ import {
     hex,
 } from '../../utils'
 
+export const escapeHtml = (str: string) =>
+    escapeInternal(str, thru)
+
+export const escapeHtmlAll = (str: string) =>
+    escapeInternal(str, toHex)
+
+export const unescapeHtml = (str: string) =>
+    !isValidStr(str)
+        ? str
+        : escapedChars(str).map(unescapeChar)
+                           .join('')
+
+const escapeChar = (ch: string, fallback: (ch: string) => string) =>
+    specialChars[ch] !== undefined
+        ? specialChars[ch]
+        : fallback(ch)
+
+const thru = (ch: string) => ch
+
+const toHex = (ch: string) =>
+    `&#x${hex(ch.codePointAt(0))};`
+
+const escapeInternal = (str: string, fallback: (ch: string) => string) =>
+    !isValidStr(str)
+        ? str
+        : chars(str).map(ch => escapeChar(ch, fallback))
+                    .join('')
+
+const sliceHex = (str: string) =>
+    str.slice(3, -1)
+
+const sliceDec = (str: string) =>
+    str.slice(2, -1)
+
+const unescapeHex = (str: string) =>
+    String.fromCodePoint(Number.parseInt(sliceHex(str), 16))
+
+const unescapeDec = (str: string) =>
+    String.fromCodePoint(Number.parseInt(sliceDec(str), 10))
+
+const unescapeSpecialChar = (str: string) =>
+    specialCharsRev[str] !== undefined
+        ? specialCharsRev[str]
+        : str
+
+const unescapeChar = (ch: string) =>
+    ch.startsWith('&#x') ? unescapeHex(ch) :
+    ch.startsWith('&#')  ? unescapeDec(ch) :
+                   unescapeSpecialChar(ch)
+
+const escapedChars = (str: string) =>
+    str.match(/&[^;]+;|[\uD800-\uDBFF][\uDC00-\uDFFF]|[^\uD800-\uDFFF]/g) || []
+
 const specialChars = {
     '\xa0': '&nbsp;',
     '\'': '&#039;',
@@ -618,58 +671,3 @@ const specialCharsRev = {
     '&zeta;': 'ζ',
     '&Zeta;': 'Ζ',
 }
-
-const escapeChar = (ch: string, fallback: (ch: string) => string) =>
-    specialChars[ch] !== undefined
-        ? specialChars[ch]
-        : fallback(ch)
-
-const thru = (ch: string) => ch
-
-const toHex = (ch: string) =>
-    `&#x${hex(ch.codePointAt(0))};`
-
-const escapeInternal = (str: string, fallback: (ch: string) => string) =>
-    !isValidStr(str)
-        ? str
-        : chars(str).map(ch => escapeChar(ch, fallback))
-                    .join('')
-
-export const escapeHtml = (str: string) =>
-    escapeInternal(str, thru)
-
-export const escapeHtmlAll = (str: string) =>
-    escapeInternal(str, toHex)
-
-const sliceHex = (str: string) =>
-    str.slice(3, -1)
-
-const sliceDec = (str: string) =>
-    str.slice(2, -1)
-
-const unescapeHex = (str: string) =>
-    String.fromCodePoint(Number.parseInt(sliceHex(str), 16))
-
-const unescapeDec = (str: string) =>
-    String.fromCodePoint(Number.parseInt(sliceDec(str), 10))
-
-const unescapeSpecialChar = (str: string) =>
-    specialCharsRev[str] !== undefined
-        ? specialCharsRev[str]
-        : str
-
-const unescapeChar = (ch: string) =>
-    ch.startsWith('&#x') ? unescapeHex(ch) :
-    ch.startsWith('&#')  ? unescapeDec(ch) :
-                   unescapeSpecialChar(ch)
-
-const escapedChars = (str: string) =>
-    str.match(/&[^;]+;|[\uD800-\uDBFF][\uDC00-\uDFFF]|[^\uD800-\uDFFF]/g) || []
-
-export const unescapeHtml = (str: string) =>
-    !isValidStr(str)
-        ? str
-        : escapedChars(str).map(unescapeChar)
-                           .join('')
-
-

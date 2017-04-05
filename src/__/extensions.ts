@@ -2,7 +2,8 @@ import * as vscode from 'vscode'
 import * as words from './commands/wordCases'
 import * as filters from './commands/lineFilters'
 import * as encodings from './commands/encodings'
-import * as escape from './commands/escapes'
+import * as escapes from './commands/escapes'
+import * as swaps from './commands/swaps'
 
 export const activate = (context: vscode.ExtensionContext) => {
     console.log('Harurow say "Hello!"')
@@ -37,13 +38,17 @@ export const activate = (context: vscode.ExtensionContext) => {
     )
 
     context.subscriptions.push(
-        escape.escapeHtmlCommand('commands.escapes.escapeHtml'),
-        escape.escapeHtmlAllCommand('commands.escapes.escapeHtmlAll'),
-        escape.unescapeHtmlCommand('commands.escapes.unescapeHtml'),
+        escapes.escapeHtmlCommand('commands.escapes.escapeHtml'),
+        escapes.escapeHtmlAllCommand('commands.escapes.escapeHtmlAll'),
+        escapes.unescapeHtmlCommand('commands.escapes.unescapeHtml'),
 
-        escape.escapeUnicodeCommand('commands.escapes.escapeUnicode'),
-        escape.escapeUnicodeAllCommand('commands.escapes.escapeUnicodeAll'),
-        escape.unescapeUnicodeCommand('commands.escapes.unescapeUnicode'),
+        escapes.escapeUnicodeCommand('commands.escapes.escapeUnicode'),
+        escapes.escapeUnicodeAllCommand('commands.escapes.escapeUnicodeAll'),
+        escapes.unescapeUnicodeCommand('commands.escapes.unescapeUnicode'),
+    )
+
+    context.subscriptions.push(
+        swaps.swapLrCommand('commands.swaps.swapLr')
     )
 }
 

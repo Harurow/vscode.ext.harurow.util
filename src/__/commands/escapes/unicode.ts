@@ -6,6 +6,18 @@ import {
     surrogatePair,
 } from '../../utils'
 
+export const escapeUnicode = (str: string) =>
+    escapeInternal(str, thru)
+
+export const escapeUnicodeAll = (str: string) =>
+    escapeInternal(str, toUnicode)
+
+export const unescapeUnicode = (str: string) =>
+    !isValidStr(str)
+        ? str
+        : escapedChars(str).map(unescapeChar)
+                           .join('')
+
 const formatUnicode = (cp: number) =>
     cp <= 0xffff
         ? `\\u${hex(cp, 4)}`
@@ -36,12 +48,6 @@ const escapeInternal = (str: string, asciiConverter: (ch: string) => string) =>
         : chars(str).map(ch => escapeChar(ch, asciiConverter))
                     .join('')
 
-export const escapeUnicode = (str: string) =>
-    escapeInternal(str, thru)
-
-export const escapeUnicodeAll = (str: string) =>
-    escapeInternal(str, toUnicode)
-
 const escapedChars = (str: string) =>
     str.match(/\\u[0-9A-Fa-f]{4}|[\uD800-\uDBFF][\uDC00-\uDFFF]|[^\uD800-\uDFFF]/g) || []
 
@@ -52,9 +58,3 @@ const unescapeChar = (ch: string) =>
     ch.startsWith('\\u')
         ? unescapeHex(ch)
         : ch
-
-export const unescapeUnicode = (str: string) =>
-    !isValidStr(str)
-        ? str
-        : escapedChars(str).map(unescapeChar)
-                           .join('')

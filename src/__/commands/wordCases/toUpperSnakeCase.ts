@@ -5,12 +5,7 @@ import {
     isUnderscore,
 } from '../../utils'
 
-const toUpperWord = (str: string) =>
-    !hasChar(str)       ? str
-    : isUnderscore(str) ? ''
-    : str.toUpperCase()
-
-const toUpperSnakeCase = (str: string) =>
+export const toUpperSnakeCase = (str: string) =>
     !isValidIdentifier(str)
         ? str
         : words(str)
@@ -18,4 +13,7 @@ const toUpperSnakeCase = (str: string) =>
            .map(toUpperWord)
            .join('_')
 
-export default toUpperSnakeCase
+const toUpperWord = (str: string) =>
+    !hasChar(str)       ? str
+    : isUnderscore(str) ? ''
+    : str.toUpperCase()

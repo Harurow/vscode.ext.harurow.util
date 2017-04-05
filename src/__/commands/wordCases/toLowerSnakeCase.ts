@@ -10,12 +10,10 @@ export const toLowerWord = (str: string) =>
     : isUnderscore(str) ? ''
     : str.toLowerCase()
 
-const toLowerSnakeCase = (str: string) =>
+export const toLowerSnakeCase = (str: string) =>
     !isValidIdentifier(str)
         ? str
         : words(str)
            .filter(s => !isUnderscore(s))
            .map(toLowerWord)
            .join('_')
-
-export default toLowerSnakeCase

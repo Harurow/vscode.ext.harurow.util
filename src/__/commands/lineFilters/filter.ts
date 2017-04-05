@@ -1,7 +1,7 @@
 import * as vscode from 'vscode'
 import * as edt from '../../utils/editor'
 
-const filter = async (replacer: (str: string, input: string) => string, options?: vscode.InputBoxOptions) => {
+export const filter = async (replacer: (input: string, content: string) => string, options?: vscode.InputBoxOptions) => {
     let editor = await edt.showWarningIfHasNoSelection()
     if (!editor) {
         return false
@@ -19,9 +19,7 @@ const filter = async (replacer: (str: string, input: string) => string, options?
         editor.selections
             .forEach(sel => {
                 let content = editor.document.getText(sel)
-                eb.replace(sel, replacer(content, input))
+                eb.replace(sel, replacer(input, content))
             })
     })
 }
-
-export default filter

@@ -6,7 +6,7 @@ import {
     removeLineIfNotContains
 } from './removeLine'
 
-import filter from './filter'
+import { filter } from './filter'
 
 export const removeLineIfMatchCommand = (command: string) =>
     vscode.commands.registerCommand(command, () =>

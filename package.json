@@ -75,6 +75,7 @@
     "onCommand:commands.escapes.escapeUnicode",
     "onCommand:commands.escapes.escapeUnicodeAll",
     "onCommand:commands.escapes.unescapeUnicode",
+    "onCommand:commands.swaps.swapLr",
     
     "onCommand:extension.esc.toUnicode",
     "onCommand:extension.esc.fromUnicode",
@@ -82,7 +83,6 @@
     "onCommand:extension.num.numbers",
     "onCommand:extension.sel.string",
     "onCommand:extension.sel.regex",
-    "onCommand:extension.rep.leftsideRight",
     "onCommand:caseConverters.toPascal",
     "onCommand:caseConverters.toCamel",
     "onCommand:caseConverters.toUpperSnake",
@@ -205,6 +205,11 @@
         "category": "Unescape",
         "title": "From Unicode Escape"
       },
+      {
+        "command": "commands.swaps.swapLr",
+        "category": "Replace",
+        "title": "Leftside Right"
+      },
 
 
       {
@@ -221,11 +226,6 @@
         "command": "extension.num.numbers",
         "category": "Numbers",
         "title": "Inert Numbers to Multiple Cursors ..."
-      },
-      {
-        "command": "extension.rep.leftsideRight",
-        "category": "Replace",
-        "title": "Leftside Right"
       }
     ]
   }
