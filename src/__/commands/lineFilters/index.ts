@@ -6,32 +6,36 @@ import {
     removeLineIfNotContains
 } from './removeLine'
 
-import { filter } from './filter'
+import { lineFilter } from './lineFilter'
 
 export const removeLineIfMatchCommand = (command: string) =>
     vscode.commands.registerCommand(command, () =>
-        filter(removeLineIfMatch, {
+        lineFilter(removeLineIfMatch, {
             placeHolder: 'Pattern',
-            prompt: 'Remove lines if it matched input pattern.'
+            prompt: 'Remove lines if it matched input pattern.',
+            emptyMessage: 'Must be input text.'
         }))
 
 export const removeLineIfUnmatchCommand = (command: string) =>
     vscode.commands.registerCommand(command, () =>
-        filter(removeLineIfUnmatch, {
+        lineFilter(removeLineIfUnmatch, {
             placeHolder: 'Pattern',
-            prompt: 'Remove lines if it un-matched input pattern.'
+            prompt: 'Remove lines if it un-matched input pattern.',
+            emptyMessage: 'Must be input text.'
         }))
 
 export const removeLineIfContainsCommand = (command: string) =>
     vscode.commands.registerCommand(command, () =>
-        filter(removeLineIfContains, {
+        lineFilter(removeLineIfContains, {
             placeHolder: 'Text',
-            prompt: 'Remove lines if it contains input text.'
+            prompt: 'Remove lines if it contains input text.',
+            emptyMessage: 'Must be input text.'
         }))
 
 export const removeLineIfNotContainsCommand = (command: string) =>
     vscode.commands.registerCommand(command, () =>
-        filter(removeLineIfNotContains, {
+        lineFilter(removeLineIfNotContains, {
             placeHolder: 'Text',
-            prompt: 'Remove lines if it not contains input text.'
+            prompt: 'Remove lines if it not contains input text.',
+            emptyMessage: 'Must be input text.'
         }))

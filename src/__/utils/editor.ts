@@ -1,33 +1,40 @@
 import * as vscode from 'vscode'
 
-export const showWarningIfHasNoSelection = async (warn: string = 'Must be select target range.') => {
+export const getTextEditorOrThrowIfNotExistsTextEditor = () => {
     let editor = vscode.window.activeTextEditor
     if (!editor) {
-        return <vscode.TextEditor>null
+        throw undefined
+    }
+    return editor
+}
+
+export const showWarningIfHasNoMultiCursorsAsync = async (message: string = 'Has no multiple cursors.') => {
+    let editor = vscode.window.activeTextEditor
+    if (!editor) {
+        throw undefined
     }
 
-    if (editor.selection.isEmpty) {
-        await vscode.window.showWarningMessage(warn)
-        return <vscode.TextEditor>null
+    if (!editor.selections || editor.selections.length < 2) {
+        await vscode.window.showWarningMessage(message)
+        throw message
     }
 
     return editor
 }
 
-export const showWarningIfHasNoInputAsync = async (input: string, warn: string = 'Must be input text.') => {
-    if (input === undefined) {
-        return false
-    } else if (!input) {
-        vscode.window.showWarningMessage(warn)
-        return false
+export const showWarningIfHasNoSelectionAsync = async (message: string = 'Must be select target range.') => {
+    let editor = vscode.window.activeTextEditor
+    if (!editor) {
+        throw undefined
     }
-    return true
-}
 
-const getNormalizedActiveLine = (selection: vscode.Selection) =>
-    (selection.anchor.line < selection.active.line && selection.active.character === 0)
-        ? selection.active.line - 1
-        : selection.active.line
+    if (editor.selection.isEmpty) {
+        await vscode.window.showWarningMessage(message)
+        throw message
+    }
+
+    return editor
+}
 
 export const getNormalizedLineSelection = (selection: vscode.Selection) =>
     new vscode.Selection(
@@ -64,3 +71,32 @@ export const getForEachFunc = (each: (str: string, index: number) => void) =>
         editor.selections
               .forEach((sel, i) => each(getText(sel), i))
     }
+
+export const getWholeFunc = (func: () => any) =>
+    () => {
+        func()
+    }
+
+export interface InputBoxOptionsEx extends vscode.InputBoxOptions {
+    emptyMessage: string
+}
+
+export const showInputBoxAsync = async (options: vscode.InputBoxOptions | InputBoxOptionsEx) => {
+    let input = await vscode.window.showInputBox(options)
+    if (input === undefined) {
+        throw undefined
+    }
+    if (!input) {
+        let op = options as InputBoxOptionsEx
+        if (op && op.emptyMessage) {
+            vscode.window.showWarningMessage(op.emptyMessage)
+            throw op.emptyMessage
+        }
+    }
+    return input
+}
+
+const getNormalizedActiveLine = (selection: vscode.Selection) =>
+    (selection.anchor.line < selection.active.line && selection.active.character === 0)
+        ? selection.active.line - 1
+        : selection.active.line

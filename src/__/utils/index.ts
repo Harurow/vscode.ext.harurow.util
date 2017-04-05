@@ -1,14 +1,19 @@
 import {
     regReplace,
     regForEach,
+    regWhole,
 } from './commands'
 
 import {
-    showWarningIfHasNoSelection,
-    showWarningIfHasNoInputAsync,
+    InputBoxOptionsEx,
+    getTextEditorOrThrowIfNotExistsTextEditor,
+    showWarningIfHasNoMultiCursorsAsync,
+    showWarningIfHasNoSelectionAsync,
+    showInputBoxAsync,
     getNormalizedLineSelection,
     getReplaceFunc,
     getForEachFunc,
+    getWholeFunc,
 } from './editor'
 
 import {
@@ -31,9 +36,13 @@ import {
 export {
     regReplace,
     regForEach,
+    regWhole,
 
-    showWarningIfHasNoSelection,
-    showWarningIfHasNoInputAsync,
+    InputBoxOptionsEx,
+    getTextEditorOrThrowIfNotExistsTextEditor,
+    showWarningIfHasNoMultiCursorsAsync,
+    showWarningIfHasNoSelectionAsync,
+    showInputBoxAsync,
     getNormalizedLineSelection,
     getReplaceFunc,
     getForEachFunc,

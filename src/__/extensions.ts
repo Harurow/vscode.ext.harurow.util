@@ -4,9 +4,10 @@ import * as filters from './commands/lineFilters'
 import * as encodings from './commands/encodings'
 import * as escapes from './commands/escapes'
 import * as swaps from './commands/swaps'
+import * as selectors from './commands/selectors'
 
 export const activate = (context: vscode.ExtensionContext) => {
-    console.log('Harurow say "Hello!"')
+    console.log('Harurow say "Have a good time!"')
     context.subscriptions.push(
         words.toPascalCaseCommand('commands.caseConverters.toPascalCase'),
         words.toCamelCaseCommand('commands.caseConverters.toCamelCase'),
@@ -48,7 +49,13 @@ export const activate = (context: vscode.ExtensionContext) => {
     )
 
     context.subscriptions.push(
-        swaps.swapLrCommand('commands.swaps.swapLr')
+        swaps.swapLrCommand('commands.swaps.swapLr'),
+    )
+
+    context.subscriptions.push(
+        selectors.selectWhenMatchSubstringCommand('commands.selectors.substring'),
+        selectors.selectWhenMatchPatternCommand('commands.selectors.pattern'),
+        selectors.selectWhenMatchPatternIgnoreCaseCommand('commands.selectors.patternIgnoreCase'),
     )
 }
 

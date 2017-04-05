@@ -76,17 +76,11 @@
     "onCommand:commands.escapes.escapeUnicodeAll",
     "onCommand:commands.escapes.unescapeUnicode",
     "onCommand:commands.swaps.swapLr",
-    
-    "onCommand:extension.esc.toUnicode",
-    "onCommand:extension.esc.fromUnicode",
-    "onCommand:extension.esc.fromUnicodeAll",
-    "onCommand:extension.num.numbers",
-    "onCommand:extension.sel.string",
-    "onCommand:extension.sel.regex",
-    "onCommand:caseConverters.toPascal",
-    "onCommand:caseConverters.toCamel",
-    "onCommand:caseConverters.toUpperSnake",
-    "onCommand:caseConverters.toLowerSnake"
+    "onCommand:commands.selectors.substring",
+    "onCommand:commands.selectors.pattern",
+    "onCommand:commands.selectors.patternIgnoreCase",
+
+    "onCommand:extension.num.numbers"
   ],
   "contributes": {
     "commands": [
@@ -210,18 +204,22 @@
         "category": "Replace",
         "title": "Leftside Right"
       },
-
-
       {
-        "command": "extension.sel.string",
+        "command": "commands.selectors.substring",
         "category": "Selection",
         "title": "Select String ..."
       },
       {
-        "command": "extension.sel.regex",
+        "command": "commands.selectors.pattern",
         "category": "Selection",
         "title": "Select If Matched Regex ..."
       },
+      {
+        "command": "commands.selectors.patternIgnoreCase",
+        "category": "Selection",
+        "title": "Select If Matched Regex (Ignore Case)..."
+      },
+
       {
         "command": "extension.num.numbers",
         "category": "Numbers",
