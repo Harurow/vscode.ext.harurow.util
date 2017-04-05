@@ -10,7 +10,7 @@ import {
     removeLineIfNotContains,
     removeLineIfMatch,
     removeLineIfUnmatch,
-} from '../../../src/__/commands/lineFilters/removeLine'
+} from '../../../src/commands/lineFilters/removeLine'
 
 suite('commands/lineFilters/removeLine', () => {
 

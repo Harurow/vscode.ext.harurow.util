@@ -1,7 +1,7 @@
 import * as assert from 'assert'
 import * as vscode from 'vscode'
 
-import { toCamelCase } from '../../../src/__/commands/wordCases/toCamelCase'
+import { toCamelCase } from '../../../src/commands/wordCases/toCamelCase'
 
 suite('commands/wordCases/toCamelCase', () => {
     test('toCamelCase', () => {

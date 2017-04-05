@@ -32,6 +32,9 @@ import {
     surrogatePair,
 } from './string'
 
+import {
+    throwIf,
+} from './util'
 
 export {
     regReplace,
@@ -60,4 +63,6 @@ export {
     hex,
     SurrogatePair,
     surrogatePair,
+
+    throwIf,
 }

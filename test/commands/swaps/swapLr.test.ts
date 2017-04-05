@@ -3,7 +3,7 @@ import * as vscode from 'vscode'
 
 import {
     swapLr
-} from '../../../src/__/commands/swaps/lr'
+} from '../../../src/commands/swaps/lr'
 
 suite('Swaps Tests', () => {
 

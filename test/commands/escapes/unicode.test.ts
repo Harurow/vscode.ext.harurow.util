@@ -5,7 +5,7 @@ import {
     escapeUnicode,
     escapeUnicodeAll,
     unescapeUnicode,
-} from '../../../src/__/commands/escapes/unicode'
+} from '../../../src/commands/escapes/unicode'
 
 suite('Escape Unicode Tests', () => {
 

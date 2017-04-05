@@ -1,7 +1,7 @@
 import * as assert from 'assert'
 import * as vscode from 'vscode'
 
-import * as $ from '../../src/__/utils/string'
+import * as $ from '../../src/utils/string'
 
 suite('utils/string tests', () => {
 

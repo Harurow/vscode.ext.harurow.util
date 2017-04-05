@@ -1,7 +1,7 @@
 import * as assert from 'assert'
 import * as vscode from 'vscode'
 
-import { toPascalCase } from '../../../src/__/commands/wordCases/toPascalCase'
+import { toPascalCase } from '../../../src/commands/wordCases/toPascalCase'
 
 suite('commands/wordCases/toPascalCase', () => {
     test('toPascalCase', () => {

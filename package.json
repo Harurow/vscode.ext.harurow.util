@@ -49,14 +49,6 @@
     "encoding-japanese": "^1.0.25"
   },
   "activationEvents": [
-    "onCommand:commands.caseConverters.toPascalCase",
-    "onCommand:commands.caseConverters.toCamelCase",
-    "onCommand:commands.caseConverters.toUpperSnakeCase",
-    "onCommand:commands.caseConverters.toLowerSnakeCase",
-    "onCommand:commands.lineFilters.match",
-    "onCommand:commands.lineFilters.unmatch",
-    "onCommand:commands.lineFilters.contains",
-    "onCommand:commands.lineFilters.notContains",
     "onCommand:commands.encodings.encodeRfc3986ShiftJis",
     "onCommand:commands.encodings.encodeRfc3986EucJp",
     "onCommand:commands.encodings.encodeRfc3986Utf8",
@@ -75,55 +67,22 @@
     "onCommand:commands.escapes.escapeUnicode",
     "onCommand:commands.escapes.escapeUnicodeAll",
     "onCommand:commands.escapes.unescapeUnicode",
-    "onCommand:commands.swaps.swapLr",
+    "onCommand:commands.lineFilters.match",
+    "onCommand:commands.lineFilters.unmatch",
+    "onCommand:commands.lineFilters.contains",
+    "onCommand:commands.lineFilters.notContains",
+    "onCommand:commands.numberings.numbering",
     "onCommand:commands.selectors.substring",
     "onCommand:commands.selectors.pattern",
     "onCommand:commands.selectors.patternIgnoreCase",
-
-    "onCommand:extension.num.numbers"
+    "onCommand:commands.swaps.swapLr",
+    "onCommand:commands.caseConverters.toPascalCase",
+    "onCommand:commands.caseConverters.toCamelCase",
+    "onCommand:commands.caseConverters.toUpperSnakeCase",
+    "onCommand:commands.caseConverters.toLowerSnakeCase"
   ],
   "contributes": {
     "commands": [
-      {
-        "command": "commands.caseConverters.toPascalCase",
-        "category": "CaseConverter",
-        "title": "ToPascalCase"
-      },
-      {
-        "command": "commands.caseConverters.toCamelCase",
-        "category": "CaseConverter",
-        "title": "toCamelCase"
-      },
-      {
-        "command": "commands.caseConverters.toUpperSnakeCase",
-        "category": "CaseConverter",
-        "title": "TO_UPPER_SNAKE_CASE"
-      },
-      {
-        "command": "commands.caseConverters.toLowerSnakeCase",
-        "category": "CaseConverter",
-        "title": "to_lower_snake_case"
-      },
-      {
-        "command": "commands.lineFilters.match",
-        "category": "LineFilter",
-        "title": "Remove Line If Matched Regex ..."
-      },
-      {
-        "command": "commands.lineFilters.unmatch",
-        "category": "LineFilter",
-        "title": "Remove Line If Un-Matched Regex ..."
-      },
-      {
-        "command": "commands.lineFilters.contains",
-        "category": "LineFilter",
-        "title": "Remove Line If Contains String ..."
-      },
-      {
-        "command": "commands.lineFilters.notContains",
-        "category": "LineFilter",
-        "title": "Remove Line If NOT Contains String ..."
-      },
       {
         "command": "commands.encoding.encodeRfc3986ShiftJis",
         "category": "Encode",
@@ -200,9 +159,29 @@
         "title": "From Unicode Escape"
       },
       {
-        "command": "commands.swaps.swapLr",
-        "category": "Replace",
-        "title": "Leftside Right"
+        "command": "commands.lineFilters.match",
+        "category": "LineFilter",
+        "title": "Remove Line If Matched Regex ..."
+      },
+      {
+        "command": "commands.lineFilters.unmatch",
+        "category": "LineFilter",
+        "title": "Remove Line If Un-Matched Regex ..."
+      },
+      {
+        "command": "commands.lineFilters.contains",
+        "category": "LineFilter",
+        "title": "Remove Line If Contains String ..."
+      },
+      {
+        "command": "commands.lineFilters.notContains",
+        "category": "LineFilter",
+        "title": "Remove Line If NOT Contains String ..."
+      },
+      {
+        "command": "commands.numberings.numbering",
+        "category": "Numbers",
+        "title": "Inert Numbers to Multiple Cursors ..."
       },
       {
         "command": "commands.selectors.substring",
@@ -219,11 +198,30 @@
         "category": "Selection",
         "title": "Select If Matched Regex (Ignore Case)..."
       },
-
       {
-        "command": "extension.num.numbers",
-        "category": "Numbers",
-        "title": "Inert Numbers to Multiple Cursors ..."
+        "command": "commands.swaps.swapLr",
+        "category": "Replace",
+        "title": "Leftside Right"
+      },
+      {
+        "command": "commands.caseConverters.toPascalCase",
+        "category": "CaseConverter",
+        "title": "ToPascalCase"
+      },
+      {
+        "command": "commands.caseConverters.toCamelCase",
+        "category": "CaseConverter",
+        "title": "toCamelCase"
+      },
+      {
+        "command": "commands.caseConverters.toUpperSnakeCase",
+        "category": "CaseConverter",
+        "title": "TO_UPPER_SNAKE_CASE"
+      },
+      {
+        "command": "commands.caseConverters.toLowerSnakeCase",
+        "category": "CaseConverter",
+        "title": "to_lower_snake_case"
       }
     ]
   }

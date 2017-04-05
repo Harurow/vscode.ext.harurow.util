@@ -5,7 +5,7 @@ import {
     escapeHtml,
     escapeHtmlAll,
     unescapeHtml,
-} from '../../../src/__/commands/escapes/html'
+} from '../../../src/commands/escapes/html'
 
 suite('Escape HTML Tests', () => {
 

@@ -1,7 +1,7 @@
 import * as assert from 'assert'
 import * as vscode from 'vscode'
 
-import { toLowerSnakeCase } from '../../../src/__/commands/wordCases/toLowerSnakeCase'
+import { toLowerSnakeCase } from '../../../src/commands/wordCases/toLowerSnakeCase'
 
 suite('commands/wordCases/toLowerSnakeCase', () => {
     test('toLowerSnakeCase', () => {
