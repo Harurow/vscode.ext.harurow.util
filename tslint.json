@@ -37,7 +37,6 @@
     "no-switch-case-fall-through": true,
     "no-trailing-whitespace": true,
     "no-unused-expression": true,
-    "no-unused-variable": [true],
     "no-use-before-declare": false,
     "no-var-keyword": true,
     "one-line": [true,
@@ -56,7 +55,6 @@
       "property-declaration",
       "member-variable-declaration"
     ],
-//    "use-strict": false,
     "variable-name": false,
     "whitespace": [true,
       "check-branch",
