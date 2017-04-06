@@ -114,9 +114,14 @@ const getSelectorForRegex = (pattern: RegExp) =>
         let m = pattern.exec(content)
 
         while (m) {
+            let hit = m[0]
+            let len = strLen(hit)
+            if (len === 0) {
+                break
+            }
             yield new vscode.Range(
                 doc.positionAt(offset + m.index),
-                doc.positionAt(offset + m.index + strLen(m[0]))
+                doc.positionAt(offset + m.index + len)
             )
             m = pattern.exec(content)
         }

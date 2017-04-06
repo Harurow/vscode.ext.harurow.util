@@ -1,6 +1,5 @@
 import {
     regReplace,
-    regForEach,
     regWhole,
 } from './commands'
 
@@ -12,7 +11,6 @@ import {
     showInputBoxAsync,
     getNormalizedLineSelection,
     getReplaceFunc,
-    getForEachFunc,
     getWholeFunc,
 } from './editor'
 
@@ -21,6 +19,7 @@ import {
     hasChar,
     isUnderscore,
     isValidIdentifier,
+    replaceIdentifiers,
     words,
     lines,
     chars,
@@ -38,7 +37,6 @@ import {
 
 export {
     regReplace,
-    regForEach,
     regWhole,
 
     InputBoxOptionsEx,
@@ -48,12 +46,12 @@ export {
     showInputBoxAsync,
     getNormalizedLineSelection,
     getReplaceFunc,
-    getForEachFunc,
 
     isValidStr,
     hasChar,
     isUnderscore,
     isValidIdentifier,
+    replaceIdentifiers,
     words,
     lines,
     chars,

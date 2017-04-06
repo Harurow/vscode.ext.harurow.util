@@ -1,11 +1,15 @@
 import {
     hasChar,
     isValidIdentifier,
+    replaceIdentifiers,
     words,
     isUnderscore,
 } from '../../utils'
 
-export const toUpperSnakeCase = (str: string) =>
+export const toUpperSnakeCase = (content: string) =>
+    replaceIdentifiers(toUpperSnakeCaseIdentifier, content)
+
+const toUpperSnakeCaseIdentifier = (str: string) =>
     !isValidIdentifier(str)
         ? str
         : words(str)

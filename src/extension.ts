@@ -14,6 +14,7 @@ export function activate(context: vscode.ExtensionContext): void {
         encodings.encodeRfc1866EucJpCommand('commands.encodings.encodeRfc1866EucJp'),
         encodings.encodeRfc1866ShiftJisCommand('commands.encodings.encodeRfc1866ShiftJis'),
         encodings.encodeRfc1866Utf8Command('commands.encodings.encodeRfc1866Utf8'),
+
         encodings.encodeRfc3986EucJpCommand('commands.encodings.encodeRfc3986EucJp'),
         encodings.encodeRfc3986ShiftJisCommand('commands.encodings.encodeRfc3986ShiftJis'),
         encodings.encodeRfc3986Utf8Command('commands.encodings.encodeRfc3986Utf8'),
@@ -21,6 +22,7 @@ export function activate(context: vscode.ExtensionContext): void {
         encodings.decodeRfc1866EucJpCommand('commands.encodings.decodeRfc1866EucJp'),
         encodings.decodeRfc1866ShiftJisCommand('commands.encodings.decodeRfc1866ShiftJis'),
         encodings.decodeRfc1866Utf8Command('commands.encodings.decodeRfc1866Utf8'),
+
         encodings.decodeRfc3986EucJpCommand('commands.encodings.decodeRfc3986EucJp'),
         encodings.decodeRfc3986ShiftJisCommand('commands.encodings.decodeRfc3986ShiftJis'),
         encodings.decodeRfc3986Utf8Command('commands.encodings.decodeRfc3986Utf8'),

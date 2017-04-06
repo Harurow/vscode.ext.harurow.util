@@ -26,11 +26,8 @@ const encodingEucJp = decodeEncoding('EUCJP')
 const encodingShiftJis = decodeEncoding('SJIS')
 const encodingUtf8 = decodeEncoding('UTF8')
 
-const rfc1866 = (str: string) =>
-    str ? str.replace(/[+]/g, ' ') : str
-
-const rfc3986 = (str: string) =>
-    str
+const rfc1866 = (str: string) => str ? str.replace(/[+]/g, ' ') : str
+const rfc3986 = (str: string) => str
 
 const decodePercentEncode = (str: string) =>
     (str.length === 3 && str.startsWith('%'))

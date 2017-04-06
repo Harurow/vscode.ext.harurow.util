@@ -10,8 +10,12 @@ export const isUnderscore = (str: string) =>
         : false
 
 export const isValidIdentifier = (str: string) =>
-    (isValidStr(str) &&
-     /^[A-Za-z_][A-Za-z0-9_]*$/g.test(str))
+    isValidStr(str) && /^[A-Za-z_][A-Za-z0-9_]*$/g.test(str)
+
+export const replaceIdentifiers = (replacer: (identifier: string) => string, content: string) =>
+    content
+        ? content.replace(/[a-zA-Z_][a-zA-Z_0-9]*/g, replacer)
+        : content
 
 export const words = (str: string) => {
     if (!isValidIdentifier(str)) {
