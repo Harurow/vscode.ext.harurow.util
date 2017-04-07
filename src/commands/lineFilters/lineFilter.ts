@@ -2,26 +2,25 @@ import * as vscode from 'vscode'
 import * as edt from '../../utils/editor'
 import {
     InputBoxOptionsEx,
-    showInputBoxAsync,
-    showWarningIfHasNoSelectionAsync,
+    showInputBox,
+    showWarningIfHasNoSelection,
 } from '../../utils'
 
-export const lineFilter = async (replacer: (input: string, content: string) => string, options?: vscode.InputBoxOptions | InputBoxOptionsEx) => {
-    try {
-        let editor = await showWarningIfHasNoSelectionAsync()
-        let input = await showInputBoxAsync(options)
+export const lineFilter = (replacer: (input: string, content: string) => string, options?: vscode.InputBoxOptions | InputBoxOptionsEx) => {
+    showWarningIfHasNoSelection()
+        .then(editor => {
+            showInputBox(options)
+                .then(input => {
+                    editor.edit(eb => {
+                        editor.selections = editor.selections
+                                                .map(edt.getNormalizedLineSelection)
 
-        await editor.edit(eb => {
-            editor.selections = editor.selections
-                                    .map(edt.getNormalizedLineSelection)
-
-            editor.selections
-                .forEach(sel => {
-                    let content = editor.document.getText(sel)
-                    eb.replace(sel, replacer(input, content))
+                        editor.selections
+                            .forEach(sel => {
+                                let content = editor.document.getText(sel)
+                                eb.replace(sel, replacer(input, content))
+                            })
+                    })
                 })
-        })
-    } catch (error) {
-        // suppress
-    }
+        }).catch(error => {/* suppress */})
 }

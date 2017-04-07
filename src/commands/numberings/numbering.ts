@@ -1,39 +1,38 @@
 import * as vscode from 'vscode'
 import {
-    showWarningIfHasNoMultiCursorsAsync,
-    showInputBoxAsync,
+    showWarningIfHasNoMultiCursors,
+    showInputBox,
     throwIf,
 } from '../../utils'
 
-export const numbering =  async () => {
-    try {
-        let editor = await showWarningIfHasNoMultiCursorsAsync()
-        let input = await showInputBoxAsync({
-            value: '0',
-            placeHolder: 'start step?=1 radix?:[2|10|8|16]=10 len?=0',
-            prompt: 'input number setting > start step?=1 radix?:[2|10|8|16]=10 len?=0',
-            emptyMessage: 'Must be input number.'
-        })
-
-        try {
-            const {start, step, radix, length} = parseOptions(input)
-
-            let num = new Numbering(start, step, radix, length)
-
-            await editor.edit(eb => {
-                editor.selections.forEach(sel => {
-                    eb.replace(sel, num.toString())
-                    num.next()
-                })
+export const numbering = () => {
+    showWarningIfHasNoMultiCursors()
+        .then(editor => {
+            showInputBox({
+                value: '0',
+                placeHolder: 'start step?=1 radix?:[2|10|8|16]=10 len?=0',
+                prompt: 'input number setting > start step?=1 radix?:[2|10|8|16]=10 len?=0',
+                emptyMessage: 'Must be input number.'
             })
-        } catch (error) {
-            if (error && typeof error === 'string') {
-                vscode.window.showWarningMessage(error)
-            }
-        }
-    } catch (error) {
-        // suppress
-    }
+            .then(input => {
+                try {
+                    const {start, step, radix, length} = parseOptions(input)
+
+                    let num = new Numbering(start, step, radix, length)
+
+                    editor.edit(eb => {
+                        editor.selections.forEach(sel => {
+                            eb.replace(sel, num.toString())
+                            num.next()
+                        })
+                    })
+                } catch (error) {
+                    if (error && typeof error === 'string') {
+                        vscode.window.showWarningMessage(error)
+                    }
+                }
+            })
+        })
 }
 
 const parseOptions = (input: string) => {

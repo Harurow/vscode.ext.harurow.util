@@ -6,9 +6,9 @@ import {
 import {
     InputBoxOptionsEx,
     getTextEditorOrThrowIfNotExistsTextEditor,
-    showWarningIfHasNoMultiCursorsAsync,
-    showWarningIfHasNoSelectionAsync,
-    showInputBoxAsync,
+    showWarningIfHasNoMultiCursors,
+    showWarningIfHasNoSelection,
+    showInputBox,
     getNormalizedLineSelection,
     getReplaceFunc,
     getWholeFunc,
@@ -41,9 +41,9 @@ export {
 
     InputBoxOptionsEx,
     getTextEditorOrThrowIfNotExistsTextEditor,
-    showWarningIfHasNoMultiCursorsAsync,
-    showWarningIfHasNoSelectionAsync,
-    showInputBoxAsync,
+    showWarningIfHasNoMultiCursors,
+    showWarningIfHasNoSelection,
+    showInputBox,
     getNormalizedLineSelection,
     getReplaceFunc,
 

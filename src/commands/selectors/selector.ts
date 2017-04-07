@@ -8,56 +8,50 @@ import {
 import {
     strLen,
     InputBoxOptionsEx,
-    showInputBoxAsync,
+    showInputBox,
     getTextEditorOrThrowIfNotExistsTextEditor,
 } from '../../utils'
 
-export const selectWhenMatchSubstring = async () => {
-    let options = {
-        placeHolder: 'Text',
-        prompt: 'Select if it equales input text.',
-        emptyMessage: 'Must be input text.'
-    }
-    try {
-        let editor = getTextEditorOrThrowIfNotExistsTextEditor()
-        let substr = await showInputBoxAsync(options)
-        await selectAsync(editor, substr)
-    } catch (error) {
-        // suppress
-    }
+export const selectWhenMatchSubstring = () => {
+    getTextEditorOrThrowIfNotExistsTextEditor()
+        .then(editor => {
+            showInputBox({
+                placeHolder: 'Text',
+                prompt: 'Select if it equales input text.',
+                emptyMessage: 'Must be input text.'
+            }).then(input => {
+                select(editor, input)
+            })
+        })
 }
 
 export const selectWhenMatchPattern = async () => {
-    let options = {
-        placeHolder: 'Pattern',
-        prompt: 'Select if it matched input pattern.',
-        emptyMessage: 'Must be input pattern.'
-    }
-    try {
-        let editor = getTextEditorOrThrowIfNotExistsTextEditor()
-        let pattern = await showInputBoxAsync(options)
-        await selectAsync(editor, new RegExp(pattern, 'gm'))
-    } catch (error) {
-        // suppress
-    }
+    getTextEditorOrThrowIfNotExistsTextEditor()
+        .then(editor => {
+            showInputBox({
+                placeHolder: 'Pattern',
+                prompt: 'Select if it matched input pattern.',
+                emptyMessage: 'Must be input pattern.'
+            }).then(pattern => {
+               select(editor, new RegExp(pattern, 'gm'))
+            })
+        })
 }
 
 export const selectWhenMatchPatternIgnoreCase = async () => {
-    let options = {
-        placeHolder: 'Pattern (ignore case)',
-        prompt: 'Select if it matched input pattern. (ignore case)',
-        emptyMessage: 'Must be input pattern.'
-    }
-    try {
-        let editor = getTextEditorOrThrowIfNotExistsTextEditor()
-        let pattern = await showInputBoxAsync(options)
-        await selectAsync(editor, new RegExp(pattern, 'igm'))
-    } catch (error) {
-        // suppress
-    }
+    getTextEditorOrThrowIfNotExistsTextEditor()
+        .then(editor => {
+            showInputBox({
+                placeHolder: 'Pattern (ignore case)',
+                prompt: 'Select if it matched input pattern. (ignore case)',
+                emptyMessage: 'Must be input pattern.'
+            }).then(pattern => {
+                select(editor, new RegExp(pattern, 'igm'))
+            })
+        })
 }
 
-const selectAsync = async (editor: vscode.TextEditor, pattern: string|RegExp) => {
+const select = (editor: vscode.TextEditor, pattern: string|RegExp) => {
     let selections = getSelections(editor)
 
     editor.edit(eb => {
