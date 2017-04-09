@@ -4,14 +4,10 @@ All notable changes to this "harurow-util" extension will be documented in this 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) 
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
-- Base64エンコード・デコード
-- 画像ファイルのcssへの埋め込み
-
-
-## [1.2.0] 2017-xx-xx
-- リファクタリング
+## [1.2.0] 2017-04-xx
 - 正規表現選択で大文字小文字の無視を追加
+- リファクタリング
+- travis, codecov 対応
 
 ## [1.1.2] 2017-02-28
 ### Changed
