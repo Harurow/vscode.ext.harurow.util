@@ -1,15 +1,15 @@
 {
     "files.exclude": {
-        "out": false,
         ".vscode-test": true,
-        "node_modules": true
+        "node_modules": true,
+        "out": true,
+        "coverage": true
     },
     "search.exclude": {
-        "out": true,
         ".vscode-test": true,
-        "node_modules": true
+        "node_modules": true,
+        "out": true,
+        "coverage": true
     },
-    "standard.enable": false,
-    "typescript.tsdk": "./node_modules/typescript/lib",
-    "vsicons.presets.angular": false
+    "typescript.tsdk": "./node_modules/typescript/lib"
 }
