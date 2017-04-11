@@ -5,13 +5,14 @@ import TextEditor from './textEditor'
 
 suite('TextEditor tests', () => {
     test('init', async () => {
-        let editor = await TextEditor.initAsync()
-        await editor.clearTextAsync()
+        let editor = await TextEditor.init()
+        await editor.clearText()
 
         assert.equal(false, editor.editor == null)
 
         editor.selectAll()
-        await editor.setTextAsync('abc xyz')
+        await editor.setText('abc xyz')
         assert.equal('abc xyz', editor.getText())
+        await editor.clearText()
     })
 })
