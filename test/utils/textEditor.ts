@@ -26,6 +26,16 @@ export default class TextEditor {
         this.selectAll()
     }
 
+    execCommandAsync = (command: string) =>
+        new Promise<void>((resolve, reject) => {
+            vscode.commands.executeCommand(command)
+                .then(_ => {
+                    resolve()
+                }, f => {
+                    reject(f)
+                })
+        })
+
     static initAsync = () =>
         new Promise<TextEditor>(async (resolve, reject) => {
             let editor = vscode.window.activeTextEditor

@@ -10,14 +10,6 @@ export const decodeRfc3986EucJp = (str: string) => decodeString(rfc3986(str), en
 export const decodeRfc3986ShiftJis = (str: string) => decodeString(rfc3986(str), encodingShiftJis)
 export const decodeRfc3986Utf8 = (str: string) => decodeString(rfc3986(str), encodingUtf8)
 
-const encodeEncoding = (encoding: ej.Encoding) =>
-    (char: string) =>
-        (char == null)
-            ? char
-            : ej.convert(ej.stringToCode(char), encoding, 'UNICODE')
-                .map(mapCode)
-                .join('')
-
 const decodeEncoding = (encoding: ej.Encoding) =>
     (code: number[]) =>
         ej.codeToString(ej.convert(code, 'UNICODE', encoding))

@@ -9,7 +9,7 @@ import * as swaps from './commands/swaps'
 import * as words from './commands/wordCases'
 
 export function activate(context: vscode.ExtensionContext): void {
-    console.log('Harurow say "Have a good time!"')
+    //console.log('Harurow say "Have a good time!"')
     context.subscriptions.push(
         encodings.encodeRfc1866EucJpCommand('commands.encodings.encodeRfc1866EucJp'),
         encodings.encodeRfc1866ShiftJisCommand('commands.encodings.encodeRfc1866ShiftJis'),
@@ -68,5 +68,5 @@ export function activate(context: vscode.ExtensionContext): void {
 }
 
 export function deactivate(): void {
-    console.log('Harurow say "see you next time!"')
+    //console.log('Harurow say "see you next time!"')
 }
