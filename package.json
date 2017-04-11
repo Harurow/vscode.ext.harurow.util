@@ -44,7 +44,7 @@
     "mocha": "^3.2.0",
     "remap-istanbul": "^0.9.5",
     "tslint": "^5.0.0",
-    "typescript": "^2.2.1",
+    "typescript": "^2.2.2",
     "vscode": "^1.0.5",
     "vscode-nls": "^2.0.2"
   },
