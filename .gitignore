@@ -1,6 +1,7 @@
-out
 .vscode-test
 node_modules
+out
+coverage
 
 .DS_Store
 npm-debug.log

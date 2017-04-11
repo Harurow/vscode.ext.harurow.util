@@ -1,5 +1,9 @@
 # Harurow Util README
 
+[![Build Status](https://travis-ci.org/Harurow/vscode.ext.harurow.util.svg?branch=master)](https://travis-ci.org/Harurow/vscode.ext.harurow.util)
+
+[![codecov](https://codecov.io/gh/Harurow/vscode.ext.harurow.util/branch/master/graph/badge.svg)](https://codecov.io/gh/Harurow/vscode.ext.harurow.util)
+
 ## 特徴
 自分でプログラムを書くときに利用する機能をVisualStudioCodeの拡張として提供しています
 [Github](https://github.com/Harurow/vscode.ext.harurow.util)でソースも公開しています
@@ -89,6 +93,9 @@ HTMLまたはUnicodeエスケープ処理を実施します
 - `Select If Matched Regex`  
 正規表現に一致する文字列を選択します
 
+- `Select If Matched Regex (Ignore Case)`  
+正規表現(大文字・小文字の違いを無視)に一致する文字列を選択します
+
 #### 連番
 複数カーソルの位置に連番で番号を採番します
 
@@ -131,6 +138,9 @@ start step?=1 radix?:[2|10|8|16]=10 len?=0
 
 ## Release Notes
 
+### [1.2.0] 2017-04-11
+正規表現のマッチングで大文字・小文字を無視を追加
+
 ### [1.1.2] 2017-02-28
 プレビューの画像を圧縮
 
@@ -143,4 +153,4 @@ start step?=1 radix?:[2|10|8|16]=10 len?=0
 ### [1.0.3] 2017-01-21
 初回リリース
 
------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------

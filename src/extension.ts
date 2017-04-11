@@ -1,60 +1,72 @@
-'use strict'
-
 import * as vscode from 'vscode'
-import * as commands from './commands'
-import * as strutil from './stringutil';
-import * as filter from './linefilter'
-import * as encoding from './encoding'
-import * as escape from './escape'
-import * as num from './numbers'
-import * as sel from './selection'
-import * as rep from './replace'
-import * as misc from './misc'
 
-export function activate(context: vscode.ExtensionContext) {
-    console.log('"harurow-util" is now active')
+import * as encodings from './commands/encodings'
+import * as escapes from './commands/escapes'
+import * as lineFilters from './commands/lineFilters'
+import * as numberings from './commands/numberings'
+import * as selectors from './commands/selectors'
+import * as swaps from './commands/swaps'
+import * as words from './commands/wordCases'
+
+export function activate(context: vscode.ExtensionContext): void {
+    console.log('Harurow say "Have a good time!"')
+    context.subscriptions.push(
+        encodings.encodeRfc1866EucJpCommand('commands.encodings.encodeRfc1866EucJp'),
+        encodings.encodeRfc1866ShiftJisCommand('commands.encodings.encodeRfc1866ShiftJis'),
+        encodings.encodeRfc1866Utf8Command('commands.encodings.encodeRfc1866Utf8'),
+
+        encodings.encodeRfc3986EucJpCommand('commands.encodings.encodeRfc3986EucJp'),
+        encodings.encodeRfc3986ShiftJisCommand('commands.encodings.encodeRfc3986ShiftJis'),
+        encodings.encodeRfc3986Utf8Command('commands.encodings.encodeRfc3986Utf8'),
+
+        encodings.decodeRfc1866EucJpCommand('commands.encodings.decodeRfc1866EucJp'),
+        encodings.decodeRfc1866ShiftJisCommand('commands.encodings.decodeRfc1866ShiftJis'),
+        encodings.decodeRfc1866Utf8Command('commands.encodings.decodeRfc1866Utf8'),
+
+        encodings.decodeRfc3986EucJpCommand('commands.encodings.decodeRfc3986EucJp'),
+        encodings.decodeRfc3986ShiftJisCommand('commands.encodings.decodeRfc3986ShiftJis'),
+        encodings.decodeRfc3986Utf8Command('commands.encodings.decodeRfc3986Utf8'),
+    )
 
     context.subscriptions.push(
-        commands.register('extension.str.toPascalCase', {replace: strutil.toPascalCase}),
-        commands.register('extension.str.toCamelCase', {replace: strutil.toCamelCase}),
-        commands.register('extension.str.toUpperSnakeCase', {replace: strutil.toUpperSnakeCase}),
-        commands.register('extension.str.toLowerSnakeCase', {replace: strutil.toLowerSnakeCase}),
+        escapes.escapeHtmlCommand('commands.escapes.escapeHtml'),
+        escapes.escapeHtmlAllCommand('commands.escapes.escapeHtmlAll'),
+        escapes.unescapeHtmlCommand('commands.escapes.unescapeHtml'),
 
-        commands.register('extension.flt.removeMatched', {whole: filter.removeMatched}),
-        commands.register('extension.flt.removeUnmatched', {whole: filter.removeUnmatched}),
-        commands.register('extension.flt.removeContains', {whole: filter.removeContains}),
-        commands.register('extension.flt.removeNotContains', {whole: filter.removeNotContains}),
+        escapes.escapeUnicodeCommand('commands.escapes.escapeUnicode'),
+        escapes.escapeUnicodeAllCommand('commands.escapes.escapeUnicodeAll'),
+        escapes.unescapeUnicodeCommand('commands.escapes.unescapeUnicode'),
+    )
 
-        commands.register('extension.enc.rfc3986ShiftJis', {replace: encoding.toRfc3986ShiftJis}),
-        commands.register('extension.enc.rfc3986EucJp', {replace: encoding.toRfc3986EucJp}),
-        commands.register('extension.enc.rfc3986Utf8', {replace: encoding.toRfc3986Utf8}),
-        commands.register('extension.enc.rfc1866ShiftJis', {replace: encoding.toRfc1866ShiftJis}),
-        commands.register('extension.enc.rfc1866EucJp', {replace: encoding.toRfc1866EucJp}),
-        commands.register('extension.enc.rfc1866Utf8', {replace: encoding.toRfc1866Utf8}),
+    context.subscriptions.push(
+        lineFilters.removeLineIfMatchCommand('commands.lineFilters.match'),
+        lineFilters.removeLineIfUnmatchCommand('commands.lineFilters.unmatch'),
+        lineFilters.removeLineIfContainsCommand('commands.lineFilters.contains'),
+        lineFilters.removeLineIfNotContainsCommand('commands.lineFilters.notContains'),
+    )
 
-        commands.register('extension.dec.rfc3986ShiftJis', {replace: encoding.fromRfc3986ShiftJis}),
-        commands.register('extension.dec.rfc3986EucJp', {replace: encoding.fromRfc3986EucJp}),
-        commands.register('extension.dec.rfc3986Utf8', {replace: encoding.fromRfc3986Utf8}),
+    context.subscriptions.push(
+        numberings.numberingCommand('commands.numberings.numbering'),
+    )
 
-        commands.register('extension.esc.toHtml', {replace: escape.toHtml}),
-        commands.register('extension.esc.toHtmlAll', {replace: escape.toHtmlAll}),
-        commands.register('extension.esc.toUnicode', {replace: escape.toUnicode}),
-        commands.register('extension.esc.toUnicodeAll', {replace: escape.toUnicodeAll}),
-        commands.register('extension.esc.fromHtmlAll', {replace: escape.fromHtmlAll}),
-        commands.register('extension.esc.fromUnicode', {replace: escape.fromUnicode}),
+    context.subscriptions.push(
+        selectors.selectWhenMatchSubstringCommand('commands.selectors.substring'),
+        selectors.selectWhenMatchPatternCommand('commands.selectors.pattern'),
+        selectors.selectWhenMatchPatternIgnoreCaseCommand('commands.selectors.patternIgnoreCase'),
+    )
 
-        commands.register('extension.num.numbers', {whole: num.numbers}),
+    context.subscriptions.push(
+        swaps.swapLrCommand('commands.swaps.swapLr'),
+    )
 
-        commands.register('extension.sel.string', {whole: sel.string}),
-        commands.register('extension.sel.regex', {whole: sel.regex}),
-        
-        commands.register('extension.rep.leftsideRight', {replace: rep.leftsideRight}),
-
-        commands.register('extension.trn.transGoogle', {foreach: misc.transGoogle}),
-        commands.register('extension.trn.transMicrosoft', {foreach: misc.transMicrosoft}),
+    context.subscriptions.push(
+        words.toPascalCaseCommand('commands.caseConverters.toPascalCase'),
+        words.toCamelCaseCommand('commands.caseConverters.toCamelCase'),
+        words.toUpperSnakeCaseCommand('commands.caseConverters.toUpperSnakeCase'),
+        words.toLowerSnakeCaseCommand('commands.caseConverters.toLowerSnakeCase'),
     )
 }
 
-export function deactivate() {
-    console.log('"harurow-util" is now deactive')
+export function deactivate(): void {
+    console.log('Harurow say "see you next time!"')
 }
