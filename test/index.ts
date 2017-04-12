@@ -101,7 +101,6 @@ class CoverageRunner {
         if (!options.relativeSourcePath) {
             return endRunCallback('Error - relativeSourcePath must be defined for code coverage to work')
         }
-
     }
 
     public setupCoverage(): void {

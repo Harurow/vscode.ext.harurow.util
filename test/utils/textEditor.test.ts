@@ -6,13 +6,13 @@ import TextEditor from './textEditor'
 suite('TextEditor tests', () => {
     test('init', async () => {
         let editor = await TextEditor.init()
+        assert.equal(false, editor.editor === null)
+
         await editor.clearText()
 
-        assert.equal(false, editor.editor == null)
+        await editor.replaceTextAll('abc xyz')
+        assert.equal('abc xyz', editor.getTextAll())
 
-        editor.selectAll()
-        await editor.setText('abc xyz')
-        assert.equal('abc xyz', editor.getText())
         await editor.clearText()
     })
 })

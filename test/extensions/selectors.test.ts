@@ -13,8 +13,8 @@ suite('extensions selectors', () => {
         await editor.clearText()
         await editor.setText(before)
         assert.equal(before, editor.getText())
-        //await editor.execCommandAsync(command)
-        assert.equal(after, editor.getText())
+        editor.execCommand(command)
+            .then(_ => assert.equal(after, editor.getText()))
     })
 
     test('commands.selectors.pattern', async () => {
@@ -26,8 +26,8 @@ suite('extensions selectors', () => {
         await editor.clearText()
         await editor.setText(before)
         assert.equal(before, editor.getText())
-        //await editor.execCommandAsync(command)
-        assert.equal(after, editor.getText())
+        editor.execCommand(command)
+            .then(_ => assert.equal(after, editor.getText()))
     })
 
     test('commands.selectors.patternIgnoreCase', async () => {
@@ -39,7 +39,7 @@ suite('extensions selectors', () => {
         await editor.clearText()
         await editor.setText(before)
         assert.equal(before, editor.getText())
-        //await editor.execCommandAsync(command)
-        assert.equal(after, editor.getText())
+        editor.execCommand(command)
+            .then(_ => assert.equal(after, editor.getText()))
     })
 })

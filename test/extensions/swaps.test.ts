@@ -10,30 +10,14 @@ suite('extensions swaps', () => {
         let command = 'commands.swaps.swapLr'
         let before = 'left = right'
         let after = 'right = left'
-        console.log('0')
+
         await editor.clearText()
         await editor.setText(before)
+
+        editor.selectAll()
         assert.equal(before, editor.getText())
-        console.log('1')
 
-        vscode.commands.executeCommand(command)
-            .then(_ => {
-                console.log('3')
-                assert.equal(after, editor.getText())
-            }, reason => {
-                console.log('4')
-            })
-
-        console.log('2')
-    })
-})
-
-suite('extensions swaps', () => {
-    test('test', done => {
-        assert.equal(true, true)
-
-
-
-        done()
+        editor.execCommand(command)
+            .then(_ => assert.equal(after, editor.getText()))
     })
 })

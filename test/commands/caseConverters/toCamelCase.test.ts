@@ -1,9 +1,9 @@
 import * as assert from 'assert'
 import * as vscode from 'vscode'
 
-import { toCamelCase } from '../../../src/commands/wordCases/toCamelCase'
+import { toCamelCase } from '../../../src/commands/caseConverters/toCamelCase'
 
-suite('commands/wordCases/toCamelCase', () => {
+suite('commands/caseConverters/toCamelCase', () => {
     test('toCamelCase', () => {
         assert.equal(undefined, toCamelCase(undefined))
         assert.equal(null, toCamelCase(null))

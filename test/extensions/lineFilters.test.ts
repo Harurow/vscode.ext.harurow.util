@@ -39,8 +39,8 @@ suite('extensions lineFilters', () => {
         await editor.clearText()
         await editor.setText(before)
         assert.equal(before, editor.getText())
-        //await editor.execCommandAsync(command)
-        assert.equal(after, editor.getText())
+        editor.execCommand(command)
+            .then(_ => assert.equal(after, editor.getText()))
     })
 
     test('commands.lineFilters.unmatch', async () => {
@@ -52,8 +52,8 @@ suite('extensions lineFilters', () => {
         await editor.clearText()
         await editor.setText(before)
         assert.equal(before, editor.getText())
-        //await editor.execCommandAsync(command)
-        assert.equal(after, editor.getText())
+        editor.execCommand(command)
+            .then(_ => assert.equal(after, editor.getText()))
     })
 
     test('commands.lineFilters.contains', async () => {
@@ -65,8 +65,8 @@ suite('extensions lineFilters', () => {
         await editor.clearText()
         await editor.setText(before)
         assert.equal(before, editor.getText())
-        //await editor.execCommandAsync(command)
-        assert.equal(after, editor.getText())
+        editor.execCommand(command)
+            .then(_ => assert.equal(after, editor.getText()))
     })
 
     test('commands.lineFilters.notContains', async () => {
@@ -78,7 +78,7 @@ suite('extensions lineFilters', () => {
         await editor.clearText()
         await editor.setText(before)
         assert.equal(before, editor.getText())
-        //await editor.execCommandAsync(command)
-        assert.equal(after, editor.getText())
+        editor.execCommand(command)
+            .then(_ => assert.equal(after, editor.getText()))
     })
 })

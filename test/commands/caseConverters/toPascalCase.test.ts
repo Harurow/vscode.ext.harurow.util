@@ -1,9 +1,9 @@
 import * as assert from 'assert'
 import * as vscode from 'vscode'
 
-import { toPascalCase } from '../../../src/commands/wordCases/toPascalCase'
+import { toPascalCase } from '../../../src/commands/caseConverters/toPascalCase'
 
-suite('commands/wordCases/toPascalCase', () => {
+suite('commands/caseConverters/toPascalCase', () => {
     test('toPascalCase', () => {
         assert.equal(undefined, toPascalCase(undefined))
         assert.equal(null, toPascalCase(null))

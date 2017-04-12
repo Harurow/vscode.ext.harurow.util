@@ -17,6 +17,9 @@ export default class TextEditor {
     getText = () =>
         this.editor.document.getText(this.editor.selection)
 
+    getTextAll = () =>
+        this.editor.document.getText(this.getAllSelection())
+
     setText = (str: string) =>
         new Promise<void>((resolve, reject) => {
             this.editor.edit(eb => eb.replace(this.editor.selection, str))
@@ -26,9 +29,9 @@ export default class TextEditor {
         })
 
     clearText = () =>
-        this.replaceAll('')
+        this.replaceTextAll('')
 
-    replaceAll = (text: string) =>
+    replaceTextAll = (text: string) =>
         new Promise<void>((resolve, reject) => {
             this.editor.edit(async eb => {
                 this.selectAll()

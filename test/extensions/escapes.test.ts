@@ -13,9 +13,8 @@ suite('extensions escapes', () => {
         await editor.clearText()
         await editor.setText(before)
         assert.equal(before, editor.getText())
-        editor
-            .execCommand(command)
-            .then( _ => assert.equal(after, editor.getText()))
+        editor.execCommand(command)
+            .then(_ => assert.equal(after, editor.getText()))
     })
 
     test('commands.escapes.escapeHtmlAll', async () => {
@@ -27,9 +26,8 @@ suite('extensions escapes', () => {
         await editor.clearText()
         await editor.setText(before)
         assert.equal(before, editor.getText())
-        editor
-            .execCommand(command)
-            .then( _ => assert.equal(after, editor.getText()))
+        editor.execCommand(command)
+            .then(_ => assert.equal(after, editor.getText()))
     })
 
     test('commands.escapes.unescapeHtml', async () => {
@@ -41,9 +39,8 @@ suite('extensions escapes', () => {
         await editor.clearText()
         await editor.setText(before)
         assert.equal(before, editor.getText())
-        editor
-            .execCommand(command)
-            .then( _ => assert.equal(after, editor.getText()))
+        editor.execCommand(command)
+            .then(_ => assert.equal(after, editor.getText()))
     })
 
     test('commands.escapes.escapeUnicode', async () => {
@@ -55,9 +52,8 @@ suite('extensions escapes', () => {
         await editor.clearText()
         await editor.setText(before)
         assert.equal(before, editor.getText())
-        editor
-            .execCommand(command)
-            .then( _ => assert.equal(after, editor.getText()))
+        editor.execCommand(command)
+            .then(_ => assert.equal(after, editor.getText()))
     })
 
     test('commands.escapes.escapeUnicodeAll', async () => {
@@ -69,9 +65,8 @@ suite('extensions escapes', () => {
         await editor.clearText()
         await editor.setText(before)
         assert.equal(before, editor.getText())
-        editor
-            .execCommand(command)
-            .then( _ => assert.equal(after, editor.getText()))
+        editor.execCommand(command)
+            .then(_ => assert.equal(after, editor.getText()))
     })
 
     test('commands.escapes.unescapeUnicode', async () => {
@@ -83,8 +78,7 @@ suite('extensions escapes', () => {
         await editor.clearText()
         await editor.setText(before)
         assert.equal(before, editor.getText())
-        editor
-            .execCommand(command)
-            .then( _ => assert.equal(after, editor.getText()))
+        editor.execCommand(command)
+            .then(_ => assert.equal(after, editor.getText()))
     })
 })
