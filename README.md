@@ -1,7 +1,6 @@
 # Harurow Util README
 
 [![Build Status](https://travis-ci.org/Harurow/vscode.ext.harurow.util.svg?branch=master)](https://travis-ci.org/Harurow/vscode.ext.harurow.util)
-
 [![codecov](https://codecov.io/gh/Harurow/vscode.ext.harurow.util/branch/master/graph/badge.svg)](https://codecov.io/gh/Harurow/vscode.ext.harurow.util)
 
 ## 特徴
@@ -137,6 +136,9 @@ start step?=1 radix?:[2|10|8|16]=10 len?=0
 なし
 
 ## Release Notes
+
+### [1.2.1] 2017-04-14
+テストケースの最適化
 
 ### [1.2.0] 2017-04-11
 正規表現のマッチングで大文字・小文字を無視を追加
