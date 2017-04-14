@@ -57,6 +57,16 @@ suite('utils/string tests', () => {
         assert.equal(false, $.isValidIdentifier(' invalid '))
     })
 
+    test('replaceIdentifiers', () => {
+        let rep = (str: string) =>
+            'abc'
+        assert.equal(undefined, $.replaceIdentifiers(rep, undefined))
+        assert.equal(null, $.replaceIdentifiers(rep, null))
+        assert.equal('', $.replaceIdentifiers(rep, ''))
+
+        assert.equal('abc abc abc', $.replaceIdentifiers(rep, 'a b c'))
+    })
+
     test('words', () => {
         assert.equal(undefined, $.words('0'))
         assert.equal(undefined, $.words(undefined))
@@ -111,6 +121,18 @@ suite('utils/string tests', () => {
         assert.deepEqual(['c', 'a'], $.lines('c\ra'))
         assert.deepEqual(['c', 'a'], $.lines('c\na'))
         assert.deepEqual(['c', 'a'], $.lines('c\r\na'))
+    })
+
+    test('strLen', () => {
+        assert.deepEqual(0, $.strLen(undefined))
+        assert.deepEqual(0, $.strLen(null))
+        assert.deepEqual(0, $.strLen(''))
+
+        assert.deepEqual(3, $.strLen('abc'))
+        assert.deepEqual(3, $.strLen('あいう'))
+        assert.deepEqual(5, $.strLen('\u{20b9f} 𠮟 \ud842\udf9f'))
+        assert.deepEqual(4, $.strLen('0%20'))
+        assert.deepEqual(8, $.strLen('\u{20b9f} 𠮟 %7e\ud842\udf9f'))
     })
 
     test('chars', () => {
