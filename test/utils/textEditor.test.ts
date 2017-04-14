@@ -3,34 +3,16 @@ import * as vscode from 'vscode'
 
 import TextEditor from './textEditor'
 
-suite('TextEditor tests', async () => {
+suite('TextEditor tests', () => {
     test('init', async () => {
-        let editor = await TextEditor.initAsync()
-        await editor.clearTextAsync()
+        let editor = await TextEditor.init()
+        assert.equal(false, editor.editor === null)
 
-        assert.equal(false, editor.editor == null)
+        await editor.clearText()
 
-        editor.selectAll()
-        await editor.setTextAsync('abc xyz')
-        assert.equal('abc xyz', editor.getText())
+        await editor.replaceTextAll('abc xyz')
+        assert.equal('abc xyz', editor.getTextAll())
+
+        await editor.clearText()
     })
-
-/*
-    test('newline', async () => {
-        let editor = await TextEditor.initAsync()
-        await editor.clearTextAsync()
-
-        editor.selectAll()
-        await editor.setTextAsync('abc\r\nxyz')
-        assert.equal('abc\nxyz', editor.getText())
-
-        editor.selectAll()
-        await editor.setTextAsync('abc\nxyz')
-        assert.equal('abc\nxyz', editor.getText())
-
-        editor.selectAll()
-        await editor.setTextAsync('abc\rxyz')
-        assert.equal('abc\nxyz', editor.getText())
-    })
-*/
 })

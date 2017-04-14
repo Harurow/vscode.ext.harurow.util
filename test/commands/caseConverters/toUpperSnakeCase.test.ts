@@ -1,9 +1,9 @@
 import * as assert from 'assert'
 import * as vscode from 'vscode'
 
-import { toUpperSnakeCase } from '../../../src/commands/wordCases/toUpperSnakeCase'
+import { toUpperSnakeCase } from '../../../src/commands/caseConverters/toUpperSnakeCase'
 
-suite('commands/wordCases/toUpperSnakeCase', () => {
+suite('commands/caseConverters/toUpperSnakeCase', () => {
     test('toUpperSnakeCase', () => {
         assert.equal(undefined, toUpperSnakeCase(undefined))
         assert.equal(null, toUpperSnakeCase(null))
