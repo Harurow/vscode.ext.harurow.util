@@ -16,6 +16,7 @@ suite('commands/encodings/encode tests', () => {
         assert.equal(undefined, encodeRfc1866EucJp(undefined))
         assert.equal(null, encodeRfc1866EucJp(null))
         assert.equal('', encodeRfc1866EucJp(''))
+        assert.equal('%00', encodeRfc1866EucJp('\x00'))
         assert.equal('+', encodeRfc1866EucJp(' '))
         assert.equal('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLNOPQRSUTVWXYZ0123456789-._~',
                      encodeRfc1866EucJp('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLNOPQRSUTVWXYZ0123456789-._~'))
@@ -35,6 +36,7 @@ suite('commands/encodings/encode tests', () => {
         assert.equal(undefined, encodeRfc1866ShiftJis(undefined))
         assert.equal(null, encodeRfc1866ShiftJis(null))
         assert.equal('', encodeRfc1866ShiftJis(''))
+        assert.equal('%00', encodeRfc1866ShiftJis('\x00'))
         assert.equal('+', encodeRfc1866ShiftJis(' '))
         assert.equal('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLNOPQRSUTVWXYZ0123456789-._~',
                      encodeRfc1866ShiftJis('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLNOPQRSUTVWXYZ0123456789-._~'))
@@ -54,6 +56,7 @@ suite('commands/encodings/encode tests', () => {
         assert.equal(undefined, encodeRfc1866Utf8(undefined))
         assert.equal(null, encodeRfc1866Utf8(null))
         assert.equal('', encodeRfc1866Utf8(''))
+        assert.equal('%00', encodeRfc1866Utf8('\x00'))
         assert.equal('+', encodeRfc1866Utf8(' '))
         assert.equal('++', encodeRfc1866Utf8('  '))
         assert.equal('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLNOPQRSUTVWXYZ0123456789-._~',
@@ -77,6 +80,7 @@ suite('commands/encodings/encode tests', () => {
         assert.equal(undefined, encodeRfc3986EucJp(undefined))
         assert.equal(null, encodeRfc3986EucJp(null))
         assert.equal('', encodeRfc3986EucJp(''))
+        assert.equal('%00', encodeRfc3986EucJp('\x00'))
         assert.equal('%20', encodeRfc3986EucJp(' '))
         assert.equal('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLNOPQRSUTVWXYZ0123456789-._~',
                      encodeRfc3986EucJp('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLNOPQRSUTVWXYZ0123456789-._~'))
@@ -96,6 +100,7 @@ suite('commands/encodings/encode tests', () => {
         assert.equal(undefined, encodeRfc3986ShiftJis(undefined))
         assert.equal(null, encodeRfc3986ShiftJis(null))
         assert.equal('', encodeRfc3986ShiftJis(''))
+        assert.equal('%00', encodeRfc3986ShiftJis('\x00'))
         assert.equal('%20', encodeRfc3986ShiftJis(' '))
         assert.equal('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLNOPQRSUTVWXYZ0123456789-._~',
                      encodeRfc3986ShiftJis('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLNOPQRSUTVWXYZ0123456789-._~'))
@@ -115,6 +120,7 @@ suite('commands/encodings/encode tests', () => {
         assert.equal(undefined, encodeRfc3986Utf8(undefined))
         assert.equal(null, encodeRfc3986Utf8(null))
         assert.equal('', encodeRfc3986Utf8(''))
+        assert.equal('%00', encodeRfc3986Utf8('\x00'))
         assert.equal('%20', encodeRfc3986Utf8(' '))
         assert.equal('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLNOPQRSUTVWXYZ0123456789-._~',
                      encodeRfc3986Utf8('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLNOPQRSUTVWXYZ0123456789-._~'))

@@ -1,7 +1,10 @@
 import * as assert from 'assert'
 import * as vscode from 'vscode'
 
-import { toLowerSnakeCase } from '../../../src/commands/caseConverters/toLowerSnakeCase'
+import {
+    toLowerSnakeCase,
+    toLowerWord,
+} from '../../../src/commands/caseConverters/toLowerSnakeCase'
 
 suite('commands/caseConverters/toLowerSnakeCase', () => {
     test('toLowerSnakeCase', () => {
@@ -21,5 +24,16 @@ suite('commands/caseConverters/toLowerSnakeCase', () => {
         assert.equal('lower', toLowerSnakeCase('lower'))
         assert.equal('', toLowerSnakeCase('_'))
         assert.equal('', toLowerSnakeCase('__'))
+    })
+
+    test('toLowerWord', () => {
+        assert.equal(undefined, toLowerWord(undefined))
+        assert.equal(null, toLowerWord(null))
+        assert.equal('', toLowerWord(''))
+        assert.equal(' ', toLowerWord(' '))
+        assert.equal('0', toLowerWord('0'))
+        assert.equal('abc', toLowerWord('ABC'))
+        assert.equal('', toLowerWord('__'))
+        assert.equal('', toLowerWord('_'))
     })
 })

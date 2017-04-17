@@ -27,18 +27,18 @@ const decodePercentEncode = (str: string) =>
         : str
 
 const percentEncodedChars = (str: string) =>
-    (str == null)
-        ? []
-        : str.match(/%[0-9a-fA-F]{2}|[\uD800-\uDBFF][\uDC00-\uDFFF]|[^\uD800-\uDFFF]/g) || []
+    str.match(/%[0-9a-fA-F]{2}|[\uD800-\uDBFF][\uDC00-\uDFFF]|[^\uD800-\uDFFF]/g)
 
 const percentEncodedCodePoints = (str: string) =>
-    percentEncodedChars(str).map(char => decodePercentEncode(char))
-                            .map(char => <CharInfo>({
-                                char,
-                                code: char.codePointAt(0)
-                            }))
+    percentEncodedChars(str)
+        .map(char => decodePercentEncode(char))
+        .map(char => <CharInfo>({
+            char,
+            code: char.codePointAt(0)
+        }))
 
 const decodeString = (str: string, dec: (code: number[]) => string) =>
     (!str)
         ? str
-        : dec(percentEncodedCodePoints(str).map(info => info.code))
+        : dec(percentEncodedCodePoints(str)
+            .map(info => info.code))
