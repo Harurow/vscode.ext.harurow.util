@@ -49,7 +49,7 @@ const escapeInternal = (str: string, asciiConverter: (ch: string) => string) =>
                     .join('')
 
 const escapedChars = (str: string) =>
-    str.match(/\\u[0-9A-Fa-f]{4}|[\uD800-\uDBFF][\uDC00-\uDFFF]|[^\uD800-\uDFFF]/g) || []
+    str.match(/\\u[0-9A-Fa-f]{4}|[\uD800-\uDBFF][\uDC00-\uDFFF]|[^\uD800-\uDFFF]/g)
 
 const unescapeHex = (ch: string) =>
     String.fromCodePoint(Number.parseInt(ch.slice(2), 16))

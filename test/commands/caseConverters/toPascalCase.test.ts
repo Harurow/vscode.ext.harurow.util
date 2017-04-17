@@ -1,7 +1,10 @@
 import * as assert from 'assert'
 import * as vscode from 'vscode'
 
-import { toPascalCase } from '../../../src/commands/caseConverters/toPascalCase'
+import {
+    toPascalCase,
+    toPascalWord,
+} from '../../../src/commands/caseConverters/toPascalCase'
 
 suite('commands/caseConverters/toPascalCase', () => {
     test('toPascalCase', () => {
@@ -21,5 +24,19 @@ suite('commands/caseConverters/toPascalCase', () => {
         assert.equal('Pascal', toPascalCase('pascal'))
         assert.equal('', toPascalCase('_'))
         assert.equal('', toPascalCase('__'))
+    })
+
+    test('toPascalWord', () => {
+        assert.equal(undefined, toPascalWord(undefined))
+        assert.equal(null, toPascalWord(null))
+        assert.equal('', toPascalWord(''))
+        assert.equal(' ', toPascalWord(' '))
+        assert.equal('0', toPascalWord('0'))
+
+        assert.equal('Pascal', toPascalWord('Pascal'))
+        assert.equal('Pascal', toPascalWord('PASCAL'))
+        assert.equal('Pascal', toPascalWord('pascal'))
+        assert.equal('', toPascalWord('_'))
+        assert.equal('', toPascalWord('__'))
     })
 })

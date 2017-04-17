@@ -18,11 +18,9 @@ const encodeString = (encode: (info: CharInfo) => string, content: string) =>
 
 const encodeEncoding = (encoding: ej.Encoding) =>
     (char: string) =>
-        (char == null)
-            ? char
-            : ej.convert(ej.stringToCode(char), encoding, 'UNICODE')
-                .map(mapCode)
-                .join('')
+        ej.convert(ej.stringToCode(char), encoding, 'UNICODE')
+          .map(mapCode)
+          .join('')
 
 const encodeChar = (space: string, enc: (char: string) => string) =>
     (info: CharInfo) =>

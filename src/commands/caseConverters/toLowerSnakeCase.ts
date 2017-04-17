@@ -15,9 +15,7 @@ export const toLowerWord = (str: string) =>
     : str.toLowerCase()
 
 const toLowerSnakeCaseIdentifier = (str: string) =>
-    !isValidIdentifier(str)
-        ? str
-        : words(str)
-           .filter(s => !isUnderscore(s))
-           .map(toLowerWord)
-           .join('_')
+    words(str)
+        .filter(s => !isUnderscore(s))
+        .map(toLowerWord)
+        .join('_')

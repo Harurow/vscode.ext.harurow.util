@@ -67,9 +67,3 @@ export function activate(context: vscode.ExtensionContext): void {
         swaps.swapLrCommand('commands.swaps.swapLr'),
     )
 }
-
-/*
-export function deactivate(): void {
-    console.log('Harurow say "see you next time!"')
-}
-*/
