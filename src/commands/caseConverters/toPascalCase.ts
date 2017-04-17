@@ -16,8 +16,6 @@ export const toPascalWord = (str: string) =>
     : str[0].toUpperCase() + str.slice(1).toLowerCase()
 
 const toPascalCaseIdentifier = (str: string) =>
-    !isValidIdentifier(str)
-        ? str
-        : words(str)
-           .map(toPascalWord)
-           .join('')
+    words(str)
+        .map(toPascalWord)
+        .join('')

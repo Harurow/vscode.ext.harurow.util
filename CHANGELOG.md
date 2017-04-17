@@ -4,6 +4,9 @@ All notable changes to this "harurow-util" extension will be documented in this 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) 
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.2.2] 2017-04-17
+- テストケースの追加と修正
+
 ## [1.2.1] 2017-04-14
 - テストケースの最適化
 

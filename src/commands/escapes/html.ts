@@ -55,7 +55,7 @@ const unescapeChar = (ch: string) =>
                    unescapeSpecialChar(ch)
 
 const escapedChars = (str: string) =>
-    str.match(/&[^;]+;|[\uD800-\uDBFF][\uDC00-\uDFFF]|[^\uD800-\uDFFF]/g) || []
+    str.match(/&[^;]+;|[\uD800-\uDBFF][\uDC00-\uDFFF]|[^\uD800-\uDFFF]/g)
 
 const specialChars = {
     '\xa0': '&nbsp;',
