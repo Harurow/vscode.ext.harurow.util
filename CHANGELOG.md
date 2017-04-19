@@ -4,6 +4,10 @@ All notable changes to this "harurow-util" extension will be documented in this 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) 
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.2.3] 2017-04-18
+変数の左右入れ替えの機能を拡張
+終端が','でも入れ替えられるように対応した
+
 ## [1.2.2] 2017-04-17
 - テストケースの追加と修正
 
