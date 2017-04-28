@@ -1,4 +1,8 @@
 import {
+    getTimezoneOffset,
+} from './util'
+
+import {
     isValidStr
 } from '../../utils'
 
@@ -7,21 +11,18 @@ export const toIsoDateTime = (content: string) =>
         ? content.replace(/\\\/Date\(([0-9]+)([+-][0-9]{4})?\)\\\//g, replacer)
         : content
 
-const replacer = (match, g1, g2) =>
-    toDate(Number.parseInt(g1, 10), g2)
+const replacer = (match, tick, timezone) =>
+    toDate(Number.parseInt(tick, 10), timezone)
 
-const toDate = (tick, g2) =>
-    g2 ? getDateOfTimezone(tick, g2)
+const toDate = (tick, timezone) =>
+    timezone ? getDateOfLocal(tick, timezone)
        : getDateOfUtc(tick)
 
-const getDateOfTimezone = (tick, g2) =>
-    AdjustTimezone(tick).toISOString().replace('Z', g2)
+const getDateOfLocal = (tick, timezone) =>
+    AdjustTimezone(tick, timezone).toISOString().replace('Z', timezone)
 
-const getTimezoneOffset = () =>
-    -(new Date().getTimezoneOffset() * 60 * 1000)
-
-const AdjustTimezone = (tick) =>
-    new Date(tick + getTimezoneOffset())
+const AdjustTimezone = (tick, timezone) =>
+    new Date(tick + getTimezoneOffset(timezone) * 60 * 1000 )
 
 const getDateOfUtc = (tick) =>
     new Date(tick).toISOString()

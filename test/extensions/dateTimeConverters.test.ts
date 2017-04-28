@@ -17,4 +17,18 @@ suite('extensions dateTimeConverters', () => {
         editor.execCommand(command)
             .then(_ => assert.equal(after, editor.getText()))
     })
+
+    test('commands.dateTimeConverters.toCSharpDateTime', async () => {
+        let editor = await TextEditor.init()
+
+        let command = 'commands.dateTimeConverters.toCSharpDateTime'
+
+        let before = '2017-04-27T15:00:00.000Z 2017-04-28T00:00:00.000+0900 2017-04-28T00:00:00.000-0900 2017-04-27T15:00:00.321Z'
+        let aflter = '\\/Date(1493305200000)\\/ \\/Date(1493305200000+0900)\\/ \\/Date(1493305200000-0900)\\/ \\/Date(1493305200321)\\/'
+        await editor.clearText()
+        await editor.setText(before)
+        assert.equal(before, editor.getText())
+        editor.execCommand(command)
+            .then(_ => assert.equal(after, editor.getText()))
+    })
 })
