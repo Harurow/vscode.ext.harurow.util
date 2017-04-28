@@ -1,6 +1,7 @@
 import * as vscode from 'vscode'
 
 import * as caseConverters from './commands/caseConverters'
+import * as dateTimeConverters from './commands/dateTimeConverters'
 import * as encodings from './commands/encodings'
 import * as escapes from './commands/escapes'
 import * as lineFilters from './commands/lineFilters'
@@ -16,6 +17,11 @@ export function activate(context: vscode.ExtensionContext): void {
         caseConverters.toCamelCaseCommand('commands.caseConverters.toCamelCase'),
         caseConverters.toUpperSnakeCaseCommand('commands.caseConverters.toUpperSnakeCase'),
         caseConverters.toLowerSnakeCaseCommand('commands.caseConverters.toLowerSnakeCase'),
+    )
+
+    context.subscriptions.push(
+        dateTimeConverters.toIsoDateTimeCommand('commands.dateTimeConverters.toIsoDateTime'),
+        dateTimeConverters.toCSharpDateTimeCommand('commands.dateTimeConverters.toCSharpDateTime'),
     )
 
     context.subscriptions.push(

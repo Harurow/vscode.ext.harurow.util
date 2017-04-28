@@ -14,7 +14,12 @@ suite('extensions encodings', () => {
         await editor.setText(before)
         assert.equal(before, editor.getText())
         editor.execCommand(command)
-            .then(_ => assert.equal(after, editor.getText()))
+        await new Promise((resolve, reject) => {
+            setTimeout(() => {
+                assert.equal(after, editor.getText())
+                resolve()
+            }, 200)
+        })
     })
 
     test('commands.encodings.encodeRfc1866ShiftJis', async () => {
@@ -27,7 +32,12 @@ suite('extensions encodings', () => {
         await editor.setText(before)
         assert.equal(before, editor.getText())
         editor.execCommand(command)
-            .then(_ => assert.equal(after, editor.getText()))
+        await new Promise((resolve, reject) => {
+            setTimeout(() => {
+                assert.equal(after, editor.getText())
+                resolve()
+            }, 200)
+        })
     })
 
     test('commands.encodings.encodeRfc1866Utf8', async () => {
@@ -40,7 +50,12 @@ suite('extensions encodings', () => {
         await editor.setText(before)
         assert.equal(before, editor.getText())
         editor.execCommand(command)
-            .then(_ => assert.equal(after, editor.getText()))
+        await new Promise((resolve, reject) => {
+            setTimeout(() => {
+                assert.equal(after, editor.getText())
+                resolve()
+            }, 200)
+        })
     })
 
     test('commands.encodings.encodeRfc3986EucJp', async () => {
@@ -53,7 +68,12 @@ suite('extensions encodings', () => {
         await editor.setText(before)
         assert.equal(before, editor.getText())
         editor.execCommand(command)
-            .then(_ => assert.equal(after, editor.getText()))
+        await new Promise((resolve, reject) => {
+            setTimeout(() => {
+                assert.equal(after, editor.getText())
+                resolve()
+            }, 200)
+        })
     })
 
     test('commands.encodings.encodeRfc3986ShiftJis', async () => {
@@ -66,7 +86,12 @@ suite('extensions encodings', () => {
         await editor.setText(before)
         assert.equal(before, editor.getText())
         editor.execCommand(command)
-            .then(_ => assert.equal(after, editor.getText()))
+        await new Promise((resolve, reject) => {
+            setTimeout(() => {
+                assert.equal(after, editor.getText())
+                resolve()
+            }, 200)
+        })
     })
 
     test('commands.encodings.encodeRfc3986Utf8', async () => {
@@ -79,7 +104,12 @@ suite('extensions encodings', () => {
         await editor.setText(before)
         assert.equal(before, editor.getText())
         editor.execCommand(command)
-            .then(_ => assert.equal(after, editor.getText()))
+        await new Promise((resolve, reject) => {
+            setTimeout(() => {
+                assert.equal(after, editor.getText())
+                resolve()
+            }, 200)
+        })
     })
 
     test('commands.encodings.decodeRfc1866EucJp', async () => {
@@ -92,7 +122,12 @@ suite('extensions encodings', () => {
         await editor.setText(before)
         assert.equal(before, editor.getText())
         editor.execCommand(command)
-            .then(_ => assert.equal(after, editor.getText()))
+        await new Promise((resolve, reject) => {
+            setTimeout(() => {
+                assert.equal(after, editor.getText())
+                resolve()
+            }, 200)
+        })
     })
 
     test('commands.encodings.decodeRfc1866ShiftJis', async () => {
@@ -105,7 +140,12 @@ suite('extensions encodings', () => {
         await editor.setText(before)
         assert.equal(before, editor.getText())
         editor.execCommand(command)
-            .then(_ => assert.equal(after, editor.getText()))
+        await new Promise((resolve, reject) => {
+            setTimeout(() => {
+                assert.equal(after, editor.getText())
+                resolve()
+            }, 200)
+        })
     })
 
     test('commands.encodings.decodeRfc1866Utf8', async () => {
@@ -118,9 +158,13 @@ suite('extensions encodings', () => {
         await editor.setText(before)
         assert.equal(before, editor.getText())
         editor.execCommand(command)
-            .then(_ => assert.equal(after, editor.getText()))
+        await new Promise((resolve, reject) => {
+            setTimeout(() => {
+                assert.equal(after, editor.getText())
+                resolve()
+            }, 200)
+        })
     })
-
 
     test('commands.encodings.decodeRfc3986EucJp', async () => {
         let editor = await TextEditor.init()
@@ -132,7 +176,12 @@ suite('extensions encodings', () => {
         await editor.setText(before)
         assert.equal(before, editor.getText())
         editor.execCommand(command)
-            .then(_ => assert.equal(after, editor.getText()))
+        await new Promise((resolve, reject) => {
+            setTimeout(() => {
+                assert.equal(after, editor.getText())
+                resolve()
+            }, 200)
+        })
     })
 
     test('commands.encodings.decodeRfc3986ShiftJis', async () => {
@@ -145,7 +194,12 @@ suite('extensions encodings', () => {
         await editor.setText(before)
         assert.equal(before, editor.getText())
         editor.execCommand(command)
-            .then(_ => assert.equal(after, editor.getText()))
+        await new Promise((resolve, reject) => {
+            setTimeout(() => {
+                assert.equal(after, editor.getText())
+                resolve()
+            }, 200)
+        })
     })
 
     test('commands.encodings.decodeRfc3986Utf8', async () => {
@@ -158,7 +212,12 @@ suite('extensions encodings', () => {
         await editor.setText(before)
         assert.equal(before, editor.getText())
         editor.execCommand(command)
-            .then(_ => assert.equal(after, editor.getText()))
+        await new Promise((resolve, reject) => {
+            setTimeout(() => {
+                assert.equal(after, editor.getText())
+                resolve()
+            }, 200)
+        })
     })
 
 })

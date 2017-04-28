@@ -2,7 +2,7 @@
   "name": "harurow-util",
   "displayName": "Harurow Util",
   "description": "自分で使うプログラマのための機能をまとめたVisual Studio Code 拡張",
-  "version": "1.2.3",
+  "version": "1.3.0",
   "publisher": "Harurow-the-programmer",
   "homepage": "https://github.com/Harurow/vscode.ext.harurow.util",
   "repository": {
@@ -82,7 +82,9 @@
     "onCommand:commands.caseConverters.toPascalCase",
     "onCommand:commands.caseConverters.toCamelCase",
     "onCommand:commands.caseConverters.toUpperSnakeCase",
-    "onCommand:commands.caseConverters.toLowerSnakeCase"
+    "onCommand:commands.caseConverters.toLowerSnakeCase",
+    "onCommand:commands.dateTimeConverters.toIsoDateTime",
+    "onCommand:commands.dateTimeConverters.toCSharpDateTime"
   ],
   "contributes": {
     "commands": [
@@ -225,6 +227,16 @@
         "command": "commands.caseConverters.toLowerSnakeCase",
         "category": "CaseConverter",
         "title": "to_lower_snake_case"
+      },
+      {
+        "command": "commands.dateTimeConverters.toIsoDateTime",
+        "category": "DateTimeConverter",
+        "title": "To ISO8601 DateTime Format(yyyy-mm-ddThh:mm:ss.sss)"
+      },
+      {
+        "command": "commands.dateTimeConverters.toCSharpDateTime",
+        "category": "DateTimeConverter",
+        "title": "To C# DateTime Format(\\/Date(nnnnnnnnnn)\\/)"
       }
     ]
   }
