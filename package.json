@@ -2,7 +2,7 @@
   "name": "harurow-util",
   "displayName": "Harurow Util",
   "description": "自分で使うプログラマのための機能をまとめたVisual Studio Code 拡張",
-  "version": "1.2.3",
+  "version": "1.3.0",
   "publisher": "Harurow-the-programmer",
   "homepage": "https://github.com/Harurow/vscode.ext.harurow.util",
   "repository": {
@@ -231,12 +231,12 @@
       {
         "command": "commands.datetimeConverters.toIsoDateTime",
         "category": "DateTimeConverter",
-        "title": "to ISO8601 DateTime Format(yyyy-mm-ddThh:mm:ss)"
+        "title": "To ISO8601 DateTime Format(yyyy-mm-ddThh:mm:ss.sss)"
       },
       {
         "command": "commands.datetimeConverters.toCSharpDateTime",
         "category": "DateTimeConverter",
-        "title": "to C# DateTime Format(\\/Date(nnnnnnnnnn)\\/)"
+        "title": "To C# DateTime Format(\\/Date(nnnnnnnnnn)\\/)"
       }
     ]
   }

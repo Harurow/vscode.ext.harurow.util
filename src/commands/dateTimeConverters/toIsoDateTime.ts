@@ -2,24 +2,26 @@ import {
     isValidStr
 } from '../../utils'
 
-export const toIsoDateTime = (content: string) => {
-    if (!isValidStr(content)) {
-        return content
-    }
+export const toIsoDateTime = (content: string) =>
+    isValidStr(content)
+        ? content.replace(/\\\/Date\(([0-9]+)([+-][0-9]{4})?\)\\\//g, replacer)
+        : content
 
-    let regex = /\\\/Date\(([0-9]+)([+-][0-9]{4})?\)\\\//g
+const replacer = (match, g1, g2) =>
+    toDate(Number.parseInt(g1, 10), g2)
 
-    return content.replace(regex,
-        (match, g1, g2: string) => {
-            let tick = Number.parseInt(g1, 10)
+const toDate = (tick, g2) =>
+    g2 ? getDateOfTimezone(tick, g2)
+       : getDateOfUtc(tick)
 
-            if (g2) {
-                let utc = new Date()
-                utc.setTime(tick - utc.getTimezoneOffset() * 60 * 1000)
-                return utc.toISOString().replace('Z', g2)
-            }
+const getDateOfTimezone = (tick, g2) =>
+    AdjustTimezone(tick).toISOString().replace('Z', g2)
 
-            let utc = new Date(tick)
-            return utc.toISOString()
-        })
-}
+const getTimezoneOffset = () =>
+    -(new Date().getTimezoneOffset() * 60 * 1000)
+
+const AdjustTimezone = (tick) =>
+    new Date(tick + getTimezoneOffset())
+
+const getDateOfUtc = (tick) =>
+    new Date(tick).toISOString()
