@@ -82,7 +82,9 @@
     "onCommand:commands.caseConverters.toPascalCase",
     "onCommand:commands.caseConverters.toCamelCase",
     "onCommand:commands.caseConverters.toUpperSnakeCase",
-    "onCommand:commands.caseConverters.toLowerSnakeCase"
+    "onCommand:commands.caseConverters.toLowerSnakeCase",
+    "onCommand:commands.datetimeConverters.toIsoDateTime",
+    "onCommand:commands.datetimeConverters.toCSharpDateTime"
   ],
   "contributes": {
     "commands": [
@@ -225,6 +227,16 @@
         "command": "commands.caseConverters.toLowerSnakeCase",
         "category": "CaseConverter",
         "title": "to_lower_snake_case"
+      },
+      {
+        "command": "commands.datetimeConverters.toIsoDateTime",
+        "category": "DateTimeConverter",
+        "title": "to ISO8601 DateTime Format(yyyy-mm-ddThh:mm:ss)"
+      },
+      {
+        "command": "commands.datetimeConverters.toCSharpDateTime",
+        "category": "DateTimeConverter",
+        "title": "to C# DateTime Format(\\/Date(nnnnnnnnnn)\\/)"
       }
     ]
   }
