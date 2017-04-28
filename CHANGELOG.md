@@ -4,7 +4,7 @@ All notable changes to this "harurow-util" extension will be documented in this 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) 
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-### [1.3.0] 2017-xx-xx
+## [1.3.0] 2017-04-28
 日付の変換機能を追加
 
 ## [1.2.3] 2017-04-18
