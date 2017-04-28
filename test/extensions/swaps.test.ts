@@ -16,8 +16,12 @@ suite('extensions swaps', () => {
 
         editor.selectAll()
         assert.equal(before, editor.getText())
-
         editor.execCommand(command)
-            .then(_ => assert.equal(after, editor.getText()))
+        await new Promise((resolve, reject) => {
+            setTimeout(() => {
+                assert.equal(after, editor.getText())
+                resolve()
+            }, 200)
+        })
     })
 })

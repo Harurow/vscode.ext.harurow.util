@@ -20,7 +20,8 @@ export function activate(context: vscode.ExtensionContext): void {
     )
 
     context.subscriptions.push(
-        dateTimeConverters.toIsoDateTimeCommand('commands.dateTimeConverters.toIsoDateTime')
+        dateTimeConverters.toIsoDateTimeCommand('commands.dateTimeConverters.toIsoDateTime'),
+        dateTimeConverters.toCSharpDateTimeCommand('commands.dateTimeConverters.toCSharpDateTime'),
     )
 
     context.subscriptions.push(

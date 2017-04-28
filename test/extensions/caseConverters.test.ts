@@ -5,16 +5,22 @@ import TextEditor from '../utils/textEditor'
 
 suite('extensions caseConverters', () => {
     test('commands.caseConverters.toPascalCase', async () => {
-        let editor = await TextEditor.init()
-
         let command = 'commands.caseConverters.toPascalCase'
         let before = 'PascalCase camelCase lower_snake UPPER_SNAKE'
         let after = 'PascalCase CamelCase LowerSnake UpperSnake'
+
+        let editor = await TextEditor.init()
+
         await editor.clearText()
         await editor.setText(before)
         assert.equal(before, editor.getText())
         editor.execCommand(command)
-            .then(_ => assert.equal(after, editor.getText()))
+        await new Promise((resolve, reject) => {
+            setTimeout(() => {
+                assert.equal(after, editor.getText())
+                resolve()
+            }, 200)
+        })
     })
 
     test('commands.caseConverters.toCamelCase', async () => {
@@ -27,7 +33,12 @@ suite('extensions caseConverters', () => {
         await editor.setText(before)
         assert.equal(before, editor.getText())
         editor.execCommand(command)
-            .then(_ => assert.equal(after, editor.getText()))
+        await new Promise((resolve, reject) => {
+            setTimeout(() => {
+                assert.equal(after, editor.getText())
+                resolve()
+            }, 200)
+        })
     })
 
     test('commands.caseConverters.toUpperSnakeCase', async () => {
@@ -40,7 +51,12 @@ suite('extensions caseConverters', () => {
         await editor.setText(before)
         assert.equal(before, editor.getText())
         editor.execCommand(command)
-            .then(_ => assert.equal(after, editor.getText()))
+        await new Promise((resolve, reject) => {
+            setTimeout(() => {
+                assert.equal(after, editor.getText())
+                resolve()
+            }, 200)
+        })
     })
 
     test('commands.caseConverters.toLowerSnakeCase', async () => {
@@ -53,6 +69,11 @@ suite('extensions caseConverters', () => {
         await editor.setText(before)
         assert.equal(before, editor.getText())
         editor.execCommand(command)
-            .then(_ => assert.equal(after, editor.getText()))
+        await new Promise((resolve, reject) => {
+            setTimeout(() => {
+                assert.equal(after, editor.getText())
+                resolve()
+            }, 200)
+        })
     })
 })

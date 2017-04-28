@@ -10,12 +10,17 @@ suite('extensions dateTimeConverters', () => {
         let command = 'commands.dateTimeConverters.toIsoDateTime'
 
         let before = '\\/Date(1493305200000)\\/ \\/Date(1493305200000+0900)\\/ \\/Date(1493305200000-0900)\\/ \\/Date(1493305200321)\\/'
-        let after = '2017-04-27T15:00:00.000Z 2017-04-28T00:00:00.000+0900 2017-04-28T00:00:00.000-0900 2017-04-27T15:00:00.321Z'
+        let after = '2017-04-27T15:00:00.000Z 2017-04-28T00:00:00.000+0900 2017-04-27T06:00:00.000-0900 2017-04-27T15:00:00.321Z'
         await editor.clearText()
         await editor.setText(before)
         assert.equal(before, editor.getText())
         editor.execCommand(command)
-            .then(_ => assert.equal(after, editor.getText()))
+        await new Promise((resolve, reject) => {
+            setTimeout(() => {
+                assert.equal(after, editor.getText())
+                resolve()
+            }, 200)
+        })
     })
 
     test('commands.dateTimeConverters.toCSharpDateTime', async () => {
@@ -23,12 +28,17 @@ suite('extensions dateTimeConverters', () => {
 
         let command = 'commands.dateTimeConverters.toCSharpDateTime'
 
-        let before = '2017-04-27T15:00:00.000Z 2017-04-28T00:00:00.000+0900 2017-04-28T00:00:00.000-0900 2017-04-27T15:00:00.321Z'
-        let aflter = '\\/Date(1493305200000)\\/ \\/Date(1493305200000+0900)\\/ \\/Date(1493305200000-0900)\\/ \\/Date(1493305200321)\\/'
+        let before = '2017-04-27T15:00:00.000Z 2017-04-28T00:00:00.000+0900 2017-04-27T06:00:00.000-0900 2017-04-27T15:00:00.321Z'
+        let after = '\\/Date(1493305200000)\\/ \\/Date(1493305200000+0900)\\/ \\/Date(1493305200000-0900)\\/ \\/Date(1493305200321)\\/'
         await editor.clearText()
         await editor.setText(before)
         assert.equal(before, editor.getText())
         editor.execCommand(command)
-            .then(_ => assert.equal(after, editor.getText()))
+        await new Promise((resolve, reject) => {
+            setTimeout(() => {
+                assert.equal(after, editor.getText())
+                resolve()
+            }, 200)
+        })
     })
 })
