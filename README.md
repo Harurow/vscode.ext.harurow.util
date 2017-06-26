@@ -1,7 +1,6 @@
 # Harurow Util README
 
 [![Build Status](https://travis-ci.org/Harurow/vscode.ext.harurow.util.svg?branch=master)](https://travis-ci.org/Harurow/vscode.ext.harurow.util)
-[![codecov](https://codecov.io/gh/Harurow/vscode.ext.harurow.util/branch/master/graph/badge.svg)](https://codecov.io/gh/Harurow/vscode.ext.harurow.util)
 
 ## 特徴
 自分でプログラムを書くときに利用する機能をVisualStudioCodeの拡張として提供しています
