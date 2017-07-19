@@ -2,7 +2,7 @@
   "name": "harurow-util",
   "displayName": "Harurow Util",
   "description": "自分で使うプログラマのための機能をまとめたVisual Studio Code 拡張",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "publisher": "Harurow-the-programmer",
   "homepage": "https://github.com/Harurow/vscode.ext.harurow.util",
   "repository": {
@@ -14,7 +14,7 @@
   },
   "license": "MIT",
   "engines": {
-    "vscode": "^1.8.0"
+    "vscode": "^1.14.1"
   },
   "categories": [
     "Other"
@@ -30,6 +30,7 @@
   "scripts": {
     "vscode:prepublish": "tsc -p ./",
     "compile": "tsc -watch -p ./",
+    "build": "tsc -p ./",
     "postinstall": "node ./node_modules/vscode/bin/install",
     "test": "node ./node_modules/vscode/bin/test"
   },
@@ -37,15 +38,16 @@
     "@types/encoding-japanese": "^1.0.15",
     "@types/glob": "^5.0.30",
     "@types/mocha": "^2.2.41",
-    "@types/node": "^8.0.2",
+    "@types/node": "^8.0.14",
     "decache": "^4.1.0",
     "glob": "^7.1.2",
     "istanbul": "^0.4.5",
     "mocha": "^3.4.2",
     "remap-istanbul": "^0.9.5",
-    "tslint": "^5.4.3",
-    "typescript": "^2.4.0",
-    "vscode": "^1.0.5",
+    "source-map-support": "^0.4.15",
+    "tslint": "^5.5.0",
+    "typescript": "^2.4.1",
+    "vscode": "^1.1.4",
     "vscode-nls": "^2.0.2"
   },
   "dependencies": {

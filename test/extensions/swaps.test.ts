@@ -21,7 +21,7 @@ suite('extensions swaps', () => {
             setTimeout(() => {
                 assert.equal(after, editor.getText())
                 resolve()
-            }, 200)
+            }, 300)
         })
     })
 })

@@ -19,7 +19,7 @@ suite('extensions caseConverters', () => {
             setTimeout(() => {
                 assert.equal(after, editor.getText())
                 resolve()
-            }, 200)
+            }, 300)
         })
     })
 
@@ -37,7 +37,7 @@ suite('extensions caseConverters', () => {
             setTimeout(() => {
                 assert.equal(after, editor.getText())
                 resolve()
-            }, 200)
+            }, 300)
         })
     })
 
@@ -55,7 +55,7 @@ suite('extensions caseConverters', () => {
             setTimeout(() => {
                 assert.equal(after, editor.getText())
                 resolve()
-            }, 200)
+            }, 300)
         })
     })
 
@@ -73,7 +73,7 @@ suite('extensions caseConverters', () => {
             setTimeout(() => {
                 assert.equal(after, editor.getText())
                 resolve()
-            }, 200)
+            }, 300)
         })
     })
 })

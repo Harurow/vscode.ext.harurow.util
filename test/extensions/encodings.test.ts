@@ -18,7 +18,7 @@ suite('extensions encodings', () => {
             setTimeout(() => {
                 assert.equal(after, editor.getText())
                 resolve()
-            }, 200)
+            }, 300)
         })
     })
 
@@ -36,7 +36,7 @@ suite('extensions encodings', () => {
             setTimeout(() => {
                 assert.equal(after, editor.getText())
                 resolve()
-            }, 200)
+            }, 300)
         })
     })
 
@@ -54,7 +54,7 @@ suite('extensions encodings', () => {
             setTimeout(() => {
                 assert.equal(after, editor.getText())
                 resolve()
-            }, 200)
+            }, 300)
         })
     })
 
@@ -72,7 +72,7 @@ suite('extensions encodings', () => {
             setTimeout(() => {
                 assert.equal(after, editor.getText())
                 resolve()
-            }, 200)
+            }, 300)
         })
     })
 
@@ -90,7 +90,7 @@ suite('extensions encodings', () => {
             setTimeout(() => {
                 assert.equal(after, editor.getText())
                 resolve()
-            }, 200)
+            }, 300)
         })
     })
 
@@ -108,7 +108,7 @@ suite('extensions encodings', () => {
             setTimeout(() => {
                 assert.equal(after, editor.getText())
                 resolve()
-            }, 200)
+            }, 300)
         })
     })
 
@@ -126,7 +126,7 @@ suite('extensions encodings', () => {
             setTimeout(() => {
                 assert.equal(after, editor.getText())
                 resolve()
-            }, 200)
+            }, 300)
         })
     })
 
@@ -144,7 +144,7 @@ suite('extensions encodings', () => {
             setTimeout(() => {
                 assert.equal(after, editor.getText())
                 resolve()
-            }, 200)
+            }, 300)
         })
     })
 
@@ -162,7 +162,7 @@ suite('extensions encodings', () => {
             setTimeout(() => {
                 assert.equal(after, editor.getText())
                 resolve()
-            }, 200)
+            }, 300)
         })
     })
 
@@ -180,7 +180,7 @@ suite('extensions encodings', () => {
             setTimeout(() => {
                 assert.equal(after, editor.getText())
                 resolve()
-            }, 200)
+            }, 300)
         })
     })
 
@@ -198,7 +198,7 @@ suite('extensions encodings', () => {
             setTimeout(() => {
                 assert.equal(after, editor.getText())
                 resolve()
-            }, 200)
+            }, 300)
         })
     })
 
@@ -216,7 +216,7 @@ suite('extensions encodings', () => {
             setTimeout(() => {
                 assert.equal(after, editor.getText())
                 resolve()
-            }, 200)
+            }, 300)
         })
     })
 
