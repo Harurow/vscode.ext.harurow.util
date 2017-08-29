@@ -6,3 +6,6 @@ export const regReplace = (name: string, replacer: (str: string) => string) =>
 
 export const regWhole = (name: string, whole: () => any) =>
     vscode.commands.registerCommand(name, editor.getWholeFunc(whole))
+
+export const regExec = (name: string, exec: () => any) =>
+    vscode.commands.registerCommand(name, editor.execFunc(exec))

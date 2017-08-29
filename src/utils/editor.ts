@@ -80,6 +80,9 @@ export const getWholeFunc = (func: () => any) =>
         func()
     }
 
+export const execFunc = (func: () => any) =>
+    () => func()
+
 export interface InputBoxOptionsEx extends vscode.InputBoxOptions {
     emptyMessage: string
 }

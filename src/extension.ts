@@ -4,6 +4,7 @@ import * as caseConverters from './commands/caseConverters'
 import * as dateTimeConverters from './commands/dateTimeConverters'
 import * as encodings from './commands/encodings'
 import * as escapes from './commands/escapes'
+import * as execScripts from './commands/execScripts'
 import * as lineFilters from './commands/lineFilters'
 import * as numberings from './commands/numberings'
 import * as selectors from './commands/selectors'
@@ -71,5 +72,9 @@ export function activate(context: vscode.ExtensionContext): void {
 
     context.subscriptions.push(
         swaps.swapLrCommand('commands.swaps.swapLr'),
+    )
+
+    context.subscriptions.push(
+        execScripts.execScriptCommand('commands.execScripts.execScript'),
     )
 }

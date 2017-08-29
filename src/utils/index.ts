@@ -1,6 +1,7 @@
 import {
     regReplace,
     regWhole,
+    regExec,
 } from './commands'
 
 import {
@@ -38,6 +39,7 @@ import {
 export {
     regReplace,
     regWhole,
+    regExec,
 
     InputBoxOptionsEx,
     getTextEditorOrThrowIfNotExistsTextEditor,
