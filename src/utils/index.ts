@@ -1,66 +1,9 @@
-import {
-    regReplace,
-    regWhole,
-} from './commands'
-
-import {
-    InputBoxOptionsEx,
-    getTextEditorOrThrowIfNotExistsTextEditor,
-    showWarningIfHasNoMultiCursors,
-    showWarningIfHasNoSelection,
-    showInputBox,
-    getNormalizedLineSelection,
-    getReplaceFunc,
-    getWholeFunc,
-} from './editor'
-
-import {
-    isValidStr,
-    hasChar,
-    isUnderscore,
-    isValidIdentifier,
-    replaceIdentifiers,
-    words,
-    lines,
-    chars,
-    strLen,
-    CharInfo,
-    codePoints,
-    hex,
-    SurrogatePair,
-    surrogatePair,
-} from './string'
-
-import {
-    throwIf,
-} from './util'
-
-export {
-    regReplace,
-    regWhole,
-
-    InputBoxOptionsEx,
-    getTextEditorOrThrowIfNotExistsTextEditor,
-    showWarningIfHasNoMultiCursors,
-    showWarningIfHasNoSelection,
-    showInputBox,
-    getNormalizedLineSelection,
-    getReplaceFunc,
-
-    isValidStr,
-    hasChar,
-    isUnderscore,
-    isValidIdentifier,
-    replaceIdentifiers,
-    words,
-    lines,
-    chars,
-    strLen,
-    CharInfo,
-    codePoints,
-    hex,
-    SurrogatePair,
-    surrogatePair,
-
-    throwIf,
-}
+import './string.extension'
+import './number.extension'
+export { UserCanceled } from './UserCanceled'
+export { UserError } from './UserError'
+export { UserInformation } from './UserInformation'
+export { UserWarning } from './UserWarning'
+export { validateRegex } from './validations'
+export { MultiStepInput } from './MultiStepInput'
+export { CharInfo } from './CharInfo'

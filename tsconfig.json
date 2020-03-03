@@ -6,9 +6,11 @@
         "lib": [
             "es6"
         ],
-        "alwaysStrict": true,
         "sourceMap": true,
-        "rootDir": "."
+        "rootDir": ".",
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
+        "strict": true,
     },
     "exclude": [
         "node_modules",
