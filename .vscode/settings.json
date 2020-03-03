@@ -1,15 +1,18 @@
+// Place your settings in this file to overwrite default and user settings.
 {
     "files.exclude": {
-        ".vscode-test": true,
         "node_modules": true,
         "out": true,
-        "coverage": true
+        ".vscode-test": true,
     },
     "search.exclude": {
-        ".vscode-test": true,
         "node_modules": true,
-        "out": true,
-        "coverage": true
+        "out": true // set this to false to include "out" folder in search results
     },
-    "typescript.tsdk": "./node_modules/typescript/lib"
+    // Turn off tsc task auto detection since we have the necessary tasks as npm scripts
+    "typescript.tsc.autoDetect": "off",
+    "workbench.enableExperiments": false,
+    "telemetry.enableCrashReporter": false,
+    "telemetry.enableTelemetry": false,
+    "typescript.tsdk": "node_modules/typescript/lib"
 }
