@@ -6,6 +6,7 @@
     "harurow.datetime.convert": "Harurow: datetime converter",
     "harurow.datetime.insert": "Harurow: datetime insert",
     "harurow.edit.calc": "Harurow: Evalute math expression",
+    "harurow.edit.dictionary": "Harurow: dictionary",
     "harurow.edit.distinct": "Harurow: distinct",
     "harurow.edit.numbering": "Harurow: numbering",
     "harurow.edit.swap": "Harurow: Left and right swapping",

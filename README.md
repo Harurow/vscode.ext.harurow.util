@@ -123,17 +123,10 @@ https://momentjs.com/docs/#/displaying/
 利用可能な数式は以下
 http://bugwheels94.github.io/math-expression-evaluator/
 
-## Requirements
-なし
-
-## Extension Settings
-なし
-
-## Known Issues
-なし
+##### 辞書検索
+英和辞典を検索
 
 ## Release Notes
-
-
+省略
 
 --------------------------------------------------------------------------------
