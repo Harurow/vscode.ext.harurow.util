@@ -2,7 +2,7 @@
     "name": "harurow-util",
     "displayName": "Harurow UTIL",
     "description": "自分で使うプログラマのための機能をまとめたVisual Studio Code 拡張",
-    "version": "2.0.0",
+    "version": "2.1.0",
     "license": "MIT",
     "engines": {
         "vscode": "^1.42.0"
@@ -25,6 +25,7 @@
         "onCommand:harurow.datetime.convert",
         "onCommand:harurow.datetime.insert",
         "onCommand:harurow.edit.calc",
+        "onCommand:harurow.edit.dictionary",
         "onCommand:harurow.edit.distinct",
         "onCommand:harurow.edit.numbering",
         "onCommand:harurow.edit.swap",
@@ -60,6 +61,10 @@
             {
                 "command": "harurow.edit.calc",
                 "title": "%harurow.edit.calc%"
+            },
+            {
+                "command": "harurow.edit.dictionary",
+                "title": "%harurow.edit.dictionary%"
             },
             {
                 "command": "harurow.edit.distinct",
@@ -177,6 +182,9 @@
                 {
                     "command": "harurow.edit.calc",
                     "when": "!editorReadonly"
+                },
+                {
+                    "command": "harurow.edit.dictionary"
                 },
                 {
                     "command": "harurow.edit.distinct",
@@ -309,6 +317,7 @@
     },
     "dependencies": {
         "encoding-japanese": "^1.0.30",
+        "harurow-ejdict": "^1.1.0",
         "math-expression-evaluator": "^1.2.22",
         "moment": "^2.24.0"
     }

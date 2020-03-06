@@ -1,52 +1,43 @@
 import { TextDocument, TextEditorEdit, Selection, QuickPickItem } from 'vscode'
 import { transformTemplate, getSelectTextIfExists } from '../util'
-import { MultiStepInput } from '../../../utils'
-import * as mee from 'math-expression-evaluator'
-
-interface QuickPickItemEx extends QuickPickItem {
-  result: boolean
-}
+import { MultiStepInput, isNullOrEmpty } from '../../../utils'
+import * as dict from 'harurow-ejdict'
 
 interface State {
-  pick?: QuickPickItemEx
+  pick?: QuickPickItem
 }
 
-function calculation (expr: string): { result: boolean, answer: string } {
-  try {
-    const answer: number = mee.eval(expr.replace(/%/, 'Mod'))
-    return { result: true, answer: answer.toString() }
-  } catch (err) {
+function createPickItem (query: string): QuickPickItem[] {
+  if (isNullOrEmpty(query)) {
+    return []
   }
-  return { result: false, answer: '' }
+  return dict.match(query, 25)
+    .map((i) => ({
+      alwaysShow: true,
+      picked: true,
+      label: i.index,
+      description: i.description,
+      result: i.index
+    }))
 }
 
-function createPickItem (expr: string): QuickPickItemEx {
-  const result = calculation(expr)
-  return {
-    alwaysShow: true,
-    picked: true,
-    label: result.result ? result.answer : '-',
-    description: `= ${expr}`,
-    result: result.result
-  }
-}
-
-export async function calc (): Promise<void> {
+export async function dictionary (): Promise<void> {
   const state: State = {}
   const text = getSelectTextIfExists()
-  const items: QuickPickItemEx[] = []
+  const items: QuickPickItem[] = []
+
   if (text != null) {
-    items.push(createPickItem(text))
+    items.push(...createPickItem(text))
   }
 
   async function pick (input: MultiStepInput, state: State): Promise<any> {
-    state.pick = await input.showQuickPick<QuickPickItemEx>({
-      placeholder: '計算式',
+    state.pick = await input.showQuickPick<QuickPickItem>({
+      placeholder: '検索文字',
       value: text ?? undefined,
       items: items,
       activeItem: items.length > 0 ? items[0] : undefined,
       onDidChangeValue: (sender, input) => {
-        sender.items = [createPickItem(input)] as QuickPickItemEx[]
+        sender.items = [...createPickItem(input)] as QuickPickItem[]
       }
     })
   }
@@ -73,11 +64,7 @@ async function transform (replace: (doc: TextDocument, editBuilder: TextEditorEd
   })
 }
 
-async function edit (state: QuickPickItemEx): Promise<void> {
-  if (!state.result) {
-    return
-  }
-
+async function edit (state: QuickPickItem): Promise<void> {
   await transform((doc, eb, sel) => {
     const before = doc.getText(sel)
     const after = state.label
@@ -89,7 +76,7 @@ async function edit (state: QuickPickItemEx): Promise<void> {
 }
 
 export const cmdTable = [
-  { name: 'edit.calc', func: calc }
+  { name: 'edit.dictionary', func: dictionary }
 ]
 
 export default cmdTable
