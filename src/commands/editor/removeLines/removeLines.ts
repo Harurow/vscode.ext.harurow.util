@@ -43,7 +43,7 @@ export async function ifMatched (): Promise<void> {
     return { pattern: pattern.slice(0, ignoreCase ? -2 : undefined), ignoreCase }
   }
 
-  let removes = 0
+  let removes: number | undefined
 
   const replace = (doc: TextDocument, eb: TextEditorEdit, sel: Selection, input: {pattern: string, ignoreCase: boolean}): void => {
     const before = doc.getText(sel)
@@ -51,7 +51,7 @@ export async function ifMatched (): Promise<void> {
       .lines()
       .filter(line => {
         const match = !RegExp(input.pattern, input.ignoreCase ? 'i' : undefined).test(line)
-        removes = match ? removes : removes + 1
+        removes = match ? removes : (removes ?? 0) + 1
         return match
       })
       .join('\n')
@@ -66,7 +66,7 @@ export async function ifMatched (): Promise<void> {
   if (removes === 0) {
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     window.showInformationMessage('notFound'.toLocalize())
-  } else {
+  } else if (removes !== undefined) {
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     window.showInformationMessage(
       'removeLines.ifMatched.result'
@@ -91,7 +91,7 @@ export async function ifUnmatched (): Promise<void> {
     return { pattern: pattern.slice(0, ignoreCase ? -2 : undefined), ignoreCase }
   }
 
-  let removes = 0
+  let removes: number | undefined
 
   const replace = (doc: TextDocument, eb: TextEditorEdit, sel: Selection, input: {pattern: string, ignoreCase: boolean}): void => {
     const before = doc.getText(sel)
@@ -99,7 +99,7 @@ export async function ifUnmatched (): Promise<void> {
       .lines()
       .filter(line => {
         const match = RegExp(input.pattern, input.ignoreCase ? 'i' : undefined).test(line)
-        removes = match ? removes : removes + 1
+        removes = match ? removes : (removes ?? 0) + 1
         return match
       })
       .join('\n')
@@ -114,7 +114,7 @@ export async function ifUnmatched (): Promise<void> {
   if (removes === 0) {
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     window.showInformationMessage('notFound'.toLocalize())
-  } else {
+  } else if (removes !== undefined) {
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     window.showInformationMessage(
       'removeLines.ifUnmatched.result'
