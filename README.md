@@ -14,7 +14,7 @@
 エクスプローラーからファイルまたはフォルダを非表示にする  
 ワークスペースの設定で選択中のファイル・フォルダを非表示に設定します。
 
-![エクスプローラーから除外](screenshots/fileExclude.excludeFile.gif)
+![エクスプローラーから除外](https://github.com/harurow/vscode.ext.harurow.util/blob/develop/screenshots/fileExclude.excludeFile.gif?raw=true)
 
 ### `除外設定を一時的に解除` / `除外設定を元に戻す`
 
@@ -22,7 +22,7 @@
 
 `除外設定を元に戻す`は`除外設定を一時的に解除`時に退避した設定を再度設定しファイルまたはフォルダの非表示を元に戻します。
 
-![除外設定を一時的に解除 / 除外設定を元に戻す](screenshots/fileExclude.backup,restore.gif)
+![除外設定を一時的に解除 / 除外設定を元に戻す](https://github.com/harurow/vscode.ext.harurow.util/blob/develop/screenshots/fileExclude.backup,restore.gif?raw=true)
 
 ## コマンドパレット
 
@@ -54,7 +54,7 @@
 
 選択中の文字列をチェインケース(小文字)に変換します
 
-![ケース変換関連](screenshots/transformCase.gif)
+![ケース変換関連](https://github.com/harurow/vscode.ext.harurow.util/blob/develop/screenshots/transformCase.gif?raw=true)
 
 ### 行削除関連
 
@@ -68,7 +68,7 @@
 選択中の行のうち正規表現に一致しない行を削除します
 正規表現入力で最後に`\i`を指定すると大文字小文字を区別しません
 
-![行削除関連](screenshots/removeLines.gif)
+![行削除関連](https://github.com/harurow/vscode.ext.harurow.util/blob/develop/screenshots/removeLines.gif?raw=true)
 
 ### エンコード, エスケープ関連
 
@@ -94,7 +94,7 @@
 * HTML, XML エスケープ  
 * UNICODE エスケープ
 
-![エンコード, エスケープ関連](screenshots/encoding.gif)
+![エンコード, エスケープ関連](https://github.com/harurow/vscode.ext.harurow.util/blob/develop/screenshots/encoding.gif?raw=true)
 
 ### その他
 
