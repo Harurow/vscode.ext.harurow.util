@@ -17,7 +17,6 @@
     "harurow.fileExclude.restore": "restore file.exclude settings",
     "harurow.removeLines.ifMatched": "Harurow: Remove lines if matched",
     "harurow.removeLines.ifUnmatched": "Harurow: Remove lines if unmatched",
-    "harurow.select.ifMatched": "Harurow: Select string if matched",
     "harurow.transformCase.ToLowerCamelCase": "Harurow: Transform to lowerCamelCase",
     "harurow.transformCase.ToLowerChainCase": "Harurow: Transform to lower-chain-case",
     "harurow.transformCase.ToLowerSnakeCase": "Harurow: Transform to lower_snake_case",
@@ -103,10 +102,6 @@
     "msg.removeLines.ifUnmatched.placeHoler": "input regex pattern",
     "msg.removeLines.ifUnmatched.prompt": "remove lines if unmatched regex pattern. [ends widh '\\i':ignore-case]",
     "msg.removeLines.ifUnmatched.result": "remove %1 line(s)",
-    "msg.select.ifMatched.invalidate": "input regex pattern",
-    "msg.select.ifMatched.placeHoler": "input regex pattern",
-    "msg.select.ifMatched.prompt": "select if matched regex pattern. [ends widh '\\i':ignore-case]",
-    "msg.select.ifMatched.result": "select %1 region(s)",
     "msg.transformCase.failed": "failed transform case",
 
     "msg.activateExtension": "Harurow > Hello!",

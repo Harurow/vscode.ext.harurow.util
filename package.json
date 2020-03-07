@@ -36,7 +36,6 @@
         "onCommand:harurow.fileExclude.restore",
         "onCommand:harurow.removeLines.ifMatched",
         "onCommand:harurow.removeLines.ifUnmatched",
-        "onCommand:harurow.select.ifMatched",
         "onCommand:harurow.transformCase.ToLowerCamelCase",
         "onCommand:harurow.transformCase.ToLowerChainCase",
         "onCommand:harurow.transformCase.ToLowerSnakeCase",
@@ -106,10 +105,6 @@
             {
                 "command": "harurow.removeLines.ifUnmatched",
                 "title": "%harurow.removeLines.ifUnmatched%"
-            },
-            {
-                "command": "harurow.select.ifMatched",
-                "title": "%harurow.select.ifMatched%"
             },
             {
                 "command": "harurow.transformCase.ToLowerCamelCase",
@@ -248,10 +243,6 @@
                 },
                 {
                     "command": "harurow.removeLines.ifUnmatched",
-                    "when": "!editorReadonly && editorHasSelection"
-                },
-                {
-                    "command": "harurow.select.ifMatched",
                     "when": "!editorReadonly && editorHasSelection"
                 }
             ]

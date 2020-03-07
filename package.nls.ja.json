@@ -17,7 +17,6 @@
     "harurow.fileExclude.restore": "除外設定を元に戻す",
     "harurow.removeLines.ifMatched": "正規表現に一致する行を削除",
     "harurow.removeLines.ifUnmatched": "正規表現に一致しない行を削除",
-    "harurow.select.ifMatched": "正規表現に一致する文字列を選択",
     "harurow.transformCase.ToLowerCamelCase": "キャメルケース(小文字)に変換",
     "harurow.transformCase.ToLowerChainCase": "チェインケース(小文字)に変換",
     "harurow.transformCase.ToLowerSnakeCase": "スネークケース(小文字)に変換",
@@ -78,10 +77,6 @@
     "msg.removeLines.ifUnmatched.placeHoler": "正規表現を入力してください",
     "msg.removeLines.ifUnmatched.prompt": "正規表現に一致しない行を削除します. [末尾'\\i':大文字小文字を無視] ",
     "msg.removeLines.ifUnmatched.result": "%1 行削除しました",
-    "msg.select.ifMatched.invalidate": "正しい正規表現を入力してください",
-    "msg.select.ifMatched.placeHoler": "正規表現を入力してください",
-    "msg.select.ifMatched.prompt": "正規表現に一致する文字列を選択します. [末尾'\\i':大文字小文字を無視] ",
-    "msg.select.ifMatched.result": "%1 箇所選択しました",
     "msg.transformCase.failed": "ケースの変換に失敗しました",
 
     "": ""
