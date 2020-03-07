@@ -19,6 +19,7 @@
     "bugs": {
         "url": "https://github.com/Harurow/vscode.ext.harurow.util/issues"
     },
+    "icon": "images/mosaic.png",
     "main": "./out/src/extension.js",
     "activationEvents": [
         "onCommand:harurow.experiment",
