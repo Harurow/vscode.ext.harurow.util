@@ -94,6 +94,8 @@
 * HTML, XML エスケープ  
 * UNICODE エスケープ
 
+![エンコード, エスケープ関連](screenshots/encoding.gif)
+
 ### その他
 
 #### 左右の入れ替え
