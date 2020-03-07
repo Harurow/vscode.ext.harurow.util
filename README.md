@@ -7,63 +7,70 @@
 自分でプログラムを書くときに利用する機能をVisualStudioCodeの拡張として提供しています
 [Github](https://github.com/Harurow/vscode.ext.harurow.util)でソースも公開しています
 
-### エクスプローラーの拡張
+## エクスプローラーの拡張
 
-#### ファイル除外関連
+### `エクスプローラーから除外`
 
-##### `エクスプローラーから除外`
+エクスプローラーからファイルまたはフォルダを非表示にする  
+ワークスペースの設定で選択中のファイル・フォルダを非表示に設定します。
 
-エクスプローラーからファイルまたはフォルダを非表示にする
+![エクスプローラーから除外](screenshots/fileExclude.excludeFile.gif)
 
-##### `除外設定を一時的に解除`
+### `除外設定を一時的に解除` / `除外設定を元に戻す`
 
-エクスプローラーの除外設定を退避してファイルまたはフォルダの非表示を解除します
+`除外設定を一時的に解除`はエクスプローラーの除外設定を退避してファイルまたはフォルダの非表示を解除します。
 
-##### `除外設定を元に戻す`
+`除外設定を元に戻す`は`除外設定を一時的に解除`時に退避した設定を再度設定しファイルまたはフォルダの非表示を元に戻します。
 
-`除外設定を一時的に解除`時に退避した設定を再度設定しファイルまたはフォルダの非表示を元に戻します
+![除外設定を一時的に解除 / 除外設定を元に戻す](screenshots/fileExclude.backup,restore.gif)
 
-### コマンドパレット
+
+## コマンドパレット
 
 コマンドパレットからテキストエディタ用の拡張機能です
 
-#### ケース変換関連
+### ケース変換関連
 
-##### `キャメルケース(大文字)に変換` (Harurow: Transform to UpperCamelCase)
+#### `キャメルケース(大文字)に変換` (Harurow: Transform to UpperCamelCase)
 
 選択中の文字列をキャメルケース(大文字)に変換します
 
-##### `キャメルケース(小文字)に変換` (Harurow: Transform to lowerCamelCase)
+#### `キャメルケース(小文字)に変換` (Harurow: Transform to lowerCamelCase)
 
 選択中の文字列をキャメルケース(小文字)に変換します
 
-##### `スネークケース(大文字)に変換` (Harurow: Transform to UPPER_SNAKE_CASE)
+#### `スネークケース(大文字)に変換` (Harurow: Transform to UPPER_SNAKE_CASE)
 
 選択中の文字列をスネークケース(大文字)に変換します
 
-##### `スネークケース(小文字)に変換` (Harurow: Transform to lower_snake_case)
+#### `スネークケース(小文字)に変換` (Harurow: Transform to lower_snake_case)
 
 選択中の文字列をスネークケース(小文字)に変換します
 
-##### `チェインケース(大文字)に変換` (Harurow: Transform to UPPER-CHAIN-CASE)
+#### `チェインケース(大文字)に変換` (Harurow: Transform to UPPER-CHAIN-CASE)
 
 選択中の文字列をチェインケース(大文字)に変換します
 
-##### `チェインケース(小文字)に変換` (Harurow: Transform to lower-chain-case)
+#### `チェインケース(小文字)に変換` (Harurow: Transform to lower-chain-case)
 
 選択中の文字列をチェインケース(小文字)に変換します
 
-#### 行削除関連
+![ケース変換関連](screenshots/transformCase.gif)
 
-##### `正規表現に一致する行を削除` (Harurow: Remove lines if matched)
+### 行削除関連
+
+#### `正規表現に一致する行を削除` (Harurow: Remove lines if matched)
 
 選択中の行のうち正規表現に一致する行を削除します  
 正規表現入力で最後に\\iを指定すると大文字小文字を区別しません
 
-##### `正規表現に一致しない行を削除` (Harurow: Remove lines if unmatched)
+#### `正規表現に一致しない行を削除` (Harurow: Remove lines if unmatched)
 
 選択中の行のうち正規表現に一致しない行を削除します
 正規表現入力で最後に\\iを指定すると大文字小文字を区別しません
+
+![行削除関連](screenshots/removeLines.gif)
+
 
 #### エンコード, エスケープ関連
 
