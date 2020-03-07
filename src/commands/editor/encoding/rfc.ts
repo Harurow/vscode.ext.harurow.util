@@ -30,18 +30,14 @@ export function encodeRfc (isRfc1866: boolean, isAll: boolean, encoding: ej.Enco
 }
 
 export function decodeRfc (encoding: ej.Encoding): (text: string) => string {
-  const parse = (text: string): RegExpMatchArray =>
-    text.match(/%[0-9A-Fa-f]{2}|[\uD800-\uDBFF][\uDC00-\uDFFF]|[^\uD800-\uDFFF]/g) ?? []
+  return (text: string): string => {
+    const dec = (m: string): string => {
+      const code = m.match(/%[0-9A-Fa-f]{2}/g)
+        ?.map(m => Number.parseInt(m.substr(1), 16)) as number[]
+      return ej.codeToString(ej.convert(code, 'UNICODE', encoding))
+    }
 
-  const dec = (code: number[]): string => ej.codeToString(ej.convert(code, 'UNICODE', encoding))
-
-  const enc = (str: string): number | undefined =>
-    str.length === 3 && str.startsWith('%')
-      ? Number.parseInt(str.substr(1), 16)
-      : str.codePointAt(0)
-
-  return (text: string) =>
-    dec(parse(text.replace(/[+]/g, ' '))
-      .map(enc)
-      .filter(n => n !== undefined) as number[])
+    return text.replace(/[+]/g, ' ')
+      .replace(/(%[0-9A-Fa-f]{2})+/g, dec)
+  }
 }
