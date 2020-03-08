@@ -131,6 +131,8 @@ moment.jsの書式を設定に指定できます。
 
 マルチカーソルに数値を採番します
 
+![採番](https://github.com/harurow/vscode.ext.harurow.util/blob/master/screenshots/edit.numbering.gif?raw=true)
+
 ##### 数式の評価
 
 数式の計算結果を求めます
