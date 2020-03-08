@@ -145,4 +145,6 @@ moment.jsの書式を設定に指定できます。
 英和辞典を検索します。
 辞書はパブリックドメインの辞書[ejdic-hand](https://kujirahand.com/web-tools/EJDictFreeDL.php)を利用しています。
 
+![辞書検索](https://github.com/harurow/vscode.ext.harurow.util/blob/master/screenshots/edit.dictionary.gif?raw=true)
+
 --------------------------------------------------------------------------------
