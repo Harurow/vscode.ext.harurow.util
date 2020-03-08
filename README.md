@@ -110,6 +110,8 @@ ISO8601 と C# の形式を相互変換します
 ```2017-04-28T00:00:00.000+0900``` ↔️ ```\/Date(1493305200000+0900)\/```  
 ```2017-04-28T00:00:00.000-0900``` ↔️ ```\/Date(1493305200000-0900)\/```  
 
+![日付・時刻の変換](https://github.com/harurow/vscode.ext.harurow.util/blob/master/screenshots/datetime.convert.gif?raw=true)
+
 #### 日付・時刻の挿入
 
 日付・時刻を挿入します  
@@ -117,7 +119,7 @@ moment.jsの書式を設定に指定できます。
 また設定`harurow.datetime.insert.format`に書式を指定することで選択リストをカスタマイズできます。
 書式は以下を参考に[Moment.js](https://momentjs.com/docs/#/displaying/)
 
-![日付・時刻を挿入します ](https://github.com/harurow/vscode.ext.harurow.util/blob/master/screenshots/datetime.insert.gif?raw=true)
+![日付・時刻を挿入します](https://github.com/harurow/vscode.ext.harurow.util/blob/master/screenshots/datetime.insert.gif?raw=true)
 
 ##### 重複の削除
 
