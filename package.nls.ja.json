@@ -26,6 +26,7 @@
     "msg.canceled": "キャンセルされました",
     "msg.completed": "完了しました",
     "msg.datetime.convert.placeholder": "変換の種類を選択してください",
+    "msg.datetime.insert.placeholder": "選択するか、書式を入力してください",
     "msg.edit.numbering.radix": "基数を選択してください",
     "msg.edit.numbering.start": "最初の数値を入力してください",
     "msg.edit.numbering.step": "増加量を入力してください",

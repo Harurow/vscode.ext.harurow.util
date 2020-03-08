@@ -18,6 +18,8 @@ interface QuickPickParameters<T extends QuickPickItem> {
   value?: string
   items: T[]
   activeItem?: T
+  matchOnDescription?: boolean
+  matchOnDetail?: boolean
   placeholder: string
   onDidChangeActive?: (item: T) => void
   onDidChangeValue?: (sender: QuickPick<T>, filter: string) => void
@@ -69,6 +71,8 @@ export class MultiStepInput {
   private initQuickPick<T extends QuickPickItem> (input: QuickPick<T>, resolve: (value: T) => void, reject: (reason?: any) => void, p: QuickPickParameters<T>): Disposable[] {
     input.title = p.title
     input.step = p.step
+    input.matchOnDescription = p.matchOnDescription ?? false
+    input.matchOnDetail = p.matchOnDetail ?? false
     input.totalSteps = p.totalSteps
     input.placeholder = p.placeholder
     input.value = p.value ?? ''
@@ -103,7 +107,7 @@ export class MultiStepInput {
     return disposables
   }
 
-  async showQuickPick<T extends QuickPickItem>(p: QuickPickParameters<T>): Promise<T | undefined> {
+  async showQuickPick<T extends QuickPickItem = QuickPickItem>(p: QuickPickParameters<T>): Promise<T | undefined> {
     const disposables: Disposable[] = []
     try {
       return await new Promise<T | undefined>((resolve, reject) => {

@@ -1,30 +1,47 @@
-import { window, TextDocument, TextEditorEdit, Selection, workspace, Uri } from 'vscode'
+import { TextDocument, TextEditorEdit, Selection, workspace, Uri, QuickPickItem } from 'vscode'
 import { transformTemplate } from '../util'
 import { format } from './util'
+import { MultiStepInput } from '../../../utils'
+
+interface State {
+  pick?: QuickPickItem
+}
 
 export async function insert (uri: Uri): Promise<void> {
+  const state: State = {}
   const now = new Date()
-  const fmt = (fmt: string): string => format(now, fmt)
 
   const conf = workspace.getConfiguration('harurow', uri)
   const values = conf.inspect('datetime.insert.format')
+  const formats = (values?.workspaceValue ?? values?.defaultValue) as string[]
 
-  const formats = values?.workspaceValue ?? values?.defaultValue
+  const createQuickPickItem = (fmt: string): QuickPickItem =>
+    ({ label: format(now, fmt), description: fmt })
 
-  const items = [
-    ...(formats as string[])
-  ].map((i: string) => ({ label: i, description: fmt(i) }))
+  const items = [...formats].map(createQuickPickItem)
 
-  const result = await window.showQuickPick(items,
-    {
-      placeHolder: 'datetime.convert.placeholder'.toLocalize(),
+  async function pick (input: MultiStepInput, state: State): Promise<any> {
+    state.pick = await input.showQuickPick({
+      placeholder: 'datetime.insert.placeholder'.toLocalize(),
       matchOnDescription: true,
-      matchOnDetail: true
-    }
-  )
+      items: items,
+      activeItem: items.length > 0 ? items[0] : undefined,
+      onDidChangeValue: (sender, input) => {
+        sender.items = [input, ...formats].map(createQuickPickItem)
+      }
+    })
+  }
 
-  if (result != null) {
-    await edit((_: string): string => result.description)
+  let result = false
+
+  try {
+    result = await MultiStepInput.run(async input => pick(input, state))
+  } catch (err) {
+    console.warn(err)
+  } finally {
+    if (result && state.pick != null) {
+      await edit((_: string): string => state.pick?.label ?? '')
+    }
   }
 }
 
