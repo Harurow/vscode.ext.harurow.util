@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0](https://github.com/Harurow/vscode.ext.harurow.util/compare/v2.2.2...v2.3.0) (2020-03-08)
+
+
+### Features
+
+* デフォルトの日付フォーマットを拡張 ([e2c1a57](https://github.com/Harurow/vscode.ext.harurow.util/commit/e2c1a578b0f00c0e458fa981bb0f06d22b519a0b))
+* 日付・時刻の変換の対応書式を拡充 ([ff4fdd6](https://github.com/Harurow/vscode.ext.harurow.util/commit/ff4fdd620f4f221569c29ef4d13c6e5557400338))
+* 日付の挿入で直接書式を入力できる機能を追加 ([af87fab](https://github.com/Harurow/vscode.ext.harurow.util/commit/af87fab7ce698ddf2d35c0ebbb8233b8d7912ec9))
+
+
+### Bug Fixes
+
+* 数式の評価の不具合を修正 ([4092c73](https://github.com/Harurow/vscode.ext.harurow.util/commit/4092c73af94c1abe7ede86786bc7fb824db70c52))
+* 日付の書式をlocale依存に修正 ([4afe491](https://github.com/Harurow/vscode.ext.harurow.util/commit/4afe491284f3be6b3d399012a6585cb0368a6871))
+
 ### [2.2.2](https://github.com/Harurow/vscode.ext.harurow.util/compare/v2.2.1...v2.2.2) (2020-03-07)
 
 ### [2.2.1](https://github.com/Harurow/vscode.ext.harurow.util/compare/v2.2.0...v2.2.1) (2020-03-07)
