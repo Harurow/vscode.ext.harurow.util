@@ -11,9 +11,12 @@ interface State {
   pick?: QuickPickItemEx
 }
 
-function calculation (expr: string): { result: boolean, answer: string } {
+function calculation (expression: string): { result: boolean, answer: string } {
   try {
-    const answer: number = mee.eval(expr.replace(/%/, 'Mod'))
+    const expr = expression
+      .replace(/%/g, 'Mod')
+      .replace(/,/g, '')
+    const answer: number = mee.eval(expr)
     return { result: true, answer: answer.toString() }
   } catch (err) {
   }
