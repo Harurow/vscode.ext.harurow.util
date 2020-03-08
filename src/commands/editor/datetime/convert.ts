@@ -80,7 +80,7 @@ export function toCSharp (text: string): string {
       ? toDate(match, year, month, day, hour, min, sec, msec, timezone)
       : match
 
-  const regex = /([0-9]{4})-([0-9]{2})-([0-9]{2})T([0-9]{2}):([0-9]{2}):([0-9]{2})(\.[0-9]{1,3})(Z|[+-][0-9]{2}:?[0-9]{2})/g
+  const regex = /([0-9]{4})[-/]?([0-9]{1,2})[-/]?([0-9]{1,2})T([0-9]{1,2}):?([0-9]{1,2}):?([0-9]{1,2})(\.[0-9]{1,3})?(Z|[+-][0-9]{2}:?[0-9]{2})/g
   return text.replace(regex, replace)
 }
 
