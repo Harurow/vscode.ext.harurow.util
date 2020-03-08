@@ -123,23 +123,26 @@ moment.jsの書式を設定に指定できます。
 
 ##### 重複の削除
 
-選択している行のうち重複している行を一つの行にします
+選択している行のうち重複している行を一つの行にします。
 
 ![重複の削除](https://github.com/harurow/vscode.ext.harurow.util/blob/master/screenshots/edit.distinct.gif?raw=true)
 
 ##### 採番
 
-マルチカーソルに数値を採番します
+マルチカーソルに数値を採番します。
 
 ![採番](https://github.com/harurow/vscode.ext.harurow.util/blob/master/screenshots/edit.numbering.gif?raw=true)
 
 ##### 数式の評価
 
-数式の計算結果を求めます
+数式の計算結果を求めます。
 利用可能な数式は[Math-expression-evaluator](http://bugwheels94.github.io/math-expression-evaluator/)
+
+![数式の評価](https://github.com/harurow/vscode.ext.harurow.util/blob/master/screenshots/edit.calc.gif?raw=true)
 
 ##### 辞書検索
 
-英和辞典を検索
+英和辞典を検索します。
+辞書はパブリックドメインの辞書[ejdic-hand](https://kujirahand.com/web-tools/EJDictFreeDL.php)を利用しています。
 
 --------------------------------------------------------------------------------
