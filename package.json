@@ -272,7 +272,11 @@
                     "default": [
                         "YYYY-MM",
                         "YYYY-MM-DD",
-                        "YYYY-MM-DD HH:mm:ss.SSS"
+                        "YYYY-MM-DD HH:mm:ss.SSS",
+                        "L",
+                        "LL",
+                        "LLL",
+                        "LLLL"
                     ],
                     "description": "%cfg.datetime.insert.format.description%"
                 }
