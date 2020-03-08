@@ -1,7 +1,7 @@
 import en from '../../package.nls.json'
 import ja from '../../package.nls.ja.json'
 
-function getLocale (): string {
+export function getLocale (): string {
   return JSON.parse(process.env.VSCODE_NLS_CONFIG as string).locale as string
 }
 

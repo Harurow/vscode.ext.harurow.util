@@ -1,4 +1,5 @@
 import moment from 'moment'
+import { getLocale } from '../../../utils'
 
 export function normalizeTimezone (timezone: string): string {
   return timezone
@@ -20,5 +21,6 @@ export function getTimeZoneOffset (timezone: string): number {
 }
 
 export function format (datetime: Date, format: string): string {
+  moment.locale(getLocale())
   return moment(datetime).format(format)
 }
