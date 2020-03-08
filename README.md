@@ -14,7 +14,7 @@
 エクスプローラーからファイルまたはフォルダを非表示にする  
 ワークスペースの設定で選択中のファイル・フォルダを非表示に設定します。
 
-![エクスプローラーから除外](https://github.com/harurow/vscode.ext.harurow.util/blob/develop/screenshots/fileExclude.excludeFile.gif?raw=true)
+![エクスプローラーから除外](https://github.com/harurow/vscode.ext.harurow.util/blob/master/screenshots/fileExclude.excludeFile.gif?raw=true)
 
 ### `除外設定を一時的に解除` / `除外設定を元に戻す`
 
@@ -22,7 +22,7 @@
 
 `除外設定を元に戻す`は`除外設定を一時的に解除`時に退避した設定を再度設定しファイルまたはフォルダの非表示を元に戻します。
 
-![除外設定を一時的に解除 / 除外設定を元に戻す](https://github.com/harurow/vscode.ext.harurow.util/blob/develop/screenshots/fileExclude.backup,restore.gif?raw=true)
+![除外設定を一時的に解除 / 除外設定を元に戻す](https://github.com/harurow/vscode.ext.harurow.util/blob/master/screenshots/fileExclude.backup,restore.gif?raw=true)
 
 ## コマンドパレット
 
@@ -54,7 +54,7 @@
 
 選択中の文字列をチェインケース(小文字)に変換します
 
-![ケース変換関連](https://github.com/harurow/vscode.ext.harurow.util/blob/develop/screenshots/transformCase.gif?raw=true)
+![ケース変換関連](https://github.com/harurow/vscode.ext.harurow.util/blob/master/screenshots/transformCase.gif?raw=true)
 
 ### 行削除関連
 
@@ -68,7 +68,7 @@
 選択中の行のうち正規表現に一致しない行を削除します
 正規表現入力で最後に`\i`を指定すると大文字小文字を区別しません
 
-![行削除関連](https://github.com/harurow/vscode.ext.harurow.util/blob/develop/screenshots/removeLines.gif?raw=true)
+![行削除関連](https://github.com/harurow/vscode.ext.harurow.util/blob/master/screenshots/removeLines.gif?raw=true)
 
 ### エンコード, エスケープ関連
 
@@ -94,7 +94,7 @@
 * HTML, XML エスケープ  
 * UNICODE エスケープ
 
-![エンコード, エスケープ関連](https://github.com/harurow/vscode.ext.harurow.util/blob/develop/screenshots/encoding.gif?raw=true)
+![エンコード, エスケープ関連](https://github.com/harurow/vscode.ext.harurow.util/blob/master/screenshots/encoding.gif?raw=true)
 
 ### その他
 
@@ -113,8 +113,11 @@ ISO8601 と C# の形式を相互変換します
 #### 日付・時刻の挿入
 
 日付・時刻を挿入します  
-moment.jsの書式を設定に指定できます
+moment.jsの書式を設定に指定できます。
+また設定`harurow.datetime.insert.format`に書式を指定することで選択リストをカスタマイズできます。
 書式は以下を参考に[Moment.js](https://momentjs.com/docs/#/displaying/)
+
+![日付・時刻を挿入します ](https://github.com/harurow/vscode.ext.harurow.util/blob/master/screenshots/datetime.insert.gif?raw=true)
 
 ##### 重複の削除
 
