@@ -119,11 +119,13 @@ moment.jsの書式を設定に指定できます。
 また設定`harurow.datetime.insert.format`に書式を指定することで選択リストをカスタマイズできます。
 書式は以下を参考に[Moment.js](https://momentjs.com/docs/#/displaying/)
 
-![日付・時刻を挿入します](https://github.com/harurow/vscode.ext.harurow.util/blob/master/screenshots/datetime.insert.gif?raw=true)
+![日付・時刻の挿入](https://github.com/harurow/vscode.ext.harurow.util/blob/master/screenshots/datetime.insert.gif?raw=true)
 
 ##### 重複の削除
 
 選択している行のうち重複している行を一つの行にします
+
+![重複の削除](https://github.com/harurow/vscode.ext.harurow.util/blob/master/screenshots/edit.distinct.gif?raw=true)
 
 ##### 採番
 
