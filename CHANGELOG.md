@@ -11,10 +11,6 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [2.3.2](https://github.com/Harurow/vscode.ext.harurow.util/compare/v2.3.1...v2.3.2) (2020-03-09)
 
-### [2.3.1](https://github.com/Harurow/vscode.ext.harurow.util/compare/v2.3.0...v2.3.1) (2020-03-08)
-
-## [2.3.0](https://github.com/Harurow/vscode.ext.harurow.util/compare/v2.2.2...v2.3.0) (2020-03-08)
-
 
 ### Features
 
@@ -27,10 +23,6 @@ All notable changes to this project will be documented in this file. See [standa
 
 * 数式の評価の不具合を修正 ([4092c73](https://github.com/Harurow/vscode.ext.harurow.util/commit/4092c73af94c1abe7ede86786bc7fb824db70c52))
 * 日付の書式をlocale依存に修正 ([4afe491](https://github.com/Harurow/vscode.ext.harurow.util/commit/4afe491284f3be6b3d399012a6585cb0368a6871))
-
-### [2.2.2](https://github.com/Harurow/vscode.ext.harurow.util/compare/v2.2.1...v2.2.2) (2020-03-07)
-
-### [2.2.1](https://github.com/Harurow/vscode.ext.harurow.util/compare/v2.2.0...v2.2.1) (2020-03-07)
 
 ## [2.2.0](https://github.com/Harurow/vscode.ext.harurow.util/compare/v2.1.1...v2.2.0) (2020-03-07)
 
