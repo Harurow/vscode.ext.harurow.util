@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.4.0](https://github.com/Harurow/vscode.ext.harurow.util/compare/v2.3.2...v2.4.0) (2020-03-09)
+
+
+### Features
+
+* .d.tsファイルの作成を追加 ([6cd66d2](https://github.com/Harurow/vscode.ext.harurow.util/commit/6cd66d2d1a7dd326829e94d877d272264a5db8a6))
+
 ### [2.3.2](https://github.com/Harurow/vscode.ext.harurow.util/compare/v2.3.1...v2.3.2) (2020-03-09)
 
 ### [2.3.1](https://github.com/Harurow/vscode.ext.harurow.util/compare/v2.3.0...v2.3.1) (2020-03-08)

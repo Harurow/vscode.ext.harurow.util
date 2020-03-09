@@ -2,7 +2,7 @@
     "name": "harurow-util",
     "displayName": "Harurow UTIL",
     "description": "自分で使うプログラマのための機能をまとめたVisual Studio Code 拡張",
-    "version": "2.3.2",
+    "version": "2.4.0",
     "license": "MIT",
     "engines": {
         "vscode": "^1.42.0"
