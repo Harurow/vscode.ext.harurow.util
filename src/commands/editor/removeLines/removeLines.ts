@@ -68,10 +68,7 @@ export async function ifMatched (): Promise<void> {
     window.showInformationMessage('notFound'.toLocalize())
   } else if (removes !== undefined) {
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    window.showInformationMessage(
-      'removeLines.ifMatched.result'
-        .toLocalize()
-        .replace('%1', `${removes.toLocaleString()}`))
+    window.showInformationMessage('removeLines.ifMatched.result'.toLocalize(removes))
   }
 }
 
@@ -116,10 +113,7 @@ export async function ifUnmatched (): Promise<void> {
     window.showInformationMessage('notFound'.toLocalize())
   } else if (removes !== undefined) {
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    window.showInformationMessage(
-      'removeLines.ifUnmatched.result'
-        .toLocalize()
-        .replace('%1', `${removes.toLocaleString()}`))
+    window.showInformationMessage('removeLines.ifUnmatched.result'.toLocalize(removes))
   }
 }
 

@@ -6,7 +6,7 @@ export {}
 declare global {
   interface String {
     isNullOrEmpty(): boolean
-    toLocalize (): string
+    toLocalize (...args: any[]): string
     hasCharactors(): boolean
     isVariable(): boolean
     isVariableLoose(): boolean
@@ -20,8 +20,14 @@ export function isNullOrEmpty (str: string | undefined | null): boolean {
   return str == null || str === ''
 }
 
-String.prototype.toLocalize = function (): string {
-  return localize(this as string)
+String.prototype.toLocalize = function (...args: any[]): string {
+  let msg = localize(this as string)
+  if (msg != null) {
+    for (let i = 0; i < args.length; i++) {
+      msg = msg.replace(`{${i.toString()}}`, args[i].toString())
+    }
+  }
+  return msg
 }
 
 String.prototype.hasCharactors = function (): boolean {

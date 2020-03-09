@@ -153,7 +153,7 @@ async function edit (callback: (str: string) => { result: string, failed: number
     }
   })
   if (failedNum > 0) {
-    const msg = 'encoding.encode.failed'.toLocalize().replace('{0}', failedNum.toString())
+    const msg = 'encoding.encode.failed'.toLocalize(failedNum)
     await window.showWarningMessage(msg)
   }
 }
