@@ -2,7 +2,7 @@
     "name": "harurow-util",
     "displayName": "Harurow UTIL",
     "description": "自分で使うプログラマのための機能をまとめたVisual Studio Code 拡張",
-    "version": "2.3.1",
+    "version": "2.3.2",
     "license": "MIT",
     "engines": {
         "vscode": "^1.42.0"
@@ -35,6 +35,7 @@
         "onCommand:harurow.fileExclude.backup",
         "onCommand:harurow.fileExclude.excludeFile",
         "onCommand:harurow.fileExclude.restore",
+        "onCommand:harurow.generator.generateDts",
         "onCommand:harurow.removeLines.ifMatched",
         "onCommand:harurow.removeLines.ifUnmatched",
         "onCommand:harurow.transformCase.ToLowerCamelCase",
@@ -92,12 +93,15 @@
             },
             {
                 "command": "harurow.fileExclude.excludeFile",
-                "title": "%harurow.fileExclude.excludeFile%",
-                "enablement": ""
+                "title": "%harurow.fileExclude.excludeFile%"
             },
             {
                 "command": "harurow.fileExclude.restore",
                 "title": "%harurow.fileExclude.restore%"
+            },
+            {
+                "command": "harurow.generator.generateDts",
+                "title": "%harurow.generator.generateDts%"
             },
             {
                 "command": "harurow.removeLines.ifMatched",
@@ -142,19 +146,24 @@
             ],
             "explorer/context": [
                 {
+                    "when": "filesExplorerFocus && listHasSelectionOrFocus && resourceExtname == .js",
+                    "command": "harurow.generator.generateDts",
+                    "group": "9_harurow@1"
+                },
+                {
                     "when": "filesExplorerFocus && listHasSelectionOrFocus && config.harurow.file.exclude.backup == undefined",
                     "command": "harurow.fileExclude.excludeFile",
-                    "group": "9_harurow@1"
+                    "group": "9_harurow@100"
                 },
                 {
                     "when": "filesExplorerFocus && config.harurow.file.exclude.backup == undefined && config.files.exclude != undefined",
                     "command": "harurow.fileExclude.backup",
-                    "group": "9_harurow@2"
+                    "group": "9_harurow@101"
                 },
                 {
                     "when": "filesExplorerFocus && config.harurow.file.exclude.backup != undefined",
                     "command": "harurow.fileExclude.restore",
-                    "group": "9_harurow@3"
+                    "group": "9_harurow@102"
                 },
                 {
                     "when": "filesExplorerFocus && config.harurow.experiment",
