@@ -2,7 +2,7 @@
     "name": "harurow-util",
     "displayName": "Harurow UTIL",
     "description": "自分で使うプログラマのための機能をまとめたVisual Studio Code 拡張",
-    "version": "2.4.0",
+    "version": "2.4.1",
     "license": "MIT",
     "engines": {
         "vscode": "^1.42.0"
@@ -298,10 +298,9 @@
         "webpack-dev": "webpack --mode development --watch",
         "test-complie": "tsc -p ./",
         "vscode:prepublish": "webpack --mode production",
-
         "pretest": "npm run test-complie && npm run lint",
         "test": "node ./out/src/test/runTest.js",
-        "release": "standard-version",
+        "version": "standard-version",
         "package": "vsce package"
     },
     "devDependencies": {

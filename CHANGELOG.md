@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.4.1](https://github.com/Harurow/vscode.ext.harurow.util/compare/v2.4.0...v2.4.1) (2020-03-10)
+
+
+### Bug Fixes
+
+* typescriptをパッケージに追加 ([d7394ea](https://github.com/Harurow/vscode.ext.harurow.util/commit/d7394ea999e45a105d6f253422e29e93dd4c03c5))
+* エラーハンドリングを統一 ([fd563ce](https://github.com/Harurow/vscode.ext.harurow.util/commit/fd563ce635387ff6da95c454319fac54722e754a))
+
 ## [2.4.0](https://github.com/Harurow/vscode.ext.harurow.util/compare/v2.3.2...v2.4.0) (2020-03-09)
 
 
