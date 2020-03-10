@@ -1,16 +1,3 @@
-.vscode-test/**
-out/test/**
-src/**
-screenshots/
-.gitignore
-vsc-extension-quickstart.md
-**/tsconfig.json
-**/.eslintrc.json
-**/*.map
-.travis.yml
-**/*.ts
-
-
 .vscode/
 .vscode-test/
 @types/
