@@ -296,9 +296,9 @@
         "lint": "eslint src --ext ts",
         "webpack": "webpack --mode development",
         "webpack-dev": "webpack --mode development --watch",
-        "test-complie": "tsc -p ./",
+        "complie": "tsc -p ./",
         "vscode:prepublish": "webpack --mode production",
-        "pretest": "npm run test-complie && npm run lint",
+        "pretest": "npm run complie && npm run lint",
         "test": "node ./out/src/test/runTest.js",
         "version": "standard-version",
         "package": "vsce package"
