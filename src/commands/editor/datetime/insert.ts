@@ -1,5 +1,5 @@
 import { TextDocument, TextEditorEdit, Selection, workspace, Uri, QuickPickItem } from 'vscode'
-import { transformTemplate } from '../util'
+import { transformTemplate, handleError } from '../util'
 import { format } from './util'
 import { MultiStepInput } from '../../../utils'
 
@@ -37,7 +37,8 @@ export async function insert (uri: Uri): Promise<void> {
   try {
     result = await MultiStepInput.run(async input => pick(input, state))
   } catch (err) {
-    console.warn(err)
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    handleError(err)
   } finally {
     if (result && state.pick != null) {
       await edit((_: string): string => state.pick?.label ?? '')

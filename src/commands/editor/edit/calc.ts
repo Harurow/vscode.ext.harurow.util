@@ -1,5 +1,5 @@
 import { TextDocument, TextEditorEdit, Selection, QuickPickItem } from 'vscode'
-import { transformTemplate, getSelectTextIfExists } from '../util'
+import { transformTemplate, getSelectTextIfExists, handleError } from '../util'
 import { MultiStepInput } from '../../../utils'
 import * as mee from 'math-expression-evaluator'
 
@@ -19,6 +19,8 @@ function calculation (expression: string): { result: boolean, answer: string } {
     const answer: number = mee.eval(expr)
     return { result: true, answer: answer.toString() }
   } catch (err) {
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    handleError(err)
   }
   return { result: false, answer: '' }
 }
@@ -59,7 +61,8 @@ export async function calc (): Promise<void> {
   try {
     result = await MultiStepInput.run(async input => pick(input, state))
   } catch (err) {
-    console.warn(err)
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    handleError(err)
   } finally {
     if (result && state.pick != null) {
       await edit(state.pick)

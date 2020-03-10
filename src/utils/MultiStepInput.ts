@@ -1,4 +1,5 @@
 import { QuickPickItem, window, Disposable, QuickInput, QuickInputButtons, QuickPick, InputBox, InputBoxOptions } from 'vscode'
+import { UserCanceled } from './UserCanceled'
 
 // eslint-disable-next-line @typescript-eslint/no-extraneous-class
 class InputFlowAction extends Error {
@@ -95,7 +96,7 @@ export class MultiStepInput {
         resolve(items[0])
       }),
       input.onDidHide(() => {
-        reject(undefined)
+        reject(new UserCanceled())
       }),
       input.onDidTriggerButton(item => {
         if (item === QuickInputButtons.Back) {
@@ -148,7 +149,7 @@ export class MultiStepInput {
         }
       }),
       input.onDidHide(() => {
-        reject(undefined)
+        reject(new UserCanceled())
       }),
       input.onDidTriggerButton(item => {
         if (item === QuickInputButtons.Back) {

@@ -1,6 +1,7 @@
-import { workspace, Uri, window } from 'vscode'
+import { workspace, Uri } from 'vscode'
 import path from 'path'
 import { isNullOrEmpty } from '../../utils/string.extension'
+import { handleError } from '../editor/util'
 
 export async function excludeFile (uri: Uri): Promise<void> {
   try {
@@ -23,8 +24,8 @@ export async function excludeFile (uri: Uri): Promise<void> {
 
     await filesConf.update('exclude', values, false)
   } catch (err) {
-    console.warn(err)
-    await window.showErrorMessage('excludeFile.failed'.toLocalize())
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    handleError(err, 'excludeFile.failed'.toLocalize())
   }
 }
 
@@ -54,9 +55,9 @@ export async function backup (uri: Uri): Promise<void> {
 
     await harurowConf.update('file.exclude.backup', values, false)
     await filesConf.update('exclude', newValue, false)
-  } catch (ex) {
-    console.warn(ex)
-    await window.showErrorMessage('excludeFile.failed'.toLocalize())
+  } catch (err) {
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    handleError(err, 'excludeFile.failed'.toLocalize())
   }
 }
 
@@ -76,9 +77,9 @@ export async function restore (uri: Uri): Promise<void> {
 
     await filesConf.update('exclude', values, false)
     await harurowConf.update('file.exclude.backup', undefined, false)
-  } catch (ex) {
-    console.warn(ex)
-    await window.showErrorMessage('excludeFile.failed'.toLocalize())
+  } catch (err) {
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    handleError(err, 'excludeFile.failed'.toLocalize())
   }
 }
 

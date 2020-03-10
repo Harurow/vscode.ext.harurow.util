@@ -1,13 +1,14 @@
-import { Uri, window, workspace } from 'vscode'
+import { Uri, workspace } from 'vscode'
+import { handleError } from '../editor/util'
 
-export async function experiment (uri: Uri): Promise<void> {
+export function experiment (uri: Uri): void {
   try {
     console.log(uri)
     const workspaceFolder = workspace.getWorkspaceFolder(uri)
     console.log(workspaceFolder)
   } catch (err) {
-    console.warn(err)
-    await window.showErrorMessage(err)
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    handleError(err)
   }
 }
 

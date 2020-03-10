@@ -1,5 +1,5 @@
 import { TextDocument, TextEditorEdit, Selection, QuickPickItem } from 'vscode'
-import { transformTemplate, getSelectTextIfExists } from '../util'
+import { transformTemplate, getSelectTextIfExists, handleError } from '../util'
 import { MultiStepInput, isNullOrEmpty } from '../../../utils'
 import * as dict from 'harurow-ejdict'
 
@@ -47,7 +47,8 @@ export async function dictionary (): Promise<void> {
   try {
     result = await MultiStepInput.run(async input => pick(input, state))
   } catch (err) {
-    console.warn(err)
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    handleError(err)
   } finally {
     if (result && state.pick != null) {
       await edit(state.pick)

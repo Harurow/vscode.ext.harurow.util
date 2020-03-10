@@ -1,5 +1,5 @@
 import { TextDocument, TextEditorEdit, Selection } from 'vscode'
-import { transformTemplate } from '../util'
+import { transformTemplate, handleError } from '../util'
 import { MultiStepInput } from '../../../utils'
 
 type radix = 'bin' | 'dec' | 'oct' | 'hex' | 'HEX'
@@ -115,7 +115,8 @@ export async function numbering (): Promise<void> {
   try {
     result = await MultiStepInput.run(async input => pickRadix(input, state))
   } catch (err) {
-    console.warn(err)
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    handleError(err)
   } finally {
     if (result) {
       await edit(state)

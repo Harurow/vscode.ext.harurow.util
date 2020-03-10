@@ -1,7 +1,8 @@
 import { Uri, window } from 'vscode'
 import * as ts from 'typescript'
 import * as fs from 'fs'
-import path = require('path')
+import * as path from 'path'
+import { handleError } from '../editor/util'
 
 export async function generateDts (uri: Uri): Promise<void> {
   const options: ts.CompilerOptions = {
@@ -30,8 +31,8 @@ export async function generateDts (uri: Uri): Promise<void> {
       await window.showInformationMessage('generateDts.succeeded'.toLocalize(dtsBaseFileName))
     }
   } catch (err) {
-    console.warn(err)
-    await window.showErrorMessage('generateDts.failed'.toLocalize(dtsBaseFileName))
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    handleError(err, 'generateDts.failed'.toLocalize(dtsBaseFileName))
   }
 }
 

@@ -1,6 +1,6 @@
 import { QuickPickItem, TextDocument, TextEditorEdit, Selection } from 'vscode'
 import { MultiStepInput } from '../../../utils'
-import { transformTemplate } from '../util'
+import { transformTemplate, handleError } from '../util'
 import * as ej from 'encoding-japanese'
 import { decodeRfc } from './rfc'
 import { decodeSgml } from './sgml'
@@ -79,7 +79,8 @@ export async function decoding (): Promise<void> {
   try {
     result = await MultiStepInput.run(async input => pickType(input, state))
   } catch (err) {
-    console.warn(err)
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    handleError(err)
   } finally {
     if (result) {
       const func = replace(state)

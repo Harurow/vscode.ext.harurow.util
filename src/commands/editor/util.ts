@@ -43,26 +43,30 @@ interface TransformTemplateOptions<T = void> {
   failedMessage?: string | undefined
 }
 
+export async function handleError (err: any, failedMessage?: string): Promise<string | undefined> {
+  if (err instanceof UserCanceled) {
+    if (!err.silent) {
+      return window.showInformationMessage(err.message)
+    }
+    // nop
+  } else if (err instanceof UserInformation) {
+    return window.showInformationMessage(err.message)
+  } else if (err instanceof UserWarning) {
+    return window.showWarningMessage(err.message)
+  } else if (err instanceof UserError) {
+    return window.showErrorMessage(err.message)
+  } else {
+    console.warn(err)
+    return window.showErrorMessage(failedMessage ?? 'failed'.toLocalize())
+  }
+}
+
 export async function tryCatch (process: () => Promise<void>, failedMessage?: string): Promise<void> {
   try {
     await process()
-  } catch (ex) {
-    if (ex instanceof UserCanceled) {
-      // nop
-    } else if (ex instanceof UserInformation) {
-      // eslint-disable-next-line @typescript-eslint/no-floating-promises
-      window.showInformationMessage(ex.message)
-    } else if (ex instanceof UserWarning) {
-      // eslint-disable-next-line @typescript-eslint/no-floating-promises
-      window.showWarningMessage(ex.message)
-    } else if (ex instanceof UserError) {
-      // eslint-disable-next-line @typescript-eslint/no-floating-promises
-      window.showErrorMessage(ex.message)
-    } else {
-      console.warn(ex)
-      // eslint-disable-next-line @typescript-eslint/no-floating-promises
-      window.showErrorMessage(failedMessage ?? 'failed'.toLocalize())
-    }
+  } catch (err) {
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    handleError(err, failedMessage)
   }
 }
 
