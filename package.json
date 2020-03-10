@@ -300,8 +300,7 @@
         "vscode:prepublish": "webpack --mode production",
         "pretest": "npm run compile && npm run lint",
         "test": "node ./out/src/test/runTest.js",
-        "version": "standard-version",
-        "package": "vsce package",
+        "versioning": "standard-version",
         "deploy": "vsce publish --yarn"
     },
     "devDependencies": {
