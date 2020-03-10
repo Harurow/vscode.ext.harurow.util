@@ -1,5 +1,6 @@
 # Harurow Util README
 
+[![Build Status](https://dev.azure.com/motoharucamellia/vscode.ext.harurow.util/_apis/build/status/Harurow.vscode.ext.harurow.util?branchName=master)](https://dev.azure.com/motoharucamellia/vscode.ext.harurow.util/_build/latest?definitionId=1&branchName=master)
 [![Build Status](https://travis-ci.org/Harurow/vscode.ext.harurow.util.svg?branch=master)](https://travis-ci.org/Harurow/vscode.ext.harurow.util)
 
 ## 特徴
