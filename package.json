@@ -301,7 +301,8 @@
         "pretest": "npm run compile && npm run lint",
         "test": "node ./out/src/test/runTest.js",
         "version": "standard-version",
-        "package": "vsce package"
+        "package": "vsce package",
+        "deploy": "vsce publish --yarn"
     },
     "devDependencies": {
         "@types/encoding-japanese": "^1.0.15",
