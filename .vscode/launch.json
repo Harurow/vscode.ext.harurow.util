@@ -30,7 +30,7 @@
 			"outFiles": [
 				"${workspaceFolder}/out/src/test/**/*.js"
 			],
-			"preLaunchTask": "${defaultBuildTask}"
+			"preLaunchTask": "npm: test-complie"
 		}
 	]
 }

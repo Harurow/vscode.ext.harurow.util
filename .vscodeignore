@@ -1,4 +1,3 @@
-.vscode/**
 .vscode-test/**
 out/test/**
 src/**
@@ -10,3 +9,19 @@ vsc-extension-quickstart.md
 **/*.map
 .travis.yml
 **/*.ts
+
+
+.vscode/
+.vscode-test/
+@types/
+node_modules/
+out/
+screenshots/
+src/
+.eslintrc.json
+.gitignore
+.travis.yml
+coverconfig.json
+*.vsix
+tsconfig.json
+webpack.config.js
