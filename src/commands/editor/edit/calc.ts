@@ -19,8 +19,6 @@ function calculation (expression: string): { result: boolean, answer: string } {
     const answer: number = mee.eval(expr)
     return { result: true, answer: answer.toString() }
   } catch (err) {
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    handleError(err)
   }
   return { result: false, answer: '' }
 }
