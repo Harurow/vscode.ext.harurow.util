@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.4.3](https://github.com/Harurow/vscode.ext.harurow.util/compare/v2.4.2...v2.4.3) (2020-03-24)
+
+
+### Bug Fixes
+
+* 数式評価でのエラー不具合修正 ([a5212c2](https://github.com/Harurow/vscode.ext.harurow.util/commit/a5212c222f2a0cbad89688be8408420f031c44f9))
+
 ### [2.4.2](https://github.com/Harurow/vscode.ext.harurow.util/compare/v2.4.1...v2.4.2) (2020-03-10)
 
 ### [2.4.1](https://github.com/Harurow/vscode.ext.harurow.util/compare/v2.4.0...v2.4.1) (2020-03-10)
