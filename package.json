@@ -300,8 +300,8 @@
         "vscode:prepublish": "webpack --mode production",
         "pretest": "npm run compile && npm run lint",
         "test": "node ./out/src/test/runTest.js",
-        "version": "standard-version",
-        "package": "vsce package --yarn"
+        "versioning": "standard-version",
+        "deploy": "vsce publish --yarn"
     },
     "devDependencies": {
         "@types/encoding-japanese": "^1.0.15",
