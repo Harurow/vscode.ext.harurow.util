@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.5.0](https://github.com/Harurow/vscode.ext.harurow.util/compare/v2.4.3...v2.5.0) (2020-03-25)
+
+
+### Features
+
+* npmパッケージの更新 ([32414f8](https://github.com/Harurow/vscode.ext.harurow.util/commit/32414f808cdf9b57ab5893b0146827a3a27e34fc))
+
 ### [2.4.3](https://github.com/Harurow/vscode.ext.harurow.util/compare/v2.4.2...v2.4.3) (2020-03-24)
 
 
