@@ -2,7 +2,7 @@
 {
     "files.exclude": {
         "node_modules": true,
-        ".vscode-test": true,
+        ".vscode-test": true
     },
     "search.exclude": {
         "node_modules": true,

@@ -15,9 +15,9 @@ function createPickItem (query: string): QuickPickItem[] {
     .map((i) => ({
       alwaysShow: true,
       picked: true,
-      label: i.index,
+      label: i.word,
       description: i.description,
-      result: i.index
+      result: i.word
     }))
 }
 

@@ -330,7 +330,7 @@
     },
     "dependencies": {
         "encoding-japanese": "^1.0.30",
-        "harurow-ejdict": "^1.1.1",
+        "harurow-ejdict": "^2.0.0",
         "math-expression-evaluator": "^1.2.22",
         "moment": "^2.24.0",
         "typescript": "^3.8.3"
