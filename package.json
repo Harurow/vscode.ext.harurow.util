@@ -2,7 +2,7 @@
     "name": "harurow-util",
     "displayName": "Harurow UTIL",
     "description": "自分で使うプログラマのための機能をまとめたVisual Studio Code 拡張",
-    "version": "2.5.0",
+    "version": "2.5.1",
     "license": "MIT",
     "engines": {
         "vscode": "^1.42.0"
@@ -22,6 +22,8 @@
     "icon": "images/mosaic.png",
     "main": "./dist/extension",
     "activationEvents": [
+        "onCommand:harurow.autoReveal.off",
+        "onCommand:harurow.autoReveal.on",
         "onCommand:harurow.experiment",
         "onCommand:harurow.datetime.convert",
         "onCommand:harurow.datetime.insert",
@@ -47,6 +49,14 @@
     ],
     "contributes": {
         "commands": [
+            {
+                "command": "harurow.autoReveal.off",
+                "title": "%harurow.autoReveal.off%"
+            },
+            {
+                "command": "harurow.autoReveal.on",
+                "title": "%harurow.autoReveal.on%"
+            },
             {
                 "command": "harurow.experiment",
                 "title": "%harurow.experiment%"
@@ -172,6 +182,12 @@
                 }
             ],
             "commandPalette": [
+                {
+                    "command": "harurow.autoReveal.off"
+                },
+                {
+                    "command": "harurow.autoReveal.on"
+                },
                 {
                     "command": "harurow.experiment",
                     "when": "config.harurow.experiment"
