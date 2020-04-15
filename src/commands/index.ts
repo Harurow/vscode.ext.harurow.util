@@ -11,7 +11,7 @@ const cmdTable = [
   ...editor,
   ...experiment,
   ...explorer,
-  ...misc,
+  ...misc
 ]
 
 export function registerCommands (): Disposable[] {
