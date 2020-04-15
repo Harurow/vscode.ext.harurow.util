@@ -154,4 +154,8 @@ moment.jsの書式を設定に指定できます。
 
 ![辞書検索](https://github.com/harurow/vscode.ext.harurow.util/blob/master/screenshots/edit.dictionary.gif?raw=true)
 
+#### アクティブファイルをサイドバーに表示を無効化/有効化
+
+開いているファイルを切り替えた時にエクスプローラー上でもアクティブにする設定を切り替えます
+
 --------------------------------------------------------------------------------

@@ -2,6 +2,8 @@
     "cfg.datetime.insert.format.description": "insert date formats. powered by `moment.js`",
     "cfg.experiment": "<experiment>",
     "cfg.file.exclude.backup.description": "file.exclude backup. DON'T EDIT.",
+    "harurow.autoReveal.off": "Harurow: turn off explorer auto-reveal",
+    "harurow.autoReveal.on": "Harurow: turn on explorer auto-reveal",
     "harurow.experiment": "Harurow: <experiment>",
     "harurow.datetime.convert": "Harurow: datetime converter",
     "harurow.datetime.insert": "Harurow: datetime insert",

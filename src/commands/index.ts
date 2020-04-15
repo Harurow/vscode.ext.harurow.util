@@ -3,13 +3,15 @@ import '../utils/string.extension'
 import editor from './editor'
 import experiment from './experiment'
 import explorer from './explorer'
+import misc from './misc'
 
 const register = commands.registerCommand
 
 const cmdTable = [
   ...editor,
   ...experiment,
-  ...explorer
+  ...explorer,
+  ...misc,
 ]
 
 export function registerCommands (): Disposable[] {
