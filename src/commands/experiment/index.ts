@@ -1,7 +1,5 @@
-import experiment from './experiment'
+import * as experiment from './experiment'
 
-const cmdTable = [
-  ...experiment
+export const cmdTable = [
+  ...experiment.cmdTable
 ]
-
-export default cmdTable

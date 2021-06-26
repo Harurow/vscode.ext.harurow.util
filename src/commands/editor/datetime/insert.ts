@@ -69,5 +69,3 @@ async function edit (callback: (str: string) => string): Promise<void> {
 export const cmdTable = [
   { name: 'datetime.insert', func: insert }
 ]
-
-export default cmdTable

@@ -83,10 +83,8 @@ export async function restore (uri: Uri): Promise<void> {
   }
 }
 
-const cmdTable = [
+export const cmdTable = [
   { name: 'fileExclude.excludeFile', func: excludeFile },
   { name: 'fileExclude.backup', func: backup },
   { name: 'fileExclude.restore', func: restore }
 ]
-
-export default cmdTable

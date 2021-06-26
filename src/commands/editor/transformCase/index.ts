@@ -1,8 +1,6 @@
-import transCase from './transCase'
+import * as transCase from './transCase'
 
-const cmdTable =
+export const cmdTable =
 [
-  ...transCase
+  ...transCase.cmdTable
 ]
-
-export default cmdTable

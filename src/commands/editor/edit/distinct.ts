@@ -36,5 +36,3 @@ async function edit (): Promise<void> {
 export const cmdTable = [
   { name: 'edit.distinct', func: distinct }
 ]
-
-export default cmdTable

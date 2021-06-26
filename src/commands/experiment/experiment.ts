@@ -12,8 +12,6 @@ export function experiment (uri: Uri): void {
   }
 }
 
-const cmdTable = [
+export const cmdTable = [
   { name: 'experiment', func: experiment }
 ]
-
-export default cmdTable

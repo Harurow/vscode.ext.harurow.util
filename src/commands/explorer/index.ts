@@ -1,9 +1,7 @@
-import fileExclude from './fileExclude'
-import generateDts from './generateDts'
+import * as fileExclude from './fileExclude'
+import * as generateDts from './generateDts'
 
-const cmdTable = [
-  ...fileExclude,
-  ...generateDts
+export const cmdTable = [
+  ...fileExclude.cmdTable,
+  ...generateDts.cmdTable
 ]
-
-export default cmdTable

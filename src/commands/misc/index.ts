@@ -1,7 +1,5 @@
-import autoReveal from './autoReveal'
+import * as autoReveal from './autoReveal'
 
-const cmdTable = [
-  ...autoReveal
+export const cmdTable = [
+  ...autoReveal.cmdTable
 ]
-
-export default cmdTable

@@ -126,5 +126,3 @@ export const cmdTable =
 [
   { name: 'encoding.decode', func: decoding }
 ]
-
-export default cmdTable

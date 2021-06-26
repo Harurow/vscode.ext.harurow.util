@@ -24,7 +24,6 @@
     "activationEvents": [
         "onCommand:harurow.autoReveal.off",
         "onCommand:harurow.autoReveal.on",
-        "onCommand:harurow.experiment",
         "onCommand:harurow.datetime.convert",
         "onCommand:harurow.datetime.insert",
         "onCommand:harurow.edit.calc",
@@ -34,6 +33,7 @@
         "onCommand:harurow.edit.swap",
         "onCommand:harurow.encoding.decode",
         "onCommand:harurow.encoding.encode",
+        "onCommand:harurow.experiment",
         "onCommand:harurow.fileExclude.backup",
         "onCommand:harurow.fileExclude.excludeFile",
         "onCommand:harurow.fileExclude.restore",

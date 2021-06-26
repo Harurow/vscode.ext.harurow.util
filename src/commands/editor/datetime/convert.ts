@@ -106,5 +106,3 @@ async function edit (callback: (str: string) => string): Promise<void> {
 export const cmdTable = [
   { name: 'datetime.convert', func: converter }
 ]
-
-export default cmdTable

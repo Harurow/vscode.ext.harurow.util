@@ -167,5 +167,3 @@ async function edit (state: State): Promise<void> {
 export const cmdTable = [
   { name: 'edit.numbering', func: numbering }
 ]
-
-export default cmdTable

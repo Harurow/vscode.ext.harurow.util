@@ -1,17 +1,17 @@
 import { commands, Disposable } from 'vscode'
 import '../utils/string.extension'
-import editor from './editor'
-import experiment from './experiment'
-import explorer from './explorer'
-import misc from './misc'
+import * as editor from './editor'
+import * as experiment from './experiment'
+import * as explorer from './explorer'
+import * as misc from './misc'
 
 const register = commands.registerCommand
 
 const cmdTable = [
-  ...editor,
-  ...experiment,
-  ...explorer,
-  ...misc
+  ...editor.cmdTable,
+  ...experiment.cmdTable,
+  ...explorer.cmdTable,
+  ...misc.cmdTable
 ]
 
 export function registerCommands (): Disposable[] {

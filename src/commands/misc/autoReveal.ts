@@ -22,9 +22,7 @@ export async function autoRevealOn (uri: Uri): Promise<void> {
   }
 }
 
-const cmdTable = [
+export const cmdTable = [
   { name: 'autoReveal.off', func: autoRevealOff },
   { name: 'autoReveal.on', func: autoRevealOn }
 ]
-
-export default cmdTable

@@ -158,5 +158,3 @@ export const cmdTable =
   { name: 'transformCase.ToUpperChainCase', func: replaceCase(transformToUpperChain) },
   { name: 'transformCase.ToLowerChainCase', func: replaceCase(transformToLowerChain) }
 ]
-
-export default cmdTable

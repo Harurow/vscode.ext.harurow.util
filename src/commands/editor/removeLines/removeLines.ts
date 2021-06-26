@@ -122,5 +122,3 @@ export const cmdTable =
   { name: 'removeLines.ifMatched', func: ifMatched },
   { name: 'removeLines.ifUnmatched', func: ifUnmatched }
 ]
-
-export default cmdTable

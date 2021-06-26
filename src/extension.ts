@@ -3,10 +3,10 @@ import './utils'
 import { registerCommands } from './commands'
 
 export function activate (context: vscode.ExtensionContext): void {
-  console.log('activateExtension'.toLocalize())
+  console.log('extension.activate'.toLocalize())
   context.subscriptions.push(...registerCommands())
 }
 
 export function deactivate (): void {
-  console.log('deactivateExtension'.toLocalize())
+  console.log('extension.deactivate'.toLocalize())
 }

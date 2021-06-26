@@ -1,10 +1,8 @@
-import encoding from './encoding'
-import decoding from './decoding'
+import * as encoding from './encoding'
+import * as decoding from './decoding'
 
 export const cmdTable =
 [
-  ...encoding,
-  ...decoding
+  ...encoding.cmdTable,
+  ...decoding.cmdTable
 ]
-
-export default cmdTable

@@ -30,5 +30,3 @@ export const cmdTable =
 [
   { name: 'edit.swap', func: swap }
 ]
-
-export default cmdTable

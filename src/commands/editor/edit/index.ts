@@ -1,15 +1,13 @@
-import calc from './calc'
-import dictionary from './dictionary'
-import distinct from './distinct'
-import numbering from './numbering'
-import swap from './swap'
+import * as calc from './calc'
+import * as dictionary from './dictionary'
+import * as distinct from './distinct'
+import * as numbering from './numbering'
+import * as swap from './swap'
 
-const cmdTable = [
-  ...calc,
-  ...dictionary,
-  ...distinct,
-  ...numbering,
-  ...swap
+export const cmdTable = [
+  ...calc.cmdTable,
+  ...dictionary.cmdTable,
+  ...distinct.cmdTable,
+  ...numbering.cmdTable,
+  ...swap.cmdTable
 ]
-
-export default cmdTable

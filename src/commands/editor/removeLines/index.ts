@@ -1,8 +1,6 @@
-import removeLines from './removeLines'
+import * as removeLines from './removeLines'
 
-const cmdTable =
+export const cmdTable =
 [
-  ...removeLines
+  ...removeLines.cmdTable
 ]
-
-export default cmdTable

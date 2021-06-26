@@ -36,8 +36,6 @@ export async function generateDts (uri: Uri): Promise<void> {
   }
 }
 
-const cmdTable = [
+export const cmdTable = [
   { name: 'generator.generateDts', func: generateDts }
 ]
-
-export default cmdTable

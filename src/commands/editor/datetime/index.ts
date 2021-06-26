@@ -1,10 +1,8 @@
-import convert from './convert'
-import insert from './insert'
+import * as convert from './convert'
+import * as insert from './insert'
 
 export const cmdTable =
 [
-  ...convert,
-  ...insert
+  ...convert.cmdTable,
+  ...insert.cmdTable
 ]
-
-export default cmdTable

@@ -79,5 +79,3 @@ async function edit (state: QuickPickItem): Promise<void> {
 export const cmdTable = [
   { name: 'edit.dictionary', func: dictionary }
 ]
-
-export default cmdTable
