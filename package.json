@@ -19,33 +19,10 @@
     "bugs": {
         "url": "https://github.com/Harurow/vscode.ext.harurow.util/issues"
     },
-    "icon": "images/mosaic.png",
+    "icon": "images/ext-icon.png",
     "main": "./dist/extension",
     "activationEvents": [
-        "onCommand:harurow.autoReveal.off",
-        "onCommand:harurow.autoReveal.on",
-        "onCommand:harurow.datetime.convert",
-        "onCommand:harurow.datetime.insert",
-        "onCommand:harurow.edit.calc",
-        "onCommand:harurow.edit.dictionary",
-        "onCommand:harurow.edit.distinct",
-        "onCommand:harurow.edit.numbering",
-        "onCommand:harurow.edit.swap",
-        "onCommand:harurow.encoding.decode",
-        "onCommand:harurow.encoding.encode",
-        "onCommand:harurow.experiment",
-        "onCommand:harurow.fileExclude.backup",
-        "onCommand:harurow.fileExclude.excludeFile",
-        "onCommand:harurow.fileExclude.restore",
-        "onCommand:harurow.generator.generateDts",
-        "onCommand:harurow.removeLines.ifMatched",
-        "onCommand:harurow.removeLines.ifUnmatched",
-        "onCommand:harurow.transformCase.ToLowerCamelCase",
-        "onCommand:harurow.transformCase.ToLowerChainCase",
-        "onCommand:harurow.transformCase.ToLowerSnakeCase",
-        "onCommand:harurow.transformCase.ToUpperCamelCase",
-        "onCommand:harurow.transformCase.ToUpperChainCase",
-        "onCommand:harurow.transformCase.ToUpperSnakeCase"
+        "*"
     ],
     "contributes": {
         "commands": [
