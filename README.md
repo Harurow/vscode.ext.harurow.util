@@ -158,4 +158,17 @@ moment.jsの書式を設定に指定できます。
 
 開いているファイルを切り替えた時にエクスプローラー上でもアクティブにする設定を切り替えます
 
---------------------------------------------------------------------------------
+## エディタのデコレーション
+
+### 全角スペースのデコレーション
+
+全角スペースを波線で囲みます。設定で有効・無効を切り替えられます。規定は有効です。
+
+## Thank you
+
+[Zenkaku](https://github.com/mosapride/vscode-zenkaku)  
+[whitespace-plus](https://github.com/davidhouchin/whitespace-plus)  
+
+## License
+
+MIT
