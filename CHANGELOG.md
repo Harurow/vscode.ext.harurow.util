@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.6.0](https://github.com/Harurow/vscode.ext.harurow.util/compare/v2.5.9...v2.6.0) (2021-06-27)
+
+
+### Features
+
+* アイコンを新しくした ([3c04535](https://github.com/Harurow/vscode.ext.harurow.util/commit/3c045358e5d834cfa390896487c4e988c6ae8ab1))
+* 全角スペースを破線で囲むデコレーションを追加 ([3866011](https://github.com/Harurow/vscode.ext.harurow.util/commit/38660114859ea1a42d0e19ab0c55f3d17c46ae90))
+* 日付・時刻挿入の設定の扱いを変更 ([02f2700](https://github.com/Harurow/vscode.ext.harurow.util/commit/02f270027365ef918f5436a6243afee0a9ef82a7))
+
 ### [2.5.9](https://github.com/Harurow/vscode.ext.harurow.util/compare/v2.5.8...v2.5.9) (2021-06-26)
 
 ### [2.5.8](https://github.com/Harurow/vscode.ext.harurow.util/compare/v2.5.7...v2.5.8) (2021-06-26)
