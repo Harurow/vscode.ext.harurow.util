@@ -1,8 +1,8 @@
 {
     "cfg.datetime.insert.format.description": "insert date formats. powered by `moment.js`",
-    "cfg.experiment": "<experiment>",
+    "cfg.experiment.description": "<experiment>",
     "cfg.file.exclude.backup.description": "file.exclude backup. DON'T EDIT.",
-    "cfg.textEditor.fullWideSpace": "visible full-width space",
+    "cfg.editor.fullWidthSpaceRender.description": "render full-width space",
     "harurow.autoReveal.off": "Harurow: turn off explorer auto-reveal",
     "harurow.autoReveal.on": "Harurow: turn on explorer auto-reveal",
     "harurow.datetime.convert": "Harurow: datetime converter",

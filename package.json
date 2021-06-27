@@ -254,11 +254,9 @@
             "title": "Harurow UTIL",
             "properties": {
                 "harurow.experiment": {
-                    "type": [
-                        "boolean"
-                    ],
+                    "type": "boolean",
                     "default": false,
-                    "description": "%cfg.experiment%"
+                    "description": "%cfg.experiment.description%"
                 },
                 "harurow.file.exclude.backup": {
                     "type": [
@@ -267,18 +265,30 @@
                     "default": "undefined",
                     "description": "%cfg.file.exclude.backup.description%"
                 },
-                "harurow.datetime.insert.format": {
-                    "type": [
-                        "array"
+                "harurow.editor.fullWidthSpaceReder": {
+                    "type": "string",
+                    "default": "always",
+                    "enum": [
+                        "always",
+                        "never"
                     ],
-                    "default": [
+                    "description": "%cfg.editor.fullWidthSpaceRender.description%"
+                },
+                "harurow.datetime.insert.format": {
+                    "type": "string",
+                    "default": "YYYY-MM-DD",
+                    "enum": [
                         "YYYY-MM",
                         "YYYY-MM-DD",
                         "YYYY-MM-DD HH:mm:ss.SSS",
                         "L",
+                        "l",
                         "LL",
+                        "ll",
                         "LLL",
-                        "LLLL"
+                        "lll",
+                        "LLLL",
+                        "llll"
                     ],
                     "description": "%cfg.datetime.insert.format.description%"
                 }

@@ -1,8 +1,8 @@
 ﻿{
     "cfg.datetime.insert.format.description": "日付を挿入するときのフォーマット. moment.js のフォーマットが利用できます",
-    "cfg.experiment": "<実験>",
+    "cfg.experiment.description": "<実験>",
     "cfg.file.exclude.backup.description": "file.exclude のバックアップです. 修正しないでください.",
-    "cfg.textEditor.fullWideSpace": "全角スペースを表示する",
+    "cfg.editor.fullWidthSpaceRender.description": "全角スペースを表示する",
     "harurow.autoReveal.off": "アクティブファイルをサイドバーに表示を無効化",
     "harurow.autoReveal.on": "アクティブファイルをサイドバーに表示を有効化",
     "harurow.datetime.convert": "日付・時刻の変換",
