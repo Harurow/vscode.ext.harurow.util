@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.8.0](https://github.com/Harurow/vscode.ext.harurow.util/compare/v2.7.1...v2.8.0) (2021-07-04)
+
+
+### Features
+
+* no-break spaceも描画対象にした ([2954035](https://github.com/Harurow/vscode.ext.harurow.util/commit/29540358b29401c61be8c5cde4e066a190239909))
+
 ### [2.7.1](https://github.com/Harurow/vscode.ext.harurow.util/compare/v2.7.0...v2.7.1) (2021-07-04)
 
 ## [2.7.0](https://github.com/Harurow/vscode.ext.harurow.util/compare/v2.6.0...v2.7.0) (2021-07-04)
