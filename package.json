@@ -250,20 +250,31 @@
                 }
             ]
         },
+        "colors": [
+            {
+                "id": "harurow.whitespace",
+                "description": "%color.whitespace%",
+                "defaults": {
+                    "dark": "#556DAB",
+                    "light": "#ff8DCB",
+                    "highContrast": "#758DCB"
+                }
+            }
+        ],
         "configuration": {
             "title": "Harurow UTIL",
             "properties": {
                 "harurow.experiment": {
                     "type": "boolean",
                     "default": false,
-                    "description": "%cfg.experiment.description%"
+                    "description": "%config.experiment.description%"
                 },
                 "harurow.file.exclude.backup": {
                     "type": [
                         "object"
                     ],
                     "default": "undefined",
-                    "description": "%cfg.file.exclude.backup.description%"
+                    "description": "%config.file.exclude.backup.description%"
                 },
                 "harurow.editor.fullWidthSpaceReder": {
                     "type": "string",
@@ -272,7 +283,7 @@
                         "always",
                         "never"
                     ],
-                    "description": "%cfg.editor.fullWidthSpaceRender.description%"
+                    "description": "%config.editor.fullWidthSpaceRender.description%"
                 },
                 "harurow.editor.nobreakSpaceRender": {
                     "type": "string",
@@ -281,7 +292,7 @@
                         "always",
                         "never"
                     ],
-                    "description": "%cfg.editor.nobreakSpaceRender.description%"
+                    "description": "%config.editor.nobreakSpaceRender.description%"
                 },
                 "harurow.datetime.insert.format": {
                     "type": "string",
@@ -299,7 +310,7 @@
                         "LLLL",
                         "llll"
                     ],
-                    "description": "%cfg.datetime.insert.format.description%"
+                    "description": "%config.datetime.insert.format.description%"
                 }
             }
         }
