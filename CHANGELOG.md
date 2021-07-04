@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.7.0](https://github.com/Harurow/vscode.ext.harurow.util/compare/v2.6.0...v2.7.0) (2021-07-04)
+
+
+### Features
+
+* 数式のヘルプをブラウザで開く機能を追加と数式をコメントで追加する機能も追加 ([2057435](https://github.com/Harurow/vscode.ext.harurow.util/commit/20574358c912e7341d55f5962833bc4ec4eb1a94))
+
+
+### Bug Fixes
+
+* 辞書のプレースホルダのローカライズ対応 ([5e97152](https://github.com/Harurow/vscode.ext.harurow.util/commit/5e9715214d0fef844e6563641036e841da9bfbdc))
+* 数式のローカライズ対応 ([72ce44c](https://github.com/Harurow/vscode.ext.harurow.util/commit/72ce44c3e8225909af462d6b8e38e9ee910aa4f7))
+
 ## [2.6.0](https://github.com/Harurow/vscode.ext.harurow.util/compare/v2.5.9...v2.6.0) (2021-06-27)
 
 
