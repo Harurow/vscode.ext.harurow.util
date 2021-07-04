@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.8.2](https://github.com/Harurow/vscode.ext.harurow.util/compare/v2.8.1...v2.8.2) (2021-07-04)
+
+
+### Bug Fixes
+
+* レンダリングのイベントの処理方法を変更た ([98ee89a](https://github.com/Harurow/vscode.ext.harurow.util/commit/98ee89afe5ea94d12a08a159f03580b042a76eb0))
+
 ### [2.8.1](https://github.com/Harurow/vscode.ext.harurow.util/compare/v2.8.0...v2.8.1) (2021-07-04)
 
 ## [2.8.0](https://github.com/Harurow/vscode.ext.harurow.util/compare/v2.7.1...v2.8.0) (2021-07-04)
