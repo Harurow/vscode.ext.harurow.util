@@ -274,6 +274,15 @@
                     ],
                     "description": "%cfg.editor.fullWidthSpaceRender.description%"
                 },
+                "harurow.editor.nobreakSpaceRender": {
+                    "type": "string",
+                    "default": "always",
+                    "enum": [
+                        "always",
+                        "never"
+                    ],
+                    "description": "%cfg.editor.nobreakSpaceRender.description%"
+                },
                 "harurow.datetime.insert.format": {
                     "type": "string",
                     "default": "YYYY-MM-DD",

@@ -1,56 +1,47 @@
 import * as vscode from 'vscode'
 
 const IDEOGRAPHIC_SPACE = 0x3000
+const NOBREAK_SPACE = 0x00A0
 
 function getConfiguration (section: string | undefined, key: string, doc: vscode.TextDocument): unknown {
   const config = vscode.workspace.getConfiguration(section, doc)
   return config.get(key)
 }
 
-const renderOptions: vscode.DecorationRenderOptions = {
-  borderWidth: '1.5px',
-  outlineWidth: '0px',
-  borderRadius: '5px',
+const whiteSpaceDecorationRenderOptions: vscode.DecorationRenderOptions = {
+  borderWidth: '1px',
+  borderRadius: '4px',
   borderStyle: 'dashed',
   light: {
-    borderColor: 'rgba(58, 70, 101, 0.4)'
+    borderColor: 'rgba(58, 70, 101, 0.4)',
   },
   dark: {
-    borderColor: 'rgba(117, 141, 203, 0.4)'
+    borderColor: 'rgba(117, 141, 203, 0.4)',
   }
 }
 
 class WhitespaceRender {
   private readonly editor: vscode.TextEditor
-  private readonly decoration: vscode.TextEditorDecorationType
+  private readonly whiteSpaceDeco1: vscode.TextEditorDecorationType
+  private readonly whiteSpaceDeco2: vscode.TextEditorDecorationType
 
   constructor (editor: vscode.TextEditor) {
     this.editor = editor
-    this.decoration = vscode.window.createTextEditorDecorationType(renderOptions)
-  }
-
-  getRenderOptions (): vscode.DecorationRenderOptions {
-    return {
-      borderWidth: '1.5px',
-      outlineWidth: '0px',
-      borderRadius: '5px',
-      borderStyle: 'dashed',
-      light: {
-        borderColor: 'rgba(58, 70, 101, 0.4)'
-      },
-      dark: {
-        borderColor: 'rgba(117, 141, 203, 0.4)'
-      }
-    }
+    this.whiteSpaceDeco1 = vscode.window.createTextEditorDecorationType(whiteSpaceDecorationRenderOptions)
+    this.whiteSpaceDeco2 = vscode.window.createTextEditorDecorationType(whiteSpaceDecorationRenderOptions)
   }
 
   setDecoration (): void {
-    const whitespaces: vscode.Range[] = []
+    const whiteSpaceDeco1: vscode.Range[] = []
+    const whiteSpaceDeco2: vscode.Range[] = []
     const doc = this.editor.document
 
-    const value = getConfiguration('harurow', 'editor.fullWidthSpaceReder', doc)
+    const fullWidthSpace = getConfiguration('harurow', 'editor.fullWidthSpaceReder', doc) === 'always'
+    const nobreakSpace = getConfiguration('harurow', 'editor.nobreakSpaceReder', doc) === 'always'
 
-    if (value === 'always') {
+    if (fullWidthSpace || nobreakSpace) {
+      const deco = [whiteSpaceDeco1, whiteSpaceDeco2]
+      let idx = 0
       for (let i = 0; i < doc.lineCount; i++) {
         const line = doc.lineAt(i)
         const offset = doc.offsetAt(line.range.start)
@@ -58,16 +49,18 @@ class WhitespaceRender {
 
         for (let i = 0; i < text.length; i++) {
           const chCode = text.charCodeAt(i)
-          if (chCode === IDEOGRAPHIC_SPACE) {
-            whitespaces.push(new vscode.Range(
+          if (chCode === IDEOGRAPHIC_SPACE || chCode === NOBREAK_SPACE) {
+            deco[idx].push(new vscode.Range(
               doc.positionAt(offset + i),
               doc.positionAt(offset + i + 1)))
+            idx = (idx + 1) & 1
           }
         }
       }
     }
 
-    this.editor.setDecorations(this.decoration, whitespaces)
+    this.editor.setDecorations(this.whiteSpaceDeco1, whiteSpaceDeco1)
+    this.editor.setDecorations(this.whiteSpaceDeco2, whiteSpaceDeco2)
   }
 }
 
