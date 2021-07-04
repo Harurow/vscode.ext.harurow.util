@@ -54,7 +54,7 @@ class Tracker implements vscode.DebugAdapterTracker {
   }
 }
 
-class TrackerFactory implements vscode.DebugAdapterTrackerFactory {
+export class TrackerFactory implements vscode.DebugAdapterTrackerFactory {
   /**
    * The method 'createDebugAdapterTracker' is called at the start of a debug session in order
    * to return a "tracker" object that provides read-access to the communication between VS Code and a debug adapter.
@@ -66,13 +66,4 @@ class TrackerFactory implements vscode.DebugAdapterTrackerFactory {
     console.log('session', session)
     return new Tracker()
   }
-}
-
-export function activate (context: vscode.ExtensionContext): void {
-  // const factory = new TrackerFactory()
-  // context.subscriptions.push(vscode.debug.registerDebugAdapterTrackerFactory('*', factory))
-}
-
-export function deactivate (): void {
-  // nop
 }

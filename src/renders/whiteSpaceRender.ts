@@ -102,7 +102,7 @@ export class WhiteSpaceRender {
     } else if (this.isEnableNobreakSpaceRender) {
       return (ch: number) => ch === NOBREAK_SPACE
     }
-    return (ch: number) => false
+    return (_: number) => false
   }
 
   private readonly refreshDecoratioins = (editor: vscode.TextEditor): void => {
