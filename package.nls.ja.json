@@ -32,6 +32,8 @@
     "msg.datetime.convert.placeholder": "変換の種類を選択してください",
     "msg.datetime.insert.placeholder": "選択するか、書式を入力してください",
     "msg.edit.calc.placeholder": "計算式",
+    "msg.edit.calc.invalid": "計算式が評価できません",
+    "msg.edit.calc.help": "数式のヘルプを開く(別ブラウザ)",
     "msg.edit.dictionary.placeholder": "検索文字列",
     "msg.edit.numbering.radix": "基数を選択してください",
     "msg.edit.numbering.start": "最初の数値を入力してください",

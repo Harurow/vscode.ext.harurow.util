@@ -1,9 +1,11 @@
-import { TextDocument, TextEditorEdit, Selection, QuickPickItem } from 'vscode'
+import { TextDocument, TextEditorEdit, Selection, QuickPickItem, Uri } from 'vscode'
 import { transformTemplate, getSelectTextIfExists, handleError } from '../util'
 import { MultiStepInput } from '../../../utils'
 import * as mee from 'math-expression-evaluator'
+import * as vscode from 'vscode'
 
 interface QuickPickItemEx extends QuickPickItem {
+  url?: Uri
   result: boolean
 }
 
@@ -15,7 +17,7 @@ function calculation (expression: string): { result: boolean, answer: string } {
   try {
     const expr = expression
       .replace(/%/g, 'Mod')
-      .replace(/,/g, '')
+      .replace(/[,|;]/g, '')
     const answer: number = mee.eval(expr)
     return { result: true, answer: answer.toString() }
   } catch (err) {
@@ -23,14 +25,51 @@ function calculation (expression: string): { result: boolean, answer: string } {
   return { result: false, answer: '' }
 }
 
-function createPickItem (expr: string): QuickPickItemEx {
+function createPickItems (expr: string): QuickPickItemEx[] {
   const result = calculation(expr)
+  if (result.result) {
+    return [
+      {
+        alwaysShow: true,
+        picked: true,
+        label: result.answer,
+        description: '',
+        result: true
+      },
+      {
+        alwaysShow: true,
+        picked: false,
+        label: result.answer,
+        description: ` // ${expr}`,
+        result: true
+      },
+      {
+        alwaysShow: true,
+        picked: false,
+        label: result.answer,
+        description: ` /* ${expr} */`,
+        result: true
+      }
+    ]
+  } else {
+    return [{
+      alwaysShow: true,
+      picked: false,
+      label: 'edit.calc.invalid'.toLocalize(),
+      description: '',
+      result: false
+    }]
+  }
+}
+
+function createHelpLinkPickItem (): QuickPickItemEx {
   return {
     alwaysShow: true,
-    picked: true,
-    label: result.result ? result.answer : '-',
-    description: `= ${expr}`,
-    result: result.result
+    picked: false,
+    label: '',
+    description: 'edit.calc.help'.toLocalize(),
+    url: Uri.parse('http://bugwheels94.github.io/math-expression-evaluator/'),
+    result: false
   }
 }
 
@@ -39,8 +78,9 @@ export async function calc (): Promise<void> {
   const text = getSelectTextIfExists()
   const items: QuickPickItemEx[] = []
   if (text != null) {
-    items.push(createPickItem(text))
+    items.push(...createPickItems(text))
   }
+  items.push(createHelpLinkPickItem())
 
   async function pick (input: MultiStepInput, state: State): Promise<any> {
     state.pick = await input.showQuickPick<QuickPickItemEx>({
@@ -49,7 +89,10 @@ export async function calc (): Promise<void> {
       items: items,
       activeItem: items.length > 0 ? items[0] : undefined,
       onDidChangeValue: (sender, input) => {
-        sender.items = [createPickItem(input)] as QuickPickItemEx[]
+        sender.items = [
+          ...createPickItems(input),
+          createHelpLinkPickItem()
+        ] as QuickPickItemEx[]
       }
     })
   }
@@ -62,8 +105,12 @@ export async function calc (): Promise<void> {
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     handleError(err)
   } finally {
-    if (result && state.pick != null) {
-      await edit(state.pick)
+    if (state.pick != null) {
+      if (state.pick.url != null) {
+        await vscode.env.openExternal(state.pick.url)
+      } else if (result) {
+        await edit(state.pick)
+      }
     }
   }
 }
@@ -84,7 +131,7 @@ async function edit (state: QuickPickItemEx): Promise<void> {
 
   await transform((doc, eb, sel) => {
     const before = doc.getText(sel)
-    const after = state.label
+    const after = state.label + (state.description ?? '')
 
     if (before !== after) {
       eb.replace(sel, after)

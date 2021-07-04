@@ -36,6 +36,8 @@
     "msg.datetime.convert.placeholder": "Select or input format",
     "msg.datetime.insert.placeholder": "Select type",
     "msg.edit.calc.placeholder": "expression",
+    "msg.edit.calc.invalid": "invalid expression",
+    "msg.edit.calc.help": "open help (browser)",
     "msg.edit.dictionary.placeholder": "word",
     "msg.edit.numbering.radix": "select radix",
     "msg.edit.numbering.start": "input start number",
