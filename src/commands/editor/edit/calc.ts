@@ -44,7 +44,7 @@ export async function calc (): Promise<void> {
 
   async function pick (input: MultiStepInput, state: State): Promise<any> {
     state.pick = await input.showQuickPick<QuickPickItemEx>({
-      placeholder: '計算式',
+      placeholder: 'edit.calc.placeholder'.toLocalize(),
       value: text ?? undefined,
       items: items,
       activeItem: items.length > 0 ? items[0] : undefined,
