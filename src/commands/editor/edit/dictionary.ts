@@ -32,7 +32,7 @@ export async function dictionary (): Promise<void> {
 
   async function pick (input: MultiStepInput, state: State): Promise<any> {
     state.pick = await input.showQuickPick<QuickPickItem>({
-      placeholder: '検索文字',
+      placeholder: 'edit.dictionary.placeholder'.toLocalize(),
       value: text ?? undefined,
       items: items,
       activeItem: items.length > 0 ? items[0] : undefined,

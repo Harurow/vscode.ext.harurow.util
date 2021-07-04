@@ -35,6 +35,7 @@
     "msg.datetime.convert.iso8601.label": "ISO8601",
     "msg.datetime.convert.placeholder": "Select or input format",
     "msg.datetime.insert.placeholder": "Select type",
+    "msg.edit.dictionary.placeholder": "word",
     "msg.edit.numbering.radix": "select radix",
     "msg.edit.numbering.start": "input start number",
     "msg.edit.numbering.step": "input step",

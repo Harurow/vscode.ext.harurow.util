@@ -1,4 +1,4 @@
-﻿{
+{
     "cfg.datetime.insert.format.description": "日付を挿入するときのフォーマット. moment.js のフォーマットが利用できます",
     "cfg.experiment.description": "<実験>",
     "cfg.file.exclude.backup.description": "file.exclude のバックアップです. 修正しないでください.",
@@ -31,6 +31,7 @@
     "msg.completed": "完了しました",
     "msg.datetime.convert.placeholder": "変換の種類を選択してください",
     "msg.datetime.insert.placeholder": "選択するか、書式を入力してください",
+    "msg.edit.dictionary.placeholder": "検索文字列",
     "msg.edit.numbering.radix": "基数を選択してください",
     "msg.edit.numbering.start": "最初の数値を入力してください",
     "msg.edit.numbering.step": "増加量を入力してください",
