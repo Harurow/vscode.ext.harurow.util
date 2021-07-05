@@ -20,6 +20,7 @@ class Tracker implements vscode.DebugAdapterTracker {
   */
   onDidSendMessage? (message: any): void {
     // console.log('onDidSendMessage', message)
+    /*
     if (message.event === 'output' && message?.body?.category === 'stdout') {
       const body = message.body
       const output = body.output
@@ -30,6 +31,7 @@ class Tracker implements vscode.DebugAdapterTracker {
       const pathUri = vscode.Uri.file(path)
       console.log(`onDisSendMessage: ${pathUri.path}(${line}) > ${output}`)
     }
+    */
   }
 
   /**

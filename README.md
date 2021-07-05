@@ -164,6 +164,8 @@ moment.jsの書式を設定に指定できます。
 
 全角スペース/ノーブレイクスーペースを波線で囲みます。設定で有効・無効を切り替えられます。規定は有効です。
 
+![空白](https://github.com/harurow/vscode.ext.harurow.util/blob/master/screenshots/whitespace.gif?raw=true)
+
 ## Thank you
 
 [Zenkaku](https://github.com/mosapride/vscode-zenkaku)  
