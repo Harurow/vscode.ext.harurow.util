@@ -1,11 +1,9 @@
-import { Uri, workspace } from 'vscode'
+import { Uri } from 'vscode'
 import { handleError } from '../editor/util'
 
 export function experiment (uri: Uri): void {
   try {
-    console.log(uri)
-    const workspaceFolder = workspace.getWorkspaceFolder(uri)
-    console.log(workspaceFolder)
+    // const workspaceFolder = workspace.getWorkspaceFolder(uri)
   } catch (err) {
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     handleError(err)

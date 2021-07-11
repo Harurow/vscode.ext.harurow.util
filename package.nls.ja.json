@@ -1,6 +1,9 @@
 ﻿{
-    "color.whitespace": "全角スペース, ノー・ブレイク・スペース",
     "config.datetime.insert.format.description": "日付を挿入するときのフォーマット. moment.js のフォーマットが利用できます",
+    "config.debug.neighborLog.description": "コード領域にデバッグログを書き出します",
+    "config.debug.metricsStartPrefix.description": "ログ計測開始のプレフィクス",
+    "config.debug.metricsStopPrefix.description": "ログ計測停止のプレフィクス",
+    "config.debug.metrics.description": "ログとログの間の時間を計測します",
     "config.experiment.description": "<実験>",
     "config.file.exclude.backup.description": "file.exclude のバックアップです. 修正しないでください.",
     "config.editor.fullWidthSpaceRender.description": "全角スペース(U+3000)を表示する",

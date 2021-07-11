@@ -164,7 +164,18 @@ moment.jsの書式を設定に指定できます。
 
 全角スペース/ノーブレイクスーペースを波線で囲みます。設定で有効・無効を切り替えられます。規定は有効です。
 
-![空白](https://github.com/harurow/vscode.ext.harurow.util/blob/master/screenshots/whitespace.gif?raw=true)
+![空白のレンダリング拡張](https://github.com/harurow/vscode.ext.harurow.util/blob/master/screenshots/whitespace.gif?raw=true)
+
+### デバッグログをコードの行に描画する
+
+デバッグログ出力をコード行に描画します。2回以上実行される場合は、実行回数も描画します。規定では有効です。
+
+### デバッグログの実行時間を計測する
+
+指定のプレフィックスで出力されたデバッグログの時間を計測します。マウスオーバー時に表示されます。規定では有効です。
+規定では `@>:`から始まるデバッグログと `@<:` で始まるデバッグログの間を計測します。それぞれ設定で変更可能です。
+
+![デバッグログの拡張](https://github.com/harurow/vscode.ext.harurow.util/blob/master/screenshots/debuglog.gif?raw=true)
 
 ## Thank you
 

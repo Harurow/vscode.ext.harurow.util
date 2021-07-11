@@ -1,10 +1,11 @@
 import * as vscode from 'vscode'
+import { createOnDidChangeVisibleTextEditors } from '../utils'
 
 const IDEOGRAPHIC_SPACE = 0x3000
 const NOBREAK_SPACE = 0x00A0
 
 const listenSections = [
-  'harurow.editor.fullWidthSpaceReder',
+  'harurow.editor.fullWidthSpaceRender',
   'harurow.editor.nobreakSpaceRender'
 ]
 
@@ -13,12 +14,12 @@ export class WhiteSpaceRender {
   private isEnableNobreakSpaceRender: boolean = false
   private readonly decoType1: vscode.TextEditorDecorationType
   private readonly decoType2: vscode.TextEditorDecorationType
-  private readonly lastVisibleTextEditors = new Set<vscode.TextEditor>()
+  private readonly visibleTextEditors = new Set<vscode.TextEditor>()
 
   public constructor (context: vscode.ExtensionContext) {
     vscode.workspace.onDidChangeConfiguration(this.onDidChangeConfiguration, context.subscriptions)
     vscode.workspace.onDidChangeTextDocument(this.onDidChangeTextDocument, context.subscriptions)
-    vscode.window.onDidChangeVisibleTextEditors(this.onDidChangeVisibleTextEditors, context.subscriptions)
+    vscode.window.onDidChangeVisibleTextEditors(createOnDidChangeVisibleTextEditors(this.visibleTextEditors, this.refreshDecoratioins), context.subscriptions)
 
     const decorationRenderOptions = this.getDecorationRenderOptions()
     this.decoType1 = vscode.window.createTextEditorDecorationType(decorationRenderOptions)
@@ -47,27 +48,6 @@ export class WhiteSpaceRender {
     }
   }
 
-  private readonly onDidChangeVisibleTextEditors = (visibleTextEditors: vscode.TextEditor[]): void => {
-    const newVisibleTextEditors = new Set<vscode.TextEditor>()
-
-    visibleTextEditors.forEach(editor => {
-      if (!this.lastVisibleTextEditors.has(editor)) {
-        this.refreshDecoratioins(editor)
-        this.lastVisibleTextEditors.add(editor)
-      }
-      newVisibleTextEditors.add(editor)
-    })
-
-    const removedTextEditors: vscode.TextEditor[] = []
-    this.lastVisibleTextEditors.forEach((editor) => {
-      if (!newVisibleTextEditors.has(editor)) {
-        removedTextEditors.push(editor)
-      }
-    })
-
-    removedTextEditors.forEach(this.lastVisibleTextEditors.delete)
-  }
-
   private readonly getConfigurationScope = (): vscode.WorkspaceFolder | undefined => {
     return vscode.workspace.workspaceFolders?.[0]
   }
@@ -82,12 +62,12 @@ export class WhiteSpaceRender {
       borderWidth: '1px',
       borderRadius: '4px',
       borderStyle: 'dashed',
-      borderColor: new vscode.ThemeColor('harurow.whitespace')
+      borderColor: new vscode.ThemeColor('editorWhitespace.foreground')
     }
   }
 
   private readonly refreshFlags = (): void => {
-    this.isEnableFullWidthSpaceRender = this.getConfiguration('editor.fullWidthSpaceReder') === 'always'
+    this.isEnableFullWidthSpaceRender = this.getConfiguration('editor.fullWidthSpaceRender') === 'always'
     this.isEnableNobreakSpaceRender = this.getConfiguration('editor.nobreakSpaceRender') === 'always'
   }
 
@@ -136,11 +116,11 @@ export class WhiteSpaceRender {
   }
 
   private readonly refreshVisibleTextEditors = (): void => {
-    this.lastVisibleTextEditors.clear()
+    this.visibleTextEditors.clear()
 
     vscode.window.visibleTextEditors.forEach((editor) => {
       this.refreshDecoratioins(editor)
-      this.lastVisibleTextEditors.add(editor)
+      this.visibleTextEditors.add(editor)
     })
   }
 }

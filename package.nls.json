@@ -1,6 +1,9 @@
 {
-    "color.whitespace": "full-width space, no-break space",
     "config.datetime.insert.format.description": "insert date formats. powered by `moment.js`",
+    "config.debug.neighborLog.description": "write debug log on text-editor",
+    "config.debug.metricsStartPrefix.description": "debug log metrics start prefix",
+    "config.debug.metricsStopPrefix.description": "debug log metrics stop prefix",
+    "config.debug.metrics.description": "debug log metrics",
     "config.experiment.description": "<experiment>",
     "config.file.exclude.backup.description": "file.exclude backup. DON'T EDIT.",
     "config.editor.fullWidthSpaceRender.description": "render full-width space(U+3000)",
