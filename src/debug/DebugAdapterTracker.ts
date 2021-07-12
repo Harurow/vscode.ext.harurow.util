@@ -52,15 +52,8 @@ export class DebugAdapterTracker implements vscode.DebugAdapterTracker, vscode.D
       if (message.event === 'output' && message.body != null) {
         if (message.body.category === 'stdout') {
           this.onDidSendStdoutMessage(message)
-          return
-        } else if (message.body.category === 'telemetry') {
-          return
         }
-      } else if (message.event === 'telemetry' || message.event === 'loadedSource') {
-        return
       }
-    }
-    if (this.session.parentSession != null) {
     }
   }
 
