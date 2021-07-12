@@ -3,7 +3,7 @@
 [![Marketplace Version](https://vsmarketplacebadge.apphb.com/version/harurow.harurow-util.svg)](https://marketplace.visualstudio.com/items?itemName=harurow.harurow-util)
 [![Build Status](https://dev.azure.com/motoharucamellia/vscode.ext.harurow.util/_apis/build/status/Harurow.vscode.ext.harurow.util?branchName=master)](https://dev.azure.com/motoharucamellia/vscode.ext.harurow.util/_build/latest?definitionId=1&branchName=master)
 [![Build Status](https://travis-ci.com/Harurow/vscode.ext.harurow.util.svg?branch=master)](https://travis-ci.com/Harurow/vscode.ext.harurow.util)
-[![Open in Visual Studio Code](https://open.vscode.dev/badges/open-in-vscode.svg?format)](https://open.vscode.dev/harurow/vscode.ext.harurow.util)
+[![Open in Visual Studio Code](https://open.vscode.dev/badges/open-in-vscode.svg)](https://open.vscode.dev/harurow/vscode.ext.harurow.util)
 
 ## 特徴
 
