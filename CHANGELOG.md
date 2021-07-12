@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.11.0](https://github.com/Harurow/vscode.ext.harurow.util/compare/v2.6.0...v2.11.0) (2021-07-12)
+
+
+### Features
+
+* no-break spaceも描画対象にした ([2954035](https://github.com/Harurow/vscode.ext.harurow.util/commit/29540358b29401c61be8c5cde4e066a190239909))
+* デバッグログの拡張 ([90b06f7](https://github.com/Harurow/vscode.ext.harurow.util/commit/90b06f7bb22cdc7c965bf0a52349a91a34c22911))
+* 空白の色を設定で変更できるように修正 ([ee4b150](https://github.com/Harurow/vscode.ext.harurow.util/commit/ee4b150caaa8c5fce378b522a4d95f918522903a))
+* 数式のヘルプをブラウザで開く機能を追加と数式をコメントで追加する機能も追加 ([2057435](https://github.com/Harurow/vscode.ext.harurow.util/commit/20574358c912e7341d55f5962833bc4ec4eb1a94))
+
+
+### Bug Fixes
+
+* レンダリングのイベントの処理方法を変更た ([98ee89a](https://github.com/Harurow/vscode.ext.harurow.util/commit/98ee89afe5ea94d12a08a159f03580b042a76eb0))
+* 辞書のプレースホルダのローカライズ対応 ([5e97152](https://github.com/Harurow/vscode.ext.harurow.util/commit/5e9715214d0fef844e6563641036e841da9bfbdc))
+* 数式のローカライズ対応 ([72ce44c](https://github.com/Harurow/vscode.ext.harurow.util/commit/72ce44c3e8225909af462d6b8e38e9ee910aa4f7))
+
 ## [2.10.0](https://github.com/Harurow/vscode.ext.harurow.util/compare/v2.9.1...v2.10.0) (2021-07-11)
 
 
