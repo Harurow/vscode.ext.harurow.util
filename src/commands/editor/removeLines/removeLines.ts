@@ -1,120 +1,160 @@
-import { window, TextDocument, TextEditorEdit, Selection, TextEditor } from 'vscode'
-import { UserCanceled, validateRegex } from '../../../utils'
-import { transformTemplate } from '../util'
+import * as vscode from 'vscode'
+import { window } from 'vscode'
+import { enumLineNumbers, showInformationMessage } from '../../../utils'
 
-function extendsToLineSelection (sel: Selection): Selection {
-  const anchorLine = sel.anchor.line < sel.active.line && sel.active.character === 0
-    ? sel.active.line - 1
-    : sel.active.line
+export const ifMatched = async (): Promise<void> => {
+  const editor = vscode.window.activeTextEditor
+  if (editor == null) {
+    return
+  }
 
-  return new Selection(sel.anchor.line, 0, anchorLine, Number.MAX_VALUE)
-}
-
-function extendsToLineSelections (editor: TextEditor): Selection[] {
-  editor.selections = editor.selections.map(extendsToLineSelection)
-  return editor.selections
-}
-
-async function transformLines<T = void> (
-  input: () => Promise<T>,
-  replace: (doc: TextDocument, editBuilder: TextEditorEdit, selection: Selection, input: T) => void,
-  failedMessage?: string | undefined): Promise<void> {
-  return transformTemplate({
-    getSelectionCallback: extendsToLineSelections,
-    inputCallback: input,
-    replaceCallback: replace,
-    failedMessage: failedMessage
+  const background = new vscode.ThemeColor('editor.findMatchBackground')
+  const lineDeco = vscode.window.createTextEditorDecorationType({
+    isWholeLine: true,
+    backgroundColor: background
   })
-}
 
-export async function ifMatched (): Promise<void> {
-  const input = async (): Promise<{pattern: string, ignoreCase: boolean}> => {
-    const pattern = await window.showInputBox({
-      placeHolder: 'removeLines.ifMatched.placeHoler'.toLocalize(),
+  const dispose = (): void => {
+    editor.setDecorations(lineDeco, [])
+    lineDeco.dispose()
+  }
+
+  try {
+    const doc = editor.document
+    const getRegex = (value: string): RegExp => {
+      const ignoreCase = value.endsWith('\\i')
+      const flags = ignoreCase ? 'i' : undefined
+      const pattern = value.slice(0, ignoreCase ? -2 : undefined)
+      return new RegExp(pattern, flags)
+    }
+
+    const removeLines: vscode.Range[] = []
+    const validateInput = (value: string): string | undefined => {
+      try {
+        removeLines.length = 0
+        if (value !== '') {
+          const regex = getRegex(value)
+          for (const lineNo of enumLineNumbers()) {
+            const line = doc.lineAt(lineNo)
+            if (regex.test(line.text)) {
+              removeLines.push(line.range)
+            }
+          }
+        }
+
+        editor.setDecorations(lineDeco, removeLines)
+      } catch {
+        removeLines.length = 0
+        editor.setDecorations(lineDeco, [])
+        return 'removeLines.ifMatched.invalidate'.toLocalize()
+      }
+    }
+
+    const userInput = await window.showInputBox({
+      placeHolder: 'removeLines.ifMatched.placeHolder'.toLocalize(),
       prompt: 'removeLines.ifMatched.prompt'.toLocalize(),
-      validateInput: validateRegex('removeLines.ifMatched.invalidate'.toLocalize())
+      validateInput
     })
 
-    if (pattern === undefined) {
-      throw new UserCanceled()
+    if (userInput == null || userInput === '') {
+      return
     }
 
-    const ignoreCase = pattern.endsWith('\\i')
-    return { pattern: pattern.slice(0, ignoreCase ? -2 : undefined), ignoreCase }
-  }
-
-  let removes: number | undefined
-
-  const replace = (doc: TextDocument, eb: TextEditorEdit, sel: Selection, input: {pattern: string, ignoreCase: boolean}): void => {
-    const before = doc.getText(sel)
-    const after = before
-      .lines()
-      .filter(line => {
-        const match = !RegExp(input.pattern, input.ignoreCase ? 'i' : undefined).test(line)
-        removes = match ? removes : (removes ?? 0) + 1
-        return match
-      })
-      .join('\n')
-
-    if (before !== after) {
-      eb.replace(sel, after)
+    if (removeLines.length === 0) {
+      showInformationMessage('notFound'.toLocalize())
+      return
     }
-  }
 
-  await transformLines<{pattern: string, ignoreCase: boolean}>(input, replace)
+    await editor.edit((eb) => {
+      removeLines
+        .reverse()
+        .forEach((r) => {
+          eb.delete(doc.lineAt(r.start).rangeIncludingLineBreak)
+        })
+    })
 
-  if (removes === 0) {
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    window.showInformationMessage('notFound'.toLocalize())
-  } else if (removes !== undefined) {
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    window.showInformationMessage('removeLines.ifMatched.result'.toLocalize(removes))
+    showInformationMessage('removeLines.ifMatched.result'.toLocalize(removeLines.length))
+  } finally {
+    dispose()
   }
 }
 
-export async function ifUnmatched (): Promise<void> {
-  const input = async (): Promise<{pattern: string, ignoreCase: boolean}> => {
-    const pattern = await window.showInputBox({
-      placeHolder: 'removeLines.ifUnmatched.placeHoler'.toLocalize(),
+export const ifUnmatched = async (): Promise<void> => {
+  const editor = vscode.window.activeTextEditor
+  if (editor == null) {
+    return
+  }
+
+  const background = new vscode.ThemeColor('editor.findMatchBackground')
+  const lineDeco = vscode.window.createTextEditorDecorationType({
+    isWholeLine: true,
+    backgroundColor: background
+  })
+
+  const dispose = (): void => {
+    editor.setDecorations(lineDeco, [])
+    lineDeco.dispose()
+  }
+
+  const doc = editor.document
+  const removeLines: vscode.Range[] = []
+
+  try {
+    const getRegex = (value: string): RegExp => {
+      const ignoreCase = value.endsWith('\\i')
+      const flags = ignoreCase ? 'i' : undefined
+      const pattern = value.slice(0, ignoreCase ? -2 : undefined)
+      return new RegExp(pattern, flags)
+    }
+
+    const validateInput = (value: string): string | undefined => {
+      try {
+        removeLines.length = 0
+        if (value !== '') {
+          const regex = getRegex(value)
+          for (const lineNo of enumLineNumbers()) {
+            const line = doc.lineAt(lineNo)
+            if (!regex.test(line.text)) {
+              removeLines.push(line.range)
+            }
+          }
+        }
+
+        editor.setDecorations(lineDeco, removeLines)
+      } catch {
+        removeLines.length = 0
+        editor.setDecorations(lineDeco, [])
+        return 'removeLines.ifUnmatched.invalidate'.toLocalize()
+      }
+    }
+
+    const userInput = await window.showInputBox({
+      placeHolder: 'removeLines.ifUnmatched.placeHolder'.toLocalize(),
       prompt: 'removeLines.ifUnmatched.prompt'.toLocalize(),
-      validateInput: validateRegex('removeLines.ifUnmatched.invalidate'.toLocalize())
+      validateInput
     })
 
-    if (pattern === undefined) {
-      throw new UserCanceled()
+    if (userInput == null || userInput === '') {
+      return
     }
-
-    const ignoreCase = pattern.endsWith('\\i')
-    return { pattern: pattern.slice(0, ignoreCase ? -2 : undefined), ignoreCase }
+  } finally {
+    dispose()
   }
 
-  let removes: number | undefined
+  if (removeLines.length === 0) {
+    showInformationMessage('notFound'.toLocalize())
+    return
+  }
 
-  const replace = (doc: TextDocument, eb: TextEditorEdit, sel: Selection, input: {pattern: string, ignoreCase: boolean}): void => {
-    const before = doc.getText(sel)
-    const after = before
-      .lines()
-      .filter(line => {
-        const match = RegExp(input.pattern, input.ignoreCase ? 'i' : undefined).test(line)
-        removes = match ? removes : (removes ?? 0) + 1
-        return match
+  await editor.edit((eb) => {
+    removeLines
+      .reverse()
+      .forEach((r) => {
+        eb.delete(doc.lineAt(r.start).rangeIncludingLineBreak)
       })
-      .join('\n')
+  })
 
-    if (before !== after) {
-      eb.replace(sel, after)
-    }
-  }
-
-  await transformLines<{pattern: string, ignoreCase: boolean}>(input, replace)
-
-  if (removes === 0) {
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    window.showInformationMessage('notFound'.toLocalize())
-  } else if (removes !== undefined) {
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    window.showInformationMessage('removeLines.ifUnmatched.result'.toLocalize(removes))
-  }
+  showInformationMessage('removeLines.ifUnmatched.result'.toLocalize(removeLines.length))
 }
 
 export const cmdTable =
