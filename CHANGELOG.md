@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.12.0](https://github.com/Harurow/vscode.ext.harurow.util/compare/v2.10.0...v2.12.0) (2021-07-13)
+
+
+### Features
+
+* 正規表現での行削除機能拡張 正規表現入力中削除対象行をハイライト ([0322e23](https://github.com/Harurow/vscode.ext.harurow.util/commit/0322e235053dab1fcd407405d357c445990f532e))
+
+
+### Bug Fixes
+
+* ビルドエラー ([36083c6](https://github.com/Harurow/vscode.ext.harurow.util/commit/36083c6bee1918bd07a441de050032210400c84f))
+
 ### [2.11.4](https://github.com/Harurow/vscode.ext.harurow.util/compare/v2.11.3...v2.11.4) (2021-07-12)
 
 ### [2.11.3](https://github.com/Harurow/vscode.ext.harurow.util/compare/v2.11.2...v2.11.3) (2021-07-12)
