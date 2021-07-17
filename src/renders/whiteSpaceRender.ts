@@ -1,126 +1,93 @@
 import * as vscode from 'vscode'
-import { createOnDidChangeVisibleTextEditors } from '../utils'
+import { createRender, getVisibleRanges } from '../utils'
 
 const IDEOGRAPHIC_SPACE = 0x3000
 const NOBREAK_SPACE = 0x00A0
 
-const listenSections = [
-  'harurow.editor.fullWidthSpaceRender',
-  'harurow.editor.nobreakSpaceRender'
-]
+interface WhiteSpaceRenderResource {
+  isEnabledFullWidthSpaceRender: boolean
+  isEnabledNobreakSpaceRender: boolean
+  decoType1: vscode.TextEditorDecorationType
+  decoType2: vscode.TextEditorDecorationType
+  dispose(): any
+}
 
 export class WhiteSpaceRender {
-  private isEnableFullWidthSpaceRender: boolean = false
-  private isEnableNobreakSpaceRender: boolean = false
-  private readonly decoType1: vscode.TextEditorDecorationType
-  private readonly decoType2: vscode.TextEditorDecorationType
-  private readonly visibleTextEditors = new Set<vscode.TextEditor>()
-
   public constructor (context: vscode.ExtensionContext) {
-    vscode.workspace.onDidChangeConfiguration(this.onDidChangeConfiguration, context.subscriptions)
-    vscode.workspace.onDidChangeTextDocument(this.onDidChangeTextDocument, context.subscriptions)
-    vscode.window.onDidChangeVisibleTextEditors(createOnDidChangeVisibleTextEditors(this.visibleTextEditors, this.refreshDecoratioins), context.subscriptions)
-
-    const decorationRenderOptions = this.getDecorationRenderOptions()
-    this.decoType1 = vscode.window.createTextEditorDecorationType(decorationRenderOptions)
-    this.decoType2 = vscode.window.createTextEditorDecorationType(decorationRenderOptions)
-
-    this.refreshFlags()
-    this.refreshVisibleTextEditors()
+    context.subscriptions.push(
+      createRender(this.createResource, this.setDecorations,
+        ['harurow.editor.fullWidthSpaceRender', 'harurow.editor.nobreakSpaceRender']))
   }
 
-  private readonly onDidChangeConfiguration = (e: vscode.ConfigurationChangeEvent): void => {
-    const scope = this.getConfigurationScope()
-    if (listenSections.some((section) => e.affectsConfiguration(section, scope))) {
-      this.refreshFlags()
-      this.refreshVisibleTextEditors()
-    }
-  }
-
-  private readonly onDidChangeTextDocument = (e: vscode.TextDocumentChangeEvent): void => {
-    if (e.document != null) {
-      const docUri = e.document.uri.toString()
-      vscode.window.visibleTextEditors.forEach((editor) => {
-        if (editor.document?.uri?.toString() === docUri) {
-          this.refreshDecoratioins(editor)
-        }
-      })
-    }
-  }
-
-  private readonly getConfigurationScope = (): vscode.WorkspaceFolder | undefined => {
-    return vscode.workspace.workspaceFolders?.[0]
-  }
-
-  private readonly getConfiguration = (section: string): any => {
-    const scope = this.getConfigurationScope()
-    return vscode.workspace.getConfiguration('harurow', scope).get(section)
-  }
-
-  private readonly getDecorationRenderOptions = (): vscode.DecorationRenderOptions => {
-    return {
+  private readonly createResource = (editor: vscode.TextEditor): WhiteSpaceRenderResource => {
+    const borderColor = new vscode.ThemeColor('editorWhitespace.foreground')
+    const decoType1 = vscode.window.createTextEditorDecorationType({
       borderWidth: '1px',
       borderRadius: '4px',
       borderStyle: 'dashed',
-      borderColor: new vscode.ThemeColor('editorWhitespace.foreground')
+      borderColor: borderColor
+    })
+    const decoType2 = vscode.window.createTextEditorDecorationType({
+      borderWidth: '1px',
+      borderRadius: '4px',
+      borderStyle: 'dashed',
+      borderColor: borderColor
+    })
+    return {
+      decoType1: decoType1,
+      decoType2: decoType2,
+      isEnabledFullWidthSpaceRender: vscode.workspace.getConfiguration('harurow', editor.document).get('editor.fullWidthSpaceRender') === 'always',
+      isEnabledNobreakSpaceRender: vscode.workspace.getConfiguration('harurow', editor.document).get('editor.nobreakSpaceRender') === 'always',
+      dispose: (): void => {
+        decoType1.dispose()
+        decoType2.dispose()
+      }
     }
   }
 
-  private readonly refreshFlags = (): void => {
-    this.isEnableFullWidthSpaceRender = this.getConfiguration('editor.fullWidthSpaceRender') === 'always'
-    this.isEnableNobreakSpaceRender = this.getConfiguration('editor.nobreakSpaceRender') === 'always'
+  private readonly setDecorations = (editor: vscode.TextEditor, resource: WhiteSpaceRenderResource): void => {
+    if (resource.isEnabledFullWidthSpaceRender || resource.isEnabledNobreakSpaceRender) {
+      const isWhiteSpace = this.getIsWhiteSpace(resource)
+      const ranges: vscode.Range[][] = [[], []]
+      const doc = editor.document
+
+      let idx = 0
+      getVisibleRanges(editor).forEach(r => {
+        for (let i = r.start.line; i <= r.end.line; i++) {
+          const line = doc.lineAt(i)
+          const offset = doc.offsetAt(line.range.start)
+          const text = line.text
+          for (let i = 0; i < text.length; i++) {
+            const ch = text.charCodeAt(i)
+            if (isWhiteSpace(ch)) {
+              ranges[idx].push(new vscode.Range(
+                doc.positionAt(offset + i),
+                doc.positionAt(offset + i + 1)))
+              idx = (idx + 1) & 1
+            }
+          }
+        }
+      })
+
+      editor.setDecorations(resource.decoType1, ranges[0])
+      editor.setDecorations(resource.decoType2, ranges[1])
+    } else {
+      editor.setDecorations(resource.decoType1, [])
+      editor.setDecorations(resource.decoType2, [])
+    }
   }
 
-  private readonly getIsWhiteSpace = (): ((ch: number) => boolean) => {
-    if (this.isEnableFullWidthSpaceRender) {
-      if (this.isEnableNobreakSpaceRender) {
+  private readonly getIsWhiteSpace = (resource: WhiteSpaceRenderResource): ((ch: number) => boolean) => {
+    if (resource.isEnabledFullWidthSpaceRender) {
+      if (resource.isEnabledNobreakSpaceRender) {
         return (ch: number) => {
           return ch === IDEOGRAPHIC_SPACE || ch === NOBREAK_SPACE
         }
       }
       return (ch: number) => ch === IDEOGRAPHIC_SPACE
-    } else if (this.isEnableNobreakSpaceRender) {
+    } else if (resource.isEnabledNobreakSpaceRender) {
       return (ch: number) => ch === NOBREAK_SPACE
     }
     return (_: number) => false
-  }
-
-  private readonly refreshDecoratioins = (editor: vscode.TextEditor): void => {
-    const ranges: vscode.Range[][] = [[], []]
-
-    if (this.isEnableFullWidthSpaceRender || this.isEnableNobreakSpaceRender) {
-      const doc = editor.document
-
-      const isWhiteSpace = this.getIsWhiteSpace()
-
-      let idx = 0
-      for (let i = 0; i < doc.lineCount; i++) {
-        const line = doc.lineAt(i)
-        const offset = doc.offsetAt(line.range.start)
-        const text = line.text
-
-        for (let i = 0; i < text.length; i++) {
-          const ch = text.charCodeAt(i)
-          if (isWhiteSpace(ch)) {
-            ranges[idx].push(new vscode.Range(
-              doc.positionAt(offset + i),
-              doc.positionAt(offset + i + 1)))
-            idx = (idx + 1) & 1
-          }
-        }
-      }
-    }
-
-    editor.setDecorations(this.decoType1, ranges[0])
-    editor.setDecorations(this.decoType2, ranges[1])
-  }
-
-  private readonly refreshVisibleTextEditors = (): void => {
-    this.visibleTextEditors.clear()
-
-    vscode.window.visibleTextEditors.forEach((editor) => {
-      this.refreshDecoratioins(editor)
-      this.visibleTextEditors.add(editor)
-    })
   }
 }

@@ -1,6 +1,6 @@
 import * as vscode from 'vscode'
 import { window } from 'vscode'
-import { enumLineNumbers, showInformationMessage } from '../../../utils'
+import { enumTargetLines, enumTargetVisibleLines, showInformationMessage } from '../../../utils'
 
 export const ifMatched = async (): Promise<void> => {
   const editor = vscode.window.activeTextEditor
@@ -14,38 +14,57 @@ export const ifMatched = async (): Promise<void> => {
     backgroundColor: background
   })
 
+  const getRegex = (value: string): RegExp => {
+    const ignoreCase = value.endsWith('\\i')
+    const flags = ignoreCase ? 'i' : undefined
+    const pattern = value.slice(0, ignoreCase ? -2 : undefined)
+    return new RegExp(pattern, flags)
+  }
+
+  const redraw = (value: string): boolean => {
+    const removeLines: vscode.Range[] = []
+    try {
+      if (value !== '') {
+        const regex = getRegex(value)
+        for (const line of enumTargetVisibleLines(editor)) {
+          if (regex.test(line.text)) {
+            removeLines.push(line.range)
+          }
+        }
+      }
+
+      editor.setDecorations(lineDeco, removeLines)
+    } catch {
+      removeLines.length = 0
+      editor.setDecorations(lineDeco, [])
+      return false
+    }
+    return true
+  }
+
+  let lastInputText: string | undefined
+  const disposables = [
+    vscode.window.onDidChangeTextEditorVisibleRanges((e) => {
+      if (editor === e.textEditor) {
+        if (lastInputText != null) {
+          redraw(lastInputText)
+        }
+      }
+    })
+  ]
+
   const dispose = (): void => {
+    disposables.forEach((obj) => obj.dispose())
+    disposables.length = 0
     editor.setDecorations(lineDeco, [])
     lineDeco.dispose()
   }
 
   try {
-    const doc = editor.document
-    const getRegex = (value: string): RegExp => {
-      const ignoreCase = value.endsWith('\\i')
-      const flags = ignoreCase ? 'i' : undefined
-      const pattern = value.slice(0, ignoreCase ? -2 : undefined)
-      return new RegExp(pattern, flags)
-    }
-
-    const removeLines: vscode.Range[] = []
     const validateInput = (value: string): string | undefined => {
-      try {
-        removeLines.length = 0
-        if (value !== '') {
-          const regex = getRegex(value)
-          for (const lineNo of enumLineNumbers()) {
-            const line = doc.lineAt(lineNo)
-            if (regex.test(line.text)) {
-              removeLines.push(line.range)
-            }
-          }
-        }
-
-        editor.setDecorations(lineDeco, removeLines)
-      } catch {
-        removeLines.length = 0
-        editor.setDecorations(lineDeco, [])
+      lastInputText = value
+      if (!redraw(value)) {
+        lastInputText = undefined
         return 'removeLines.ifMatched.invalidate'.toLocalize()
       }
     }
@@ -60,20 +79,24 @@ export const ifMatched = async (): Promise<void> => {
       return
     }
 
-    if (removeLines.length === 0) {
-      showInformationMessage('notFound'.toLocalize())
-      return
-    }
-
     await editor.edit((eb) => {
-      removeLines
-        .reverse()
-        .forEach((r) => {
-          eb.delete(doc.lineAt(r.start).rangeIncludingLineBreak)
-        })
-    })
+      const regex = getRegex(userInput)
 
-    showInformationMessage('removeLines.ifMatched.result'.toLocalize(removeLines.length))
+      const removeLines: vscode.Range[] = []
+      for (const line of enumTargetLines(editor)) {
+        if (regex.test(line.text)) {
+          removeLines.unshift(line.rangeIncludingLineBreak)
+        }
+      }
+
+      removeLines.forEach((r) => eb.delete(r))
+
+      if (removeLines.length === 0) {
+        showInformationMessage('notFound'.toLocalize())
+      } else {
+        showInformationMessage('removeLines.ifMatched.result'.toLocalize(removeLines.length))
+      }
+    })
   } finally {
     dispose()
   }
@@ -91,39 +114,57 @@ export const ifUnmatched = async (): Promise<void> => {
     backgroundColor: background
   })
 
+  const getRegex = (value: string): RegExp => {
+    const ignoreCase = value.endsWith('\\i')
+    const flags = ignoreCase ? 'i' : undefined
+    const pattern = value.slice(0, ignoreCase ? -2 : undefined)
+    return new RegExp(pattern, flags)
+  }
+
+  const redraw = (value: string): boolean => {
+    const removeLines: vscode.Range[] = []
+    try {
+      if (value !== '') {
+        const regex = getRegex(value)
+        for (const line of enumTargetVisibleLines(editor)) {
+          if (!regex.test(line.text)) {
+            removeLines.push(line.range)
+          }
+        }
+      }
+
+      editor.setDecorations(lineDeco, removeLines)
+    } catch {
+      removeLines.length = 0
+      editor.setDecorations(lineDeco, [])
+      return false
+    }
+    return true
+  }
+
+  let lastInputText: string | undefined
+  const disposables = [
+    vscode.window.onDidChangeTextEditorVisibleRanges((e) => {
+      if (editor === e.textEditor) {
+        if (lastInputText != null) {
+          redraw(lastInputText)
+        }
+      }
+    })
+  ]
+
   const dispose = (): void => {
+    disposables.forEach((obj) => obj.dispose())
+    disposables.length = 0
     editor.setDecorations(lineDeco, [])
     lineDeco.dispose()
   }
 
-  const doc = editor.document
-  const removeLines: vscode.Range[] = []
-
   try {
-    const getRegex = (value: string): RegExp => {
-      const ignoreCase = value.endsWith('\\i')
-      const flags = ignoreCase ? 'i' : undefined
-      const pattern = value.slice(0, ignoreCase ? -2 : undefined)
-      return new RegExp(pattern, flags)
-    }
-
     const validateInput = (value: string): string | undefined => {
-      try {
-        removeLines.length = 0
-        if (value !== '') {
-          const regex = getRegex(value)
-          for (const lineNo of enumLineNumbers()) {
-            const line = doc.lineAt(lineNo)
-            if (!regex.test(line.text)) {
-              removeLines.push(line.range)
-            }
-          }
-        }
-
-        editor.setDecorations(lineDeco, removeLines)
-      } catch {
-        removeLines.length = 0
-        editor.setDecorations(lineDeco, [])
+      lastInputText = value
+      if (!redraw(value)) {
+        lastInputText = undefined
         return 'removeLines.ifUnmatched.invalidate'.toLocalize()
       }
     }
@@ -137,24 +178,27 @@ export const ifUnmatched = async (): Promise<void> => {
     if (userInput == null || userInput === '') {
       return
     }
+
+    await editor.edit((eb) => {
+      const removeLines: vscode.Range[] = []
+      const regex = getRegex(userInput)
+      for (const line of enumTargetLines(editor)) {
+        if (!regex.test(line.text)) {
+          removeLines.unshift(line.rangeIncludingLineBreak)
+        }
+      }
+
+      removeLines.forEach((r) => eb.delete(r))
+
+      if (removeLines.length === 0) {
+        showInformationMessage('notFound'.toLocalize())
+      } else {
+        showInformationMessage('removeLines.ifUnmatched.result'.toLocalize(removeLines.length))
+      }
+    })
   } finally {
     dispose()
   }
-
-  if (removeLines.length === 0) {
-    showInformationMessage('notFound'.toLocalize())
-    return
-  }
-
-  await editor.edit((eb) => {
-    removeLines
-      .reverse()
-      .forEach((r) => {
-        eb.delete(doc.lineAt(r.start).rangeIncludingLineBreak)
-      })
-  })
-
-  showInformationMessage('removeLines.ifUnmatched.result'.toLocalize(removeLines.length))
 }
 
 export const cmdTable =

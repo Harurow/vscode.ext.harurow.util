@@ -6,13 +6,12 @@ import { DebugMetricsStore } from './DebugLogMetrics'
 import { NeighborLogMessage } from './NeighborLogMessage'
 import { NeighborLogCounter } from './NeighborLogCounter'
 import { NeighborLogMetrics } from './NeighborLogMetrics'
-import { createOnDidChangeVisibleTextEditors, lineNoToRange } from '../utils'
+import { onDidChangeVisibleTextEditors, lineNoToRange, VisibleTextEditorsChangeEvent } from '../utils'
 
 export class NeighborLog implements vscode.Disposable {
   private readonly logStore: DebugLogStore
   private readonly metricsStore: DebugMetricsStore
   private readonly disposables: vscode.Disposable[]
-  private readonly visibleTextEditors = new Set<vscode.TextEditor>()
   private readonly message: NeighborLogMessage
   private readonly counter: NeighborLogCounter
   private readonly metrics: NeighborLogMetrics
@@ -30,7 +29,7 @@ export class NeighborLog implements vscode.Disposable {
       sessionEventHub.subscribe(this.onDebugSessionEvent),
       logStoreEventHub.subscribe(this.onLogStoreEvent),
       vscode.workspace.onDidChangeTextDocument(this.onDidChangeTextDocument),
-      vscode.window.onDidChangeVisibleTextEditors(createOnDidChangeVisibleTextEditors(this.visibleTextEditors, this.setDecorations)),
+      onDidChangeVisibleTextEditors(this.onDidChangeVisibleTextEditors),
       this.message = new NeighborLogMessage(),
       this.counter = new NeighborLogCounter(),
       this.metrics = new NeighborLogMetrics()
@@ -147,6 +146,12 @@ export class NeighborLog implements vscode.Disposable {
         }
       })
     }
+  }
+
+  private readonly onDidChangeVisibleTextEditors = (e: VisibleTextEditorsChangeEvent): void => {
+    e.added.forEach((editor) => {
+      this.setDecorations(editor)
+    })
   }
 
   private readonly setDecorations = (editor: vscode.TextEditor): void => {
