@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.13.1](https://github.com/Harurow/vscode.ext.harurow.util/compare/v2.13.0...v2.13.1) (2021-07-19)
+
+
+### Bug Fixes
+
+* 日付け挿入のフォーマットが設定できなくなっていた ([c7bd0e6](https://github.com/Harurow/vscode.ext.harurow.util/commit/c7bd0e6b5ec286f2e93c8c934e9290e42228173e))
+
 ## [2.13.0](https://github.com/Harurow/vscode.ext.harurow.util/compare/v2.12.0...v2.13.0) (2021-07-17)
 
 
