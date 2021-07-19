@@ -12,27 +12,13 @@ export async function insert (uri: Uri): Promise<void> {
   const now = new Date()
 
   const conf = workspace.getConfiguration('harurow', uri)
-  const values = conf.inspect('datetime.insert.format')
-  const value = (values?.workspaceValue ?? values?.defaultValue) as string
-  const formats = [
-    'YYYY-MM',
-    'YYYY-MM-DD',
-    'YYYY-MM-DD HH:mm:ss.SSS',
-    'L',
-    'l',
-    'LL',
-    'll',
-    'LLL',
-    'lll',
-    'LLLL',
-    'llll'
-  ]
+  const formats = conf.get('datetime.insert.format') as string[]
 
   const createQuickPickItem = (fmt: string): QuickPickItem =>
     ({ label: format(now, fmt), description: fmt })
 
   const items = [...formats].map(createQuickPickItem)
-  const activeItem = items.find((i) => i.description === value)
+  const activeItem = items?.[0]
 
   async function pick (input: MultiStepInput, state: State): Promise<any> {
     state.pick = await input.showQuickPick({

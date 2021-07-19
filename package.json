@@ -313,11 +313,10 @@
                     "description": "%config.editor.nobreakSpaceRender.description%"
                 },
                 "harurow.datetime.insert.format": {
-                    "type": "string",
-                    "default": "YYYY-MM-DD",
-                    "enum": [
-                        "YYYY-MM",
+                    "type": "array",
+                    "default": [
                         "YYYY-MM-DD",
+                        "YYYY-MM",
                         "YYYY-MM-DD HH:mm:ss.SSS",
                         "L",
                         "l",
