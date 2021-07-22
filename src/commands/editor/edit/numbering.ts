@@ -1,167 +1,229 @@
-import { TextDocument, TextEditorEdit, Selection } from 'vscode'
-import { transformTemplate, handleError } from '../util'
-import { MultiStepInput } from '../../../utils'
+import * as vscode from 'vscode'
+import { createStep, runSteps, setActiveItems, Step } from '../../../utils'
 
-type radix = 'bin' | 'dec' | 'oct' | 'hex' | 'HEX'
+type RadixTypes = 'bin' | 'oct' | 'dec' | 'hex' | 'HEX'
+type RadixValues = 2 | 8 | 10 | 16
 
-interface State {
-  radix?: radix
-  start?: number
-  step?: number
-  zeroPadLen?: number
+interface RadixPickItem extends vscode.QuickPickItem {
+  type: RadixTypes
+  value: RadixValues
 }
 
-export async function numbering (): Promise<void> {
-  const state: State = {
-    radix: 'dec',
+const radixItems: RadixPickItem[] = [
+  { label: '2', description: '[0|1]', type: 'bin', value: 2 },
+  { label: '8', description: '[0-7]', type: 'oct', value: 8 },
+  { label: '10', description: '[0-9]', type: 'dec', value: 10 },
+  { label: '16', description: '[0-9|a-f]', type: 'hex', value: 16 },
+  { label: '16', description: '[0-9|A-F]', type: 'HEX', value: 16 }
+]
+
+const paddingItems: vscode.QuickPickItem[] = [
+  { label: '', description: 'edit.numbering.padding.items.none'.toLocalize() },
+  { label: ' ', description: 'edit.numbering.padding.items.space'.toLocalize() },
+  { label: '0', description: 'edit.numbering.padding.items.zero'.toLocalize() }
+]
+
+export const numbering = async (): Promise<void> => {
+  const state = {
+    radixValue: 10 as RadixValues,
+    radixType: 'dec' as RadixTypes,
     start: 0,
     step: 1,
-    zeroPadLen: undefined
+    padding: '',
+    length: 8
   }
 
-  const parse = (input: string, radix: radix): number => {
-    let value: number = NaN
-    switch (radix) {
-      case 'bin':
-        if (/^-?[0|1]{1,}$/.test(input)) {
-          value = Number.parseInt(input, 2)
-        }
-        break
-      case 'oct':
-        if (/^-?[0-7]{1,}$/.test(input)) {
-          value = Number.parseInt(input, 8)
-        }
-        break
-      case 'dec':
-        if (/^-?[0-9]{1,}$/.test(input)) {
-          value = Number.parseInt(input, 10)
-        }
-        break
-      case 'hex':
-      case 'HEX':
-        if (/^-?[0-9|a-f|A-F]{1,}$/.test(input)) {
-          value = Number.parseInt(input, 16)
-        }
-        break
+  const editor = vscode.window.activeTextEditor
+  if (editor == null) {
+    return
+  }
+
+  const background = new vscode.ThemeColor('editor.findMatchBackground')
+  const deco = vscode.window.createTextEditorDecorationType({
+    after: {
+      backgroundColor: background
     }
-    return value
-  }
+  })
 
-  const validate = (input: string, radix: radix): string | undefined => {
-    const value = parse(input, radix)
-    if (isNaN(value)) {
-      return 'edit.numbering.validation'.toLocalize()
+  const getNumberingString = (index: number): string => {
+    const num = state.start + state.step * index
+    const numStr = state.radixType === 'HEX'
+      ? num.toString(state.radixValue).toUpperCase()
+      : num.toString(state.radixValue)
+
+    if (state.padding === '') {
+      return numStr
     }
-    return undefined
+
+    const paddingStr = state.padding.repeat(state.length)
+    return (paddingStr + numStr).slice(-state.length)
   }
 
-  async function pickRadix (input: MultiStepInput, state: State): Promise<any> {
-    const radixItems = [
-      { radix: 'bin', label: '2', description: '[0|1]' },
-      { radix: 'oct', label: '8', description: '[0-7]' },
-      { radix: 'dec', label: '10', description: '[0-9]' },
-      { radix: 'hex', label: '16', description: '[0-9|a-f]' },
-      { radix: 'HEX', label: '16', description: '[0-9|A-F]' }
-    ]
-    const res = await input.showQuickPick({
-      placeholder: 'edit.numbering.radix'.toLocalize(),
+  const onDidChangeState = (): void => {
+    const options = editor.selections.map((s, i) => ({
+      range: s,
+      renderOptions: {
+        after: {
+          contentText: getNumberingString(i).replace(/ /g, ' ')
+        }
+      }
+    }))
+
+    editor.setDecorations(deco, options)
+  }
+
+  const steps: Step[] = [
+    createStep({
+      type: 'quickPick',
+      name: 'radix',
+      title: 'edit.numbering.title'.toLocalize(),
+      placeholder: 'edit.numbering.radix.placeholder'.toLocalize(),
       items: radixItems,
-      activeItem: radixItems[2]
+      onWillShow: (sender) => {
+        setActiveItems(sender, (i) => i.type === state.radixType)
+      },
+      onDidChangeActive: (_, items) => {
+        if (items.length > 0) {
+          const item = items[0]
+          state.radixValue = item.value
+          state.radixType = item.type
+          onDidChangeState()
+        }
+      },
+      onDidAccept: () => 'start'
+    }),
+    createStep({
+      type: 'inputBox',
+      name: 'start',
+      title: 'edit.numbering.title'.toLocalize(),
+      placeholder: 'edit.numbering.start.placeholder'.toLocalize(),
+      prompt: 'edit.numbering.start.placeholder'.toLocalize(),
+      onWillShow: (sender) => {
+        sender.value = state.start.toString(state.radixValue)
+      },
+      onDidChangeValue: (sender, e): void => {
+        const [succeeded, value, display] = parseInputNumber(e, state.radixType)
+        if (!succeeded) {
+          sender.validationMessage = display
+          return
+        }
+        sender.validationMessage = undefined
+        state.start = value
+        onDidChangeState()
+      },
+      onDidAccept: () => 'step',
+      onDidTriggerBackButton: () => 'radix'
+    }),
+    createStep({
+      type: 'inputBox',
+      name: 'step',
+      title: 'edit.numbering.title'.toLocalize(),
+      placeholder: 'edit.numbering.step.placeholder'.toLocalize(),
+      prompt: 'edit.numbering.step.placeholder'.toLocalize(),
+      onWillShow: (sender) => {
+        sender.value = state.step.toString(state.radixValue)
+      },
+      onDidChangeValue: (sender, e): void => {
+        const [succeeded, value, display] = parseInputNumber(e, state.radixType)
+        if (!succeeded) {
+          sender.validationMessage = display
+          return
+        }
+        sender.validationMessage = undefined
+        state.step = value
+        onDidChangeState()
+      },
+      onDidAccept: () => 'padding',
+      onDidTriggerBackButton: () => 'start'
+    }),
+    createStep({
+      type: 'quickPick',
+      name: 'padding',
+      title: 'edit.numbering.title'.toLocalize(),
+      placeholder: 'edit.numbering.padding.placeholder'.toLocalize(),
+      items: paddingItems,
+      onWillShow: (sender) => {
+        setActiveItems(sender, (i) => i.label === state.padding)
+      },
+      onDidChangeActive: (sender, items) => {
+        if (items.length > 0) {
+          const item = items[0]
+          state.padding = item.label
+          onDidChangeState()
+        }
+      },
+      onDidAccept: () => state.padding === '' ? undefined : 'length',
+      onDidTriggerBackButton: () => 'step'
+    }),
+    createStep({
+      type: 'inputBox',
+      name: 'length',
+      title: 'edit.numbering.title'.toLocalize(),
+      placeholder: 'edit.numbering.length.placeholder'.toLocalize(),
+      prompt: 'edit.numbering.length.placeholder'.toLocalize(),
+      onWillShow: (sender) => {
+        sender.value = state.length.toString(10)
+      },
+      onDidChangeValue: (sender, e): void => {
+        const trimmed = e.trim()
+        if (trimmed === '') {
+          sender.validationMessage = 'edit.numbering.validation'.toLocalize()
+          return
+        }
+
+        const parsedNumber = Number.parseInt(trimmed)
+        if (!Number.isInteger(parsedNumber)) {
+          sender.validationMessage = 'edit.numbering.validation'.toLocalize()
+        }
+
+        sender.validationMessage = undefined
+        if (parsedNumber > 0 && parsedNumber < 1000) {
+          state.length = parsedNumber
+        }
+        onDidChangeState()
+      },
+      onDidTriggerBackButton: () => 'padding'
     })
+  ]
 
-    if (res != null) {
-      state.radix = res.radix as radix
-      return async (input: MultiStepInput) => inputStart(input, state)
-    }
-  }
+  const result = await runSteps(steps)
 
-  async function inputStart (input: MultiStepInput, state: State): Promise<any> {
-    const res = await input.showInputBox({
-      prompt: 'edit.numbering.start'.toLocalize(),
-      value: '0',
-      validateInput: (i: string) => validate(i, state.radix as radix)
+  editor.setDecorations(deco, [])
+  deco.dispose()
+
+  if (result) {
+    await editor.edit((eb) => {
+      editor.selections.forEach((sel, i) => {
+        const str = getNumberingString(i)
+        eb.replace(sel, str)
+      })
     })
-    if (res != null) {
-      state.start = parse(res, state.radix as radix)
-      return async (input: MultiStepInput) => inputStep(input, state)
-    }
-  }
-
-  async function inputStep (input: MultiStepInput, state: State): Promise<any> {
-    const res = await input.showInputBox({
-      prompt: 'edit.numbering.step'.toLocalize(),
-      value: '1',
-      validateInput: (i: string) => validate(i, 'dec')
-    })
-    if (res != null) {
-      state.step = parse(res, 'dec')
-      return async (input: MultiStepInput) => inputZeroPad(input, state)
-    }
-  }
-
-  async function inputZeroPad (input: MultiStepInput, state: State): Promise<any> {
-    const res = await input.showInputBox({
-      prompt: 'edit.numbering.zeroPad'.toLocalize(),
-      value: '0',
-      validateInput: (i: string) => validate(i, 'dec')
-    })
-    if (res != null) {
-      state.zeroPadLen = parse(res, 'dec')
-    }
-  }
-
-  let result = false
-
-  try {
-    result = await MultiStepInput.run(async input => pickRadix(input, state))
-  } catch (err) {
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    handleError(err)
-  } finally {
-    if (result) {
-      await edit(state)
-    }
   }
 }
 
-async function transform (replace: (doc: TextDocument, editBuilder: TextEditorEdit, selection: Selection) => void, failedMessage?: string | undefined): Promise<void> {
-  return transformTemplate({
-    getSelectionCallback: (e) => e.selections,
-    replaceCallback: replace,
-    isRequiredRegion: false,
-    failedMessage: failedMessage
-  })
+const formatNumber = (number: number, radixType: RadixTypes): string => {
+  return radixType === 'bin'
+    ? `0b${number.toString(2)}` : radixType === 'oct'
+      ? `0${number.toString(8)}` : radixType === 'dec'
+        ? `${number.toString(10)}` : radixType === 'hex'
+          ? `0x${number.toString(16)}`
+          : `0x${number.toString(16).toUpperCase()}`
 }
 
-async function edit (state: State): Promise<void> {
-  let num = state.start as number
-  const step = state.step as number
-  const convert = (num: number): string => {
-    switch (state.radix) {
-      case 'bin': return num.toString(2)
-      case 'oct': return num.toString(8)
-      case 'dec': return num.toString(10)
-      case 'hex': return num.toString(16)
-      case 'HEX': return num.toString(16).toUpperCase()
-    }
-    return ''
-  }
-  const zeroPad = (text: string): string => {
-    if (state.zeroPadLen != null && state.zeroPadLen > text.length) {
-      return ('0'.repeat(state.zeroPadLen) + text).slice(-state.zeroPadLen)
-    }
-    return text
+const parseInputNumber = (input: string, radixType: RadixTypes): ([false, number, string] | [true, number, string]) => {
+  const trimmed = input.trim()
+
+  if (trimmed === '') {
+    return [false, Number.NaN, '']
   }
 
-  await transform((doc, eb, sel) => {
-    const before = doc.getText(sel)
-    const after = zeroPad(convert(num))
-    num += step
+  const parsedNumber = Number.parseInt(trimmed)
+  if (!Number.isInteger(parsedNumber)) {
+    return [false, Number.NaN, 'edit.numbering.validation'.toLocalize()]
+  }
 
-    if (before !== after) {
-      eb.replace(sel, after)
-    }
-  })
+  const displayNumber = formatNumber(parsedNumber, radixType)
+  return [true, parsedNumber, displayNumber]
 }
 
 export const cmdTable = [
