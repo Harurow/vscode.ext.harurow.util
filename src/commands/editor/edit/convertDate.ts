@@ -1,23 +1,23 @@
 import { window, TextDocument, TextEditorEdit, Selection } from 'vscode'
 import { transformTemplate } from '../util'
-import { getTimeZoneOffset, normalizeTimezone } from './util'
+import { getTimeZoneOffset, normalizeTimezone } from '../../../utils/formatDate'
 
 export async function converter (): Promise<void> {
   const result = await window.showQuickPick(
     [
       {
         func: toIso,
-        label: 'datetime.convert.iso8601.label'.toLocalize(),
-        description: 'datetime.convert.iso8601.description'.toLocalize()
+        label: 'edit.convertDate.iso8601.label'.toLocalize(),
+        description: 'edit.convertDate.iso8601.description'.toLocalize()
       },
       {
         func: toCSharp,
-        label: 'datetime.convert.csharp.label'.toLocalize(),
-        description: 'datetime.convert.csharp.description'.toLocalize()
+        label: 'edit.convertDate.csharp.label'.toLocalize(),
+        description: 'edit.convertDate.csharp.description'.toLocalize()
       }
     ],
     {
-      placeHolder: 'datetime.convert.placeholder'.toLocalize(),
+      placeHolder: 'edit.convertDate.placeholder'.toLocalize(),
       matchOnDescription: true,
       matchOnDetail: true
     }
@@ -104,5 +104,5 @@ async function edit (callback: (str: string) => string): Promise<void> {
 }
 
 export const cmdTable = [
-  { name: 'datetime.convert', func: converter }
+  { name: 'edit.convertDate', func: converter }
 ]

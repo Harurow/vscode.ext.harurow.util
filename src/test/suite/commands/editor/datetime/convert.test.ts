@@ -1,5 +1,5 @@
 import * as assert from 'assert'
-import { toIso, toCSharp } from '../../../../../commands/editor/datetime/convert'
+import { toIso, toCSharp } from '../../../../../commands/editor/edit/convertDate'
 
 suite('datetime Test Suite', () => {
   test('toIso', () => {

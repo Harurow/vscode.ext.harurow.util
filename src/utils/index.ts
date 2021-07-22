@@ -1,6 +1,7 @@
 import './string.extension'
 import './number.extension'
 export * from './MultiStep'
+export * from './formatDate'
 export { CharInfo } from './CharInfo'
 export { createRender } from './createRender'
 export { emptyDisposable } from './emptyDisposable'

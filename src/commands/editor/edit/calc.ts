@@ -1,11 +1,10 @@
-import { TextDocument, TextEditorEdit, Selection, QuickPickItem, Uri } from 'vscode'
+import * as vscode from 'vscode'
+import * as mee from 'math-expression-evaluator'
 import { transformTemplate, getSelectTextIfExists, handleError } from '../util'
 import { MultiStepInput } from '../../../utils'
-import * as mee from 'math-expression-evaluator'
-import * as vscode from 'vscode'
 
-interface QuickPickItemEx extends QuickPickItem {
-  url?: Uri
+interface QuickPickItemEx extends vscode.QuickPickItem {
+  url?: vscode.Uri
   result: boolean
 }
 
@@ -82,7 +81,7 @@ function createHelpLinkPickItem (): QuickPickItemEx {
     picked: false,
     label: '',
     description: 'edit.calc.help'.toLocalize(),
-    url: Uri.parse('http://bugwheels94.github.io/math-expression-evaluator/'),
+    url: vscode.Uri.parse('http://bugwheels94.github.io/math-expression-evaluator/'),
     result: false
   }
 }
@@ -129,7 +128,7 @@ export async function calc (): Promise<void> {
   }
 }
 
-async function transform (replace: (doc: TextDocument, editBuilder: TextEditorEdit, selection: Selection) => void, failedMessage?: string | undefined): Promise<void> {
+async function transform (replace: (doc: vscode.TextDocument, editBuilder: vscode.TextEditorEdit, selection: vscode.Selection) => void, failedMessage?: string | undefined): Promise<void> {
   return transformTemplate({
     getSelectionCallback: (e) => e.selections,
     replaceCallback: replace,

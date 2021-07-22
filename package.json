@@ -39,12 +39,12 @@
                 "title": "%harurow.experiment%"
             },
             {
-                "command": "harurow.datetime.convert",
-                "title": "%harurow.datetime.convert%"
+                "command": "harurow.edit.convertDate",
+                "title": "%harurow.edit.convertDate%"
             },
             {
-                "command": "harurow.datetime.insert",
-                "title": "%harurow.datetime.insert%"
+                "command": "harurow.edit.insertDate",
+                "title": "%harurow.edit.insertDate%"
             },
             {
                 "command": "harurow.edit.calc",
@@ -170,11 +170,11 @@
                     "when": "config.harurow.experiment"
                 },
                 {
-                    "command": "harurow.datetime.convert",
+                    "command": "harurow.edit.convertDate",
                     "when": "!editorReadonly && editorHasSelection"
                 },
                 {
-                    "command": "harurow.datetime.insert",
+                    "command": "harurow.edit.insertDate",
                     "when": "!editorReadonly"
                 },
                 {
@@ -312,7 +312,7 @@
                     ],
                     "description": "%config.editor.nobreakSpaceRender.description%"
                 },
-                "harurow.datetime.insert.format": {
+                "harurow.edit.insertDate.format": {
                     "type": "array",
                     "default": [
                         "YYYY-MM-DD",
@@ -327,7 +327,7 @@
                         "LLLL",
                         "llll"
                     ],
-                    "description": "%config.datetime.insert.format.description%"
+                    "description": "%config.edit.insertDate.format.description%"
                 }
             }
         }

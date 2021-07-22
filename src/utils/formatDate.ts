@@ -1,5 +1,5 @@
 import moment from 'moment'
-import { getLocale } from '../../../utils'
+import { getLocale } from '.'
 
 export function normalizeTimezone (timezone: string): string {
   return timezone
@@ -20,7 +20,7 @@ export function getTimeZoneOffset (timezone: string): number {
   return toMin(toNumTimezone(normalizeTimezone(timezone)))
 }
 
-export function format (datetime: Date, format: string): string {
+export function formatDate (datetime: Date, format: string): string {
   moment.locale(getLocale())
   return moment(datetime).format(format)
 }

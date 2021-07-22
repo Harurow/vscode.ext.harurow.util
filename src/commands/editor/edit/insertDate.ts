@@ -1,9 +1,24 @@
 import * as vscode from 'vscode'
-import { format } from './util'
+import { formatDate } from '../../../utils/formatDate'
 import { createStep, runSteps } from '../../../utils'
 
-export async function insert (uri: vscode.Uri): Promise<void> {
+interface QuickPickItemEx extends vscode.QuickPickItem {
+  url?: vscode.Uri
+}
+
+function createHelpLinkPickItem (): QuickPickItemEx {
+  return {
+    alwaysShow: true,
+    picked: false,
+    label: '',
+    description: 'edit.insertDate.help'.toLocalize(),
+    url: vscode.Uri.parse('https://momentjs.com/docs/#/displaying/')
+  }
+}
+
+export const insert = async (uri: vscode.Uri): Promise<void> => {
   const state = {
+    pick: undefined as QuickPickItemEx | undefined,
     format: ''
   }
 
@@ -33,28 +48,31 @@ export async function insert (uri: vscode.Uri): Promise<void> {
   }
 
   const conf = vscode.workspace.getConfiguration('harurow', uri)
-  const formats = conf.get('datetime.insert.format') as string[]
+  const formats = conf.get('edit.insertDate.format') as string[]
 
-  const createQuickPickItem = (fmt: string, now: Date): vscode.QuickPickItem =>
-    ({ label: format(now, fmt), description: fmt })
+  const createQuickPickItem = (fmt: string, now: Date): QuickPickItemEx =>
+    ({ label: formatDate(now, fmt), description: fmt })
 
   const now = new Date()
   const items = [...formats].map((f) => createQuickPickItem(f, now))
+  items.push(createHelpLinkPickItem())
 
   const steps = [
     createStep({
       type: 'quickPick',
       name: 'format',
       items: items,
-      placeholder: 'datetime.insert.placeholder'.toLocalize(),
+      placeholder: 'edit.insertDate.placeholder'.toLocalize(),
       matchOnDescription: true,
       onDidChangeValue: (sender, e) => {
         const now = new Date()
-        sender.items = [e, ...formats].map((f) => createQuickPickItem(f, now))
-        console.log(now)
+        const items = [e, ...formats].map((f) => createQuickPickItem(f, now))
+        items.push(createHelpLinkPickItem())
+        sender.items = items
       },
       onDidChangeActive: (_, e) => {
         if (e.length > 0) {
+          state.pick = e[0]
           state.format = e[0].label
           onDidChangeState()
         }
@@ -68,14 +86,18 @@ export async function insert (uri: vscode.Uri): Promise<void> {
   deco.dispose()
 
   if (result) {
-    await editor.edit((eb) => {
-      editor.selections.forEach((s) => {
-        eb.replace(s, state.format)
+    if (state.pick?.url != null) {
+      await vscode.env.openExternal(state.pick.url)
+    } else {
+      await editor.edit((eb) => {
+        editor.selections.forEach((s) => {
+          eb.replace(s, state.format)
+        })
       })
-    })
+    }
   }
 }
 
 export const cmdTable = [
-  { name: 'datetime.insert', func: insert }
+  { name: 'edit.insertDate', func: insert }
 ]
