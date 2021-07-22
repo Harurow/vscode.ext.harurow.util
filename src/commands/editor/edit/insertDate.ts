@@ -1,6 +1,6 @@
 import * as vscode from 'vscode'
 import { formatDate } from '../../../utils/formatDate'
-import { createStep, runSteps } from '../../../utils'
+import { createOnDidChangeState, createStep, runSteps } from '../../../utils'
 
 interface QuickPickItemEx extends vscode.QuickPickItem {
   url?: vscode.Uri
@@ -22,53 +22,35 @@ export const insert = async (uri: vscode.Uri): Promise<void> => {
     format: ''
   }
 
-  const editor = vscode.window.activeTextEditor
-  if (editor == null) {
+  const result = createOnDidChangeState(() => state.format)
+  if (result.status === 'ng') {
     return
   }
 
-  const deco = vscode.window.createTextEditorDecorationType({
-    after: {
-      color: new vscode.ThemeColor('editor.foreground'),
-      backgroundColor: new vscode.ThemeColor('editor.findMatchBackground')
-    }
-  })
-
-  const onDidChangeState = (): void => {
-    const options = editor.selections.map((s, i) => ({
-      range: s,
-      renderOptions: {
-        after: {
-          contentText: state.format
-        }
-      }
-    }))
-
-    editor.setDecorations(deco, options)
-  }
-
+  const { editor, onDidChangeState, dispose } = result
   const conf = vscode.workspace.getConfiguration('harurow', uri)
   const formats = conf.get('edit.insertDate.format') as string[]
 
-  const createQuickPickItem = (fmt: string, now: Date): QuickPickItemEx =>
-    ({ label: formatDate(now, fmt), description: fmt })
-
-  const now = new Date()
-  const items = [...formats].map((f) => createQuickPickItem(f, now))
-  items.push(createHelpLinkPickItem())
+  const createItems = (): QuickPickItemEx[] => {
+    const now = new Date()
+    const items: QuickPickItemEx[] = [...formats]
+      .map((f) => ({
+        label: formatDate(now, f),
+        description: f
+      }))
+    items.push(createHelpLinkPickItem())
+    return items
+  }
 
   const steps = [
     createStep({
       type: 'quickPick',
       name: 'format',
-      items: items,
+      items: createItems(),
       placeholder: 'edit.insertDate.placeholder'.toLocalize(),
       matchOnDescription: true,
-      onDidChangeValue: (sender, e) => {
-        const now = new Date()
-        const items = [e, ...formats].map((f) => createQuickPickItem(f, now))
-        items.push(createHelpLinkPickItem())
-        sender.items = items
+      onDidChangeValue: (sender) => {
+        sender.items = createItems()
       },
       onDidChangeActive: (_, e) => {
         if (e.length > 0) {
@@ -80,12 +62,10 @@ export const insert = async (uri: vscode.Uri): Promise<void> => {
     })
   ]
 
-  const result = await runSteps(steps)
+  const isAccept = await runSteps(steps)
+  dispose()
 
-  editor.setDecorations(deco, [])
-  deco.dispose()
-
-  if (result) {
+  if (isAccept) {
     if (state.pick?.url != null) {
       await vscode.env.openExternal(state.pick.url)
     } else {

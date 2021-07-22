@@ -1,4 +1,4 @@
-import * as calc from './calc'
+import * as evaluateExpression from './evaluateExpression'
 import * as convertDate from './convertDate'
 import * as dictionary from './dictionary'
 import * as distinct from './distinct'
@@ -7,7 +7,7 @@ import * as numbering from './numbering'
 import * as swap from './swap'
 
 export const cmdTable = [
-  ...calc.cmdTable,
+  ...evaluateExpression.cmdTable,
   ...convertDate.cmdTable,
   ...dictionary.cmdTable,
   ...distinct.cmdTable,

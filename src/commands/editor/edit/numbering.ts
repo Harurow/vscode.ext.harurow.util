@@ -1,5 +1,5 @@
 import * as vscode from 'vscode'
-import { createStep, runSteps, setActiveItems, Step } from '../../../utils'
+import { createOnDidChangeState, createStep, runSteps, setActiveItems, Step } from '../../../utils'
 
 type RadixTypes = 'bin' | 'oct' | 'dec' | 'hex' | 'HEX'
 type RadixValues = 2 | 8 | 10 | 16
@@ -33,18 +33,6 @@ export const numbering = async (): Promise<void> => {
     length: 8
   }
 
-  const editor = vscode.window.activeTextEditor
-  if (editor == null) {
-    return
-  }
-
-  const deco = vscode.window.createTextEditorDecorationType({
-    after: {
-      color: new vscode.ThemeColor('editor.foreground'),
-      backgroundColor: new vscode.ThemeColor('editor.findMatchBackground')
-    }
-  })
-
   const getNumberingString = (index: number): string => {
     const num = state.start + state.step * index
     const numStr = state.radixType === 'HEX'
@@ -59,18 +47,15 @@ export const numbering = async (): Promise<void> => {
     return (paddingStr + numStr).slice(-state.length)
   }
 
-  const onDidChangeState = (): void => {
-    const options = editor.selections.map((s, i) => ({
-      range: s,
-      renderOptions: {
-        after: {
-          contentText: getNumberingString(i).replace(/ /g, ' ')
-        }
-      }
-    }))
+  const result = createOnDidChangeState((editor, s, i) => {
+    return getNumberingString(i).replace(/ /g, ' ')
+  })
 
-    editor.setDecorations(deco, options)
+  if (result.status === 'ng') {
+    return
   }
+
+  const { editor, onDidChangeState, dispose } = result
 
   const steps: Step[] = [
     createStep({
@@ -186,12 +171,10 @@ export const numbering = async (): Promise<void> => {
     })
   ]
 
-  const result = await runSteps(steps)
+  const isAccept = await runSteps(steps)
+  dispose()
 
-  editor.setDecorations(deco, [])
-  deco.dispose()
-
-  if (result) {
+  if (isAccept) {
     await editor.edit((eb) => {
       editor.selections.forEach((s, i) => {
         const str = getNumberingString(i)
