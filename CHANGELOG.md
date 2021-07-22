@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.15.0](https://github.com/Harurow/vscode.ext.harurow.util/compare/v2.14.1...v2.15.0) (2021-07-22)
+
+
+### Features
+
+* 日付の挿入にプレビューを追加 ([0d357c1](https://github.com/Harurow/vscode.ext.harurow.util/commit/0d357c11fb5a1ebc21b03dc82523b65c59b8b3af))
+* 日付挿入にヘルプ追加 ([da65d12](https://github.com/Harurow/vscode.ext.harurow.util/commit/da65d1278cba076d81711ff4b41843d9f4e7d467))
+
 ### [2.14.1](https://github.com/Harurow/vscode.ext.harurow.util/compare/v2.14.0...v2.14.1) (2021-07-22)
 
 
