@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.16.0](https://github.com/Harurow/vscode.ext.harurow.util/compare/v2.15.0...v2.16.0) (2021-07-22)
+
+
+### Features
+
+* 数式評価のマルカーソル対応 ([7186afd](https://github.com/Harurow/vscode.ext.harurow.util/commit/7186afd7d22bafcedef6ccc8a42e6020baed819e))
+
 ## [2.15.0](https://github.com/Harurow/vscode.ext.harurow.util/compare/v2.14.1...v2.15.0) (2021-07-22)
 
 
