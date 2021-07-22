@@ -56,8 +56,8 @@ export interface QuickPickOptions<T extends vscode.QuickPickItem> extends StepOp
   matchOnDetail?: boolean
   onWillShow?: (sender: vscode.QuickPick<T>) => void
   onDidChangeValue?: (sender: vscode.QuickPick<T>, e: string) => void
-  onDidChangeActive?: (sender: vscode.QuickPick<T>, e: T[]) => void
-  onDidChangeSelection?: (sender: vscode.QuickPick<T>, e: T[]) => void
+  onDidChangeActive?: (sender: vscode.QuickPick<T>, e: readonly T[]) => void
+  onDidChangeSelection?: (sender: vscode.QuickPick<T>, e: readonly T[]) => void
   onDidHide?: (sender: vscode.QuickPick<T>) => void
   onDidTriggerButton?: (sender: vscode.QuickPick<T>, e: vscode.QuickInputButton) => NextStep
   onDidTriggerBackButton?: (sender: vscode.QuickPick<T>) => NextStep
@@ -163,8 +163,8 @@ const createQuickPick = <T extends vscode.QuickPickItem>(options: QuickPickOptio
   }
 
   const onDidChangeValueInternal = (e: string): void => options.onDidChangeValue?.(quickPick, e)
-  const onDidChangeActiveInternal = (e: T[]): void => options.onDidChangeActive?.(quickPick, e)
-  const onDidChangeSelectionInternal = (e: T[]): void => options.onDidChangeSelection?.(quickPick, e)
+  const onDidChangeActiveInternal = (e: readonly T[]): void => options.onDidChangeActive?.(quickPick, e)
+  const onDidChangeSelectionInternal = (e: readonly T[]): void => options.onDidChangeSelection?.(quickPick, e)
 
   const onDidTriggerButtonInternal = (e: vscode.QuickInputButton): void => {
     const step = options.onDidTriggerButton?.(quickPick, e)
@@ -206,7 +206,7 @@ const createQuickPick = <T extends vscode.QuickPickItem>(options: QuickPickOptio
   quickPick.selectedItems = options.selectedItems ?? []
   quickPick.buttons = options.buttons ?? []
   quickPick.onDidChangeValue(onDidChangeValueInternal, undefined, disposables)
-  quickPick.onDidChangeActive(onDidChangeActiveInternal)
+  quickPick.onDidChangeActive(onDidChangeActiveInternal, undefined, disposables)
   quickPick.onDidChangeSelection(onDidChangeSelectionInternal, undefined, disposables)
   quickPick.onDidTriggerButton(onDidTriggerButtonInternal, undefined, disposables)
   quickPick.onDidAccept(onDidAcceptInternal, undefined, disposables)
