@@ -1,69 +1,79 @@
-import { TextDocument, TextEditorEdit, Selection, workspace, Uri, QuickPickItem } from 'vscode'
-import { transformTemplate, handleError } from '../util'
+import * as vscode from 'vscode'
 import { format } from './util'
-import { MultiStepInput } from '../../../utils'
+import { createStep, runSteps } from '../../../utils'
 
-interface State {
-  pick?: QuickPickItem
-}
+export async function insert (uri: vscode.Uri): Promise<void> {
+  const state = {
+    format: ''
+  }
 
-export async function insert (uri: Uri): Promise<void> {
-  const state: State = {}
-  const now = new Date()
+  const editor = vscode.window.activeTextEditor
+  if (editor == null) {
+    return
+  }
 
-  const conf = workspace.getConfiguration('harurow', uri)
+  const deco = vscode.window.createTextEditorDecorationType({
+    after: {
+      color: new vscode.ThemeColor('editor.foreground'),
+      backgroundColor: new vscode.ThemeColor('editor.findMatchBackground')
+    }
+  })
+
+  const onDidChangeState = (): void => {
+    const options = editor.selections.map((s, i) => ({
+      range: s,
+      renderOptions: {
+        after: {
+          contentText: state.format
+        }
+      }
+    }))
+
+    editor.setDecorations(deco, options)
+  }
+
+  const conf = vscode.workspace.getConfiguration('harurow', uri)
   const formats = conf.get('datetime.insert.format') as string[]
 
-  const createQuickPickItem = (fmt: string): QuickPickItem =>
+  const createQuickPickItem = (fmt: string, now: Date): vscode.QuickPickItem =>
     ({ label: format(now, fmt), description: fmt })
 
-  const items = [...formats].map(createQuickPickItem)
-  const activeItem = items?.[0]
+  const now = new Date()
+  const items = [...formats].map((f) => createQuickPickItem(f, now))
 
-  async function pick (input: MultiStepInput, state: State): Promise<any> {
-    state.pick = await input.showQuickPick({
+  const steps = [
+    createStep({
+      type: 'quickPick',
+      name: 'format',
+      items: items,
       placeholder: 'datetime.insert.placeholder'.toLocalize(),
       matchOnDescription: true,
-      items: items,
-      activeItem: activeItem,
-      onDidChangeValue: (sender, input) => {
-        sender.items = [input, ...formats].map(createQuickPickItem)
+      onDidChangeValue: (sender, e) => {
+        const now = new Date()
+        sender.items = [e, ...formats].map((f) => createQuickPickItem(f, now))
+        console.log(now)
+      },
+      onDidChangeActive: (_, e) => {
+        if (e.length > 0) {
+          state.format = e[0].label
+          onDidChangeState()
+        }
       }
     })
+  ]
+
+  const result = await runSteps(steps)
+
+  editor.setDecorations(deco, [])
+  deco.dispose()
+
+  if (result) {
+    await editor.edit((eb) => {
+      editor.selections.forEach((s) => {
+        eb.replace(s, state.format)
+      })
+    })
   }
-
-  let result = false
-
-  try {
-    result = await MultiStepInput.run(async input => pick(input, state))
-  } catch (err) {
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    handleError(err)
-  } finally {
-    if (result && state.pick != null) {
-      await edit((_: string): string => state.pick?.label ?? '')
-    }
-  }
-}
-
-async function transform (replace: (doc: TextDocument, editBuilder: TextEditorEdit, selection: Selection) => void, failedMessage?: string | undefined): Promise<void> {
-  return transformTemplate({
-    getSelectionCallback: (e) => e.selections,
-    replaceCallback: replace,
-    isRequiredRegion: false,
-    failedMessage: failedMessage
-  })
-}
-
-async function edit (callback: (str: string) => string): Promise<void> {
-  await transform((doc, eb, sel) => {
-    const before = doc.getText(sel)
-    const after = callback(before)
-
-    if (before !== after) {
-      eb.replace(sel, after)
-    }
-  })
 }
 
 export const cmdTable = [

@@ -49,6 +49,20 @@ function createPickItems (expr: string): QuickPickItemEx[] {
         label: result.answer,
         description: ` /* ${expr} */`,
         result: true
+      },
+      {
+        alwaysShow: true,
+        picked: false,
+        label: result.answer,
+        description: ` -- ${expr}`,
+        result: true
+      },
+      {
+        alwaysShow: true,
+        picked: false,
+        label: result.answer,
+        description: ` # ${expr}`,
+        result: true
       }
     ]
   } else {

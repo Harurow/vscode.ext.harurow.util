@@ -38,10 +38,10 @@ export const numbering = async (): Promise<void> => {
     return
   }
 
-  const background = new vscode.ThemeColor('editor.findMatchBackground')
   const deco = vscode.window.createTextEditorDecorationType({
     after: {
-      backgroundColor: background
+      color: new vscode.ThemeColor('editor.foreground'),
+      backgroundColor: new vscode.ThemeColor('editor.findMatchBackground')
     }
   })
 
@@ -145,7 +145,7 @@ export const numbering = async (): Promise<void> => {
       onWillShow: (sender) => {
         setActiveItems(sender, (i) => i.label === state.padding)
       },
-      onDidChangeActive: (sender, items) => {
+      onDidChangeActive: (_, items) => {
         if (items.length > 0) {
           const item = items[0]
           state.padding = item.label
@@ -193,9 +193,9 @@ export const numbering = async (): Promise<void> => {
 
   if (result) {
     await editor.edit((eb) => {
-      editor.selections.forEach((sel, i) => {
+      editor.selections.forEach((s, i) => {
         const str = getNumberingString(i)
-        eb.replace(sel, str)
+        eb.replace(s, str)
       })
     })
   }

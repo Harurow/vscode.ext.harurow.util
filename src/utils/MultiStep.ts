@@ -205,6 +205,9 @@ const createQuickPick = <T extends vscode.QuickPickItem>(options: QuickPickOptio
   quickPick.activeItems = options.activeItems ?? []
   quickPick.selectedItems = options.selectedItems ?? []
   quickPick.buttons = options.buttons ?? []
+  quickPick.canSelectMany = options.canSelectMany ?? false
+  quickPick.matchOnDescription = options.matchOnDescription ?? false
+  quickPick.matchOnDetail = options.matchOnDetail ?? false
   quickPick.onDidChangeValue(onDidChangeValueInternal, undefined, disposables)
   quickPick.onDidChangeActive(onDidChangeActiveInternal, undefined, disposables)
   quickPick.onDidChangeSelection(onDidChangeSelectionInternal, undefined, disposables)
