@@ -106,6 +106,10 @@
 
 ### その他
 
+#### 正規表現に一致する箇所を選択する
+
+正規表現に一致した範囲を選択状態にする
+
 #### 左右の入れ替え
 
 左右の変数を入れ替えます
@@ -146,7 +150,7 @@ moment.jsの書式を設定に指定できます。
 数式の計算結果を求めます。
 利用可能な数式は[Math-expression-evaluator](http://bugwheels94.github.io/math-expression-evaluator/)
 
-![数式の評価](https://github.com/harurow/vscode.ext.harurow.util/blob/master/screenshots/edit.calc.gif?raw=true)
+![数式の評価](https://github.com/harurow/vscode.ext.harurow.util/blob/master/screenshots/edit.evaluate.gif?raw=true)
 
 #### 辞書検索
 

@@ -23,5 +23,4 @@ function loadMessageBundle (): LocalizeEntry {
 const localizeStrings = loadMessageBundle()
 
 export const localize = (key: string): string => localizeStrings[`msg.${key}`] ?? key
-
-export default localize
+export const localizeTitle = (key: string): string => localizeStrings[`harurow.${key}`] ?? key

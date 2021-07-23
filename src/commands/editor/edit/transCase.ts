@@ -145,16 +145,16 @@ function replaceCase (callback: (str: string) => string): () => Promise<void> {
       if (before !== after) {
         eb.replace(sel, after)
       }
-    }, 'transformCase.failed'.toLocalize())
+    }, 'edit.transformCase.failed'.toLocalize())
   }
 }
 
 export const cmdTable =
 [
-  { name: 'transformCase.ToUpperCamelCase', func: replaceCase(transformToUpperCamel) },
-  { name: 'transformCase.ToLowerCamelCase', func: replaceCase(transformToLowerCamel) },
-  { name: 'transformCase.ToUpperSnakeCase', func: replaceCase(transformToUpperSnake) },
-  { name: 'transformCase.ToLowerSnakeCase', func: replaceCase(transformToLowerSnake) },
-  { name: 'transformCase.ToUpperChainCase', func: replaceCase(transformToUpperChain) },
-  { name: 'transformCase.ToLowerChainCase', func: replaceCase(transformToLowerChain) }
+  { name: 'edit.transformCase.ToUpperCamelCase', func: replaceCase(transformToUpperCamel) },
+  { name: 'edit.transformCase.ToLowerCamelCase', func: replaceCase(transformToLowerCamel) },
+  { name: 'edit.transformCase.ToUpperSnakeCase', func: replaceCase(transformToUpperSnake) },
+  { name: 'edit.transformCase.ToLowerSnakeCase', func: replaceCase(transformToLowerSnake) },
+  { name: 'edit.transformCase.ToUpperChainCase', func: replaceCase(transformToUpperChain) },
+  { name: 'edit.transformCase.ToLowerChainCase', func: replaceCase(transformToLowerChain) }
 ]

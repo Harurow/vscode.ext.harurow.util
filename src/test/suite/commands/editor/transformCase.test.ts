@@ -7,7 +7,7 @@ import {
   transformToLowerSnake,
   transformToLowerChain,
   transformToUpperChain
-} from '../../../../commands/editor/transformCase/transCase'
+} from '../../../../commands/editor/edit/transCase'
 
 suite('transformCase Test Suite', () => {
   console.log('start transformCase tests.')

@@ -1,5 +1,6 @@
 import * as vscode from 'vscode'
-import { createRender, getVisibleRanges } from '../utils'
+import { createRender } from '../utils'
+import { getVisibleRanges } from '../utils/enumTargetLines'
 
 const IDEOGRAPHIC_SPACE = 0x3000
 const NOBREAK_SPACE = 0x00A0
@@ -52,7 +53,7 @@ export class WhiteSpaceRender {
       const doc = editor.document
 
       let idx = 0
-      getVisibleRanges(editor).forEach(r => {
+      getVisibleRanges(editor).forEach((r) => {
         for (let i = r.start.line; i <= r.end.line; i++) {
           const line = doc.lineAt(i)
           const offset = doc.offsetAt(line.range.start)

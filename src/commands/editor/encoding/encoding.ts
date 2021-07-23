@@ -73,7 +73,7 @@ export async function encoding (): Promise<void> {
 
   async function pickType (input: MultiStepInput, state: Partial<State>): Promise<any> {
     state.type = await input.showQuickPick<TypeQuickPickItem>({
-      placeholder: 'encoding.encode.placeHolder'.toLocalize(),
+      placeholder: 'encoding.encode.placeholder'.toLocalize(),
       items: getItems()
     })
 
@@ -89,7 +89,7 @@ export async function encoding (): Promise<void> {
 
   async function pickCharset (input: MultiStepInput, state: Partial<State>): Promise<any> {
     state.charset = await input.showQuickPick<CharsetQuickPickItem>({
-      placeholder: 'encoding.charset.placeHolder'.toLocalize(),
+      placeholder: 'encoding.charset.placeholder'.toLocalize(),
       items: getCharsets()
     })
     if (state.type?.option.includes('b') ?? false) {
@@ -99,7 +99,7 @@ export async function encoding (): Promise<void> {
 
   async function pickBaseNumber (input: MultiStepInput, state: Partial<State>): Promise<any> {
     state.baseNumber = await input.showQuickPick<BaseNumberQuickPickItem>({
-      placeholder: 'encoding.charset.placeHolder'.toLocalize(),
+      placeholder: 'encoding.charset.placeholder'.toLocalize(),
       items: getBaseNumbers()
     })
   }

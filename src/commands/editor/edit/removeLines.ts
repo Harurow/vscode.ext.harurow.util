@@ -1,6 +1,6 @@
 import * as vscode from 'vscode'
 import { window } from 'vscode'
-import { enumTargetLines, enumTargetVisibleLines, showInformationMessage } from '../../../utils'
+import { createRemoveLinesDecorationRenderOptions, enumTargetLines, enumTargetVisibleLines, showInformationMessage } from '../../../utils'
 
 const getRegex = (value: string): RegExp => {
   const ignoreCase = value.endsWith('\\i')
@@ -15,18 +15,8 @@ export const ifMatched = async (): Promise<void> => {
     return
   }
 
-  const background = new vscode.ThemeColor('editor.findMatchBackground')
-  const lineDeco = vscode.window.createTextEditorDecorationType({
-    isWholeLine: true,
-    backgroundColor: background
-  })
-
-  const getRegex = (value: string): RegExp => {
-    const ignoreCase = value.endsWith('\\i')
-    const flags = ignoreCase ? 'i' : undefined
-    const pattern = value.slice(0, ignoreCase ? -2 : undefined)
-    return new RegExp(pattern, flags)
-  }
+  const lineDeco = vscode.window.createTextEditorDecorationType(
+    createRemoveLinesDecorationRenderOptions())
 
   const redraw = (value: string): boolean => {
     const removeLines: vscode.Range[] = []
@@ -72,13 +62,14 @@ export const ifMatched = async (): Promise<void> => {
       lastInputText = value
       if (!redraw(value)) {
         lastInputText = undefined
-        return 'removeLines.ifMatched.invalidate'.toLocalize()
+        return 'edit.removeLines.ifMatched.invalidate'.toLocalize()
       }
     }
 
     const userInput = await window.showInputBox({
-      placeHolder: 'removeLines.ifMatched.placeHolder'.toLocalize(),
-      prompt: 'removeLines.ifMatched.prompt'.toLocalize(),
+      title: 'edit.removeLines.ifMatched'.toLocalizeTitle(),
+      placeHolder: 'edit.removeLines.ifMatched.placeholder'.toLocalize(),
+      prompt: 'edit.removeLines.ifMatched.prompt'.toLocalize(),
       validateInput
     })
 
@@ -101,7 +92,7 @@ export const ifMatched = async (): Promise<void> => {
       if (removeLines.length === 0) {
         showInformationMessage('notFound'.toLocalize())
       } else {
-        showInformationMessage('removeLines.ifMatched.result'.toLocalize(removeLines.length))
+        showInformationMessage('edit.removeLines.ifMatched.result'.toLocalize(removeLines.length))
       }
     })
   } finally {
@@ -115,7 +106,7 @@ export const ifUnmatched = async (): Promise<void> => {
     return
   }
 
-  const background = new vscode.ThemeColor('editor.findMatchBackground')
+  const background = new vscode.ThemeColor('diffEditor.removedTextBackground')
   const lineDeco = vscode.window.createTextEditorDecorationType({
     isWholeLine: true,
     backgroundColor: background
@@ -165,13 +156,14 @@ export const ifUnmatched = async (): Promise<void> => {
       lastInputText = value
       if (!redraw(value)) {
         lastInputText = undefined
-        return 'removeLines.ifUnmatched.invalidate'.toLocalize()
+        return 'edit.removeLines.ifUnmatched.invalidate'.toLocalize()
       }
     }
 
     const userInput = await window.showInputBox({
-      placeHolder: 'removeLines.ifUnmatched.placeHolder'.toLocalize(),
-      prompt: 'removeLines.ifUnmatched.prompt'.toLocalize(),
+      title: 'edit.removeLines.ifUnmatched'.toLocalizeTitle(),
+      placeHolder: 'edit.removeLines.ifUnmatched.placeholder'.toLocalize(),
+      prompt: 'edit.removeLines.ifUnmatched.prompt'.toLocalize(),
       validateInput
     })
 
@@ -193,7 +185,7 @@ export const ifUnmatched = async (): Promise<void> => {
       if (removeLines.length === 0) {
         showInformationMessage('notFound'.toLocalize())
       } else {
-        showInformationMessage('removeLines.ifUnmatched.result'.toLocalize(removeLines.length))
+        showInformationMessage('edit.removeLines.ifUnmatched.result'.toLocalize(removeLines.length))
       }
     })
   } finally {
@@ -203,6 +195,6 @@ export const ifUnmatched = async (): Promise<void> => {
 
 export const cmdTable =
 [
-  { name: 'removeLines.ifMatched', func: ifMatched },
-  { name: 'removeLines.ifUnmatched', func: ifUnmatched }
+  { name: 'edit.removeLines.ifMatched', func: ifMatched },
+  { name: 'edit.removeLines.ifUnmatched', func: ifUnmatched }
 ]

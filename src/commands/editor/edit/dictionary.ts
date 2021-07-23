@@ -18,6 +18,7 @@ export const dictionary = async (): Promise<void> => {
   const steps = [
     createStep({
       type: 'quickPick',
+      title: 'edit.dictionary'.toLocalizeTitle(),
       placeholder: 'edit.dictionary.query.placeholder'.toLocalize(),
       name: 'letter',
       value: word,
@@ -34,6 +35,7 @@ export const dictionary = async (): Promise<void> => {
     }),
     createStep({
       type: 'quickPick',
+      title: 'edit.dictionary'.toLocalizeTitle(),
       placeholder: 'edit.dictionary.type.placeholder'.toLocalize(),
       name: 'select',
       onWillShow: (sender) => {

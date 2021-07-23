@@ -1,11 +1,9 @@
 import * as edit from './edit'
 import * as encoding from './encoding'
-import * as removeLines from './removeLines'
-import * as transformCase from './transformCase'
+import * as selection from './selection'
 
 export const cmdTable = [
   ...edit.cmdTable,
   ...encoding.cmdTable,
-  ...removeLines.cmdTable,
-  ...transformCase.cmdTable
+  ...selection.cmdTable
 ]

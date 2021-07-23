@@ -41,15 +41,6 @@ export const onDidChangeVisibleTextEditors = (listenr: ((e: VisibleTextEditorsCh
       }
     })
 
-    added.forEach((e) => {
-      console.log(`added: ${e.document.uri.path}`)
-    })
-    keeping.forEach((e) => {
-      console.log(`keeping: ${e.document.uri.path}`)
-    })
-    removed.forEach((e) => {
-      console.log(`removed: ${e.document.uri.path}`)
-    })
     listenr({ added, keeping, removed })
   }, thisArgs, disposables)
 }

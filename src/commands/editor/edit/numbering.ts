@@ -47,8 +47,10 @@ export const numbering = async (): Promise<void> => {
     return (paddingStr + numStr).slice(-state.length)
   }
 
-  const result = createOnDidChangeState((editor, s, i) => {
-    return getNumberingString(i).replace(/ /g, ' ')
+  const result = createOnDidChangeState({
+    converter: (_editor, _s, i) => {
+      return getNumberingString(i).replace(/ /g, ' ')
+    }
   })
 
   if (result.status === 'ng') {
@@ -61,7 +63,7 @@ export const numbering = async (): Promise<void> => {
     createStep({
       type: 'quickPick',
       name: 'radix',
-      title: 'edit.numbering.title'.toLocalize(),
+      title: 'edit.numbering'.toLocalizeTitle(),
       placeholder: 'edit.numbering.radix.placeholder'.toLocalize(),
       items: radixItems,
       onWillShow: (sender) => {
@@ -80,7 +82,7 @@ export const numbering = async (): Promise<void> => {
     createStep({
       type: 'inputBox',
       name: 'start',
-      title: 'edit.numbering.title'.toLocalize(),
+      title: 'edit.numbering'.toLocalizeTitle(),
       placeholder: 'edit.numbering.start.placeholder'.toLocalize(),
       prompt: 'edit.numbering.start.placeholder'.toLocalize(),
       onWillShow: (sender) => {
@@ -102,7 +104,7 @@ export const numbering = async (): Promise<void> => {
     createStep({
       type: 'inputBox',
       name: 'step',
-      title: 'edit.numbering.title'.toLocalize(),
+      title: 'edit.numbering'.toLocalizeTitle(),
       placeholder: 'edit.numbering.step.placeholder'.toLocalize(),
       prompt: 'edit.numbering.step.placeholder'.toLocalize(),
       onWillShow: (sender) => {
@@ -124,7 +126,7 @@ export const numbering = async (): Promise<void> => {
     createStep({
       type: 'quickPick',
       name: 'padding',
-      title: 'edit.numbering.title'.toLocalize(),
+      title: 'edit.numbering'.toLocalizeTitle(),
       placeholder: 'edit.numbering.padding.placeholder'.toLocalize(),
       items: paddingItems,
       onWillShow: (sender) => {
@@ -143,7 +145,7 @@ export const numbering = async (): Promise<void> => {
     createStep({
       type: 'inputBox',
       name: 'length',
-      title: 'edit.numbering.title'.toLocalize(),
+      title: 'edit.numbering'.toLocalizeTitle(),
       placeholder: 'edit.numbering.length.placeholder'.toLocalize(),
       prompt: 'edit.numbering.length.placeholder'.toLocalize(),
       onWillShow: (sender) => {

@@ -22,7 +22,7 @@ export const insert = async (uri: vscode.Uri): Promise<void> => {
     format: ''
   }
 
-  const result = createOnDidChangeState(() => state.format)
+  const result = createOnDidChangeState({ converter: () => state.format })
   if (result.status === 'ng') {
     return
   }
@@ -46,6 +46,7 @@ export const insert = async (uri: vscode.Uri): Promise<void> => {
     createStep({
       type: 'quickPick',
       name: 'format',
+      title: 'edit.insertDate'.toLocalizeTitle(),
       items: createItems(),
       placeholder: 'edit.insertDate.placeholder'.toLocalize(),
       matchOnDescription: true,

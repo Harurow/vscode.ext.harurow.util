@@ -48,7 +48,7 @@ function createPickItems (expr: string): QuickPickItemEx[] {
     })) : [{
       alwaysShow: true,
       picked: false,
-      label: 'edit.calc.invalid'.toLocalize(),
+      label: 'edit.evaluate.invalid'.toLocalize(),
       description: ''
     }]
 
@@ -56,7 +56,7 @@ function createPickItems (expr: string): QuickPickItemEx[] {
     alwaysShow: true,
     picked: false,
     label: '',
-    description: 'edit.calc.help'.toLocalize(),
+    description: 'edit.evaluate.help'.toLocalize(),
     url: vscode.Uri.parse('http://bugwheels94.github.io/math-expression-evaluator/')
   })
 
@@ -68,15 +68,17 @@ export const evaluate = async (): Promise<void> => {
     pick: undefined as QuickPickItemEx | undefined
   }
 
-  const result = createOnDidChangeState((editor, range, index) => {
-    if (state.pick?.result === true && state.pick?.description != null) {
-      if (index === 0) {
-        return state.pick.description
-      }
-      const expr = editor.document.getText(range)
-      const [result, answer] = evaluateExpression(expr)
-      if (result) {
-        return formatString(answer, expr, state.pick.format ?? '{ans}')
+  const result = createOnDidChangeState({
+    converter: (editor, range, index) => {
+      if (state.pick?.result === true && state.pick?.description != null) {
+        if (index === 0) {
+          return state.pick.description
+        }
+        const expr = editor.document.getText(range)
+        const [result, answer] = evaluateExpression(expr)
+        if (result) {
+          return formatString(answer, expr, state.pick.format ?? '{ans}')
+        }
       }
     }
   })
@@ -93,6 +95,8 @@ export const evaluate = async (): Promise<void> => {
     createStep({
       type: 'quickPick',
       name: 'expr',
+      title: 'edit.evaluate'.toLocalizeTitle(),
+      placeholder: 'edit.evaluate.placeholder'.toLocalize(),
       value: str,
       items: createPickItems(str),
       onDidChangeValue: (sender, e) => {
@@ -135,5 +139,5 @@ export const evaluate = async (): Promise<void> => {
 }
 
 export const cmdTable = [
-  { name: 'edit.calc', func: evaluate }
+  { name: 'edit.evaluate', func: evaluate }
 ]

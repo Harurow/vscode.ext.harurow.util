@@ -35,20 +35,8 @@
                 "title": "%harurow.autoReveal.on%"
             },
             {
-                "command": "harurow.experiment",
-                "title": "%harurow.experiment%"
-            },
-            {
                 "command": "harurow.edit.convertDate",
                 "title": "%harurow.edit.convertDate%"
-            },
-            {
-                "command": "harurow.edit.insertDate",
-                "title": "%harurow.edit.insertDate%"
-            },
-            {
-                "command": "harurow.edit.calc",
-                "title": "%harurow.edit.calc%"
             },
             {
                 "command": "harurow.edit.dictionary",
@@ -59,20 +47,64 @@
                 "title": "%harurow.edit.distinct%"
             },
             {
+                "command": "harurow.edit.evaluate",
+                "title": "%harurow.edit.evaluate%"
+            },
+            {
+                "command": "harurow.edit.insertDate",
+                "title": "%harurow.edit.insertDate%"
+            },
+            {
                 "command": "harurow.edit.numbering",
                 "title": "%harurow.edit.numbering%"
+            },
+            {
+                "command": "harurow.edit.removeLines.ifMatched",
+                "title": "%harurow.edit.removeLines.ifMatched%"
+            },
+            {
+                "command": "harurow.edit.removeLines.ifUnmatched",
+                "title": "%harurow.edit.removeLines.ifUnmatched%"
             },
             {
                 "command": "harurow.edit.swap",
                 "title": "%harurow.edit.swap%"
             },
             {
-                "command": "harurow.encoding.encode",
-                "title": "%harurow.encoding.encode%"
+                "command": "harurow.edit.transformCase.ToLowerCamelCase",
+                "title": "%harurow.edit.transformCase.ToLowerCamelCase%"
+            },
+            {
+                "command": "harurow.edit.transformCase.ToLowerChainCase",
+                "title": "%harurow.edit.transformCase.ToLowerChainCase%"
+            },
+            {
+                "command": "harurow.edit.transformCase.ToLowerSnakeCase",
+                "title": "%harurow.edit.transformCase.ToLowerSnakeCase%"
+            },
+            {
+                "command": "harurow.edit.transformCase.ToUpperCamelCase",
+                "title": "%harurow.edit.transformCase.ToUpperCamelCase%"
+            },
+            {
+                "command": "harurow.edit.transformCase.ToUpperChainCase",
+                "title": "%harurow.edit.transformCase.ToUpperChainCase%"
+            },
+            {
+                "command": "harurow.edit.transformCase.ToUpperSnakeCase",
+                "title": "%harurow.edit.transformCase.ToUpperSnakeCase%"
             },
             {
                 "command": "harurow.encoding.decode",
                 "title": "%harurow.encoding.decode%"
+            },
+            {
+                "command": "harurow.encoding.encode",
+                "title": "%harurow.encoding.encode%"
+            },
+            {
+                "command": "harurow.experiment",
+                "title": "%harurow.experiment%"
             },
             {
                 "command": "harurow.fileExclude.backup",
@@ -91,36 +123,8 @@
                 "title": "%harurow.generator.generateDts%"
             },
             {
-                "command": "harurow.removeLines.ifMatched",
-                "title": "%harurow.removeLines.ifMatched%"
-            },
-            {
-                "command": "harurow.removeLines.ifUnmatched",
-                "title": "%harurow.removeLines.ifUnmatched%"
-            },
-            {
-                "command": "harurow.transformCase.ToLowerCamelCase",
-                "title": "%harurow.transformCase.ToLowerCamelCase%"
-            },
-            {
-                "command": "harurow.transformCase.ToLowerChainCase",
-                "title": "%harurow.transformCase.ToLowerChainCase%"
-            },
-            {
-                "command": "harurow.transformCase.ToLowerSnakeCase",
-                "title": "%harurow.transformCase.ToLowerSnakeCase%"
-            },
-            {
-                "command": "harurow.transformCase.ToUpperCamelCase",
-                "title": "%harurow.transformCase.ToUpperCamelCase%"
-            },
-            {
-                "command": "harurow.transformCase.ToUpperChainCase",
-                "title": "%harurow.transformCase.ToUpperChainCase%"
-            },
-            {
-                "command": "harurow.transformCase.ToUpperSnakeCase",
-                "title": "%harurow.transformCase.ToUpperSnakeCase%"
+                "command": "harurow.selection.regex",
+                "title": "%harurow.selection.regex%"
             }
         ],
         "menus": {
@@ -166,20 +170,8 @@
                     "command": "harurow.autoReveal.on"
                 },
                 {
-                    "command": "harurow.experiment",
-                    "when": "config.harurow.experiment"
-                },
-                {
                     "command": "harurow.edit.convertDate",
                     "when": "!editorReadonly && editorHasSelection"
-                },
-                {
-                    "command": "harurow.edit.insertDate",
-                    "when": "!editorReadonly"
-                },
-                {
-                    "command": "harurow.edit.calc",
-                    "when": "!editorReadonly"
                 },
                 {
                     "command": "harurow.edit.dictionary"
@@ -189,15 +181,51 @@
                     "when": "!editorReadonly && editorHasSelection"
                 },
                 {
+                    "command": "harurow.edit.evaluate",
+                    "when": "!editorReadonly"
+                },
+                {
+                    "command": "harurow.edit.insertDate",
+                    "when": "!editorReadonly"
+                },
+                {
                     "command": "harurow.edit.numbering",
                     "when": "!editorReadonly && editorHasMultipleSelections"
+                },
+                {
+                    "command": "harurow.edit.removeLines.ifMatched",
+                    "when": "!editorReadonly"
+                },
+                {
+                    "command": "harurow.edit.removeLines.ifUnmatched",
+                    "when": "!editorReadonly"
                 },
                 {
                     "command": "harurow.edit.swap",
                     "when": "!editorReadonly && editorHasSelection"
                 },
                 {
-                    "command": "harurow.encoding.encode",
+                    "command": "harurow.edit.transformCase.ToLowerCamelCase",
+                    "when": "!editorReadonly && editorHasSelection"
+                },
+                {
+                    "command": "harurow.edit.transformCase.ToLowerChainCase",
+                    "when": "!editorReadonly && editorHasSelection"
+                },
+                {
+                    "command": "harurow.edit.transformCase.ToLowerSnakeCase",
+                    "when": "!editorReadonly && editorHasSelection"
+                },
+                {
+                    "command": "harurow.edit.transformCase.ToUpperCamelCase",
+                    "when": "!editorReadonly && editorHasSelection"
+                },
+                {
+                    "command": "harurow.edit.transformCase.ToUpperChainCase",
+                    "when": "!editorReadonly && editorHasSelection"
+                },
+                {
+                    "command": "harurow.edit.transformCase.ToUpperSnakeCase",
                     "when": "!editorReadonly && editorHasSelection"
                 },
                 {
@@ -205,11 +233,19 @@
                     "when": "!editorReadonly && editorHasSelection"
                 },
                 {
-                    "command": "harurow.fileExclude.excludeFile",
-                    "when": "false"
+                    "command": "harurow.encoding.encode",
+                    "when": "!editorReadonly && editorHasSelection"
+                },
+                {
+                    "command": "harurow.experiment",
+                    "when": "config.harurow.experiment"
                 },
                 {
                     "command": "harurow.fileExclude.backup",
+                    "when": "false"
+                },
+                {
+                    "command": "harurow.fileExclude.excludeFile",
                     "when": "false"
                 },
                 {
@@ -217,36 +253,7 @@
                     "when": "false"
                 },
                 {
-                    "command": "harurow.transformCase.ToUpperCamelCase",
-                    "when": "!editorReadonly && editorHasSelection"
-                },
-                {
-                    "command": "harurow.transformCase.ToLowerCamelCase",
-                    "when": "!editorReadonly && editorHasSelection"
-                },
-                {
-                    "command": "harurow.transformCase.ToUpperSnakeCase",
-                    "when": "!editorReadonly && editorHasSelection"
-                },
-                {
-                    "command": "harurow.transformCase.ToLowerSnakeCase",
-                    "when": "!editorReadonly && editorHasSelection"
-                },
-                {
-                    "command": "harurow.transformCase.ToUpperChainCase",
-                    "when": "!editorReadonly && editorHasSelection"
-                },
-                {
-                    "command": "harurow.transformCase.ToLowerChainCase",
-                    "when": "!editorReadonly && editorHasSelection"
-                },
-                {
-                    "command": "harurow.removeLines.ifMatched",
-                    "when": "!editorReadonly"
-                },
-                {
-                    "command": "harurow.removeLines.ifUnmatched",
-                    "when": "!editorReadonly"
+                    "command": "harurow.selection.regex"
                 }
             ]
         },
@@ -344,7 +351,7 @@
         "deploy": "vsce publish --yarn"
     },
     "devDependencies": {
-        "@types/encoding-japanese": "^1.0.16",
+        "@types/encoding-japanese": "^1.0.18",
         "@types/glob": "^7.1.3",
         "@types/mocha": "^7.0.2",
         "@types/moment": "^2.13.0",
