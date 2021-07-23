@@ -1,79 +1,91 @@
-import { TextDocument, TextEditorEdit, Selection, QuickPickItem } from 'vscode'
-import { transformTemplate, getSelectTextIfExists, handleError } from '../util'
-import { MultiStepInput, isNullOrEmpty } from '../../../utils'
+import * as vscode from 'vscode'
 import * as dict from 'harurow-ejdict'
+import { createStep, runSteps } from '../../../utils'
 
-interface State {
-  pick?: QuickPickItem
+export const dictionary = async (): Promise<void> => {
+  const state = {
+    pick: undefined as vscode.QuickPickItem | undefined,
+    text: undefined as string | undefined
+  }
+
+  const editor = vscode.window.activeTextEditor
+  if (editor == null) {
+    return
+  }
+
+  const word = editor.document.getText(editor.selection)
+
+  const steps = [
+    createStep({
+      type: 'quickPick',
+      placeholder: 'edit.dictionary.query.placeholder'.toLocalize(),
+      name: 'letter',
+      value: word,
+      items: createQueryItems(word),
+      onDidChangeValue: (sender, e) => {
+        sender.items = createQueryItems(e)
+      },
+      onDidChangeActive: (_, e) => {
+        if (e.length > 0) {
+          state.pick = e[0]
+        }
+      },
+      onDidAccept: () => 'select'
+    }),
+    createStep({
+      type: 'quickPick',
+      placeholder: 'edit.dictionary.type.placeholder'.toLocalize(),
+      name: 'select',
+      onWillShow: (sender) => {
+        sender.items = createTypeItems(state.pick)
+        state.text = ''
+      },
+      onDidChangeActive: (_, e) => {
+        if (e.length > 0) {
+          state.text = e[0].description
+        }
+      },
+      onDidTriggerBackButton: () => 'letter'
+    })
+  ]
+
+  const isAccept = await runSteps(steps)
+  if (isAccept && state.text != null) {
+    const text = state.text
+    await editor.edit((eb) => {
+      eb.replace(editor.selection, text)
+    })
+  }
 }
 
-function createPickItem (query: string): QuickPickItem[] {
-  if (isNullOrEmpty(query)) {
+const createQueryItems = (query: string): vscode.QuickPickItem[] => {
+  if (query == null || query.trim() === '') {
     return []
   }
-  return dict.match(query, 25)
+  return dict.match(query.trim(), 25)
     .map((i) => ({
       alwaysShow: true,
       picked: true,
       label: i.word,
-      description: i.description,
-      result: i.word
+      description: i.description
     }))
 }
 
-export async function dictionary (): Promise<void> {
-  const state: State = {}
-  const text = getSelectTextIfExists()
-  const items: QuickPickItem[] = []
-
-  if (text != null) {
-    items.push(...createPickItem(text))
+const createTypeItems = (item: vscode.QuickPickItem | undefined): vscode.QuickPickItem[] => {
+  if (item == null) {
+    return []
   }
-
-  async function pick (input: MultiStepInput, state: State): Promise<any> {
-    state.pick = await input.showQuickPick<QuickPickItem>({
-      placeholder: 'edit.dictionary.placeholder'.toLocalize(),
-      value: text ?? undefined,
-      items: items,
-      activeItem: items.length > 0 ? items[0] : undefined,
-      onDidChangeValue: (sender, input) => {
-        sender.items = [...createPickItem(input)] as QuickPickItem[]
-      }
-    })
-  }
-
-  let result = false
-
-  try {
-    result = await MultiStepInput.run(async input => pick(input, state))
-  } catch (err) {
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    handleError(err)
-  } finally {
-    if (result && state.pick != null) {
-      await edit(state.pick)
-    }
-  }
-}
-
-async function transform (replace: (doc: TextDocument, editBuilder: TextEditorEdit, selection: Selection) => void, failedMessage?: string | undefined): Promise<void> {
-  return transformTemplate({
-    getSelectionCallback: (e) => e.selections,
-    replaceCallback: replace,
-    isRequiredRegion: false,
-    failedMessage: failedMessage
-  })
-}
-
-async function edit (state: QuickPickItem): Promise<void> {
-  await transform((doc, eb, sel) => {
-    const before = doc.getText(sel)
-    const after = state.label
-
-    if (before !== after) {
-      eb.replace(sel, after)
-    }
-  })
+  return [{
+    alwaysShow: true,
+    picked: false,
+    label: 'edit.dictionary.type.item1'.toLocalize(),
+    description: item.label
+  }, {
+    alwaysShow: true,
+    picked: false,
+    label: 'edit.dictionary.type.item2'.toLocalize(),
+    description: item.description
+  }]
 }
 
 export const cmdTable = [
