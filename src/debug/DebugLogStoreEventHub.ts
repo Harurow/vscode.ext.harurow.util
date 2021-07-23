@@ -1,5 +1,4 @@
 import * as vscode from 'vscode'
-import { emptyDisposable } from '../utils'
 import { DebugLogStoreEvent } from './DebugLogStore'
 
 export type Callback = (e: DebugLogStoreEvent) => void
@@ -9,7 +8,7 @@ export class DebugLogStoreEventHub implements vscode.Disposable {
 
   dispose = (): void => {
     this.observers.length = 0
-    this.subscribe = (_callback: Callback): vscode.Disposable => emptyDisposable
+    this.subscribe = (_callback: Callback): vscode.Disposable => ({ dispose: () => { /* nop */ } })
     this.post = (_e: DebugLogStoreEvent): void => { /* nop */ }
   }
 
@@ -25,7 +24,7 @@ export class DebugLogStoreEventHub implements vscode.Disposable {
         if (index >= 0) {
           this.observers.splice(index, 1)
         }
-      }
+      },
     })
   }
 

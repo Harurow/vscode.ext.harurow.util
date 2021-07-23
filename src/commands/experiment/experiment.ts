@@ -11,5 +11,5 @@ export function experiment (uri: Uri): void {
 }
 
 export const cmdTable = [
-  { name: 'experiment', func: experiment }
+  { name: 'experiment', func: experiment },
 ]

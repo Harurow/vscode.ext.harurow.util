@@ -6,7 +6,7 @@ import { DebugMetricsStore } from './DebugLogMetrics'
 import { NeighborLogMessage } from './NeighborLogMessage'
 import { NeighborLogCounter } from './NeighborLogCounter'
 import { NeighborLogMetrics } from './NeighborLogMetrics'
-import { onDidChangeVisibleTextEditors, lineNoToRange, VisibleTextEditorsChangeEvent } from '../utils'
+import { onDidChangeVisibleTextEditors, toLineEndRange, VisibleTextEditorsChangeEvent } from '../utils'
 
 export class NeighborLog implements vscode.Disposable {
   private readonly logStore: DebugLogStore
@@ -32,7 +32,7 @@ export class NeighborLog implements vscode.Disposable {
       onDidChangeVisibleTextEditors(this.onDidChangeVisibleTextEditors),
       this.message = new NeighborLogMessage(),
       this.counter = new NeighborLogCounter(),
-      this.metrics = new NeighborLogMetrics()
+      this.metrics = new NeighborLogMetrics(),
     ]
   }
 
@@ -91,7 +91,7 @@ export class NeighborLog implements vscode.Disposable {
               updated = true
             }
           } else if (before.end.line === lineNo) {
-            debugLogSummary.range = lineNoToRange(doc, lineNo)
+            debugLogSummary.range = toLineEndRange(doc, lineNo)
             updated = true
           }
         }
@@ -101,7 +101,7 @@ export class NeighborLog implements vscode.Disposable {
       moveLines.forEach((i) => logLineNoMap.delete(i.lineNo))
       moveLines.forEach(({ lineNo, debugLogSummary }) => {
         const newLineNo = lineNo + diff
-        debugLogSummary.range = lineNoToRange(doc, newLineNo)
+        debugLogSummary.range = toLineEndRange(doc, newLineNo)
         logLineNoMap.set(newLineNo, debugLogSummary)
       })
     })

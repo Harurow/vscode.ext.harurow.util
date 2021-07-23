@@ -11,7 +11,7 @@ async function transform (replace: (doc: TextDocument, editBuilder: TextEditorEd
   return transformTemplate({
     getSelectionCallback: (e) => e.selections,
     replaceCallback: replace,
-    failedMessage: failedMessage
+    failedMessage: failedMessage,
   })
 }
 
@@ -28,5 +28,5 @@ async function edit (callback: (str: string) => string): Promise<void> {
 
 export const cmdTable =
 [
-  { name: 'edit.swap', func: swap }
+  { name: 'edit.swap', func: swap },
 ]

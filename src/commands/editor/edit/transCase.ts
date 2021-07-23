@@ -133,7 +133,7 @@ async function transform (replace: (doc: TextDocument, editBuilder: TextEditorEd
   return transformTemplate({
     getSelectionCallback: (e) => e.selections,
     replaceCallback: replace,
-    failedMessage: failedMessage
+    failedMessage: failedMessage,
   })
 }
 
@@ -156,5 +156,5 @@ export const cmdTable =
   { name: 'edit.transformCase.ToUpperSnakeCase', func: replaceCase(transformToUpperSnake) },
   { name: 'edit.transformCase.ToLowerSnakeCase', func: replaceCase(transformToLowerSnake) },
   { name: 'edit.transformCase.ToUpperChainCase', func: replaceCase(transformToUpperChain) },
-  { name: 'edit.transformCase.ToLowerChainCase', func: replaceCase(transformToLowerChain) }
+  { name: 'edit.transformCase.ToLowerChainCase', func: replaceCase(transformToLowerChain) },
 ]

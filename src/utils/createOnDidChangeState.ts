@@ -12,7 +12,7 @@ type CreateOnDidChangeStateResult = {
 
 export const createRemoveLinesDecorationRenderOptions = (): vscode.DecorationRenderOptions => ({
   isWholeLine: true,
-  backgroundColor: new vscode.ThemeColor('diffEditor.removedTextBackground')
+  backgroundColor: new vscode.ThemeColor('diffEditor.removedTextBackground'),
 })
 
 export const createReplaceDecorationRenderOptions = (): vscode.DecorationRenderOptions => ({
@@ -20,8 +20,8 @@ export const createReplaceDecorationRenderOptions = (): vscode.DecorationRenderO
   backgroundColor: new vscode.ThemeColor('diffEditor.removedTextBackground'),
   after: {
     color: new vscode.ThemeColor('editor.foreground'),
-    backgroundColor: new vscode.ThemeColor('diffEditor.insertedTextBackground')
-  }
+    backgroundColor: new vscode.ThemeColor('diffEditor.insertedTextBackground'),
+  },
 })
 
 export const createOnDidChangeState = (options: {
@@ -41,7 +41,7 @@ export const createOnDidChangeState = (options: {
   const deco = vscode.window.createTextEditorDecorationType(decoOptions)
 
   const disposables: vscode.Disposable[] = [
-    deco
+    deco,
   ]
 
   const dispose = (): void => {
@@ -57,9 +57,9 @@ export const createOnDidChangeState = (options: {
         range: s,
         renderOptions: {
           after: {
-            contentText: converter(editor, s, i)
-          }
-        }
+            contentText: converter(editor, s, i),
+          },
+        },
       }))
       .filter((e) => e.renderOptions.after.contentText != null)
 
@@ -70,7 +70,7 @@ export const createOnDidChangeState = (options: {
     status: 'ok',
     editor: editor,
     onDidChangeState: onDidChangeState,
-    dispose: dispose
+    dispose: dispose,
   }
 }
 
@@ -97,7 +97,7 @@ export const createOnDidChangeTextEditorVisibleRanges = (options: {
   const { getRangesOrOptions, decorationRenderOptions } = options
 
   const decoOptions = decorationRenderOptions ?? {
-    backgroundColor: new vscode.ThemeColor('editor.findMatchHighlightBackground')
+    backgroundColor: new vscode.ThemeColor('editor.findMatchHighlightBackground'),
   }
   const deco = vscode.window.createTextEditorDecorationType(decoOptions)
 
@@ -111,7 +111,7 @@ export const createOnDidChangeTextEditorVisibleRanges = (options: {
       if (editor === e.textEditor) {
         redraw()
       }
-    })
+    }),
   ]
 
   const dispose = (): void => {
@@ -125,6 +125,6 @@ export const createOnDidChangeTextEditorVisibleRanges = (options: {
     status: 'ok',
     editor,
     redraw,
-    dispose
+    dispose,
   }
 }

@@ -19,7 +19,7 @@ export function encodeUnicode (isAll: boolean): (text: string) => { result: stri
     result: text.charInfos()
       .map(ci => esc(ci))
       .join(''),
-    failed: 0
+    failed: 0,
   })
 }
 

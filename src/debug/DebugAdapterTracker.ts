@@ -3,7 +3,7 @@ import { DebugSessionEventHub } from './DebugSessionEventHub'
 import { DebugLogStoreEventHub } from './DebugLogStoreEventHub'
 import { DebugLogStore } from './DebugLogStore'
 import { NeighborLog } from './NeighborLog'
-import { lineNoToRange } from '../utils'
+import { toLineEndRange } from '../utils'
 import { DebugMetricsStore } from './DebugLogMetrics'
 
 export class DebugAdapterTracker implements vscode.DebugAdapterTracker, vscode.Disposable {
@@ -22,7 +22,7 @@ export class DebugAdapterTracker implements vscode.DebugAdapterTracker, vscode.D
       this.logStoreEventHub = new DebugLogStoreEventHub(),
       this.logStore = new DebugLogStore(this.logStoreEventHub),
       this.metricsStore = new DebugMetricsStore(),
-      new NeighborLog(this.sessionEventHub, this.logStoreEventHub, this.logStore, this.metricsStore)
+      new NeighborLog(this.sessionEventHub, this.logStoreEventHub, this.logStore, this.metricsStore),
     ]
   }
 
@@ -64,7 +64,7 @@ export class DebugAdapterTracker implements vscode.DebugAdapterTracker, vscode.D
 
     const doc = this.textDocumentMap.get(path)
     if (doc != null) {
-      const range = lineNoToRange(doc, lineNo)
+      const range = toLineEndRange(doc, lineNo)
       this.logStore.set(path, lineNo, range, output)
     }
   }

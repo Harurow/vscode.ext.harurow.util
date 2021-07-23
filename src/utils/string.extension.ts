@@ -5,7 +5,6 @@ export {}
 
 declare global {
   interface String {
-    isNullOrEmpty(): boolean
     toLocalize (...args: any[]): string
     toLocalizeTitle (...args: any[]): string
     hasCharactors(): boolean
@@ -15,10 +14,6 @@ declare global {
     words(): string[]
     lines(): string[]
   }
-}
-
-export function isNullOrEmpty (str: string | undefined | null): boolean {
-  return str == null || str === ''
 }
 
 String.prototype.toLocalize = function (...args: any[]): string {

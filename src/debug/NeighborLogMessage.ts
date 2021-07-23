@@ -19,9 +19,9 @@ export class NeighborLogMessage implements vscode.Disposable {
       range: debugLogSummary.range,
       renderOptions: {
         after: {
-          contentText: debugLogSummary.recent.output
-        }
-      }
+          contentText: debugLogSummary.recent.output,
+        },
+      },
     }
   }
 
@@ -33,8 +33,8 @@ export class NeighborLogMessage implements vscode.Disposable {
     return vscode.window.createTextEditorDecorationType({
       after: {
         color: this.foreground,
-        margin: '0 0 0 2.3em'
-      }
+        margin: '0 0 0 2.3em',
+      },
     })
   }
 }

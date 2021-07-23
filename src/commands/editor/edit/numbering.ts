@@ -14,13 +14,13 @@ const radixItems: RadixPickItem[] = [
   { label: '8', description: '[0-7]', type: 'oct', value: 8 },
   { label: '10', description: '[0-9]', type: 'dec', value: 10 },
   { label: '16', description: '[0-9|a-f]', type: 'hex', value: 16 },
-  { label: '16', description: '[0-9|A-F]', type: 'HEX', value: 16 }
+  { label: '16', description: '[0-9|A-F]', type: 'HEX', value: 16 },
 ]
 
 const paddingItems: vscode.QuickPickItem[] = [
   { label: '', description: 'edit.numbering.padding.items.none'.toLocalize() },
   { label: ' ', description: 'edit.numbering.padding.items.space'.toLocalize() },
-  { label: '0', description: 'edit.numbering.padding.items.zero'.toLocalize() }
+  { label: '0', description: 'edit.numbering.padding.items.zero'.toLocalize() },
 ]
 
 export const numbering = async (): Promise<void> => {
@@ -30,7 +30,7 @@ export const numbering = async (): Promise<void> => {
     start: 0,
     step: 1,
     padding: '',
-    length: 8
+    length: 8,
   }
 
   const getNumberingString = (index: number): string => {
@@ -50,7 +50,7 @@ export const numbering = async (): Promise<void> => {
   const result = createOnDidChangeState({
     converter: (_editor, _s, i) => {
       return getNumberingString(i).replace(/ /g, ' ')
-    }
+    },
   })
 
   if (result.status === 'ng') {
@@ -77,7 +77,7 @@ export const numbering = async (): Promise<void> => {
           onDidChangeState()
         }
       },
-      onDidAccept: () => 'start'
+      onDidAccept: () => 'start',
     }),
     createStep({
       type: 'inputBox',
@@ -99,7 +99,7 @@ export const numbering = async (): Promise<void> => {
         onDidChangeState()
       },
       onDidAccept: () => 'step',
-      onDidTriggerBackButton: () => 'radix'
+      onDidTriggerBackButton: () => 'radix',
     }),
     createStep({
       type: 'inputBox',
@@ -121,7 +121,7 @@ export const numbering = async (): Promise<void> => {
         onDidChangeState()
       },
       onDidAccept: () => 'padding',
-      onDidTriggerBackButton: () => 'start'
+      onDidTriggerBackButton: () => 'start',
     }),
     createStep({
       type: 'quickPick',
@@ -140,7 +140,7 @@ export const numbering = async (): Promise<void> => {
         }
       },
       onDidAccept: () => state.padding === '' ? undefined : 'length',
-      onDidTriggerBackButton: () => 'step'
+      onDidTriggerBackButton: () => 'step',
     }),
     createStep({
       type: 'inputBox',
@@ -169,8 +169,8 @@ export const numbering = async (): Promise<void> => {
         }
         onDidChangeState()
       },
-      onDidTriggerBackButton: () => 'padding'
-    })
+      onDidTriggerBackButton: () => 'padding',
+    }),
   ]
 
   const isAccept = await runSteps(steps)
@@ -212,5 +212,5 @@ const parseInputNumber = (input: string, radixType: RadixTypes): ([false, number
 }
 
 export const cmdTable = [
-  { name: 'edit.numbering', func: numbering }
+  { name: 'edit.numbering', func: numbering },
 ]

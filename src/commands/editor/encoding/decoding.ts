@@ -18,7 +18,7 @@ function getItems (): TypeQuickPickItem[] {
   return [
     'rfc/c',
     'sgml/',
-    'unicode/'
+    'unicode/',
   ].map(i => {
     const [type, opt] = i.split('/')
     return {
@@ -26,7 +26,7 @@ function getItems (): TypeQuickPickItem[] {
       label: `encoding.decode.${type}.label`.toLocalize(),
       description: `encoding.decode.${type}.description`.toLocalize(),
       detail: `encoding.decode.${type}.detail`.toLocalize(),
-      option: opt
+      option: opt,
     }
   })
 }
@@ -36,18 +36,18 @@ function getCharsets (): CharsetQuickPickItem[] {
     {
       charset: 'UTF8',
       label: 'encoding.charset.utf8.label'.toLocalize(),
-      description: 'encoding.charset.utf8.description'.toLocalize()
+      description: 'encoding.charset.utf8.description'.toLocalize(),
     },
     {
       charset: 'SJIS',
       label: 'encoding.charset.shiftJis.label'.toLocalize(),
-      description: 'encoding.charset.shiftJis.description'.toLocalize()
+      description: 'encoding.charset.shiftJis.description'.toLocalize(),
     },
     {
       charset: 'EUCJP',
       label: 'encoding.charset.eucJp.label'.toLocalize(),
-      description: 'encoding.charset.eucJp.description'.toLocalize()
-    }
+      description: 'encoding.charset.eucJp.description'.toLocalize(),
+    },
   ]
 }
 
@@ -57,7 +57,7 @@ export async function decoding (): Promise<void> {
   async function pickType (input: MultiStepInput, state: Partial<State>): Promise<any> {
     state.type = await input.showQuickPick<TypeQuickPickItem>({
       placeholder: 'encoding.decode.placeholder'.toLocalize(),
-      items: getItems()
+      items: getItems(),
     })
 
     if (state.type != null) {
@@ -70,7 +70,7 @@ export async function decoding (): Promise<void> {
   async function pickCharset (input: MultiStepInput, state: Partial<State>): Promise<any> {
     state.charset = await input.showQuickPick<CharsetQuickPickItem>({
       placeholder: 'encoding.charset.placeholder'.toLocalize(),
-      items: getCharsets()
+      items: getCharsets(),
     })
   }
 
@@ -107,7 +107,7 @@ async function transform (replace: (doc: TextDocument, editBuilder: TextEditorEd
   return transformTemplate({
     getSelectionCallback: (e) => e.selections,
     replaceCallback: replace,
-    failedMessage: failedMessage
+    failedMessage: failedMessage,
   })
 }
 
@@ -124,5 +124,5 @@ async function edit (callback: (str: string) => string): Promise<void> {
 
 export const cmdTable =
 [
-  { name: 'encoding.decode', func: decoding }
+  { name: 'encoding.decode', func: decoding },
 ]

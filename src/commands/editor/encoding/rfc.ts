@@ -25,7 +25,7 @@ export function encodeRfc (isRfc1866: boolean, isAll: boolean, encoding: ej.Enco
         return ch
       })
       .join(''),
-    failed: failed
+    failed: failed,
   })
 }
 

@@ -1,6 +1,5 @@
 import { workspace, Uri } from 'vscode'
 import path from 'path'
-import { isNullOrEmpty } from '../../utils/string.extension'
 import { handleError } from '../editor/util'
 
 export async function excludeFile (uri: Uri): Promise<void> {
@@ -12,7 +11,7 @@ export async function excludeFile (uri: Uri): Promise<void> {
     }
 
     const fileName = path.relative(workspaceFolder.uri.path, uri.path)
-    if (isNullOrEmpty(fileName)) {
+    if (fileName == null || fileName === '') {
       return
     }
     const filesConf = workspace.getConfiguration('files', uri)
@@ -86,5 +85,5 @@ export async function restore (uri: Uri): Promise<void> {
 export const cmdTable = [
   { name: 'fileExclude.excludeFile', func: excludeFile },
   { name: 'fileExclude.backup', func: backup },
-  { name: 'fileExclude.restore', func: restore }
+  { name: 'fileExclude.restore', func: restore },
 ]

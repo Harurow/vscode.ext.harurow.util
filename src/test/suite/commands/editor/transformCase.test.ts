@@ -6,7 +6,7 @@ import {
   transformToUpperSnake,
   transformToLowerSnake,
   transformToLowerChain,
-  transformToUpperChain
+  transformToUpperChain,
 } from '../../../../commands/editor/edit/transCase'
 
 suite('transformCase Test Suite', () => {

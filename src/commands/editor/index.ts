@@ -5,5 +5,5 @@ import * as selection from './selection'
 export const cmdTable = [
   ...edit.cmdTable,
   ...encoding.cmdTable,
-  ...selection.cmdTable
+  ...selection.cmdTable,
 ]

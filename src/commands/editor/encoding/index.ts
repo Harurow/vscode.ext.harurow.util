@@ -4,5 +4,5 @@ import * as decoding from './decoding'
 export const cmdTable =
 [
   ...encoding.cmdTable,
-  ...decoding.cmdTable
+  ...decoding.cmdTable,
 ]

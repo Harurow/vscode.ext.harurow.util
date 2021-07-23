@@ -3,7 +3,7 @@ import { createOnDidChangeTextEditorVisibleRanges, createStep, getSafeRegex, pus
 
 export const regex = async (): Promise<void> => {
   const state = {
-    createRegex: undefined as ((() => RegExp) | undefined)
+    createRegex: undefined as ((() => RegExp) | undefined),
   }
 
   const result = createOnDidChangeTextEditorVisibleRanges({
@@ -16,7 +16,7 @@ export const regex = async (): Promise<void> => {
         return matches
       }
       return []
-    }
+    },
   })
 
   if (result.status === 'ng') {
@@ -41,8 +41,8 @@ export const regex = async (): Promise<void> => {
         }
         sender.validationMessage = undefined
         redraw()
-      }
-    })
+      },
+    }),
   ]
 
   const isAccept = await runSteps(steps)
@@ -74,5 +74,5 @@ export const regex = async (): Promise<void> => {
 
 export const cmdTable =
 [
-  { name: 'selection.regex', func: regex }
+  { name: 'selection.regex', func: regex },
 ]

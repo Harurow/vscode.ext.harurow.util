@@ -28,7 +28,7 @@ function getItems (): TypeQuickPickItem[] {
     'sgmlNumRefSpChar/b',
     'sgmlNumRefAllChar/b',
     'unicode/',
-    'unicodeAll/'
+    'unicodeAll/',
   ].map(i => {
     const [type, opt] = i.split('/')
     return {
@@ -36,7 +36,7 @@ function getItems (): TypeQuickPickItem[] {
       label: `encoding.encode.${type}.label`.toLocalize(),
       description: `encoding.encode.${type}.description`.toLocalize(),
       detail: `encoding.encode.${type}.detail`.toLocalize(),
-      option: opt
+      option: opt,
     }
   })
 }
@@ -46,25 +46,25 @@ function getCharsets (): CharsetQuickPickItem[] {
     {
       charset: 'UTF8',
       label: 'encoding.charset.utf8.label'.toLocalize(),
-      description: 'encoding.charset.utf8.description'.toLocalize()
+      description: 'encoding.charset.utf8.description'.toLocalize(),
     },
     {
       charset: 'SJIS',
       label: 'encoding.charset.shiftJis.label'.toLocalize(),
-      description: 'encoding.charset.shiftJis.description'.toLocalize()
+      description: 'encoding.charset.shiftJis.description'.toLocalize(),
     },
     {
       charset: 'EUCJP',
       label: 'encoding.charset.eucJp.label'.toLocalize(),
-      description: 'encoding.charset.eucJp.description'.toLocalize()
-    }
+      description: 'encoding.charset.eucJp.description'.toLocalize(),
+    },
   ]
 }
 
 function getBaseNumbers (): BaseNumberQuickPickItem[] {
   return [
     { baseNumber: 'hex', label: 'encoding.baseNumber.hex.label'.toLocalize() },
-    { baseNumber: 'dec', label: 'encoding.baseNumber.dec.label'.toLocalize() }
+    { baseNumber: 'dec', label: 'encoding.baseNumber.dec.label'.toLocalize() },
   ]
 }
 
@@ -74,7 +74,7 @@ export async function encoding (): Promise<void> {
   async function pickType (input: MultiStepInput, state: Partial<State>): Promise<any> {
     state.type = await input.showQuickPick<TypeQuickPickItem>({
       placeholder: 'encoding.encode.placeholder'.toLocalize(),
-      items: getItems()
+      items: getItems(),
     })
 
     if (state.type != null) {
@@ -90,7 +90,7 @@ export async function encoding (): Promise<void> {
   async function pickCharset (input: MultiStepInput, state: Partial<State>): Promise<any> {
     state.charset = await input.showQuickPick<CharsetQuickPickItem>({
       placeholder: 'encoding.charset.placeholder'.toLocalize(),
-      items: getCharsets()
+      items: getCharsets(),
     })
     if (state.type?.option.includes('b') ?? false) {
       return async (input: MultiStepInput) => pickBaseNumber(input, state)
@@ -100,7 +100,7 @@ export async function encoding (): Promise<void> {
   async function pickBaseNumber (input: MultiStepInput, state: Partial<State>): Promise<any> {
     state.baseNumber = await input.showQuickPick<BaseNumberQuickPickItem>({
       placeholder: 'encoding.charset.placeholder'.toLocalize(),
-      items: getBaseNumbers()
+      items: getBaseNumbers(),
     })
   }
 
@@ -138,7 +138,7 @@ async function transform (replace: (doc: TextDocument, editBuilder: TextEditorEd
   return transformTemplate({
     getSelectionCallback: (e) => e.selections,
     replaceCallback: replace,
-    failedMessage: failedMessage
+    failedMessage: failedMessage,
   })
 }
 
@@ -161,5 +161,5 @@ async function edit (callback: (str: string) => { result: string, failed: number
 
 export const cmdTable =
 [
-  { name: 'encoding.encode', func: encoding }
+  { name: 'encoding.encode', func: encoding },
 ]

@@ -66,12 +66,12 @@
 
 ### 行削除関連
 
-#### `正規表現に一致する行を削除` (Harurow: Remove lines if matched)
+#### `正規表現に一致する行を削除` (Harurow: remove lines where matches regular expression)
 
 選択中の行のうち正規表現に一致する行を削除します  
 正規表現入力で最後に`\i`を指定すると大文字小文字を区別しません
 
-#### `正規表現に一致しない行を削除` (Harurow: Remove lines if unmatched)
+#### `正規表現に一致しない行を削除` (Harurow: remove lines where un-matches regular expression)
 
 選択中の行のうち正規表現に一致しない行を削除します
 正規表現入力で最後に`\i`を指定すると大文字小文字を区別しません
@@ -106,7 +106,7 @@
 
 ### その他
 
-#### 正規表現に一致する箇所を選択する
+#### `正規表現に一致する箇所を選択する` (Harurow: Select where matches regex)
 
 正規表現に一致した範囲を選択状態にする
 
@@ -124,7 +124,7 @@ ISO8601 と C# の形式を相互変換します
 
 ![日付・時刻の変換](https://github.com/harurow/vscode.ext.harurow.util/blob/master/screenshots/edit.convertDate.gif?raw=true)
 
-#### 日付・時刻の挿入
+#### `日付・時刻の挿入` (Harurow: insert date-time)
 
 日付・時刻を挿入します  
 moment.jsの書式を設定に指定できます。
@@ -133,26 +133,26 @@ moment.jsの書式を設定に指定できます。
 
 ![日付・時刻の挿入](https://github.com/harurow/vscode.ext.harurow.util/blob/master/screenshots/edit.insertDate.gif?raw=true)
 
-#### 重複の削除
+#### `重複行の削除` (Harurow: remove duplicate lines)
 
 選択している行のうち重複している行を一つの行にします。
 
-![重複の削除](https://github.com/harurow/vscode.ext.harurow.util/blob/master/screenshots/edit.distinct.gif?raw=true)
+![重複行の削除](https://github.com/harurow/vscode.ext.harurow.util/blob/master/screenshots/edit.distinct.gif?raw=true)
 
-#### 採番
+#### `採番` (Harurow: numbering)
 
 マルチカーソルに数値を採番します。
 
 ![採番](https://github.com/harurow/vscode.ext.harurow.util/blob/master/screenshots/edit.numbering.gif?raw=true)
 
-#### 数式の評価
+#### `数式の評価` (Harurow: evaluate math expression)
 
 数式の計算結果を求めます。
 利用可能な数式は[Math-expression-evaluator](http://bugwheels94.github.io/math-expression-evaluator/)
 
 ![数式の評価](https://github.com/harurow/vscode.ext.harurow.util/blob/master/screenshots/edit.evaluate.gif?raw=true)
 
-#### 辞書検索
+#### `辞書検索` (Harrow: consult a dictionary)
 
 英和辞典を検索します。
 辞書はパブリックドメインの辞書[ejdic-hand](https://kujirahand.com/web-tools/EJDictFreeDL.php)を利用しています。

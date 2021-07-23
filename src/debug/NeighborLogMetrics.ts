@@ -15,7 +15,7 @@ export class NeighborLogMetrics implements vscode.Disposable {
   debugLogSummaryToDecorationOptions = (debugLogSummary: DebugLogSummary): vscode.DecorationOptions => {
     if (debugLogSummary.metrics == null) {
       return {
-        range: debugLogSummary.range
+        range: debugLogSummary.range,
       }
     }
 
@@ -28,7 +28,7 @@ export class NeighborLogMetrics implements vscode.Disposable {
 
     return {
       range: debugLogSummary.range,
-      hoverMessage: new vscode.MarkdownString(markdown)
+      hoverMessage: new vscode.MarkdownString(markdown),
     }
   }
 

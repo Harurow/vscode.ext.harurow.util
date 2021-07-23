@@ -1,38 +1,30 @@
-import { TextDocument, TextEditorEdit, Selection } from 'vscode'
-import { transformTemplate } from '../util'
+import * as vscode from 'vscode'
+import { enumTargetLines } from '../../../utils'
 
-export async function distinct (): Promise<void> {
-  await edit()
-}
+export const distinct = async (): Promise<void> => {
+  const editor = vscode.window.activeTextEditor
+  if (editor == null) {
+    return
+  }
 
-async function transform (replace: (doc: TextDocument, editBuilder: TextEditorEdit, selection: Selection) => void, failedMessage?: string | undefined): Promise<void> {
-  return transformTemplate({
-    getSelectionCallback: (e) => e.selections,
-    replaceCallback: replace,
-    failedMessage: failedMessage
-  })
-}
+  await editor.edit((eb) => {
+    const removeLines: number[] = []
+    const set = new Set<string>()
 
-async function edit (): Promise<void> {
-  await transform((doc, eb, sel) => {
-    const before = doc.getText(sel)
-    const hash: any = {}
-    const after = before.lines()
-      .filter(line => {
-        if (hash[line] === true) {
-          return false
-        }
-        hash[line] = true
-        return true
-      })
-      .join('\n')
-
-    if (before !== after) {
-      eb.replace(sel, after)
+    for (const line of enumTargetLines(editor)) {
+      if (set.has(line.text)) {
+        removeLines.push(line.lineNumber)
+      } else {
+        set.add(line.text)
+      }
     }
+
+    removeLines.reverse().forEach((i) => {
+      eb.delete(editor.document.lineAt(i).rangeIncludingLineBreak)
+    })
   })
 }
 
 export const cmdTable = [
-  { name: 'edit.distinct', func: distinct }
+  { name: 'edit.distinct', func: distinct },
 ]

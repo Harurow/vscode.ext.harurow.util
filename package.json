@@ -178,7 +178,7 @@
                 },
                 {
                     "command": "harurow.edit.distinct",
-                    "when": "!editorReadonly && editorHasSelection"
+                    "when": "!editorReadonly && editorHasSelection && !editorHasMultipleSelections"
                 },
                 {
                     "command": "harurow.edit.evaluate",

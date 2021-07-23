@@ -48,7 +48,7 @@ export class DebugMetricsStore implements vscode.Disposable {
           e.debugLogSummary.metrics = {
             count: 1,
             totalDuration: duration,
-            averageDuration: duration
+            averageDuration: duration,
           }
         } else {
           e.debugLogSummary.metrics.count++

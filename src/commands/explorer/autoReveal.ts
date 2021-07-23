@@ -24,5 +24,5 @@ export async function autoRevealOn (uri: Uri): Promise<void> {
 
 export const cmdTable = [
   { name: 'autoReveal.off', func: autoRevealOff },
-  { name: 'autoReveal.on', func: autoRevealOn }
+  { name: 'autoReveal.on', func: autoRevealOn },
 ]

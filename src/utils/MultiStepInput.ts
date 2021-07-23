@@ -80,7 +80,7 @@ export class MultiStepInput {
     input.items = p.items
     input.activeItems = (p.activeItem != null) ? [p.activeItem] : []
     input.buttons = [
-      ...(this.steps.length > 1 ? [QuickInputButtons.Back] : [])
+      ...(this.steps.length > 1 ? [QuickInputButtons.Back] : []),
     ]
 
     const disposables: Disposable[] = []
@@ -134,7 +134,7 @@ export class MultiStepInput {
     input.password = p.password ?? false
     input.value = p.value ?? ''
     input.buttons = [
-      ...(this.steps.length > 1 ? [QuickInputButtons.Back] : [])
+      ...(this.steps.length > 1 ? [QuickInputButtons.Back] : []),
     ]
 
     const disposables: Disposable[] = []

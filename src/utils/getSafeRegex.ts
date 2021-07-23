@@ -15,7 +15,7 @@ export const getSafeRegex = (regexPattern: string): {
       new RegExp(pattern, flags)
       return {
         status: 'ok',
-        createRegex: () => new RegExp(pattern, flags)
+        createRegex: () => new RegExp(pattern, flags),
       }
     } catch {
     }

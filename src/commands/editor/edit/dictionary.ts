@@ -5,7 +5,7 @@ import { createStep, runSteps } from '../../../utils'
 export const dictionary = async (): Promise<void> => {
   const state = {
     pick: undefined as vscode.QuickPickItem | undefined,
-    text: undefined as string | undefined
+    text: undefined as string | undefined,
   }
 
   const editor = vscode.window.activeTextEditor
@@ -31,7 +31,7 @@ export const dictionary = async (): Promise<void> => {
           state.pick = e[0]
         }
       },
-      onDidAccept: () => 'select'
+      onDidAccept: () => 'select',
     }),
     createStep({
       type: 'quickPick',
@@ -47,8 +47,8 @@ export const dictionary = async (): Promise<void> => {
           state.text = e[0].description
         }
       },
-      onDidTriggerBackButton: () => 'letter'
-    })
+      onDidTriggerBackButton: () => 'letter',
+    }),
   ]
 
   const isAccept = await runSteps(steps)
@@ -69,7 +69,7 @@ const createQueryItems = (query: string): vscode.QuickPickItem[] => {
       alwaysShow: true,
       picked: true,
       label: i.word,
-      description: i.description
+      description: i.description,
     }))
 }
 
@@ -81,15 +81,15 @@ const createTypeItems = (item: vscode.QuickPickItem | undefined): vscode.QuickPi
     alwaysShow: true,
     picked: false,
     label: 'edit.dictionary.type.item1'.toLocalize(),
-    description: item.label
+    description: item.label,
   }, {
     alwaysShow: true,
     picked: false,
     label: 'edit.dictionary.type.item2'.toLocalize(),
-    description: item.description
+    description: item.description,
   }]
 }
 
 export const cmdTable = [
-  { name: 'edit.dictionary', func: dictionary }
+  { name: 'edit.dictionary', func: dictionary },
 ]

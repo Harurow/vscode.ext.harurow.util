@@ -47,7 +47,7 @@ export const ifMatched = async (): Promise<void> => {
           redraw(lastInputText)
         }
       }
-    })
+    }),
   ]
 
   const dispose = (): void => {
@@ -70,7 +70,7 @@ export const ifMatched = async (): Promise<void> => {
       title: 'edit.removeLines.ifMatched'.toLocalizeTitle(),
       placeHolder: 'edit.removeLines.ifMatched.placeholder'.toLocalize(),
       prompt: 'edit.removeLines.ifMatched.prompt'.toLocalize(),
-      validateInput
+      validateInput,
     })
 
     if (userInput == null || userInput === '') {
@@ -109,7 +109,7 @@ export const ifUnmatched = async (): Promise<void> => {
   const background = new vscode.ThemeColor('diffEditor.removedTextBackground')
   const lineDeco = vscode.window.createTextEditorDecorationType({
     isWholeLine: true,
-    backgroundColor: background
+    backgroundColor: background,
   })
 
   const redraw = (value: string): boolean => {
@@ -141,7 +141,7 @@ export const ifUnmatched = async (): Promise<void> => {
           redraw(lastInputText)
         }
       }
-    })
+    }),
   ]
 
   const dispose = (): void => {
@@ -164,7 +164,7 @@ export const ifUnmatched = async (): Promise<void> => {
       title: 'edit.removeLines.ifUnmatched'.toLocalizeTitle(),
       placeHolder: 'edit.removeLines.ifUnmatched.placeholder'.toLocalize(),
       prompt: 'edit.removeLines.ifUnmatched.prompt'.toLocalize(),
-      validateInput
+      validateInput,
     })
 
     if (userInput == null || userInput === '') {
@@ -196,5 +196,5 @@ export const ifUnmatched = async (): Promise<void> => {
 export const cmdTable =
 [
   { name: 'edit.removeLines.ifMatched', func: ifMatched },
-  { name: 'edit.removeLines.ifUnmatched', func: ifUnmatched }
+  { name: 'edit.removeLines.ifUnmatched', func: ifUnmatched },
 ]

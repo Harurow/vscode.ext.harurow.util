@@ -26,13 +26,13 @@ export class WhiteSpaceRender {
       borderWidth: '1px',
       borderRadius: '4px',
       borderStyle: 'dashed',
-      borderColor: borderColor
+      borderColor: borderColor,
     })
     const decoType2 = vscode.window.createTextEditorDecorationType({
       borderWidth: '1px',
       borderRadius: '4px',
       borderStyle: 'dashed',
-      borderColor: borderColor
+      borderColor: borderColor,
     })
     return {
       decoType1: decoType1,
@@ -42,7 +42,7 @@ export class WhiteSpaceRender {
       dispose: (): void => {
         decoType1.dispose()
         decoType2.dispose()
-      }
+      },
     }
   }
 

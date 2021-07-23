@@ -17,5 +17,5 @@ export const cmdTable = [
   ...numbering.cmdTable,
   ...removeLines.cmdTable,
   ...swap.cmdTable,
-  ...transCase.cmdTable
+  ...transCase.cmdTable,
 ]

@@ -1,9 +1,9 @@
 /* eslint-disable no-extend-native */
 export {}
 
-export type CodePoint = number
+type CodePoint = number
 
-export interface SurrogatePair {
+interface SurrogatePair {
   hi: number
   lo: number
 }
@@ -47,7 +47,7 @@ export class CharInfo {
     const tmp = this.code - 0x10000
     return {
       hi: 0xd800 + Math.floor(tmp / 0x400),
-      lo: 0xdc00 + tmp % 0x400
+      lo: 0xdc00 + tmp % 0x400,
     }
   }
 }

@@ -59,7 +59,7 @@ export class DebugLogStore implements vscode.Disposable {
     const lineNoMap = this.ensureLineNoMap(path)
     const debugLog: DebugLog = {
       at: Date.now() - this.startAt,
-      output
+      output,
     }
 
     let debugLogSummary = lineNoMap.get(lineNo)
@@ -67,7 +67,7 @@ export class DebugLogStore implements vscode.Disposable {
       debugLogSummary = {
         range,
         recent: debugLog,
-        history: [debugLog]
+        history: [debugLog],
       }
       lineNoMap.set(lineNo, debugLogSummary)
     } else {

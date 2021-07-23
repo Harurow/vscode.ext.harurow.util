@@ -24,9 +24,9 @@ export class NeighborLogCounter implements vscode.Disposable {
       range: debugLogSummary.range,
       renderOptions: {
         after: {
-          contentText: contentText
-        }
-      }
+          contentText: contentText,
+        },
+      },
     }
   }
 
@@ -40,8 +40,8 @@ export class NeighborLogCounter implements vscode.Disposable {
         color: this.foreground,
         backgroundColor: this.background,
         fontWeight: '100',
-        margin: '0 0 0 1.3em'
-      }
+        margin: '0 0 0 1.3em',
+      },
     })
   }
 }

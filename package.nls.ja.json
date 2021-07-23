@@ -12,7 +12,7 @@
     "harurow.autoReveal.on": "アクティブファイルをサイドバーに表示を有効化",
     "harurow.edit.convertDate": "日付・時刻の変換",
     "harurow.edit.dictionary": "辞書検索",
-    "harurow.edit.distinct": "重複の削除",
+    "harurow.edit.distinct": "重複行の削除",
     "harurow.edit.evaluate": "数式の評価",
     "harurow.edit.insertDate": "日付・時刻の挿入",
     "harurow.edit.numbering": "採番",

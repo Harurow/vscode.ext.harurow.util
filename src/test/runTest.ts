@@ -15,7 +15,7 @@ async function main (): Promise<void> {
 
     const testOptions = {
       extensionDevelopmentPath,
-      extensionTestsPath
+      extensionTestsPath,
     }
 
     // Download VS Code, unzip it and run the integration test

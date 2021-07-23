@@ -15,7 +15,7 @@ export function encodeSgml (isHex: boolean, isAll: boolean, isEntryRef: boolean)
     result: text.charInfos()
       .map(ci => esc(ci))
       .join(''),
-    failed: 0
+    failed: 0,
   })
 }
 
@@ -287,7 +287,7 @@ const htmlSpecialChars = new Map<string, string>([
   ['Ÿ', '&Yuml;'],
   ['ÿ', '&yuml;'],
   ['ζ', '&zeta;'],
-  ['Ζ', '&Zeta;']
+  ['Ζ', '&Zeta;'],
 ])
 
 const htmlSpecialCharsRev = new Map<string, string>()

@@ -8,18 +8,18 @@ export async function converter (): Promise<void> {
       {
         func: toIso,
         label: 'edit.convertDate.iso8601.label'.toLocalize(),
-        description: 'edit.convertDate.iso8601.description'.toLocalize()
+        description: 'edit.convertDate.iso8601.description'.toLocalize(),
       },
       {
         func: toCSharp,
         label: 'edit.convertDate.csharp.label'.toLocalize(),
-        description: 'edit.convertDate.csharp.description'.toLocalize()
-      }
+        description: 'edit.convertDate.csharp.description'.toLocalize(),
+      },
     ],
     {
       placeHolder: 'edit.convertDate.placeholder'.toLocalize(),
       matchOnDescription: true,
-      matchOnDetail: true
+      matchOnDetail: true,
     }
   )
 
@@ -88,7 +88,7 @@ async function transform (replace: (doc: TextDocument, editBuilder: TextEditorEd
   return transformTemplate({
     getSelectionCallback: (e) => e.selections,
     replaceCallback: replace,
-    failedMessage: failedMessage
+    failedMessage: failedMessage,
   })
 }
 
@@ -104,5 +104,5 @@ async function edit (callback: (str: string) => string): Promise<void> {
 }
 
 export const cmdTable = [
-  { name: 'edit.convertDate', func: converter }
+  { name: 'edit.convertDate', func: converter },
 ]

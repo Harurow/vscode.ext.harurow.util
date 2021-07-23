@@ -34,7 +34,7 @@ function createPickItems (expr: string): QuickPickItemEx[] {
     '{ans} // {expr}',
     '{ans} /* {expr} */',
     '{ans} -- {expr}',
-    '{ans} # {expr}'
+    '{ans} # {expr}',
   ]
 
   const items: QuickPickItemEx[] = result
@@ -44,12 +44,12 @@ function createPickItems (expr: string): QuickPickItemEx[] {
       label: answer,
       format: f,
       result: true,
-      description: formatString(answer, expr, f)
+      description: formatString(answer, expr, f),
     })) : [{
       alwaysShow: true,
       picked: false,
       label: 'edit.evaluate.invalid'.toLocalize(),
-      description: ''
+      description: '',
     }]
 
   items.push({
@@ -57,7 +57,7 @@ function createPickItems (expr: string): QuickPickItemEx[] {
     picked: false,
     label: '',
     description: 'edit.evaluate.help'.toLocalize(),
-    url: vscode.Uri.parse('http://bugwheels94.github.io/math-expression-evaluator/')
+    url: vscode.Uri.parse('http://bugwheels94.github.io/math-expression-evaluator/'),
   })
 
   return items
@@ -65,7 +65,7 @@ function createPickItems (expr: string): QuickPickItemEx[] {
 
 export const evaluate = async (): Promise<void> => {
   const state = {
-    pick: undefined as QuickPickItemEx | undefined
+    pick: undefined as QuickPickItemEx | undefined,
   }
 
   const result = createOnDidChangeState({
@@ -80,7 +80,7 @@ export const evaluate = async (): Promise<void> => {
           return formatString(answer, expr, state.pick.format ?? '{ans}')
         }
       }
-    }
+    },
   })
 
   if (result.status === 'ng') {
@@ -107,8 +107,8 @@ export const evaluate = async (): Promise<void> => {
           state.pick = e[0]
           onDidChangeState()
         }
-      }
-    })
+      },
+    }),
   ]
 
   const isAccept = await runSteps(steps)
@@ -139,5 +139,5 @@ export const evaluate = async (): Promise<void> => {
 }
 
 export const cmdTable = [
-  { name: 'edit.evaluate', func: evaluate }
+  { name: 'edit.evaluate', func: evaluate },
 ]

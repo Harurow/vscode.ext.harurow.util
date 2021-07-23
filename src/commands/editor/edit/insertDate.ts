@@ -12,14 +12,14 @@ function createHelpLinkPickItem (): QuickPickItemEx {
     picked: false,
     label: '',
     description: 'edit.insertDate.help'.toLocalize(),
-    url: vscode.Uri.parse('https://momentjs.com/docs/#/displaying/')
+    url: vscode.Uri.parse('https://momentjs.com/docs/#/displaying/'),
   }
 }
 
 export const insert = async (uri: vscode.Uri): Promise<void> => {
   const state = {
     pick: undefined as QuickPickItemEx | undefined,
-    format: ''
+    format: '',
   }
 
   const result = createOnDidChangeState({ converter: () => state.format })
@@ -36,7 +36,7 @@ export const insert = async (uri: vscode.Uri): Promise<void> => {
     const items: QuickPickItemEx[] = [...formats]
       .map((f) => ({
         label: formatDate(now, f),
-        description: f
+        description: f,
       }))
     items.push(createHelpLinkPickItem())
     return items
@@ -59,8 +59,8 @@ export const insert = async (uri: vscode.Uri): Promise<void> => {
           state.format = e[0].label
           onDidChangeState()
         }
-      }
-    })
+      },
+    }),
   ]
 
   const isAccept = await runSteps(steps)
@@ -80,5 +80,5 @@ export const insert = async (uri: vscode.Uri): Promise<void> => {
 }
 
 export const cmdTable = [
-  { name: 'edit.insertDate', func: insert }
+  { name: 'edit.insertDate', func: insert },
 ]

@@ -48,12 +48,12 @@ export const createRender = <T extends { dispose(): any }>(
     }),
     vscode.window.onDidChangeTextEditorVisibleRanges((e) => {
       redraw(e.textEditor)
-    })
+    }),
   ]
   return {
     dispose: (): void => {
       disposables.forEach((d) => d.dispose())
       disposables.length = 0
-    }
+    },
   }
 }

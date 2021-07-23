@@ -79,7 +79,7 @@ export const createStep = <T extends vscode.QuickPickItem>(options: StepOption<T
           return undefined
         }
       })
-    }
+    },
   }
 }
 

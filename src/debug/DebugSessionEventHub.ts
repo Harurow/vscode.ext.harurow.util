@@ -1,5 +1,4 @@
 import * as vscode from 'vscode'
-import { emptyDisposable } from '../utils'
 
 export type DebugSessionEventKind = 'start' | 'stop'
 
@@ -15,7 +14,7 @@ export class DebugSessionEventHub implements vscode.Disposable {
 
   dispose = (): void => {
     this.observers.length = 0
-    this.subscribe = (_callback: Callback): vscode.Disposable => emptyDisposable
+    this.subscribe = (_callback: Callback): vscode.Disposable => ({ dispose: () => { /* nop */ } })
     this.post = (_e: DebugSessionEvent): void => { /* nop */ }
   }
 
@@ -31,7 +30,7 @@ export class DebugSessionEventHub implements vscode.Disposable {
         if (index >= 0) {
           this.observers.splice(index, 1)
         }
-      }
+      },
     })
   }
 

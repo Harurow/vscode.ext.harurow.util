@@ -8,7 +8,7 @@ export async function generateDts (uri: Uri): Promise<void> {
   const options: ts.CompilerOptions = {
     allowJs: true,
     declaration: true,
-    emitDeclarationOnly: true
+    emitDeclarationOnly: true,
   }
   const jsFile = uri.fsPath
   const dtsFile = jsFile.slice(0, -3) + '.d.ts'
@@ -37,5 +37,5 @@ export async function generateDts (uri: Uri): Promise<void> {
 }
 
 export const cmdTable = [
-  { name: 'generator.generateDts', func: generateDts }
+  { name: 'generator.generateDts', func: generateDts },
 ]
