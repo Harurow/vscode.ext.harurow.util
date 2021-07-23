@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.17.0](https://github.com/Harurow/vscode.ext.harurow.util/compare/v2.16.0...v2.17.0) (2021-07-23)
+
+
+### Features
+
+* 辞書の結果で単語と説明を選択できるように修正 ([acc2afd](https://github.com/Harurow/vscode.ext.harurow.util/commit/acc2afd23725ea8d4852372a83037b5bf47e17fe))
+
 ## [2.16.0](https://github.com/Harurow/vscode.ext.harurow.util/compare/v2.15.0...v2.16.0) (2021-07-22)
 
 
