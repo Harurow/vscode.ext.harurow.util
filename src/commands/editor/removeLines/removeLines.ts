@@ -2,6 +2,13 @@ import * as vscode from 'vscode'
 import { window } from 'vscode'
 import { enumTargetLines, enumTargetVisibleLines, showInformationMessage } from '../../../utils'
 
+const getRegex = (value: string): RegExp => {
+  const ignoreCase = value.endsWith('\\i')
+  const flags = ignoreCase ? 'i' : undefined
+  const pattern = value.slice(0, ignoreCase ? -2 : undefined)
+  return new RegExp(pattern, flags)
+}
+
 export const ifMatched = async (): Promise<void> => {
   const editor = vscode.window.activeTextEditor
   if (editor == null) {
@@ -113,13 +120,6 @@ export const ifUnmatched = async (): Promise<void> => {
     isWholeLine: true,
     backgroundColor: background
   })
-
-  const getRegex = (value: string): RegExp => {
-    const ignoreCase = value.endsWith('\\i')
-    const flags = ignoreCase ? 'i' : undefined
-    const pattern = value.slice(0, ignoreCase ? -2 : undefined)
-    return new RegExp(pattern, flags)
-  }
 
   const redraw = (value: string): boolean => {
     const removeLines: vscode.Range[] = []
