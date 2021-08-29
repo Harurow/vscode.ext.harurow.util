@@ -23,7 +23,7 @@ export const insert = async (uri: vscode.Uri): Promise<void> => {
   }
 
   const result = createOnDidChangeState({ converter: () => state.format })
-  if (result.status === 'ng') {
+  if (result.status === 'NG') {
     return
   }
 

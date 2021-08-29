@@ -83,7 +83,7 @@ export const evaluate = async (): Promise<void> => {
     },
   })
 
-  if (result.status === 'ng') {
+  if (result.status === 'NG') {
     return
   }
 

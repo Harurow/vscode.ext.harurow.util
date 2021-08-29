@@ -1,5 +1,4 @@
 import * as vscode from 'vscode'
-import { window } from 'vscode'
 import { createRemoveLinesDecorationRenderOptions, enumTargetLines, enumTargetVisibleLines, showInformationMessage } from '../../../utils'
 
 const getRegex = (value: string): RegExp => {
@@ -66,7 +65,7 @@ export const ifMatched = async (): Promise<void> => {
       }
     }
 
-    const userInput = await window.showInputBox({
+    const userInput = await vscode.window.showInputBox({
       title: 'edit.removeLines.ifMatched'.toLocalizeTitle(),
       placeHolder: 'edit.removeLines.ifMatched.placeholder'.toLocalize(),
       prompt: 'edit.removeLines.ifMatched.prompt'.toLocalize(),
@@ -160,7 +159,7 @@ export const ifUnmatched = async (): Promise<void> => {
       }
     }
 
-    const userInput = await window.showInputBox({
+    const userInput = await vscode.window.showInputBox({
       title: 'edit.removeLines.ifUnmatched'.toLocalizeTitle(),
       placeHolder: 'edit.removeLines.ifUnmatched.placeholder'.toLocalize(),
       prompt: 'edit.removeLines.ifUnmatched.prompt'.toLocalize(),

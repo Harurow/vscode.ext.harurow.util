@@ -2,12 +2,12 @@ import * as vscode from 'vscode'
 import { enumTargetVisibleLines } from '.'
 
 type CreateOnDidChangeStateResult = {
-  status: 'ok'
+  status: 'OK'
   editor: vscode.TextEditor
   onDidChangeState: () => void
   dispose: () => void
 } | {
-  status: 'ng'
+  status: 'NG'
 }
 
 export const createRemoveLinesDecorationRenderOptions = (): vscode.DecorationRenderOptions => ({
@@ -31,7 +31,7 @@ export const createOnDidChangeState = (options: {
   const editor = vscode.window.activeTextEditor
 
   if (editor == null) {
-    return { status: 'ng' }
+    return { status: 'NG' }
   }
 
   const { converter, decorationRenderOptions } = options
@@ -67,7 +67,7 @@ export const createOnDidChangeState = (options: {
   }
 
   return {
-    status: 'ok',
+    status: 'OK',
     editor: editor,
     onDidChangeState: onDidChangeState,
     dispose: dispose,
@@ -76,12 +76,12 @@ export const createOnDidChangeState = (options: {
 
 type CreateOnDidChangeTextEditorVisibleRanges =
 {
-  status: 'ok'
+  status: 'OK'
   editor: vscode.TextEditor
   redraw: () => void
   dispose: () => void
 } | {
-  status: 'ng'
+  status: 'NG'
 }
 
 export const createOnDidChangeTextEditorVisibleRanges = (options: {
@@ -91,7 +91,7 @@ export const createOnDidChangeTextEditorVisibleRanges = (options: {
   const editor = vscode.window.activeTextEditor
 
   if (editor == null) {
-    return { status: 'ng' }
+    return { status: 'NG' }
   }
 
   const { getRangesOrOptions, decorationRenderOptions } = options
@@ -122,7 +122,7 @@ export const createOnDidChangeTextEditorVisibleRanges = (options: {
   }
 
   return {
-    status: 'ok',
+    status: 'OK',
     editor,
     redraw,
     dispose,

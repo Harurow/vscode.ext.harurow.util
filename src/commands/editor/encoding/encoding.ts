@@ -1,165 +1,234 @@
-/* eslint-disable quote-props */
-import { QuickPickItem, TextDocument, TextEditorEdit, Selection, window } from 'vscode'
-import { MultiStepInput } from '../../../utils'
-import { transformTemplate, handleError } from '../util'
-import { encodeSgml } from './sgml'
-import * as ej from 'encoding-japanese'
-import { encodeRfc } from './rfc'
-import { encodeUnicode } from './unicode'
+import * as vscode from 'vscode'
+import { createReplaceDecorationRenderOptions, Step, createStep, runSteps, getVisibleRanges } from '../../../utils'
+import { ConvertKind, toBase64Encode, toJsEncodeUri, toJsEncodeUriComponent, toPercentEncode } from './rfc'
 
-type TypeQuickPickItem = QuickPickItem & { type: string, option: string }
-type CharsetQuickPickItem = QuickPickItem & { charset: string }
-type BaseNumberQuickPickItem = QuickPickItem & { baseNumber: string }
+// https://docs.python.org/ja/dev/library/base64.html
 
-interface State {
-  type?: TypeQuickPickItem
-  charset?: CharsetQuickPickItem
-  baseNumber?: BaseNumberQuickPickItem
+type ConvertQuickPickItem = vscode.QuickPickItem & {
+  convertKind: ConvertKind
+  options: any
 }
 
-function getItems (): TypeQuickPickItem[] {
-  return [
-    'rfc3986/c',
-    'rfc3986All/c',
-    'rfc1866/c',
-    'rfc1866All/c',
-    'sgmlEntRefSpChar/b',
-    'sgmlEntRefAllChar/b',
-    'sgmlNumRefSpChar/b',
-    'sgmlNumRefAllChar/b',
-    'unicode/',
-    'unicodeAll/',
-  ].map(i => {
-    const [type, opt] = i.split('/')
-    return {
-      type: type,
-      label: `encoding.encode.${type}.label`.toLocalize(),
-      description: `encoding.encode.${type}.description`.toLocalize(),
-      detail: `encoding.encode.${type}.detail`.toLocalize(),
-      option: opt,
-    }
-  })
-}
+const itemsEncodeURI: ConvertQuickPickItem[] = [
+  { isSkipNewLine: false, label: '', desc: '' },
+//  { isSkipNewLine: true, label: ' (改行は除く)', desc: ' (改行は除く)' },
+].flatMap(isSkipNewLineOption => [{
+  label: `encodeURI${isSkipNewLineOption.label}`,
+  description: `JavaScript: encodeURI${isSkipNewLineOption.desc}`,
+  convertKind: 'encodeURI',
+  options: {
+    isSkipNewLine: isSkipNewLineOption.isSkipNewLine,
+  },
+}])
 
-function getCharsets (): CharsetQuickPickItem[] {
-  return [
-    {
-      charset: 'UTF8',
-      label: 'encoding.charset.utf8.label'.toLocalize(),
-      description: 'encoding.charset.utf8.description'.toLocalize(),
+const itemsEncodeURIComponent: ConvertQuickPickItem[] = [
+  { isSkipNewLine: false, label: '', desc: '' },
+//  { isSkipNewLine: true, label: ' (改行は除く)', desc: ' (改行は除く)' },
+].flatMap(isSkipNewLineOption => [{
+  label: `encodeURIComponent${isSkipNewLineOption.label}`,
+  description: `JavaScript: encodeURIComponent${isSkipNewLineOption.desc}`,
+  convertKind: 'encodeURIComponent',
+  options: {
+    isSkipNewLine: isSkipNewLineOption.isSkipNewLine,
+  },
+}])
+
+const itemsEncodePercentRfc3986: ConvertQuickPickItem[] = ['UTF8', 'SJIS', 'EUCJP'].flatMap(enc => [
+  { skipIfFailed: false, label: '', desc: '' },
+  // { skipIfFailed: true, label: ' / 変換失敗はスキップ', desc: ' / 変換失敗はスキップ' },
+].flatMap(skipIfFailedOption => [
+  { isSkipNewLine: false, label: '', desc: '' },
+  // { isSkipNewLine: true, label: ' (改行は除く)', desc: ' (改行は除く)' },
+].flatMap(isSkipNewLineOption => [
+  { isPassUnreserveChars: true, label: '', desc: '' },
+  { isPassUnreserveChars: false, label: ' (全ての文字)', desc: ' (全ての文字を対象とする)' },
+].flatMap(isPassUnreserveCharsOption => [{
+  label: `% エンコーディング - ${enc}${isSkipNewLineOption.label}${isPassUnreserveCharsOption.label}${skipIfFailedOption.label}`,
+  description: `RFC3986準拠 - ${enc}${isSkipNewLineOption.desc}${isPassUnreserveCharsOption.desc}${skipIfFailedOption.desc}`,
+  convertKind: 'encodePercent',
+  options: {
+    upperCase: true,
+    space: '%20',
+    encoding: enc,
+    isPassUnreserveChars: isPassUnreserveCharsOption.isPassUnreserveChars,
+    skipIfFailed: skipIfFailedOption.skipIfFailed,
+    isSkipNewLine: isSkipNewLineOption.isSkipNewLine,
+  },
+}]))))
+
+const itemsEncodePercentRfc1866: ConvertQuickPickItem[] = ['UTF8', 'SJIS', 'EUCJP'].flatMap(enc => [
+  { skipIfFailed: false, label: '', desc: '' },
+  // { skipIfFailed: true, label: ' / 変換失敗はスキップ', desc: ' / 変換失敗はスキップ' },
+].flatMap(skipIfFailedOption => [
+  { isSkipNewLine: false, label: '', desc: '' },
+  // { isSkipNewLine: true, label: ' (改行は除く)', desc: ' (改行は除く)' },
+].flatMap(isSkipNewLineOption => [
+  { isPassUnreserveChars: true, label: '', desc: '' },
+  { isPassUnreserveChars: false, label: ' (全ての文字)', desc: ' (全ての文字を対象とする)' },
+].flatMap(isPassUnreserveCharsOption => [{
+  label: `x-www-form-urlencoded - ${enc}${isSkipNewLineOption.label}${isPassUnreserveCharsOption.label}${skipIfFailedOption.label}`,
+  description: `RFC1866準拠 - ${enc}${isSkipNewLineOption.desc}${isPassUnreserveCharsOption.desc}${skipIfFailedOption.desc}`,
+  convertKind: 'encodePercent',
+  options: {
+    upperCase: true,
+    space: '+',
+    encoding: enc,
+    isPassUnreserveChars: isPassUnreserveCharsOption.isPassUnreserveChars,
+    skipIfFailed: skipIfFailedOption.skipIfFailed,
+    isSkipNewLine: isSkipNewLineOption.isSkipNewLine,
+  },
+}]))))
+
+const itemsEncodeBase64: ConvertQuickPickItem[] = ['UTF8', 'SJIS', 'EUCJP'].flatMap(enc => [
+  {
+    label: `base64 - ${enc}`,
+    description: `RFC2045準拠 - ${enc}`,
+    convertKind: 'encodeBase64',
+    options: {
+      encoding: enc,
+      char62: '+',
+      char63: '/',
+      padding: '=',
+      line: 76,
     },
-    {
-      charset: 'SJIS',
-      label: 'encoding.charset.shiftJis.label'.toLocalize(),
-      description: 'encoding.charset.shiftJis.description'.toLocalize(),
+  },
+  {
+    label: `base64 safeUrl - ${enc}`,
+    description: `base64url - ${enc}`,
+    convertKind: 'encodeBase64',
+    options: {
+      encoding: enc,
+      char62: '-',
+      char63: '_',
+      padding: '',
+      line: 0,
     },
-    {
-      charset: 'EUCJP',
-      label: 'encoding.charset.eucJp.label'.toLocalize(),
-      description: 'encoding.charset.eucJp.description'.toLocalize(),
-    },
-  ]
+  },
+])
+
+const items: ConvertQuickPickItem[] = [
+  ...itemsEncodeURI,
+  ...itemsEncodeURIComponent,
+  ...itemsEncodePercentRfc3986,
+  ...itemsEncodePercentRfc1866,
+  ...itemsEncodeBase64,
+]
+
+const getConverter = (convertKind: ConvertKind, convertOptions: any): ((editor: vscode.TextEditor, range: vscode.Range) => vscode.DecorationOptions[]) => {
+  if (convertKind === 'encodePercent') {
+    return toPercentEncode(convertOptions)
+  }
+  if (convertKind === 'encodeURI') {
+    return toJsEncodeUri(convertOptions)
+  }
+  if (convertKind === 'encodeURIComponent') {
+    return toJsEncodeUriComponent(convertOptions)
+  }
+  if (convertKind === 'encodeBase64') {
+    return toBase64Encode(convertOptions)
+  }
+
+  return (_editor: vscode.TextEditor, _range: vscode.Range): vscode.DecorationOptions[] => {
+    return []
+  }
 }
 
-function getBaseNumbers (): BaseNumberQuickPickItem[] {
-  return [
-    { baseNumber: 'hex', label: 'encoding.baseNumber.hex.label'.toLocalize() },
-    { baseNumber: 'dec', label: 'encoding.baseNumber.dec.label'.toLocalize() },
-  ]
+const getDecorationOptions = (editor: vscode.TextEditor, convertKind: ConvertKind, convertOptions: any): vscode.DecorationOptions[] => {
+  const visibleRanges = getVisibleRanges(editor)
+
+  if (visibleRanges.length > 0) {
+    const visibleRange = visibleRanges[0]
+    const conv = getConverter(convertKind, convertOptions)
+    return editor.selections
+      .filter(s => visibleRange.intersection(s))
+      .flatMap(s => conv(editor, s))
+  }
+
+  return []
 }
 
-export async function encoding (): Promise<void> {
-  const state: Partial<State> = {}
+export const convert = async (): Promise<void> => {
+  const editor = vscode.window.activeTextEditor
 
-  async function pickType (input: MultiStepInput, state: Partial<State>): Promise<any> {
-    state.type = await input.showQuickPick<TypeQuickPickItem>({
-      placeholder: 'encoding.encode.placeholder'.toLocalize(),
-      items: getItems(),
-    })
+  if (editor == null) {
+    return
+  }
 
-    if (state.type != null) {
-      if (state.type.option.includes('c')) {
-        return async (input: MultiStepInput) => pickCharset(input, state)
+  const state = {
+    item: null as ConvertQuickPickItem | null,
+  }
+
+  const deco = vscode.window.createTextEditorDecorationType(
+    createReplaceDecorationRenderOptions())
+
+  const redraw = (): boolean => {
+    if (state.item != null) {
+      try {
+        const options = getDecorationOptions(editor, state.item.convertKind, state.item.options)
+        editor.setDecorations(deco, options)
+      } catch (e) {
+        console.error(e)
       }
-      if (state.type.option.includes('b')) {
-        return async (input: MultiStepInput) => pickBaseNumber(input, state)
+      return true
+    }
+
+    editor.setDecorations(deco, [])
+    return true
+  }
+  const disposables = [
+    vscode.window.onDidChangeTextEditorVisibleRanges((e) => {
+      if (editor === e.textEditor) {
+        redraw()
       }
-    }
-  }
+    }),
+  ]
 
-  async function pickCharset (input: MultiStepInput, state: Partial<State>): Promise<any> {
-    state.charset = await input.showQuickPick<CharsetQuickPickItem>({
-      placeholder: 'encoding.charset.placeholder'.toLocalize(),
-      items: getCharsets(),
-    })
-    if (state.type?.option.includes('b') ?? false) {
-      return async (input: MultiStepInput) => pickBaseNumber(input, state)
-    }
+  const dispose = (): void => {
+    disposables.forEach((obj) => obj.dispose())
+    disposables.length = 0
+    editor.setDecorations(deco, [])
+    deco.dispose()
   }
-
-  async function pickBaseNumber (input: MultiStepInput, state: Partial<State>): Promise<any> {
-    state.baseNumber = await input.showQuickPick<BaseNumberQuickPickItem>({
-      placeholder: 'encoding.charset.placeholder'.toLocalize(),
-      items: getBaseNumbers(),
-    })
-  }
-
-  let result = false
 
   try {
-    result = await MultiStepInput.run(async input => pickType(input, state))
-  } catch (err) {
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    handleError(err)
+    const steps: Step[] = [
+      createStep({
+        type: 'quickPick',
+        name: 'select',
+        title: 'エンコード',
+        placeholder: 'エンコード方法を選択してください',
+        items: items,
+        onDidChangeActive: (_, items) => {
+          if (items.length > 0) {
+            state.item = items[0]
+            redraw()
+          }
+        },
+      }),
+    ]
+
+    const isAccept = await runSteps(steps)
+    dispose()
+
+    if (isAccept) {
+      await editor.edit(eb => {
+        if (state.item != null) {
+          const conv = getConverter(state.item.convertKind, state.item.options)
+          const options = editor.selections
+            .flatMap(s => conv(editor, s))
+            .reverse()
+          options.forEach(opt => {
+            eb.replace(opt.range, opt.renderOptions?.after?.contentText ?? '')
+          })
+        }
+      })
+    }
   } finally {
-    if (result) {
-      const func = replace(state)
-      await edit(func)
-    }
-  }
-}
-
-function replace (state: State): (text: string) => { result: string, failed: number } {
-  const type = state?.type?.type
-  const charSet = (state?.charset?.charset ?? 'UTF8') as ej.Encoding
-  const baseNum = (state?.baseNumber?.baseNumber ?? 'hex')
-
-  if (type?.startsWith('rfc') === true) {
-    return encodeRfc(type.includes('1866'), type.includes('All'), charSet)
-  } else if (type?.startsWith('sgml') === true) {
-    return encodeSgml(baseNum === 'hex', type.includes('All'), type.includes('Ent'))
-  } else if (type?.startsWith('unicode') === true) {
-    return encodeUnicode(type.includes('All'))
-  }
-  return (text) => ({ result: text, failed: 0 })
-}
-
-async function transform (replace: (doc: TextDocument, editBuilder: TextEditorEdit, selection: Selection) => void, failedMessage?: string | undefined): Promise<void> {
-  return transformTemplate({
-    getSelectionCallback: (e) => e.selections,
-    replaceCallback: replace,
-    failedMessage: failedMessage,
-  })
-}
-
-async function edit (callback: (str: string) => { result: string, failed: number }): Promise<void> {
-  let failedNum = 0
-  await transform((doc, eb, sel) => {
-    const before = doc.getText(sel)
-    const { result, failed } = callback(before)
-    failedNum += failed
-
-    if (before !== result) {
-      eb.replace(sel, result)
-    }
-  })
-  if (failedNum > 0) {
-    const msg = 'encoding.encode.failed'.toLocalize(failedNum)
-    await window.showWarningMessage(msg)
+    dispose()
   }
 }
 
 export const cmdTable =
 [
-  { name: 'encoding.encode', func: encoding },
+  { name: 'encoding.encode', func: convert },
 ]

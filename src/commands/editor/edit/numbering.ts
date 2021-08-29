@@ -48,12 +48,12 @@ export const numbering = async (): Promise<void> => {
   }
 
   const result = createOnDidChangeState({
-    converter: (_editor, _s, i) => {
+    converter: (_editor, _range, i) => {
       return getNumberingString(i).replace(/ /g, ' ')
     },
   })
 
-  if (result.status === 'ng') {
+  if (result.status === 'NG') {
     return
   }
 
