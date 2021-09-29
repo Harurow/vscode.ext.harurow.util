@@ -1,16 +1,16 @@
 import * as assert from 'assert'
 import '../../../utils/string.extension'
 
-suite('string.extension Test Suite', () => {
+describe('string.extension Test Suite', () => {
   console.log('start string.extension tests.')
 
-  test('isValid', () => {
+  it('isValid', () => {
     assert.strictEqual(''.hasCharactors(), false)
 
     assert.strictEqual(' '.hasCharactors(), true)
   })
 
-  test('isVariable', () => {
+  it('isVariable', () => {
     assert.strictEqual(''.isVariable(), false)
     assert.strictEqual(' '.isVariable(), false)
     assert.strictEqual('-'.isVariable(), false)
@@ -29,7 +29,7 @@ suite('string.extension Test Suite', () => {
     assert.strictEqual('thisIsVariable2'.isVariable(), true)
   })
 
-  test('isVariableLoose', () => {
+  it('isVariableLoose', () => {
     assert.strictEqual(''.isVariableLoose(), false)
     assert.strictEqual(' '.isVariableLoose(), false)
     assert.strictEqual('-'.isVariableLoose(), false)
@@ -48,7 +48,7 @@ suite('string.extension Test Suite', () => {
     assert.strictEqual('thisIsVariable2'.isVariableLoose(), true)
   })
 
-  test('words', () => {
+  it('words', () => {
     assert.deepStrictEqual(''.words(), [])
 
     assert.deepStrictEqual(' '.words(), [' '], "input: ' '")
@@ -91,7 +91,7 @@ suite('string.extension Test Suite', () => {
     assert.deepStrictEqual('thisIsAPen'.words(), ['this', 'Is', 'A', 'Pen'])
   })
 
-  test('lines', () => {
+  it('lines', () => {
     assert.deepStrictEqual(''.lines(), [])
 
     assert.deepStrictEqual(' '.lines(), [' '])

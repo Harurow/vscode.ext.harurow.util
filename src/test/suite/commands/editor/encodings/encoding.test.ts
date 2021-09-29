@@ -63,8 +63,8 @@ const encodeLine = (core: ((charInfo: CharInfo) => CharConvertResult), line: str
   return lineText
 }
 
-suite('encoding Test Suite', () => {
-  test('encoding: encodeURI', () => {
+describe('encoding Test Suite', () => {
+  it('encoding: encodeURI', () => {
     const core = toJsEncodeCore({
       isPassChar: isJsEncodeUriPassChar,
       isSkipNewLine: false,
@@ -75,7 +75,7 @@ suite('encoding Test Suite', () => {
     })
   })
 
-  test('encoding: encodeURIComponent', () => {
+  it('encoding: encodeURIComponent', () => {
     const core = toJsEncodeCore({
       isPassChar: isJsEncodeUriComponentPassChar,
       isSkipNewLine: false,
@@ -86,7 +86,7 @@ suite('encoding Test Suite', () => {
     })
   })
 
-  test('encoding: toRotEncode16', () => {
+  it('encoding: toRotEncode16', () => {
     const core = toRotEncodeCore({
       type: '16',
     })
@@ -129,7 +129,7 @@ suite('encoding Test Suite', () => {
     }
   })
 
-  test('encoding: toRotEncode47', () => {
+  it('encoding: toRotEncode47', () => {
     const core = toRotEncodeCore({
       type: '47',
     })

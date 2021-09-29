@@ -1,8 +1,8 @@
 import * as assert from 'assert'
 import { toIso, toCSharp } from '../../../../../commands/editor/edit/convertDate'
 
-suite('datetime Test Suite', () => {
-  test('toIso', () => {
+describe('datetime Test Suite', () => {
+  it('toIso', () => {
     assert.strictEqual(toIso(''), '')
     assert.strictEqual(toIso('0'), '0')
     assert.strictEqual(toIso('asdfg'), 'asdfg')
@@ -14,7 +14,7 @@ suite('datetime Test Suite', () => {
     assert.strictEqual(toIso('\\/Date(1493305200321)\\/'), '2017-04-27T15:00:00.321Z')
   })
 
-  test('C#', () => {
+  it('C#', () => {
     assert.strictEqual(toCSharp(''), '')
     assert.strictEqual(toCSharp('0'), '0')
     assert.strictEqual(toCSharp('asdfg'), 'asdfg')

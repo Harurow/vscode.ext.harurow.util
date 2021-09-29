@@ -11,7 +11,7 @@ async function main (): Promise<void> {
 
     // The path to test runner
     // Passed to --extensionTestsPath
-    const extensionTestsPath = path.resolve(__dirname, './suite/index')
+    const extensionTestsPath = path.resolve(__dirname, './suite')
 
     const testOptions = {
       extensionDevelopmentPath,

@@ -1,49 +1,5 @@
-import { CharInfo } from '../../../utils'
-
-export function encodeSgml (isHex: boolean, isAll: boolean, isEntryRef: boolean): (text: string) => { result: string, failed: number } {
-  const num = isHex
-    ? (ci: CharInfo) => `&#x${ci.code.toHex(2)};`
-    : (ci: CharInfo) => `&#${ci.code.toString()};`
-  const etc = isAll
-    ? num
-    : (ci: CharInfo) => ci.char
-  const esc = isEntryRef
-    ? (ci: CharInfo) => escapeSpecialChar(ci.char) ?? etc(ci)
-    : (ci: CharInfo) => isSpecialChar(ci.char) ? num(ci) : etc(ci)
-
-  return (text: string) => ({
-    result: text.charInfos()
-      .map(ci => esc(ci))
-      .join(''),
-    failed: 0,
-  })
-}
-
-export function decodeSgml (): (text: string) => string {
-  const parse = (str: string): RegExpMatchArray =>
-    str.match(/&[^;]+;|[\uD800-\uDBFF][\uDC00-\uDFFF]|[^\uD800-\uDFFF]/g) ?? []
-
-  const decHex = (str: string): string =>
-    String.fromCodePoint(Number.parseInt(str.slice(3, -1), 16))
-
-  const decDec = (str: string): string =>
-    String.fromCodePoint(Number.parseInt(str.slice(2, -1), 10))
-
-  const dec = (str: string): string =>
-    str.startsWith('&#x')
-      ? decHex(str) : str.startsWith('&#')
-        ? decDec(str) : unescapeSpecialChar(str)
-
-  return (text: string) =>
-    parse(text)
-      .map(dec)
-      .join('')
-}
-
-const htmlSpecialChars = new Map<string, string>([
-  ['\xa0', '&nbsp;'],
-  ['\'', '&#039;'],
-  ['/', '&#x2f;'],
+export const markupLanguageSpecialChars = new Map<string, string>([
+  [' ', '&nbsp;'],
   ['á', '&aacute;'],
   ['Á', '&Aacute;'],
   ['â', '&acirc;'],
@@ -290,20 +246,12 @@ const htmlSpecialChars = new Map<string, string>([
   ['Ζ', '&Zeta;'],
 ])
 
-const htmlSpecialCharsRev = new Map<string, string>()
+export const markupLanguageSpecialCharsRev = new Map<string, string>()
 
-htmlSpecialChars.forEach((v, k) => {
-  htmlSpecialCharsRev.set(v, k)
+markupLanguageSpecialChars.forEach((v, k) => {
+  markupLanguageSpecialCharsRev.set(v, k)
 })
 
-function escapeSpecialChar (char: string): string | undefined {
-  return htmlSpecialChars.get(char)
-}
-
-function unescapeSpecialChar (str: string): string {
-  return htmlSpecialCharsRev.get(str) ?? str
-}
-
-function isSpecialChar (char: string): boolean {
-  return htmlSpecialChars.has(char)
+export const unescapeSpecialChar = (str: string): string => {
+  return markupLanguageSpecialCharsRev.get(str) ?? str
 }

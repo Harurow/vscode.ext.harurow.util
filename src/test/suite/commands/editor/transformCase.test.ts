@@ -1,4 +1,6 @@
 import * as assert from 'assert'
+import * as vscode from 'vscode'
+
 import '../../../../utils/string.extension'
 import {
   transformToUpperCamel,
@@ -9,10 +11,15 @@ import {
   transformToUpperChain,
 } from '../../../../commands/editor/edit/transCase'
 
-suite('transformCase Test Suite', () => {
+describe('transform case', () => {
+  before(() => {
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    vscode.window.showInformationMessage('start tests')
+  })
+
   console.log('start transformCase tests.')
 
-  test('transformToUpperCamel', () => {
+  it('transformToUpperCamel', () => {
     assert.strictEqual(transformToUpperCamel(''), '')
     assert.strictEqual(transformToUpperCamel('a'), 'A')
     assert.strictEqual(transformToUpperCamel('a_b'), 'AB')
@@ -34,7 +41,7 @@ suite('transformCase Test Suite', () => {
     assert.strictEqual(transformToUpperCamel('_private'), '_Private')
   })
 
-  test('transformToLowerCamel', () => {
+  it('transformToLowerCamel', () => {
     assert.strictEqual(transformToLowerCamel(''), '')
     assert.strictEqual(transformToLowerCamel('a'), 'a')
     assert.strictEqual(transformToLowerCamel('a_b'), 'aB')
@@ -56,29 +63,7 @@ suite('transformCase Test Suite', () => {
     assert.strictEqual(transformToLowerCamel('_private'), '_private')
   })
 
-  test('transformToLowerCamel', () => {
-    assert.strictEqual(transformToLowerCamel(''), '')
-    assert.strictEqual(transformToLowerCamel('a'), 'a')
-    assert.strictEqual(transformToLowerCamel('a_b'), 'aB')
-    assert.strictEqual(transformToLowerCamel('a-b'), 'aB')
-    assert.strictEqual(transformToLowerCamel('aB'), 'aB')
-    assert.strictEqual(transformToLowerCamel('aBb'), 'aBb')
-    assert.strictEqual(transformToLowerCamel('aBbC'), 'aBbC')
-    assert.strictEqual(transformToLowerCamel('ThisIsUpperCamelCase'), 'thisIsUpperCamelCase')
-    assert.strictEqual(transformToLowerCamel('thisIsLowerCamelCase'), 'thisIsLowerCamelCase')
-    assert.strictEqual(transformToLowerCamel('this-is-lower-chain-case'), 'thisIsLowerChainCase')
-    assert.strictEqual(transformToLowerCamel('THIS-IS-UPPER-CHAIN-CASE'), 'thisIsUpperChainCase')
-    assert.strictEqual(transformToLowerCamel('this_is_lower_snake_case'), 'thisIsLowerSnakeCase')
-    assert.strictEqual(transformToLowerCamel('THIS_IS_UPPER_SNAKE_CASE'), 'thisIsUpperSnakeCase')
-    assert.strictEqual(transformToLowerCamel('DBStore'), 'dbStore')
-    assert.strictEqual(transformToLowerCamel('DB0store'), 'db0Store')
-
-    assert.strictEqual(transformToLowerCamel('__db__'), '__db__')
-    assert.strictEqual(transformToLowerCamel('private_'), 'private_')
-    assert.strictEqual(transformToLowerCamel('_private'), '_private')
-  })
-
-  test('transformToUpperSnake', () => {
+  it('transformToUpperSnake', () => {
     assert.strictEqual(transformToUpperSnake(''), '')
     assert.strictEqual(transformToUpperSnake('a'), 'A')
     assert.strictEqual(transformToUpperSnake('a_b'), 'A_B')
@@ -100,7 +85,7 @@ suite('transformCase Test Suite', () => {
     assert.strictEqual(transformToUpperSnake('_private'), '_PRIVATE')
   })
 
-  test('transformToLowerSnake', () => {
+  it('transformToLowerSnake', () => {
     assert.strictEqual(transformToLowerSnake(''), '')
     assert.strictEqual(transformToLowerSnake('a'), 'a')
     assert.strictEqual(transformToLowerSnake('a_b'), 'a_b')
@@ -122,7 +107,7 @@ suite('transformCase Test Suite', () => {
     assert.strictEqual(transformToLowerSnake('_private'), '_private')
   })
 
-  test('transformToUpperChain', () => {
+  it('transformToUpperChain', () => {
     assert.strictEqual(transformToUpperChain(''), '')
     assert.strictEqual(transformToUpperChain('a'), 'A')
     assert.strictEqual(transformToUpperChain('a-b'), 'A-B')
@@ -144,7 +129,7 @@ suite('transformCase Test Suite', () => {
     assert.strictEqual(transformToUpperChain('_private'), '_PRIVATE')
   })
 
-  test('transformToLowerChain', () => {
+  it('transformToLowerChain', () => {
     assert.strictEqual(transformToLowerChain(''), '')
     assert.strictEqual(transformToLowerChain('a'), 'a')
     assert.strictEqual(transformToLowerChain('a-b'), 'a-b')
