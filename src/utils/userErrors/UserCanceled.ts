@@ -1,4 +1,4 @@
-import '../utils'
+import '../extension'
 
 export class UserCanceled extends Error {
   readonly silent: boolean

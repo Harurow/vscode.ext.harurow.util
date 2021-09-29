@@ -1,5 +1,5 @@
 import moment from 'moment'
-import { getLocale } from '.'
+import { getLocale } from './extension'
 
 export function normalizeTimezone (timezone: string): string {
   return timezone

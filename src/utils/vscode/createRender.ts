@@ -1,5 +1,5 @@
 import * as vscode from 'vscode'
-import { onDidChangeVisibleTextEditors } from '.'
+import { onDidChangeVisibleTextEditors } from '..'
 
 export const createRender = <T extends { dispose(): any }>(
   createResouce: ((editor: vscode.TextEditor) => T),

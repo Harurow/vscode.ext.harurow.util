@@ -1,5 +1,5 @@
 import * as vscode from 'vscode'
-import { enumTargetVisibleLines } from '.'
+import { enumTargetVisibleLines } from '..'
 
 type CreateOnDidChangeStateResult = {
   status: 'OK'

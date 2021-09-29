@@ -1,6 +1,6 @@
 import * as vscode from 'vscode'
 import { createRender } from '../utils'
-import { getVisibleRanges } from '../utils/enumTargetLines'
+import { getVisibleRanges } from '../utils/vscode/enumTargetLines'
 
 const IDEOGRAPHIC_SPACE = 0x3000
 const NOBREAK_SPACE = 0x00A0

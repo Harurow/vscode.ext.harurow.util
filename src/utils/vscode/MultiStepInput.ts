@@ -1,5 +1,5 @@
 import { QuickPickItem, window, Disposable, QuickInput, QuickInputButtons, QuickPick, InputBox, InputBoxOptions } from 'vscode'
-import { UserCanceled } from './UserCanceled'
+import { UserCanceled } from '../userErrors'
 
 // eslint-disable-next-line @typescript-eslint/no-extraneous-class
 class InputFlowAction extends Error {

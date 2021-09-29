@@ -1,5 +1,5 @@
 import { commands, Disposable } from 'vscode'
-import '../utils/string.extension'
+import '../utils/extension/string.extension'
 import * as editor from './editor'
 import * as experiment from './experiment'
 import * as explorer from './explorer'
