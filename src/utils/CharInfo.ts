@@ -17,37 +17,24 @@ export class CharInfo {
     this.code = char.codePointAt(0) as CodePoint
   }
 
-  get isSpace (): boolean {
-    return this.code === 0x20
-  }
+  get isAscii (): boolean { return isAscii(this.code) }
 
-  get isAscii (): boolean {
-    return this.code <= 0xff
-  }
+  get isLatin (): boolean { return isLatin(this.code) }
 
-  get isSurrogatePair (): boolean {
-    return this.code > 0xffff
-  }
+  get isSurrogatePair (): boolean { return isSurrogatePair(this.code) }
 
-  get isRfc3986Unreserved (): boolean {
-    const code = this.code
-    return (code >= 0x41 && code <= 0x5A) || // A-Z
-      (code >= 0x61 && code <= 0x7A) || // a-z
-      (code >= 0x30 && code <= 0x39) || // 0-9
-      code === 0x2D || // - hyphen
-      code === 0x2E || // . dot
-      code === 0x5F || // _ under-scodeore
-      code === 0x7E // ~ tilde
-  }
+  get isNewLine (): boolean { return isNewLine(this.code) }
 
-  toSurrogatePair (): SurrogatePair {
+  get isSpace (): boolean { return isSpace(this.code) }
+
+  readonly toSurrogatePair = (): SurrogatePair => {
     if (this.code == null || this.code <= 0xffff) {
       throw new Error('invalid operation')
     }
-    const tmp = this.code - 0x10000
+    const cp = this.code - 0x10000
     return {
-      hi: 0xd800 + Math.floor(tmp / 0x400),
-      lo: 0xdc00 + tmp % 0x400,
+      hi: 0xd800 + (cp >> 10),
+      lo: 0xdc00 + (cp & 0x3ff),
     }
   }
 }
@@ -59,6 +46,16 @@ declare global {
 }
 
 String.prototype.charInfos = function (): CharInfo[] {
-  return this.chars()
-    .map(c => new CharInfo(c))
+  return this.match(/[\uD800-\uDBFF][\uDC00-\uDFFF]|[^\uD800-\uDFFF]/g)
+    ?.map(c => new CharInfo(c)) ?? []
 }
+
+export const isAscii = (code: number): boolean => code <= 0x7f
+
+export const isLatin = (code: number): boolean => code <= 0xff
+
+export const isSurrogatePair = (code: number): boolean => code > 0xffff
+
+export const isNewLine = (code: number): boolean => code === 0x0a || code === 0x0d
+
+export const isSpace = (code: number): boolean => code === 0x20

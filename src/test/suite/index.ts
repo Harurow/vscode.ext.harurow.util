@@ -59,7 +59,8 @@ export const run = async (testsRoot: string): Promise<void> => {
     }
 
     // Glob test files
-    glob.glob('**/**.test.js', { cwd: testsRoot }, (err: Error | null, files: string[]) => {
+    const srcRoot = path.resolve(testsRoot, coverOptions?.relativeSourcePath ?? './')
+    glob.glob('**/**.test.js', { cwd: srcRoot }, (err: Error | null, files: string[]) => {
       if (err) {
         console.log(err)
         return reject(err)
@@ -67,7 +68,7 @@ export const run = async (testsRoot: string): Promise<void> => {
 
       try {
         // Fill into Mocha
-        files.forEach((f): Mocha => mocha.addFile(path.join(testsRoot, f)))
+        files.forEach((f): Mocha => mocha.addFile(path.join(srcRoot, f)))
         // Run the tests
         mocha.run((failures: number) => {
           if (failures > 0) {

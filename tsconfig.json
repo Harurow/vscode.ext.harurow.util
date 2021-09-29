@@ -13,9 +13,12 @@
         "strict": true,
     },
     "exclude": [
-        "node_modules",
-        "scripts",
-        ".vscode-test",
-        "out"
+        ".git/",
+        ".vscode-test/",
+        "node_modules/",
+        "scripts/",
+        "out/",
+        "dist/",
+        "coverage/"
     ]
 }

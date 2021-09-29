@@ -113,8 +113,8 @@ export const toJsEncodeCore = (options: {
   }
 
   return (charInfo: CharInfo): CharConvertResult => {
-    if (isAscii(charInfo.code)) {
-      if (isNewLine(charInfo.code)) return newLine(charInfo.code)
+    if (charInfo.isAscii) {
+      if (charInfo.isNewLine) return newLine(charInfo.code)
       if (isPassChar(charInfo.code)) return pass(charInfo)
       return { status: true, failed: false, length: 1, text: toFormat(charInfo.code) }
     }
@@ -178,9 +178,9 @@ export const toPercentEncodeCore = (options: {
   }
 
   const encodeCore = (charInfo: CharInfo): CharConvertResult => {
-    if (isAscii(charInfo.code)) {
-      if (isSpace(charInfo.code)) return space(charInfo.code)
-      if (isNewLine(charInfo.code)) return newLine(charInfo.code)
+    if (charInfo.isAscii) {
+      if (charInfo.isSpace) return space(charInfo.code)
+      if (charInfo.isNewLine) return newLine(charInfo.code)
       if (isPass(charInfo.code)) return pass(charInfo)
       return { status: true, failed: false, length: 1, text: toFormat(charInfo.code) }
     }
@@ -251,8 +251,8 @@ export const toEscapeEncodeCore = (options: {
     { status: true, failed: false, length: 1, text: `\\u${code.toHex(4).toUpperCase()}` })
 
   const encodeCore = (charInfo: CharInfo): CharConvertResult => {
-    if (isLatin(charInfo.code)) return toLatin(charInfo)
-    if (isSurrogatePair(charInfo.code)) return toSurrogatePair(charInfo)
+    if (charInfo.isLatin) return toLatin(charInfo)
+    if (charInfo.isSurrogatePair) return toSurrogatePair(charInfo)
     return other(charInfo.code)
   }
 
@@ -397,16 +397,6 @@ interface EncodeState {
   length: number
   text: string
 }
-
-const isAscii = (code: number): boolean => code <= 0x7f
-
-const isLatin = (code: number): boolean => code <= 0xff
-
-const isSurrogatePair = (code: number): boolean => code > 0xffff
-
-const isNewLine = (code: number): boolean => code === 0x0a || code === 0x0d
-
-const isSpace = (code: number): boolean => code === 0x20
 
 const encodeInternal = (
   encodeCore: (charInfo: CharInfo) => CharConvertResult
